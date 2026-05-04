@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 机炮扫射 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_StrafingRun</defName>
+    <label>机炮扫射</label>
+    <goodwillCostBase>10</goodwillCostBase>
+    <cooldownTicks>0</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_StrafingRun</aerialSupportDefName>
+    <category>FireStrike</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
+  <!-- 攻击机轰炸 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_AttackAircraftBombing</defName>
+    <label>攻击机轰炸</label>
+    <goodwillCostBase>15</goodwillCostBase>
+    <cooldownTicks>0</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_AttackAircraftBombing</aerialSupportDefName>
+    <category>FireStrike</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
+  <!-- 战斗轰炸机轰炸 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_FighterBomberBombing</defName>
+    <label>战斗轰炸机轰炸</label>
+    <goodwillCostBase>20</goodwillCostBase>
+    <cooldownTicks>30000</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_FighterBomberBombing</aerialSupportDefName>
+    <category>FireStrike</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
+  <!-- 核打击 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_CarpetBombing</defName>
+    <label>地毯式轰炸</label>
+    <goodwillCostBase>25</goodwillCostBase>
+    <cooldownTicks>60000</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_CarpetBombing</aerialSupportDefName>
+    <category>FireStrike</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+</Defs>

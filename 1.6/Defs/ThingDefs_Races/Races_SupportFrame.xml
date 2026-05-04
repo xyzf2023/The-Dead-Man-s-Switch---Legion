@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- SupportFrame 支援框架（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_SupportFrame" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_SupportFrame</defName>
+    <label>支援框架</label>
+    <description>战斗框架的改进型号之一，用于测试重武器在步行机上的效果</description>
+    <statBases>
+      <MoveSpeed>4.2</MoveSpeed>
+      <ArmorRating_Blunt>0.8</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.8</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.3</ArmorRating_Heat>
+      <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+      <AimingDelayFactor>1</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>8</mechFixedSkillLevel>
+      <body>DMS_Bipedal</body>
+      <baseBodySize>1.8</baseBodySize>
+      <baseHealthScale>2</baseHealthScale>
+      <mechWeightClass>Heavy</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <DMS_ChunkSlag>2</DMS_ChunkSlag>
+      <Tungsteel>70</Tungsteel>
+    </butcherProducts>
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter>
+        <UsableWeaponTags>
+          <li>SimpleGun</li>
+          <li>DMS_MechWeaponLongRifle</li>
+          <li>DMS_MechWeaponLight</li>
+          <li>A_BR_LongRifle</li>
+          <li>GrenadeSmoke</li>
+          <li>A_MG_Heavy</li>
+          <li>A_SuppressWeapon</li>
+          <li>ShortShots</li>
+          <li>DMS_MechWeaponHeavy</li>
+          <li>H_Gatling20mm</li>
+          <li>DMS_VehicleWeapon</li>
+          <li>H_Gatling127mm</li>
+          <li>DMS_Gun_Recoilless</li>
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>
+        <UsableTechLevels>
+          <li>Industrial</li>
+        </UsableTechLevels>
+      </li>
+    </modExtensions>
+
+    <!-- 组件设置：用于武器挂载及旋转控制 -->
+    <comps>
+      <!-- 主炮塔组件 -->
+      <li Class="Fortified.CompProperties_VehicleWeapon">
+        <!-- 不同方向的绘制数据偏移 -->
+        <drawData>
+          <dataEast>
+            <offset>(0,0,-0.15)</offset>
+          </dataEast>
+          <dataWest>
+            <offset>(0,0,0.85)</offset>
+            <layer>-21</layer>
+          </dataWest>
+          <dataSouth>
+            <offset>(-0.6,0,0)</offset>
+          </dataSouth>
+          <dataNorth>
+            <offset>(0.8,0,0)</offset>
+          </dataNorth>
+        </drawData>
+        <turretRotationFollowPawn>true</turretRotationFollowPawn>
+        <rotationSmoothTime>0.1</rotationSmoothTime>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <defName>DMSL_Mech_SupportFrame</defName>
+    <label>支援框架</label>
+    <race>DMSL_Mech_SupportFrame</race>
+    <isFighter>true</isFighter>
+    <combatPower>300</combatPower>
+    <maxPerGroup>12</maxPerGroup>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/SupportFrame/SupportFrame</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/SupportFrame/SupportFrame</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>SimpleGun</li>
+      <li>DMS_MechWeaponLongRifle</li>
+      <li>DMS_MechWeaponLight</li>
+      <li>A_BR_LongRifle</li>
+      <li>GrenadeSmoke</li>
+      <li>A_MG_Heavy</li>
+      <li>A_SuppressWeapon</li>
+      <li>ShortShots</li>
+      <li>DMS_MechWeaponHeavy</li>
+      <li>H_Gatling20mm</li>
+      <li>DMS_VehicleWeapon</li>
+      <li>H_Gatling127mm</li>
+      <li>DMS_Gun_Recoilless</li>
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs>

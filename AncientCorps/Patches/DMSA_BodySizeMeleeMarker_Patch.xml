@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 为 AncientCorps 原模组中的所有超重型机兵添加体型近战加伤标记组件 -->
+
+  <!-- Krepost：DMS_Mech_Krepost -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName = "DMS_Mech_Krepost"]/comps</xpath>
+    <value>
+      <li Class="DMS_Legion.CompProperties_BodySizeMeleeMarker" />
+    </value>
+  </Operation>
+
+  <!-- Pravda：DMS_Mech_Pravda -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName = "DMS_Mech_Pravda"]/comps</xpath>
+    <value>
+      <li Class="DMS_Legion.CompProperties_BodySizeMeleeMarker" />
+    </value>
+  </Operation>
+
+</Patch>

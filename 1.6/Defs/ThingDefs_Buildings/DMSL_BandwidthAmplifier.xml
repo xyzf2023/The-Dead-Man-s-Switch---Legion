@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 频段增幅装置：充能缓冲延迟断电/耀斑后带宽移除；研究集群收发器后充能上限与速度翻倍、耗电减半。科技需求为失能机关本体「失能机关」；建筑位于机兵科技(Biotech)菜单，排序在诱导雷达与处理阵列之间。自定义建筑类用于绘制充能条。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>DMSL_Building_BandwidthAmplifier</defName>
+    <thingClass>DMS_Legion.Building_BandwidthAmplifier</thingClass>
+    <label>频段增幅装置</label>
+    <description>用于辅助御械师控制机兵的装置，内置蓄能装置，可以在断电状态下继续提供稳定的带宽。\n\n初始提供2带宽，研究科技「集群收发器」后将获得增强，提供3带宽并提升蓄能速度与上限、降低电力需求。</description>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <fillPercent>0.4</fillPercent>
+    <graphicData>
+      <texPath>Buildings/BandwidthAmplifier/BandwidthAmplifier</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(4,4)</drawSize>
+      <!-- 贴图绘制偏移 (x, y, z)，单位：格；按需调整 -->
+      <drawOffset>(0, 0, 0.8)</drawOffset>
+      <shadowData>
+        <volume>(1.5, 0.35, 1.2)</volume>
+        <offset>(0, 0, -0.15)</offset>
+      </shadowData>
+    </graphicData>
+    <!-- 建筑菜单中图标显示缩放，默认 1 -->
+    <uiIconScale>0.5</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <buildingTags>
+        <li>Biotech</li>
+      </buildingTags>
+    </building>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <!-- 机兵科技菜单（失能机关 DMS_Category），位置在诱导雷达与处理阵列之间 -->
+    <designationCategory>DMS_Category</designationCategory>
+    <uiOrder>2500</uiOrder>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(2,2)</size>
+    <!-- 150 钢铁、3 冲压零件、60 钨钢、3 零部件 -->
+    <costList>
+      <Steel>150</Steel>
+      <ComponentStamped>3</ComponentStamped>
+      <Tungsteel>60</Tungsteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <!-- 科技需求：失能机关本体菜单中的「失能机关」(DMS_DeadMansSwitch)，非简言之假说 -->
+    <researchPrerequisites>
+      <li>DMS_DeadMansSwitch</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <!-- 实际耗电由 CompBandwidthAmplifierBuffer 动态控制，此处设为 0 仅作为默认值 -->
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <!-- 使用 NoBar 版本：不绘制红/黄/绿状态条（与 DMSL_BandNode_NoEffect 同理，仅用 Def 不依赖补丁） -->
+      <li Class="DMS_Legion.CompProperties_BandNode_NoBar">
+        <hediff>DMSL_Hediff_BandwidthAmplification</hediff>
+        <untunedEffect>DMSL_BandNode_NoEffect</untunedEffect>
+        <tuningEffect>DMSL_BandNode_NoEffect</tuningEffect>
+        <tunedEffect>DMSL_BandNode_NoEffect</tunedEffect>
+        <retuningEffect>DMSL_BandNode_NoEffect</retuningEffect>
+        <tuningCompleteSound>BandNodeTuning_Complete</tuningCompleteSound>
+        <powerConsumptionIdle>100</powerConsumptionIdle>
+      </li>
+      <li Class="DMS_Legion.CompProperties_BandwidthAmplifierBuffer"/>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_BandNode</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+  </ThingDef>
+</Defs>

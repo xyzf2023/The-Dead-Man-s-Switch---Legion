@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 根节点：存放所有 Def 定义 -->
+<Defs>
+    <!-- 物品定义：父类为原版锐利近战武器（无品质/样式，见 comps） -->
+    <ThingDef ParentName="BaseMeleeWeapon_Sharp">
+        <!-- 唯一标识符，用于代码与补丁引用 -->
+        <defName>DMSL_Weapon_Lance</defName>
+        <!-- 游戏内显示名称 -->
+        <label>骑士长枪</label>
+        <!-- 物品描述，悬停时显示 -->
+        <description>一款专为斥候设计的骑兵长枪，伤害会随着移动速度增加。\n\n&lt;i&gt;“当移速达到一定阈值后，骑枪会变得势不可挡。”&lt;/i&gt;</description>
+
+        <!-- 图形设置 -->
+        <graphicData>
+            <!-- 贴图路径（相对 Content/Textures），多向贴图会自动加载 _north/_south/_east/_west -->
+            <texPath>Weapons/DMSL_Weapon_Lance/DMSL_Weapon_Lance</texPath>
+            <!-- 单向贴图类，不随朝向变化 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 掉落在地时的随机旋转角度（度） -->
+            <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+            <!-- 绘制尺寸 -->
+            <drawSize>3.2</drawSize>
+        </graphicData>
+
+        <uiIconScale>0.8</uiIconScale> <!-- UI 图标缩放 -->
+
+        <!-- 科技等级：工业时代 -->
+        <techLevel>Industrial</techLevel>
+        <!-- 武器标签：DMS 近战武器，DMSL_Lance 供斥候装备筛选 -->
+        <weaponTags>
+            <li>DMSL_Lance</li>               <!-- Legion 长枪（斥候专属） -->
+        </weaponTags>
+        <!-- 武器分类：MeleePiercer 为刺击近战类（原版 WeaponClassDef） -->
+        <weaponClasses>
+            <li>MeleePiercer</li>
+        </weaponClasses>
+        <!-- 固定材料清单（DMS 钨钢 + 冲压零件，不支持多材料） -->
+        <costList>
+            <Tungsteel>100</Tungsteel>
+            <!-- 钨钢（DMS） -->
+            <ComponentStamped>5</ComponentStamped>
+            <!-- 冲压零件（DMS） -->
+        </costList>
+
+        <!-- 基础属性 -->
+        <statBases>
+            <WorkToMake>12000</WorkToMake>
+            <Mass>30</Mass>
+            <MaxHitPoints>800</MaxHitPoints>
+            <Flammability>0</Flammability>
+            <DeteriorationRate>0.2</DeteriorationRate>
+            <Beauty>0</Beauty>
+            <SellPriceFactor>1</SellPriceFactor>
+        </statBases>
+
+        <!-- 装备在角色身上时的贴图旋转偏移（度） -->
+        <equippedAngleOffset>-55</equippedAngleOffset>
+
+        <!-- 近战攻击方式 -->
+        <tools>
+            <li>
+                <label>枪头</label>
+                <capacities>
+                    <li>Stab</li>
+                </capacities>
+                <power>15</power>
+                <armorPenetration>2</armorPenetration>
+                <cooldownTime>2.6</cooldownTime>
+            </li>
+        </tools>
+
+        <!-- 制造相关：DMS 机械冲压机，简言之假说 + 生物机械工程联动解锁 -->
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>DMS_TableMachinePrinter</li>
+                <!-- DMS 机械冲压机 -->
+            </recipeUsers>
+            <researchPrerequisites>
+                <li>DMS_Hypothesis</li>
+                <!-- 简言之假说（DMS） -->
+                <li>DMS_Hybrid</li>
+                <!-- 生物机械工程（DMS） -->
+            </researchPrerequisites>
+            <skillRequirements>
+                <Crafting>4</Crafting>
+            </skillRequirements>
+            <displayPriority>330</displayPriority>
+        </recipeMaker>
+
+        <!-- 组件 -->
+        <comps Inherit="False">
+            <li Class="CompProperties_Forbiddable"/>
+            <li Class="CompProperties_Styleable"/>
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <!-- 持握时按朝向旋转贴图，角度与绘制偏移可在下方覆盖 -->
+            <li Class="DMS_Legion.CompProperties_LanceDrawRotation">
+                <!-- 面向下方(South)时贴图额外旋转（度）。负值=顺时针，-90=贴图原文件顺时针转90° -->
+                <southRotationOffset>88</southRotationOffset>
+                <!-- 面向上方(North)时贴图额外旋转（度）。正值=逆时针，90=贴图原文件逆时针转90° -->
+                <northRotationOffset>-90</northRotationOffset>
+                <!-- 面向右方(East)时绘制位置 X 偏移（世界单位） -->
+                <eastDrawOffsetX>0.8</eastDrawOffsetX>
+                <!-- 面向右方(East)时绘制位置 Z 偏移（世界单位） -->
+                <eastDrawOffsetZ>0.4</eastDrawOffsetZ>
+                <!-- 面向左方(West)时绘制位置 X 偏移（世界单位，负值=向左，与 East 对称） -->
+                <westDrawOffsetX>-0.8</westDrawOffsetX>
+                <!-- 面向左方(West)时绘制位置 Z 偏移（世界单位） -->
+                <westDrawOffsetZ>0.4</westDrawOffsetZ>
+                <!-- 面向下方(South)时绘制位置 X 偏移（世界单位） -->
+                <southDrawOffsetX>-0.35</southDrawOffsetX>
+                <!-- 面向下方(South)时绘制位置 Z 偏移（世界单位） -->
+                <southDrawOffsetZ>-0.3</southDrawOffsetZ>
+                <!-- 面向上方(North)时绘制位置 X 偏移（世界单位） -->
+                <northDrawOffsetX>0.45</northDrawOffsetX>
+                <!-- 面向上方(North)时绘制位置 Z 偏移（世界单位） -->
+                <northDrawOffsetZ>0.8</northDrawOffsetZ>            
+            </li>
+        </comps>
+    </ThingDef>
+</Defs>

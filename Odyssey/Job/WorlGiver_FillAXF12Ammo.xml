@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 装填 AXF12 航弹储备的工作给予者，归属搬运（Haul） -->
+  <WorkGiverDef>
+    <defName>DMSL_WorkGiver_FillAXF12Ammo</defName>
+    <label>装填航弹</label>
+    <giverClass>DMS_Legion.AXF12.WorkGiver_FillAXF12Ammo</giverClass>
+    <workType>Haul</workType>
+    <verb>装填</verb>
+    <gerund>装填航弹</gerund>
+    <priorityInType>200</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+    <canBeDoneWhileDrafted>false</canBeDoneWhileDrafted>
+  </WorkGiverDef>
+</Defs>

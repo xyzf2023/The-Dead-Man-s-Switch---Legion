@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Motorized Defs/Vehicles GrayKnights -->
+  <GrayKnights_Tank_Turret.label>Main Turret</GrayKnights_Tank_Turret.label>
+  <GrayKnights_Tank_Turret.gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; 120mm Cannon Shell&lt;/color&gt;</GrayKnights_Tank_Turret.gizmoDescription>
+  <GrayKnights_Tank_Turret.fireModes.0.label>Single Shot</GrayKnights_Tank_Turret.fireModes.0.label>
+  <GrayKnights_Tank_Turret_ArmorPack.label>Main Turret</GrayKnights_Tank_Turret_ArmorPack.label>
+  <GrayKnights_Tank_Turret_ArmorPack.gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; 120mm Cannon Shell&lt;/color&gt;</GrayKnights_Tank_Turret_ArmorPack.gizmoDescription>
+  <GrayKnights_Tank_Turret_ArmorPack.fireModes.0.label>Single Shot</GrayKnights_Tank_Turret_ArmorPack.fireModes.0.label>
+  <!-- Motorized Defs/Weapons -->
+  <PZH2000_Tank_Turret.label>PZH2000 howitzer</PZH2000_Tank_Turret.label>
+  <PZH2000_Tank_Turret.gizmoDescription>Select Target.\n\nFire high-explosive shells at long range.\n\n&lt;color=#b0e0e6&gt;Ammo:&lt;/color&gt; 155mm HE Shell&lt;/color&gt;</PZH2000_Tank_Turret.gizmoDescription>
+  <PZH2000_Tank_Turret.fireModes.0.label>Salvo Fire</PZH2000_Tank_Turret.fireModes.0.label>
+  <DMSL_AAcannon.label>Double-barrel machine gun</DMSL_AAcannon.label>
+  <DMSL_AAcannon.gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; .50 BMG&lt;/color&gt;</DMSL_AAcannon.gizmoDescription>
+  <DMSL_AAcannon.fireModes.0.label>Auto</DMSL_AAcannon.fireModes.0.label>
+  <DMSL_AAcannon.fireModes.1.label>Burst</DMSL_AAcannon.fireModes.1.label>
+  <DMSL_81mmMortar.label>81mm Mortar</DMSL_81mmMortar.label>
+  <DMSL_81mmMortar.gizmoDescription>81mm Mortar.\n\nFire high-explosive shells at medium range\n\n&lt;color=#b0e0e6&gt;Ammo:&lt;/color&gt; 81mm HE Shell&lt;/color&gt;</DMSL_81mmMortar.gizmoDescription>
+  <DMSL_81mmMortar.fireModes.0.label>Single Shot</DMSL_81mmMortar.fireModes.0.label>
+  <DMSL_Double_barrel_machine_gun.label>Double-barrel machine gun</DMSL_Double_barrel_machine_gun.label>
+  <DMSL_Double_barrel_machine_gun.gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; .50 BMG&lt;/color&gt;</DMSL_Double_barrel_machine_gun.gizmoDescription>
+  <DMSL_Double_barrel_machine_gun.fireModes.0.label>Auto</DMSL_Double_barrel_machine_gun.fireModes.0.label>
+  <DMSL_Double_barrel_machine_gun.fireModes.1.label>Burst</DMSL_Double_barrel_machine_gun.fireModes.1.label>
+</LanguageData>

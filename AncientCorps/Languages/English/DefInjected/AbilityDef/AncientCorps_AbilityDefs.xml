@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/AbilityDefs -->
+  <DMSL_Ability_WarStomp.label>War Stomp</DMSL_Ability_WarStomp.label>
+  <DMSL_Ability_WarStomp.description>Leap to a designated location using artificial muscles and deal area trampling damage on landing.</DMSL_Ability_WarStomp.description>
+  <DMSL_Ability_StaticDefenseDirective.label>Static Defense Directive</DMSL_Ability_StaticDefenseDirective.label>
+  <DMSL_Ability_StaticDefenseDirective.description>Toggle Static Defense Directive mode.</DMSL_Ability_StaticDefenseDirective.description>
+  <DMSL_Ability_RapidReload.label>Rapid Reload</DMSL_Ability_RapidReload.label>
+  <DMSL_Ability_RapidReload.description>Enter Rapid Reload mode, greatly reducing firing cooldown.</DMSL_Ability_RapidReload.description>
+</LanguageData>

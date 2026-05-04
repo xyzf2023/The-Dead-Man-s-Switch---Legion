@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/AbilityDefs -->
+  <DMSL_Ability_WarStomp.label>战争践踏</DMSL_Ability_WarStomp.label>
+  <DMSL_Ability_WarStomp.description>利用人工肌肉向指定地点跳跃，并在落地时造成范围碾压伤害。</DMSL_Ability_WarStomp.description>
+  <DMSL_Ability_StaticDefenseDirective.label>固守指令</DMSL_Ability_StaticDefenseDirective.label>
+  <DMSL_Ability_StaticDefenseDirective.description>切换固守指令状态。</DMSL_Ability_StaticDefenseDirective.description>
+  <DMSL_Ability_RapidReload.label>爆发装填</DMSL_Ability_RapidReload.label>
+  <DMSL_Ability_RapidReload.description>机械体进入爆发装填状态，射击冷却大幅缩短。</DMSL_Ability_RapidReload.description>
+</LanguageData>

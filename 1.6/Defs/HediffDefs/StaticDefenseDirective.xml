@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 固守指令 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_StaticDefenseDirective</defName>
+    <label>固守指令</label>
+    <description>该单位正在执行固守指令。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <stages>
+      <li>
+        <statFactors>
+          <!-- 耗能系数 0.1 -->
+          <MechEnergyUsageFactor>0</MechEnergyUsageFactor>
+          <!-- 承伤系数 0.25 -->
+          <IncomingDamageFactor>0.25</IncomingDamageFactor>
+          <!-- 远程武器冷却系数 0.5 -->
+          <RangedCooldownFactor>0.5</RangedCooldownFactor>
+          <!-- 瞄准时间系数 0.5 -->
+          <AimingDelayFactor>0.5</AimingDelayFactor>
+        </statFactors>
+        <statOffsets>
+          <!-- 射击精度 +12 -->
+          <ShootingAccuracyPawn>12</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="DMS_Legion.HediffCompProperties_NoMove"/>
+    </comps>
+  </HediffDef>
+</Defs>

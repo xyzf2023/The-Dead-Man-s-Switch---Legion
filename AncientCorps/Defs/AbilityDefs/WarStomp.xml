@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 战争践踏：跳跃至目标地点并在落地时造成范围钝器碾压伤害 -->
+  <AbilityDef>
+    <defName>DMSL_Ability_WarStomp</defName>
+    <label>战争践踏</label>
+    <description>利用人工肌肉向指定地点跳跃，并在落地时造成范围碾压伤害。</description>
+    <iconPath>UI/Abilities/WarStomp</iconPath>
+    <cooldownTicksRange>7500~7500</cooldownTicksRange><!-- 冷却时间：3小时（7500 ticks） -->
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityJump</verbClass>
+      <label>践踏</label>
+      <violent>false</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>1</warmupTime>
+      <range>20</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <jobDef>CastJump</jobDef>
+    <comps>
+      <li Class="DMS_Legion.CompProperties_AbilityWarStomp">
+        <radius>5</radius>
+        <damageAmount>50</damageAmount>
+        <damageDef>Blunt</damageDef>
+        <armorPenFactor>0.02</armorPenFactor>
+        <armorPenOverride>-1</armorPenOverride>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

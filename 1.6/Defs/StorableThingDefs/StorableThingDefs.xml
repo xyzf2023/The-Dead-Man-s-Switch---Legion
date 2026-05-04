@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 钢铁 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_Steel</defName>
+    <label>钢铁</label>
+    <thingDefName>Steel</thingDefName>
+    <maxStorage>20000</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 钨钢 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_Tungsteel</defName>
+    <label>钨钢</label>
+    <thingDefName>Tungsteel</thingDefName>
+    <maxStorage>5000</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 冲压零件 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_ComponentStamped</defName>
+    <label>冲压零件</label>
+    <thingDefName>ComponentStamped</thingDefName>
+    <maxStorage>1000</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 人工肌肉 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_Artifuscle</defName>
+    <label>人工肌肉</label>
+    <thingDefName>Artifuscle</thingDefName>
+    <maxStorage>500</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 湿件计算机 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_Neurocomputer</defName>
+    <label>湿件计算机</label>
+    <thingDefName>Neurocomputer</thingDefName>
+    <maxStorage>200</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 火控核心 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_ComponentFireControl</defName>
+    <label>火控核心</label>
+    <thingDefName>ComponentFireControl</thingDefName>
+    <maxStorage>100</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 集群控制芯片 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_ComponentControlChip</defName>
+    <label>集群控制芯片</label>
+    <thingDefName>ComponentControlChip</thingDefName>
+    <maxStorage>50</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 聚酯纤维 -->
+  <DMS_Legion.IndustrialHubClusterStorage>
+    <defName>Storable_Polyester</defName>
+    <label>聚酯纤维</label>
+    <thingDefName>Polyester</thingDefName>
+    <maxStorage>3000</maxStorage>
+  </DMS_Legion.IndustrialHubClusterStorage>
+
+  <!-- 可根据需要继续添加其他物资 -->
+</Defs>

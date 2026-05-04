@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 冲击波伤害类型：以原版 Bomb 为模板，显式填写所有可填 XML 字段 -->
+  <DamageDef>
+    <defName>DMSL_Damage_BlastWave</defName> <!-- 定义名 -->
+    <label>冲击波</label> <!-- 显示标签 -->
+    <workerClass>DamageWorker_AddInjury</workerClass> <!-- 伤害处理类 -->
+    <externalViolence>true</externalViolence> <!-- 视为外部暴力 -->
+    <isExplosive>true</isExplosive> <!-- 爆炸类伤害 -->
+    <deathMessage>{0} 因冲击波而死亡。</deathMessage> <!-- 死亡讯息 -->
+    <hediff>Shredded</hediff> <!-- 肉体伤势 -->
+    <hediffSolid>Crack</hediffSolid> <!-- 机械体/建筑伤势 -->
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside> <!-- 穿透至外层 -->
+    <impactSoundType>Blunt</impactSoundType> <!-- 命中音效类型 -->
+    <armorCategory>Sharp</armorCategory> <!-- 护甲类别 -->
+    <minDamageToFragment>15</minDamageToFragment> <!-- 最小碎裂伤害 -->
+    <defaultDamage>8000</defaultDamage> <!-- 默认伤害量 -->
+    <defaultStoppingPower>20</defaultStoppingPower> <!-- 默认停止力 -->
+    <defaultArmorPenetration>2.0</defaultArmorPenetration> <!-- 默认穿甲 -->
+    <buildingDamageFactorImpassable>10</buildingDamageFactorImpassable> <!-- 不可通过建筑伤害系数 -->
+    <buildingDamageFactorPassable>5</buildingDamageFactorPassable> <!-- 可通过建筑伤害系数 -->
+    <plantDamageFactor>20</plantDamageFactor> <!-- 植物伤害系数 -->
+    <corpseDamageFactor>20</corpseDamageFactor> <!-- 尸体伤害系数 -->
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly> <!-- 爆炸是否仅影响外露部位 -->
+    <explosionHeatEnergyPerCell>10</explosionHeatEnergyPerCell> <!-- 每格热力值 -->
+    <explosionCellFleck>BlastDry</explosionCellFleck> <!-- 爆炸每格 Fleck -->
+    <explosionColorCenter>(1, 0.6, 0.2)</explosionColorCenter> <!-- 爆炸中心颜色 -->
+    <explosionColorEdge>(0.7, 0.5, 0.3)</explosionColorEdge> <!-- 爆炸边缘颜色 -->
+    <soundExplosion>Explosion_Bomb</soundExplosion> <!-- 爆炸音效 -->
+    <combatLogRules>Damage_Bomb</combatLogRules> <!-- 战斗日志规则 -->
+    <hasForcefulImpact>true</hasForcefulImpact> <!-- 有强力冲击 -->
+    <makesBlood>true</makesBlood> <!-- 产生血迹 -->
+    <canInterruptJobs>true</canInterruptJobs> <!-- 可打断工作 -->
+    <harmsHealth>true</harmsHealth> <!-- 损害生命 -->
+    <consideredHelpful>false</consideredHelpful> <!-- 不视为有益 -->
+    <makesAnimalsFlee>true</makesAnimalsFlee> <!-- 使动物逃离 -->
+    <expolosionPropagationSpeed>1.0</expolosionPropagationSpeed> <!-- 爆炸扩散速度（原版拼写） -->
+    <explosionSnowMeltAmount>20</explosionSnowMeltAmount> <!-- 爆炸融雪量 -->
+  </DamageDef>
+
+  <!-- 热辐射伤害类型：以原版 Flame（烧伤）为模板，显式填写所有可填 XML 字段 -->
+  <DamageDef>
+    <defName>DMSL_Damage_ThermalRadiation</defName> <!-- 定义名 -->
+    <label>热辐射</label> <!-- 显示标签 -->
+    <workerClass>DamageWorker_Flame</workerClass> <!-- 伤害处理类（同 Flame，可引燃） -->
+    <hasForcefulImpact>false</hasForcefulImpact> <!-- 无强力冲击 -->
+    <makesBlood>false</makesBlood> <!-- 不产生血迹 -->
+    <canInterruptJobs>false</canInterruptJobs> <!-- 不打断工作 -->
+    <externalViolence>true</externalViolence> <!-- 视为外部暴力 -->
+    <deathMessage>{0} 死于热辐射。</deathMessage> <!-- 死亡讯息 -->
+    <hediff>Burn</hediff> <!-- 伤势 -->
+    <armorCategory>Heat</armorCategory> <!-- 护甲类别 -->
+    <minDamageToFragment>15</minDamageToFragment> <!-- 最小碎裂伤害 -->
+    <defaultDamage>5000</defaultDamage> <!-- 默认伤害量 -->
+    <defaultArmorPenetration>0</defaultArmorPenetration> <!-- 默认穿甲 -->
+    <explosionHeatEnergyPerCell>15</explosionHeatEnergyPerCell> <!-- 每格热力值 -->
+    <explosionCellFleck>BlastFlame</explosionCellFleck> <!-- 爆炸每格 Fleck -->
+    <explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter> <!-- 爆炸中心颜色 -->
+    <explosionColorEdge>(1, 1, 0.7)</explosionColorEdge> <!-- 爆炸边缘颜色 -->
+    <soundExplosion>Explosion_Flame</soundExplosion> <!-- 爆炸音效 -->
+    <combatLogRules>Damage_Flame</combatLogRules> <!-- 战斗日志规则 -->
+    <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect> <!-- 不使用金属偏转特效 -->
+    <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability> <!-- 建筑伤害按易燃性缩放 -->
+  </DamageDef>
+
+  <!-- 核电磁脉冲伤害类型：以原版 EMP 为模板，workerClass 为 DamageWorker_AddInjury，显式填写所有可填 XML 字段，不继承父类 -->
+  <DamageDef>
+    <defName>DMSL_Damage_NuclearEMP</defName> <!-- 定义名 -->
+    <label>核电磁脉冲</label> <!-- 显示标签 -->
+    <workerClass>DamageWorker_AddInjury</workerClass> <!-- 伤害处理类 -->
+    <externalViolence>true</externalViolence> <!-- 视为外部暴力 -->
+    <externalViolenceForMechanoids>true</externalViolenceForMechanoids> <!-- 对机械体视为外部暴力（与 EMP 一致） -->
+    <isExplosive>false</isExplosive> <!-- 非爆炸类伤害（EMP 为脉冲） -->
+    <deathMessage>{0} 因核电磁脉冲而死亡。</deathMessage> <!-- 死亡讯息 -->
+    <hediff>Shredded</hediff> <!-- 肉体伤势（有机体） -->
+    <hediffSolid>Crack</hediffSolid> <!-- 机械体/建筑伤势 -->
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside> <!-- 穿透至外层 -->
+    <impactSoundType>Electric</impactSoundType> <!-- 命中音效类型（与 EMP 一致） -->
+    <armorCategory>Blunt</armorCategory> <!-- 护甲类别（原版无 Electric，用 Blunt；EMP 类伤害多用钝击结算） -->
+    <minDamageToFragment>15</minDamageToFragment> <!-- 最小碎裂伤害 -->
+    <defaultDamage>1000</defaultDamage> <!-- 默认伤害量（与 EMP 同量级） -->
+    <defaultStoppingPower>0</defaultStoppingPower> <!-- 默认停止力 -->
+    <defaultArmorPenetration>2</defaultArmorPenetration> <!-- 默认穿甲 -->
+    <buildingDamageFactorImpassable>0</buildingDamageFactorImpassable> <!-- 不可通过建筑伤害系数 -->
+    <buildingDamageFactorPassable>0</buildingDamageFactorPassable> <!-- 可通过建筑伤害系数 -->
+    <plantDamageFactor>0</plantDamageFactor> <!-- 植物伤害系数 -->
+    <corpseDamageFactor>0</corpseDamageFactor> <!-- 尸体伤害系数 -->
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly> <!-- 爆炸是否仅影响外露部位 -->
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell> <!-- 每格热力值（EMP 无热） -->
+    <explosionCellFleck>BlastEMP</explosionCellFleck> <!-- 爆炸每格 Fleck（与 EMP 一致） -->
+    <explosionInteriorFleck>ElectricalSpark</explosionInteriorFleck> <!-- 爆炸内部 Fleck（与 EMP 一致） -->
+    <explosionColorCenter>(0.9, 0.9, 1)</explosionColorCenter> <!-- 爆炸中心颜色（淡蓝白） -->
+    <explosionColorEdge>(0.8, 0.8, 0.8)</explosionColorEdge> <!-- 爆炸边缘颜色（与 EMP 一致灰白） -->
+    <soundExplosion>Explosion_EMP</soundExplosion> <!-- 爆炸音效（与 EMP 一致） -->
+    <combatLogRules>Damage_EMP</combatLogRules> <!-- 战斗日志规则（与 EMP 一致） -->
+    <hasForcefulImpact>false</hasForcefulImpact> <!-- 无强力冲击（与 EMP 一致） -->
+    <makesBlood>false</makesBlood> <!-- 不产生血迹（与 EMP 一致） -->
+    <canInterruptJobs>true</canInterruptJobs> <!-- 可打断工作 -->
+    <harmsHealth>true</harmsHealth> <!-- 损害生命 -->
+    <consideredHelpful>false</consideredHelpful> <!-- 不视为有益 -->
+    <makesAnimalsFlee>false</makesAnimalsFlee> <!-- 不使动物逃离（与 EMP 一致） -->
+    <expolosionPropagationSpeed>1.0</expolosionPropagationSpeed> <!-- 爆炸扩散速度（原版拼写） -->
+    <explosionSnowMeltAmount>0</explosionSnowMeltAmount> <!-- 爆炸融雪量（EMP 无热，与 EMP 一致） -->
+    <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect> <!-- 不使用金属偏转特效 -->
+  </DamageDef>
+
+</Defs>

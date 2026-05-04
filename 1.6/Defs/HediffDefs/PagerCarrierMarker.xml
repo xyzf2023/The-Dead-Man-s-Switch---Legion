@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 传呼器携带者标记：在持有传呼器的敌人头顶显示红色三角 -->
+  <!-- 通过 XML 的 becomeVisible 字段隐藏，不在健康标签中显示 -->
+  <HediffDef>
+    <defName>DMSL_PagerCarrierMarker</defName>
+    <label>传呼器标记</label>
+    <description>用于标记持有空中支援传呼器者</description>
+    <hediffClass>DMS_Legion.AerialRaid.Hediff_PagerCarrierMarker</hediffClass>
+    <isBad>false</isBad>
+    <makesSickThought>false</makesSickThought>
+    <displayWound>false</displayWound>
+    <lethalSeverity>-1</lethalSeverity>
+    <tendable>false</tendable>
+    <cureAllAtOnceIfCuredByItem>false</cureAllAtOnceIfCuredByItem>
+    <stages>
+      <!-- 设置 becomeVisible 为 false，隐藏健康状态 -->
+      <li>
+        <label>标记</label>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+    <comps>
+      <!-- 可以添加其他组件，如 CompProperties_HediffComp 等 -->
+    </comps>
+  </HediffDef>
+</Defs>

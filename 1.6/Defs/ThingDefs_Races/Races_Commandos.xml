@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><!-- XML文件声明，指定版本1.0和UTF-8编码 -->
+<Defs><!-- 定义根元素，包含所有游戏定义 -->
+
+  <!-- Commandos 突击队（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_Commandos" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_Commandos</defName>
+    <label>机动射手</label>
+    <description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</description>
+    <statBases>
+      <MoveSpeed>5.2</MoveSpeed>
+      <ArmorRating_Blunt>0.9</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.9</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.2</ArmorRating_Heat>
+      <ShootingAccuracyPawn>0</ShootingAccuracyPawn>
+      <AimingDelayFactor>1</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>6</mechFixedSkillLevel>
+      <body>DMS_Humanoid_TypeA</body>
+      <baseBodySize>1.1</baseBodySize>
+      <baseHealthScale>2</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <Tungsteel>5</Tungsteel>
+    </butcherProducts>
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>false</EnableWeaponFilter>
+        <EnableTechLevelFilter>false</EnableTechLevelFilter>
+      </li>
+      <li Class="Fortified.TurretMannableExtension"/><!-- 可操作炮塔扩展 -->
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind"><!-- 定义机械体种类，继承自基础机械体种类 -->
+    <defName>DMSL_Mech_Commandos</defName><!-- 定义名称：DMS_Mech_Arquebusier -->
+    <label>机动射手</label><!-- 显示标签：arquebusier -->
+    <race>DMSL_Mech_Commandos</race><!-- 关联的种族：DMS_Mech_Guardian -->
+    <isFighter>true</isFighter><!-- 是否为战斗单位：是 -->
+    <combatPower>250</combatPower><!-- 战斗力量：250 -->
+    <maxPerGroup>12</maxPerGroup><!-- 每组最大数量：12 -->
+    <lifeStages><!-- 生命阶段列表（用于定义不同阶段的贴图） -->
+      <li><!-- 第一个生命阶段 -->
+        <bodyGraphicData><!-- 身体图形数据 -->
+          <texPath>Mechanoid/Commandos/Commandos</texPath><!-- 贴图路径：Mechanoid/Guardian/Guardian（相对于Textures目录） -->
+          <shaderType>CutoutComplex</shaderType><!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass><!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize><!-- 绘制大小：1.4 -->
+          <shadowData><!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume><!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset><!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li><!-- 第二个生命阶段（旧贴图） -->
+        <bodyGraphicData><!-- 身体图形数据 -->
+          <texPath>Mechanoid/Commandos/Commandos</texPath><!-- 贴图路径：Things/Automatroid/OldTexture/arquebusier（旧纹理） -->
+          <shaderType>CutoutComplex</shaderType><!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass><!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize><!-- 绘制大小：1.4 -->
+          <shadowData><!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume><!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset><!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags><!-- 武器标签列表（生成时可能携带的武器类型） -->
+          <li>SimpleGun</li><!-- 简单枪械标签 -->
+          <li>DMS_MechWeaponLight</li><!-- DMS轻型机械武器标签 -->
+          <li>A_AR_LongRifle</li><!-- 突击步枪长步枪标签 -->
+          <li>A_SAR_LongRifle</li><!-- 半自动步枪长步枪标签 -->
+          <li>A_BR_LongRifle</li><!-- 战斗步枪长步枪标签 -->
+          <li>A_MG_Light</li><!-- 轻型机枪标签 -->
+          <li>ElephantGun</li><!-- 象枪标签 -->
+          <li>SniperRifle</li><!-- 狙击步枪标签 -->
+          <li>AssaultRifle</li>
+    </weaponTags>
+
+    <abilities>
+     <li>DMS_SharpShooting</li>
+    </abilities>
+  </PawnKindDef>
+</Defs><!-- 定义根元素结束 -->

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Odyssey Defs/ThingDefs_Misc -->
+  <DMSL_AerialBomb.label>航弹</DMSL_AerialBomb.label>
+  <DMSL_AerialBomb.description>一种平平无奇的航弹，供AXF-12使用。注意别让你发疯的小人看到它。</DMSL_AerialBomb.description>
+  <DMSL_Bullet_AerialBomb.label>航弹</DMSL_Bullet_AerialBomb.label>
+  <DMSL_AXF12_OffsetConfigIncoming.label>AXF-12「偏构」垂直起降战斗机（入场）</DMSL_AXF12_OffsetConfigIncoming.label>
+  <DMSL_AXF12_OffsetConfigLeaving.label>AXF-12「偏构」垂直起降战斗机（离场）</DMSL_AXF12_OffsetConfigLeaving.label>
+</LanguageData>

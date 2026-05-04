@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+    未知机兵支援：正面事件，不在正常流程中被叙事者生成，仅由特殊组件调用。
+    空投电子天使派系机兵（近卫、机动射手、萨满；若加载 AncientCorps 则含铁面）协助玩家。
+  -->
+  <IncidentDef>
+    <defName>DMSL_UnknownMechSupport</defName>
+    <label>未知机兵支援</label>
+    <description>一支来源不明的机兵部队进入战区。其敌我识别信号未匹配任何已知势力，但似乎未对殖民地抱有敌意。该部队行动轨迹显示其将协助你清除来犯目标。</description>
+    <letterLabel>未知机兵支援</letterLabel>
+    <letterText>一支来源不明的机兵部队进入战区。其敌我识别信号未匹配任何已知势力，但似乎未对殖民地抱有敌意。该部队行动轨迹显示其将协助你清除来犯目标。</letterText>
+    <letterDef>PositiveEvent</letterDef>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>DMS_Legion.Incidents.UnknownMechSupport.IncidentWorker_UnknownMechSupport</workerClass>
+    <category>Misc</category>
+    <!-- 不参与叙事者轮询，仅由组件调用 -->
+    <hidden>true</hidden>
+  </IncidentDef>
+</Defs>

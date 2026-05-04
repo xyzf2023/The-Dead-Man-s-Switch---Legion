@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 高压电击：接触一击 Job -->
+  <JobDef>
+    <defName>DMSL_Job_HighVoltageShockStrike</defName>
+    <label>释放高压电击</label>
+    <driverClass>DMS_Legion.JobDriver_HighVoltageShockStrike</driverClass>
+    <reportString>正在对{0}释放高压电击。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

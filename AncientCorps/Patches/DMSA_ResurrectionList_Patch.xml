@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    DMSA机械体复活列表补丁
+    此补丁将DMSA的机械体添加到DMS本体的复活列表中
+    此补丁仅在加载了DMSA（Aoba.DeadManSwitch.AncientCorps）时才会加载
+-->
+<Patch>
+    <!-- 添加DMSA机械体到超重型复活列表 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="DMS_ResurrectUltraheavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+            <!-- DMSA机械体尸体类型（超重型） -->
+            <li>Corpse_DMSL_Mech_IronFace</li>
+            <li>Corpse_DMSL_Mech_panzer</li>
+            <li>Corpse_DMSL_Mech_leopard</li>
+            <li>Corpse_DMSL_Mech_STGeorge</li>
+            <li>Corpse_DMSL_Mech_ZBZ59D</li>
+        </value>
+    </Operation>
+</Patch>

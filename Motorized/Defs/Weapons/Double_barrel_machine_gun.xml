@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 大口径同轴，12.7多管机枪 -->
+  <Vehicles.VehicleTurretDef ParentName="DMS_BaseTurret">
+    <!-- 炮塔定义名称 -->
+    <defName>DMSL_Double_barrel_machine_gun</defName>
+    <!-- 显示标签 -->
+    <label>Double-barrel machine gun</label>
+    <!-- UI操作说明 -->
+    <gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; .50 BMG</gizmoDescription>
+    <!-- 炮塔的UI图标路径 -->
+    <gizmoIconTexPath>Vehicles/Common/Double_barrel_machine_gun_Icon</gizmoIconTexPath>
+    <graphicData>
+      <!-- 炮塔外观贴图路径 -->
+      <texPath>Vehicles/Common/Double_barrel_machine_gun</texPath>
+      <!-- 绘制尺寸 -->
+      <drawSize>1</drawSize>
+    </graphicData>
+    <!-- 弹药与装填容量相关 -->
+    <!-- 重新装填时间 -->
+    <reloadTimer>5</reloadTimer>
+    <!-- 弹夹容量 -->
+    <magazineCapacity>400</magazineCapacity>
+    <!-- 每发弹药消耗数量 -->
+    <chargePerAmmoCount>0.25</chargePerAmmoCount>
+    <!-- 启用通用弹药系统 -->
+    <genericAmmo>true</genericAmmo>
+    <!-- 发射的弹药类型 -->
+    <projectile>DMS_Bullet_Kord</projectile>
+    <!-- 射程与射界相关 -->
+    <!-- 旋转速度 -->
+    <rotationSpeed>0.9</rotationSpeed>
+    <!-- 最大射程 -->
+    <maxRange>36</maxRange>
+    <!-- 最小射程 -->
+    <minRange>1</minRange>
+    <!-- 射击相关 -->
+    <!-- 预热时间 -->
+    <warmUpTimer>0.5</warmUpTimer>
+    <!-- 弹药发射偏移量 -->
+    <projectileOffset>1.5</projectileOffset>
+    <!-- 开火音效 -->
+    <shotSound>DMS_MachineGunLight_Shot</shotSound>
+    <!-- 装填音效 -->
+    <reloadSound>DMS_Reload_MachineGunSound</reloadSound>
+    <!-- 出膛前后偏移，主要是能让子弹能从炮口飞出去 -->
+    <projectileShifting>
+      <li>0</li>
+    </projectileShifting>
+    <!-- 自动瞄准 -->
+    <autoSnapTargeting>true</autoSnapTargeting>
+    <!-- 弹药类型定义 -->
+    <ammunition Inherit="false">
+      <thingDefs>
+        <!-- 使用铀作为弹药材料 -->
+        <li>Steel</li>
+      </thingDefs>
+    </ammunition>
+    <!-- 后坐力参数 -->
+    <recoil>
+      <distanceTotal>0.1</distanceTotal>
+      <distancePerTick>0.05</distancePerTick>
+      <speedMultiplierPostRecoil>0.5</speedMultiplierPostRecoil>
+    </recoil>
+    <!-- 射击模式定义 -->
+    <fireModes>
+      <!-- 自动射击模式 -->
+      <li>
+        <!-- 每次连射弹数 -->
+        <shotsPerBurst>14~19</shotsPerBurst>
+        <!-- 射击间隔 -->
+        <ticksBetweenShots>6</ticksBetweenShots>
+        <!-- 连射间隔 -->
+        <ticksBetweenBursts>60</ticksBetweenBursts>
+        <!-- 各距离精度 -->
+        <accuracyTouch>0.45</accuracyTouch>
+        <accuracyShort>0.65</accuracyShort>
+        <accuracyMedium>0.75</accuracyMedium>
+        <accuracyLong>0.35</accuracyLong>
+        <!-- 模式标签 -->
+        <label>Auto</label>
+        <!-- 模式图标 -->
+        <texPath>UI/Gizmos/FireRate_Auto</texPath>
+      </li>
+      <!-- 点射模式 -->
+      <li>
+        <shotsPerBurst>5~9</shotsPerBurst>
+        <ticksBetweenShots>4</ticksBetweenShots>
+        <ticksBetweenBursts>40~60</ticksBetweenBursts>
+        <accuracyTouch>0.55</accuracyTouch>
+        <accuracyShort>0.75</accuracyShort>
+        <accuracyMedium>0.85</accuracyMedium>
+        <accuracyLong>0.45</accuracyLong>
+        <label>Burst</label>
+        <texPath>UI/Gizmos/FireRate_Burst</texPath>
+      </li>
+    </fireModes>
+  </Vehicles.VehicleTurretDef>
+</Defs>

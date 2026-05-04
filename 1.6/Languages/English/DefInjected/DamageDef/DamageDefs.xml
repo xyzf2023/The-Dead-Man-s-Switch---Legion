@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/DamageDefs -->
+  <DMSL_Damage_BlastWave.label>Blast Wave</DMSL_Damage_BlastWave.label>
+  <DMSL_Damage_BlastWave.deathMessage>{0} has died from the blast wave.</DMSL_Damage_BlastWave.deathMessage>
+  <DMSL_Damage_ThermalRadiation.label>Thermal Radiation</DMSL_Damage_ThermalRadiation.label>
+  <DMSL_Damage_ThermalRadiation.deathMessage>{0} has died from thermal radiation.</DMSL_Damage_ThermalRadiation.deathMessage>
+  <DMSL_Damage_NuclearEMP.label>Nuclear EMP</DMSL_Damage_NuclearEMP.label>
+  <DMSL_Damage_NuclearEMP.deathMessage>{0} has died from nuclear electromagnetic pulse.</DMSL_Damage_NuclearEMP.deathMessage>
+</LanguageData>

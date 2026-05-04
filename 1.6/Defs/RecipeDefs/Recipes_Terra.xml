@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 尘世：中型机械体组装配方，科技与萨满一致，三周期 -->
+  <RecipeDef ParentName="DMS_MediumMechanoidRecipe">
+    <defName>DMSL_Make_Terra</defName>
+    <label>组装尘世</label>
+    <description>组装一个尘世。</description>
+    <products>
+      <DMSL_Mech_Terra>1</DMSL_Mech_Terra>
+    </products>
+    <researchPrerequisite>DMS_Hypothesis</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_Terra</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>140</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>ComponentStamped</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

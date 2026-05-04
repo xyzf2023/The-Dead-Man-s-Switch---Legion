@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 维修指定能力：指定一个机械体进行维修 -->
+  <AbilityDef>
+    <defName>DMSL_Ability_RepairDesignate</defName><!-- 能力定义名称 -->
+    <label>维修指定</label><!-- 显示名称 -->
+    <description>指定一个机械体进行维修。</description><!-- 能力描述 -->
+    <iconPath>UI/Abilities/RepairDesignate</iconPath><!-- 图标路径（需要创建对应图标） -->
+    <cooldownTicksRange>0~0</cooldownTicksRange><!-- 冷却时间：0 -->
+    <jobDef>CastAbilityOnThing</jobDef><!-- 工作定义：对物体施放能力（使用原版远程维修能力的UI） -->
+    <targetRequired>True</targetRequired><!-- 需要目标 -->
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets><!-- 不使用AOE选择目标 -->
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted><!-- 未征召时显示按钮 -->
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted><!-- 未征召时不禁用按钮 -->
+    <verbProperties><!-- 动词属性 -->
+      <verbClass>Verb_CastAbility</verbClass><!-- 动词类：施放能力 -->
+      <warmupTime>0</warmupTime><!-- 预热时间：0秒 -->
+      <range>999</range><!-- 施放范围：999格（无释放范围限制） -->
+      <onlyManualCast>True</onlyManualCast><!-- 仅手动施放 -->
+      <targetParams><!-- 目标参数 -->
+        <canTargetSelf>False</canTargetSelf><!-- 不能对自己使用 -->
+        <canTargetPawns>true</canTargetPawns><!-- 可以对单位使用 -->
+        <canTargetBuildings>false</canTargetBuildings><!-- 不能对建筑使用 -->
+        <canTargetAnimals>false</canTargetAnimals><!-- 不能对动物使用 -->
+        <canTargetHumans>false</canTargetHumans><!-- 不能对人类使用 -->
+        <canTargetMechs>true</canTargetMechs><!-- 可以对机械体使用 -->
+      </targetParams>
+    </verbProperties>
+    <comps><!-- 组件列表 -->
+      <li Class="DMS_Legion.CompProperties_AbilityRepairDesignate"><!-- 维修指定能力效果组件 -->
+        <failedMessage>DMSL_RepairDesignateFailedMessage</failedMessage><!-- 验证失败时显示的错误消息 -->
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 纵火者：中型复活列表，参照 DMS 中型组装配方结构 -->
+  <RecipeDef ParentName="DMS_MediumMechanoidRecipe">
+    <defName>DMSL_Make_Arsonist</defName>
+    <label>组装纵火者</label>
+    <description>组装一个纵火者。</description>
+    <products>
+      <DMSL_Mech_Arsonist>1</DMSL_Mech_Arsonist>
+    </products>
+    <researchPrerequisite>DMS_Ronin</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_Arsonist</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>130</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Synthread</li>
+            <li>Polyester</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </filter>
+        <count>35</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Chemfuel</li>
+        <li>Synthread</li>
+        <li>Polyester</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentStamped</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

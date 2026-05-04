@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Royalty Defs/DMSL_RoyalPermits.xml -->
+  <DMSL_RoyalAid_Smoke.label>Call Smoke Strike</DMSL_RoyalAid_Smoke.label>
+  <DMSL_RoyalAid_Smoke.description>Request a smoke strike deployment from the Colonial Fleet.</DMSL_RoyalAid_Smoke.description>
+  <DMSL_RoyalAid_StrafingRun.label>Call Strafing Run</DMSL_RoyalAid_StrafingRun.label>
+  <DMSL_RoyalAid_StrafingRun.description>Request a strafing run from the Colonial Fleet.</DMSL_RoyalAid_StrafingRun.description>
+  <DMSL_RoyalAid_Emp.label>Call EMP Pulse Bomb</DMSL_RoyalAid_Emp.label>
+  <DMSL_RoyalAid_Emp.description>Request an EMP pulse bomb deployment from the Colonial Fleet. A pulse bomb will be dropped at the target location; the powerful electromagnetic pulse disables contacted powered devices, turrets, and mechanoids, and scorches mechanoid core processors.\nThis pulse has no friend-or-foe recognition. Watch friendly fire.</DMSL_RoyalAid_Emp.description>
+  <DMSL_RoyalAid_ToxGas.label>Call Tox Gas Strike</DMSL_RoyalAid_ToxGas.label>
+  <DMSL_RoyalAid_ToxGas.description>Request a tox gas strike from the Colonial Fleet. A tox gas bomb will be dropped at the target location, creating a tox gas cloud within a 30-tile radius.</DMSL_RoyalAid_ToxGas.description>
+  <DMSL_RoyalAid_AttackAircraftBombing.label>Call Attack Aircraft Bombing</DMSL_RoyalAid_AttackAircraftBombing.label>
+  <DMSL_RoyalAid_AttackAircraftBombing.description>Request an attack aircraft bombing run from the Colonial Fleet. Sparrow will execute the run. Provide two coordinates; Sparrow will drop five small bombs along the line between them.\n\n(If you have CE loaded, this support will be replaced with attack aircraft bombing.)</DMSL_RoyalAid_AttackAircraftBombing.description>
+  <DMSL_RoyalAid_FighterBomberBombing.label>Call Fighter Bomber Bombing</DMSL_RoyalAid_FighterBomberBombing.label>
+  <DMSL_RoyalAid_FighterBomberBombing.description>Request a fighter-bomber run from the Colonial Fleet. Tempest will execute the run. Provide two coordinates; Tempest will drop ten large bombs along the line between them.</DMSL_RoyalAid_FighterBomberBombing.description>
+  <DMSL_RoyalAid_CarpetBombing.label>Call Carpet Bombing</DMSL_RoyalAid_CarpetBombing.label>
+  <DMSL_RoyalAid_CarpetBombing.description>Request a carpet bombing run from the Colonial Fleet. Longbow will execute the run. Provide two coordinates; Longbow will drop thirty high-explosive bombs along the line between them.</DMSL_RoyalAid_CarpetBombing.description>
+  <DMSL_RoyalAid_AMS2.label>Call ASM-2 "White Shark" Missile Salvo</DMSL_RoyalAid_AMS2.label>
+  <DMSL_RoyalAid_AMS2.description>Request an ASM-2 "White Shark" missile salvo from the Colonial Fleet. Provide five target coordinates; the salvo will strike all provided coordinates in sequence.</DMSL_RoyalAid_AMS2.description>
+  <DMSL_RoyalAid_CM4.label>Call CM-4 Cruise Missile Strike</DMSL_RoyalAid_CM4.label>
+  <DMSL_RoyalAid_CM4.description>Request a CM-4 cruise missile strike from the Colonial Fleet. CM-4 has a large blast radius; ensure no friendly units are within 50 tiles of the target.</DMSL_RoyalAid_CM4.description>
+  <DMSL_Join_AXF12OffsetConfig.label>Expand AXF-12 Wing</DMSL_Join_AXF12OffsetConfig.label>
+  <DMSL_Join_AXF12OffsetConfig.description>Request transfer of one AXF-12 "Offset-Config" VTOL fighter from the Colonial Fleet. This aircraft will become property of your colony.</DMSL_Join_AXF12OffsetConfig.description>
+</LanguageData>

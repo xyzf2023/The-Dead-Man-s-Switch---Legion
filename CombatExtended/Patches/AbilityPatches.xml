@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 仅在加载 AncientCorps（packageId = Aoba.DeadManSwitch.AncientCorps）时生效 -->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Aoba.DeadManSwitch.AncientCorps</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <!-- 战争践踏补丁 -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/AbilityDef[defName="DMSL_Ability_WarStomp"]/comps/li[@Class="DMS_Legion.CompProperties_AbilityWarStomp"]/armorPenOverride</xpath>
+          <value>
+            <armorPenOverride>40</armorPenOverride>
+          </value>
+        </li>
+
+        <!-- 爆发装填补丁 -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/HediffDef[defName="DMSL_Hediff_RapidReload"]/stages/li</xpath>
+          <value>
+            <statOffsets>
+              <ReloadSpeed>1.0</ReloadSpeed>
+            </statOffsets>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

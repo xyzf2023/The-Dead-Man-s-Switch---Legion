@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 原版 StaggerDurationFactor 可能没有 parts 节点，故对 StatDef 添加整个 parts 子节点 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/StatDef[defName="StaggerDurationFactor"]</xpath>
+    <value>
+      <parts>
+        <li Class="DMS_Legion.StatPart_StaggerDurationFactorMomentum"/>
+      </parts>
+    </value>
+  </Operation>
+</Patch>

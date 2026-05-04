@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 固守指令 -->
+  <AbilityDef>
+    <defName>DMSL_Ability_StaticDefenseDirective</defName>
+    <label>固守指令</label>
+    <description>切换固守指令状态。</description>
+    <iconPath>UI/Abilities/StaticDefenseDirective</iconPath>
+    <gizmoClass>DMS_Legion.Command_StaticDefenseDirective</gizmoClass>
+    <targetRequired>false</targetRequired>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <comps>
+      <li Class="DMS_Legion.CompProperties_AbilityChannelingGate"/>
+    </comps>
+    <verbProperties>
+      <verbClass>DMS_Legion.Verb_StaticDefenseDirective</verbClass>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+      </targetParams>
+      <requireLineOfSight>false</requireLineOfSight>
+    </verbProperties>
+    <modExtensions>
+      <li Class="DMS_Legion.AbilityExtension_ChannelingToggle">
+        <chantTicks>600</chantTicks>
+        <canInterrupt>false</canInterrupt>
+        <hediffOnComplete>DMSL_Hediff_StaticDefenseDirective</hediffOnComplete>
+      </li>
+    </modExtensions>
+  </AbilityDef>
+</Defs>

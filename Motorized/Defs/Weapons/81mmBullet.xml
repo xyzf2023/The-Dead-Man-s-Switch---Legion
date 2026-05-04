@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 主炮的投射物定义：155mm高爆炮弹 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 定义唯一标识符 -->
+    <defName>DMSL_Bullet_81mm</defName>
+    
+    <!-- 显示名称 -->
+    <label>81mm high-explosive shell</label>
+    
+    <!-- 实体类别：爆炸性投射物 -->
+    <thingClass>Projectile_Explosive</thingClass>
+    
+    <!-- 图像数据 -->
+    <graphicData>
+      <!-- 纹理路径：使用大型子弹纹理 -->
+      <texPath>Things/Projectile/Bullet_Big</texPath>
+      
+      <!-- 图形类别：单个图像 -->
+      <graphicClass>Graphic_Single</graphicClass>
+      
+      <!-- 绘制尺寸：放大2倍 -->
+      <drawSize>1</drawSize>
+    </graphicData>
+    
+    <!-- 投射物属性 -->
+    <projectile>
+      <!-- 伤害类型：炸弹爆炸伤害 -->
+      <damageDef>Bomb</damageDef>
+      
+      <!-- 基础伤害数值：360点 -->
+      <damageAmountBase>90</damageAmountBase>
+      
+      <!-- 护甲穿透值：0.77 -->
+      <armorPenetrationBase>0.77</armorPenetrationBase>
+      
+      <!-- 移动速度：100单位/秒 -->
+      <speed>55</speed>
+      
+      <!-- 爆炸半径：15.9格 -->
+      <explosionRadius>5</explosionRadius>
+      
+      <!-- 是否飞越头顶：是（适用于曲射火炮） -->
+      <flyOverhead>true</flyOverhead>
+      
+      <!-- 声音效果 -->
+      <!-- 击中厚屋顶的声音 -->
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <!-- 爆炸声音 -->
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <!-- 撞击预兆声音 -->
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <!-- 环境声音（飞行中） -->
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+</Defs>

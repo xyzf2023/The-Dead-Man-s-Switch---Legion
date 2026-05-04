@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 载具建造定义：灰骑士主战坦克蓝图 -->
+  <Vehicles.VehicleBuildDef ParentName="DMS_BaseVehicleBuild">
+    <!-- 建筑形态的载具，基本上与BuildingDef相同 -->
+    <defName>DMS_GrayKnights_MainBattleTank_Blueprint</defName> <!-- 定义蓝图的唯一标识符 -->
+    <label>灰骑士</label> <!-- 显示名称 -->
+    <description>多用途重型底盘</description> <!-- 物品描述 -->
+    <graphicData> <!-- 图像数据 -->
+      <texPath>Vehicles/GrayKnights/vehicle</texPath> <!-- 纹理路径 -->
+      <drawSize>5.5</drawSize> <!-- 绘制尺寸 -->
+    </graphicData>
+    <statBases> <!-- 基础属性 -->
+      <MaxHitPoints>500</MaxHitPoints> <!-- 最大生命值 -->
+      <WorkToBuild>20000</WorkToBuild> <!-- 建造所需工作量 -->
+      <Flammability>0.05</Flammability> <!-- 可燃性 -->
+    </statBases>
+    <size>(3,6)</size> <!-- 物品占用格子大小 -->
+    <researchPrerequisites> <!-- 研究前置条件 -->
+      <li>DMS_HeavyAutomatroid</li> <!-- 需要完成的前置研究 -->
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite> <!-- 建造技能要求 -->
+    <costList> <!-- 建造成本清单 -->
+      <EngineTurbine MayRequireAnyOf="aoba.motorization.engine,rimthunder.core">1</EngineTurbine> <!-- 涡轮引擎，可能需要特定模组 -->
+      <ComponentFireControl>1</ComponentFireControl> <!-- 火控组件 -->
+      <Neurocomputer>2</Neurocomputer> <!-- 神经计算机 -->
+      <ComponentStamped>15</ComponentStamped> <!-- 冲压组件 -->
+      <ComponentIndustrial>25</ComponentIndustrial> <!-- 工业组件 -->
+      <Polyester>150</Polyester> <!-- 聚酯纤维 -->
+      <DMS_Ceramics>300</DMS_Ceramics> <!-- DMS陶瓷 -->
+      <Tungsteel>425</Tungsteel> <!-- 钨钢 -->
+      <Steel>750</Steel> <!-- 钢材 -->
+    </costList>
+    <thingToSpawn>DMS_GrayKnights_MainBattleTank</thingToSpawn> <!-- 建造后生成的载具Kind,这是与建筑唯一不一样的 -->
+  </Vehicles.VehicleBuildDef>
+  
+  <!-- 载具本体定义 -->
+  <Vehicles.VehicleDef ParentName="DMS_BaseVehicle">
+    <defName>DMS_GrayKnights_MainBattleTank</defName> <!-- 定义载具的唯一标识符 -->
+    <label>灰骑士</label> <!-- 显示名称 -->
+    <description>该载具目前服役于殖民舰队，设计上支持无人驾驶作战。不过出于对战场通信环境的考虑，后舱也预留了两名乘员的空间。</description> <!-- 物品描述 -->
+    <buildDef>DMS_GrayKnights_MainBattleTank_Blueprint</buildDef> <!-- 建造该载具所需的蓝图定义 -->
+    <graphicData> <!-- 图像数据 -->
+      <texPath>Vehicles/GrayKnights/vehicle</texPath> <!-- 纹理路径 -->
+      <drawSize>6</drawSize> <!-- 绘制尺寸 -->
+    </graphicData>
+    <size>(3,6)</size> <!-- 物品占用格子大小 -->
+    <fillPercent>1</fillPercent> <!-- 填充百分比，影响载具占用空间 -->
+    <wipesPlants>true</wipesPlants> <!-- 是否清除经过的植物 -->
+    <vehicleCategory>Combat</vehicleCategory> <!-- 载具类别：战斗 -->
+    <statBases> <!-- 基础属性 -->
+      <ArmorRating_Blunt>1.0</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+      <ArmorRating_Sharp>0.8</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+      <Flammability>0</Flammability> <!-- 可燃性 -->
+      <MarketValue>2240</MarketValue> <!-- 市场价值 -->
+    </statBases>
+    <vehicleStats> <!-- 载具特有属性 -->
+      <Mass>2000</Mass> <!-- 重量 -->
+      <MoveSpeed>10</MoveSpeed> <!-- 移动速度 -->
+      <CargoCapacity>600</CargoCapacity> <!-- 载货容量 -->
+      <RepairRate>0.8</RepairRate> <!-- 修理速度 -->
+    </vehicleStats>
+    <soundOneShotsOnEvent Inherit="false"> <!-- 单次播放音效 -->
+      <li>
+        <key>PawnEntered</key> <!-- 角色进入时 -->
+        <value>DMS_VehicleEnter</value> <!-- 音效ID -->
+      </li>
+      <li>
+        <key>PawnExited</key> <!-- 角色离开时 -->
+        <value>DMS_VehicleEnter</value> <!-- 音效ID -->
+      </li>
+      <li>
+        <key>IgnitionOn</key> <!-- 点火启动时 -->
+        <value>DMS_MBTVehicleStart</value> <!-- 音效ID -->
+      </li>
+      <li>
+        <key>IgnitionOff</key> <!-- 熄火关闭时 -->
+        <value>DMS_MBTVehicleStop</value> <!-- 音效ID -->
+      </li>
+    </soundOneShotsOnEvent>
+    <soundSustainersOnEvent Inherit="false"> <!-- 持续播放音效 -->
+      <li>
+        <start>IgnitionOn</start> <!-- 开始事件 -->
+        <stop>IgnitionOff</stop> <!-- 停止事件 -->
+        <value>DMS_Engine_MBT</value> <!-- 音效ID -->
+      </li>
+    </soundSustainersOnEvent>
+    <race> <!-- 种族属性 -->
+      <baseBodySize>3</baseBodySize> <!-- 基础身体大小 -->
+    </race>
+    <properties> <!-- 载具特性 -->
+      <!-- 座位与功能 -->
+      <customRoadCosts AssignDefaults="0.4" /> <!-- 道路移动成本 -->
+      <worldSpeedMultiplier>2</worldSpeedMultiplier> <!-- 世界地图移动速度倍数 -->
+      <winterCostMultiplier>2</winterCostMultiplier> <!-- 冬季移动成本倍数 -->
+      <customHillinessCosts> <!-- 丘陵地形移动成本 -->
+        <SmallHills>0.5</SmallHills> <!-- 小丘陵移动成本 -->
+       <LargeHills>0.5</LargeHills>
+        <Mountainous>0.5</Mountainous> <!-- 山地移动成本 -->
+      </customHillinessCosts>
+      <restrictToFactions> <!-- 限制派系使用 -->
+        <li>DMS_Army</li> <!-- 仅DMS军队可用 -->
+      </restrictToFactions>
+      <vehicleJobLimitations> <!-- 载具工作限制 -->
+        <li>(RepairVehicle, 4)</li> <!-- 修理载具工作，最多4人同时操作 -->
+      </vehicleJobLimitations>
+      <roles> <!-- 乘员角色 -->
+        <li>
+          <key>gunner</key> <!-- 角色键 -->
+          <label>gunner</label> <!-- 角色名称 -->
+          <slots>2</slots> <!-- 可容纳人数 -->
+          <slotsToOperate>0</slotsToOperate> <!-- 操作载具需要的人数 -->
+          <handlingTypes>Turret</handlingTypes> <!-- 操作类型：炮塔 -->
+          <turretIds> <!-- 可操作的炮塔ID -->
+            <li>mainTurret</li> <!-- 修正：引用实际存在的炮塔 -->
+          </turretIds>
+        </li>
+      </roles>
+    </properties>
+    <components> <!-- 载具组件 -->
+      <li>
+        <!-- Internal mobile Part 内部驱动部件 -->
+        <!-- Engine 100 -->
+        <key>Engine</key> <!-- 组件键 -->
+        <label>turbine engine</label> <!-- 组件名称 -->
+        <health>200</health> <!-- 组件生命值 -->
+        <efficiencyWeight>5</efficiencyWeight> <!-- 效率权重 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <depth>Internal</depth> <!-- 组件深度：内部 -->
+        <hitbox> <!-- 命中框 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(0, -2)</li> <!-- 坐标(0, -2) -->
+            <li>(1, -2)</li> <!-- 坐标(1, -2) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- fuel tank 100 -->
+        <key>FuelTank</key> <!-- 组件键 -->
+        <label>armoured fuel tank</label> <!-- 组件名称 -->
+        <health>120</health> <!-- 组件生命值 -->
+        <depth>Internal</depth> <!-- 组件深度：内部 -->
+        <reactors> <!-- 反应器 -->
+          <li Class="Vehicles.Reactor_Explosive"> <!-- 爆炸反应器 -->
+            <indicator>VF_Explosive</indicator> <!-- 爆炸指示器 -->
+            <chance>0.05</chance> <!-- 爆炸概率 -->
+            <radius>2</radius> <!-- 爆炸半径 -->
+            <damageDef>Flame</damageDef> <!-- 爆炸伤害类型 -->
+          </li>
+        </reactors>
+        <hitbox> <!-- 命中框 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(1, -1)</li> <!-- 坐标(1, -1) -->
+          </cells>
+        </hitbox>
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>0.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+      </li>
+      <li>
+        <!-- Gearbox 50 -->
+        <key>Gearbox</key> <!-- 组件键 -->
+        <label>gearbox</label> <!-- 组件名称 -->
+        <health>100</health> <!-- 组件生命值 -->
+        <depth>Internal</depth> <!-- 组件深度：内部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <hitbox> <!-- 命中框 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(0, -2)</li> <!-- 坐标(0, -2) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- AmmoRack 50 -->
+        <key>AmmoRack</key> <!-- 组件键 -->
+        <label>ammo rack</label> <!-- 组件名称 -->
+        <health>80</health> <!-- 组件生命值 -->
+        <depth>Internal</depth> <!-- 组件深度：内部 -->
+        <reactors> <!-- 反应器 -->
+          <li Class="Vehicles.Reactor_Explosive"> <!-- 爆炸反应器 -->
+            <indicator>VF_Explosive</indicator> <!-- 爆炸指示器 -->
+            <chance>0.02</chance> <!-- 爆炸概率 -->
+            <radius>5</radius> <!-- 爆炸半径 -->
+            <damageDef>Flame</damageDef> <!-- 爆炸伤害类型 -->
+          </li>
+        </reactors>
+        <hitbox> <!-- 命中框 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(0, -1)</li> <!-- 坐标(0, -1) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- transmission shaft 40 -->
+        <key>TransmissionShaft</key> <!-- 组件键 -->
+        <label>transmission shaft</label> <!-- 组件名称 -->
+        <health>60</health> <!-- 组件生命值 -->
+        <depth>Internal</depth> <!-- 组件深度：内部 -->
+      </li>
+      <!-- External mobile Part 外部驱动部件 -->
+      <li>
+        <!-- LeftTrack 150 -->
+        <key>LeftTrack</key> <!-- 组件键 -->
+        <label>left track</label> <!-- 组件名称 -->
+        <health>175</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitWeight>2</hitWeight> <!-- 命中权重 -->
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <side>Left</side> <!-- 左侧 -->
+        </hitbox>
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>0.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+      </li>
+      <li>
+        <!-- RightTrack 150 -->
+        <key>RightTrack</key> <!-- 组件键 -->
+        <label>right track</label> <!-- 组件名称 -->
+        <health>175</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitWeight>2</hitWeight> <!-- 命中权重 -->
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <side>Right</side> <!-- 右侧 -->
+        </hitbox>
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>0.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+      </li>
+      <li>
+        <!-- LeftRoadWheels 100 -->
+        <key>LeftRoadWheels</key> <!-- 组件键 -->
+        <label>left road wheels</label> <!-- 组件名称 -->
+        <health>125</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <side>Left</side> <!-- 左侧 -->
+        </hitbox>
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>0.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+      </li>
+      <li>
+        <!-- RightRoadWheels 100 -->
+        <key>RightRoadWheels</key> <!-- 组件键 -->
+        <label>right road wheels</label> <!-- 组件名称 -->
+        <health>125</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <side>Right</side> <!-- 右侧 -->
+        </hitbox>
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>0.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+      </li>
+      <li>
+        <!-- LeftDriveSprocket 75 -->
+        <key>LeftDriveSprocket</key> <!-- 组件键 -->
+        <label>left drive sprocket</label> <!-- 组件名称 -->
+        <health>100</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(-1,2)</li> <!-- 坐标(-1, 3) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- RightDriveSprocket 75 -->
+        <key>RightDriveSprocket</key> <!-- 组件键 -->
+        <label>right drive sprocket</label> <!-- 组件名称 -->
+        <health>100</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(1,2)</li> <!-- 坐标(1, 3) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- LeftTensionerWheel 75 -->
+        <key>LeftTensionerWheel</key> <!-- 组件键 -->
+        <label>left tensioner wheel</label> <!-- 组件名称 -->
+        <health>100</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(-1, -2)</li> <!-- 坐标(-1, -2) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- RightTensionerWheel 75 -->
+        <key>RightTensionerWheel</key> <!-- 组件键 -->
+        <label>right tensioner wheel</label> <!-- 组件名称 -->
+        <health>100</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <categories> <!-- 影响类别 -->
+          <li>MoveSpeed</li> <!-- 影响移动速度 -->
+        </categories>
+        <tags> <!-- 标签 -->
+          <li>Wheel</li> <!-- 轮子标签 -->
+        </tags>
+        <hitbox> <!-- 命中框 -->
+          <fallthrough>false</fallthrough> <!-- 不穿透 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(1, -2)</li> <!-- 坐标(1, -2) -->
+          </cells>
+        </hitbox>
+      </li>
+      <!-- External Platings 外部防御部件 -->
+      <li>
+        <!-- FrontArmorPlating 200 -->
+        <key>FrontArmorPlating</key> <!-- 组件键 -->
+        <label>front armor Plating</label> <!-- 组件名称前装甲 -->
+        <health>450</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>8</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>1.44</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <side>Front</side> <!-- 前侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- LeftArmorPlating 180 -->
+        <key>LeftArmorPlating</key> <!-- 组件键 -->
+        <label>left armor plating</label> <!-- 左侧装甲板 -->
+        <health>270</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>5</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.45</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.8</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <side>Left</side> <!-- 左侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- RightArmorPlating 180 -->
+        <key>RightArmorPlating</key> <!-- 组件键 -->
+        <label>right armor plating</label> <!-- 组件名称右装甲 -->
+        <health>270</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>5</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.45</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.8</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <side>Right</side> <!-- 右侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- LeftERAPlating 100 -->
+        <key>LeftERAPlating</key> <!-- 组件键 -->
+        <label>left ERA plating</label> <!-- 组件名称 左侧ERA镀层-->
+        <health>120</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>10</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.45</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>1.2</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <side>Left</side> <!-- 左侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- RightERAPlating 100 -->
+        <key>RightERAPlating</key> <!-- 组件键 -->
+        <label>right ERA plating</label> <!-- 组件名称右ERA电镀 -->
+        <health>120</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>10</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.45</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>1.2</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <side>Right</side> <!-- 右侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- RoofArmorPlating 150 -->
+        <key>RoofArmorPlating</key> <!-- 组件键 -->
+        <label>roof armor plating</label> <!-- 组件名称车顶装甲 -->
+        <health>400</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>5</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>0.9</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>0.7</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+      </li>
+      <li>
+        <!-- BackArmorPlating 150 -->
+        <key>BackArmorPlating</key> <!-- 组件键 -->
+        <label>rear armor plating</label> <!-- 组件名称后装甲 -->
+        <health>225</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>5</hitWeight> <!-- 命中权重 -->
+        <hitbox> <!-- 命中框 -->
+          <side>Back</side> <!-- 后侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- mainTurret 250 -->
+        <key>MainTurret</key> <!-- 组件键 -->
+        <label>Main Turret</label> <!-- 组件名称主炮塔 -->
+        <health>450</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>6</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>1.44</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(-1, 1)</li> <!-- 坐标(-1, 1) -->
+            <li>(-1, 0)</li> <!-- 坐标(-1, 0) -->
+            <li>(-1, -1)</li> <!-- 坐标(-1, -1) -->
+            <li>(0, 1)</li> <!-- 坐标(0, 1) -->
+            <li>(0, 0)</li> <!-- 坐标(0, 0) -->
+            <li>(0, -1)</li> <!-- 坐标(0, -1) -->
+            <li>(1, 1)</li> <!-- 坐标(1, 1) -->
+            <li>(1, 0)</li> <!-- 坐标(1, 0) -->
+            <li>(1, -1)</li> <!-- 坐标(1, -1) -->
+          </cells>
+        </hitbox>
+      </li>
+      <li>
+        <!-- FrontERAPlating 75 -->
+        <key>FrontERAPlating</key> <!-- 组件键 -->
+        <label>front ERA Plating</label> <!-- 组件名称 -->
+        <health>240</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>15</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>1.44</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <side>Front</side> <!-- 前侧 -->
+        </hitbox>
+      </li>
+      <li>
+        <!-- TurretERAPlating 75 -->
+        <key>TurretERAPlating</key> <!-- 组件键 -->
+        <label>turret ERA plating</label> <!-- 组件名称 -->
+        <health>240</health> <!-- 组件生命值 -->
+        <depth>External</depth> <!-- 组件深度：外部 -->
+        <hitWeight>15</hitWeight> <!-- 命中权重 -->
+        <armor> <!-- 护甲 -->
+          <ArmorRating_Blunt>1.5</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+          <ArmorRating_Sharp>1.44</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+        </armor>
+        <hitbox> <!-- 命中框 -->
+          <cells> <!-- 占据的格子 -->
+            <li>(-1, 1)</li> <!-- 坐标(-1, 1) -->
+            <li>(-1, 0)</li> <!-- 坐标(-1, 0) -->
+            <li>(-1, -1)</li> <!-- 坐标(-1, -1) -->
+            <li>(0, 1)</li> <!-- 坐标(0, 1) -->
+            <li>(0, 0)</li> <!-- 坐标(0, 0) -->
+            <li>(0, -1)</li> <!-- 坐标(0, -1) -->
+            <li>(1, 1)</li> <!-- 坐标(1, 1) -->
+            <li>(1, 0)</li> <!-- 坐标(1, 0) -->
+            <li>(1, -1)</li> <!-- 坐标(1, -1) -->
+          </cells>
+        </hitbox>
+      </li>
+    </components>
+    <comps> <!-- 组件列表 -->
+      <li Class="Vehicles.CompProperties_FueledTravel"> <!-- 燃料驱动组件 -->
+        <!-- 油箱与油耗 -->
+        <fuelType>Chemfuel</fuelType> <!-- 燃料类型 -->
+        <leakDef>Filth_Fuel</leakDef> <!-- 泄漏定义 -->
+        <fuelConsumptionRate>50</fuelConsumptionRate> <!-- 燃料消耗率 -->
+        <fuelConsumptionWorldMultiplier>1</fuelConsumptionWorldMultiplier> <!-- 世界地图燃料消耗倍数 -->
+        <fuelCapacity>400</fuelCapacity> <!-- 燃料容量 -->
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable> <!-- 是否可配置目标燃料水平 -->
+        <ambientHeat>4.0</ambientHeat> <!-- 环境热量 -->
+      </li>
+      <li Class="Fortified.CompProperties_SubRelay"> <!-- 子中继组件 -->
+        <relayRange>15</relayRange> <!-- 中继范围 -->
+      </li>
+      <li Class="Vehicles.CompProperties_VehicleTurrets"> <!-- 载具炮塔组件 -->
+        <!-- 炮塔 -->
+        <turrets> <!-- 炮塔列表 -->
+          <li>
+            <turretDef>GrayKnights_Tank_Turret</turretDef> <!-- 炮塔定义 -->
+            <renderProperties> <!-- 渲染属性 -->
+              <north>(-0.05,-0)</north> <!-- 北向渲染位置 -->
+              <south>(-0.15,0.6)</south> <!-- 南向渲染位置 -->
+              <east>(-0.4,0.08)</east> <!-- 东向渲染位置 -->
+              <west>(0.4,0.08)</west> <!-- 西向渲染位置 -->
+            </renderProperties>
+            <gizmoLabel>主炮塔</gizmoLabel> <!-- 操作标签 -->
+            <aimPieOffset>(0, 3.35)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+            <!-- 预热指示器的x,z偏移 -->
+            <drawLayer>2</drawLayer> <!-- 绘制层级 -->
+            <key>mainTurret</key> <!-- 炮塔键 -->
+          </li>
+          <li>
+              <!-- 车顶机枪 -->
+              <turretDef>DMS_GAU4_Turret</turretDef> <!-- 炮塔定义 -->
+              <renderProperties> <!-- 渲染属性 -->
+                <!-- 这里的坐标系是无视旋转的,所以x就是恒定左右偏移 -->
+                <north>(-0.6,0.48)</north> <!-- 北向渲染位置 - 调整了位置以适应装甲包 -->
+                <south>(0,0)</south> <!-- 南向渲染位置 -->
+                <east>(0,0)</east> <!-- 东向渲染位置 -->
+                <west>(0,0)</west> <!-- 西向渲染位置 -->
+              </renderProperties>
+              <gizmoLabel>GAU4</gizmoLabel> <!-- 操作标签 -->
+              <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+              <key>2topMG</key> <!-- 炮塔键 - 修正了键名 -->
+              <drawLayer>3</drawLayer> <!-- 绘制层级 -->
+              <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+            </li>
+          <li>
+            <!-- 同轴机枪 -->
+            <turretDef>DMS_LMG_Coaxial</turretDef> <!-- 炮塔定义 -->
+            <renderProperties> <!-- 渲染属性 -->
+              <east>(1.67,0.3)</east> <!-- 东向渲染位置 -->
+              <south>(-0.4,-1.67)</south> <!-- 南向渲染位置 -->
+              <north>(0.5,1.67)</north> <!-- 北向渲染位置 -->
+              <west>(0,0)</west> <!-- 西向渲染位置 -->
+            </renderProperties>
+            <gizmoLabel>同轴机枪</gizmoLabel> <!-- 操作标签 -->
+            <angleRestricted>(345,15)</angleRestricted> <!-- 角度限制 -->
+            <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+            <key>coaxialMG</key> <!-- 炮塔键 -->
+            <drawLayer>1</drawLayer> <!-- 绘制层级 -->
+            <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+          </li>
+          <li>
+            <turretDef>DMS_GrenadeLauncher</turretDef> <!-- 炮塔定义 -->
+            <gizmoLabel>烟雾发射器</gizmoLabel> <!-- 操作标签 -->
+            <renderProperties> <!-- 渲染属性 -->
+              <north>(0, 0.2)</north> <!-- 北向渲染位置 -->
+              <south>(0, -0.2)</south> <!-- 南向渲染位置 -->
+              <east>(0.2, -0.7)</east> <!-- 东向渲染位置 -->
+              <west>(-0.2, 0.7)</west> <!-- 西向渲染位置 -->
+            </renderProperties>
+            <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+            <drawLayer>2</drawLayer> <!-- 绘制层级 -->
+            <key>leftSmoke</key> <!-- 炮塔键 -->
+          </li>
+          <li>
+            <turretDef>DMSL_Double_barrel_machine_gun</turretDef> <!-- 炮塔定义 -->
+            <renderProperties> <!-- 渲染属性 -->
+              <east>(0.6,-0.48)</east> <!-- 东向渲染位置 -->
+              <south>(0,0)</south> <!-- 南向渲染位置 -->
+              <north>(0.6,0.65)</north> <!-- 北向渲染位置 -->
+              <west>(0,0)</west> <!-- 西向渲染位置 -->
+            </renderProperties>
+            <gizmoLabel>双管机枪</gizmoLabel> <!-- 操作标签 -->
+            <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+            <key>barrel_machine</key> <!-- 炮塔键 -->
+            <drawLayer>3</drawLayer> <!-- 绘制层级 -->
+            <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+          </li>
+          <li>
+            <!-- 同轴机枪 -->
+            <turretDef>DMSL_81mmMortar</turretDef> <!-- 炮塔定义 -->
+            <renderProperties> <!-- 渲染属性 -->
+              <east>(0,-1)</east> <!-- 东向渲染位置 -->
+              <south>(0,0)</south> <!-- 南向渲染位置 -->
+              <north>(0.6,-0.75)</north> <!-- 北向渲染位置 -->
+              <west>(0,0)</west> <!-- 西向渲染位置 -->
+            </renderProperties>
+            <gizmoLabel>迫击炮</gizmoLabel> <!-- 操作标签 -->
+            <angleRestricted>(345,15)</angleRestricted> <!-- 角度限制 -->
+            <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+            <key>81mmMortar</key> <!-- 炮塔键 -->
+            <drawLayer>3</drawLayer> <!-- 绘制层级 -->
+            <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+          </li>
+        </turrets>
+      </li>
+      <li Class="Vehicles.CompProperties_UpgradeTree"> <!--开启改装系统-->
+        <def>DMS_GrayKnights_UpgradeTree</def>
+      </li>
+    </comps>
+  </Vehicles.VehicleDef>
+
+  <!-- 主炮的Def -->
+  <Vehicles.VehicleTurretDef ParentName="DMS_BaseTurret"> <!-- 继承基础炮塔定义 -->
+    <defName>GrayKnights_Tank_Turret</defName> <!-- 炮塔定义名称 -->
+    <label>主炮塔</label> <!-- 显示名称 -->
+    <gizmoIconTexPath>Vehicles/GrayKnights/mainTurret_gizmo</gizmoIconTexPath> <!-- 操作图标路径 -->
+    <gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; 120mm Cannon Shell&lt;/color&gt;</gizmoDescription> <!-- 操作描述 -->
+    <!-- 炮塔的渲染显示 -->
+    <graphicData> <!-- 图像数据 -->
+      <texPath>Vehicles/GrayKnights/vehicle_turretTop</texPath> <!-- 纹理路径 -->
+      <drawSize>4.5</drawSize> <!-- 绘制尺寸 -->
+    </graphicData>
+    <graphics> <!-- 多层图形 -->
+      <li>
+        <graphicData> <!-- 图像数据 -->
+          <texPath>Vehicles/GrayKnights/vehicle_turretTop_barrel</texPath> <!-- 炮管纹理路径 -->
+          <drawSize>3</drawSize> <!-- 绘制尺寸 -->
+          <drawOffset>(0.05,1,3.65)</drawOffset> <!-- 绘制偏移 -->
+          <graphicClass>Vehicles.Graphic_Turret</graphicClass> <!-- 图形类 -->
+          <shaderType>CutoutComplexPattern</shaderType> <!-- 着色器类型 -->
+        </graphicData>
+        <recoil> <!-- 后坐力 -->
+          <distanceTotal>0.5</distanceTotal> <!-- 总后坐距离 -->
+          <distancePerTick>0.025</distancePerTick> <!-- 每刻度后坐距离 -->
+          <speedMultiplierPostRecoil>0.1</speedMultiplierPostRecoil> <!-- 后坐力后速度倍数 -->
+        </recoil>
+      </li>
+    </graphics>
+    <!-- 弹药与装填容量相关 -->
+    <reloadTimer>5.5</reloadTimer> <!-- 装填计时器 -->
+    <magazineCapacity>8</magazineCapacity> <!-- 弹匣容量 -->
+    <chargePerAmmoCount>25</chargePerAmmoCount> <!-- 每发弹药充能 -->
+    <genericAmmo>true</genericAmmo> <!-- 是否通用弹药 -->
+    <projectile>DMS_Bullet_ChelydridaeShell</projectile> <!-- 发射物定义 -->
+    <ammunition> <!-- 修复后的拼写 -->
+      <thingDefs> <!-- 物品定义列表 -->
+        <li>Steel</li> <!-- 钢材 -->
+      </thingDefs>
+    </ammunition>
+    <!-- 射程与射界相关 -->
+    <minRange>2</minRange> <!-- 最小射程 -->
+    <maxRange>60.9</maxRange> <!-- 最大射程 -->
+    <rotationSpeed>10</rotationSpeed> <!-- 旋转速度 -->
+    <!-- 射击相关 -->
+    <warmUpTimer>4</warmUpTimer> <!-- 预热计时器 -->
+    <shotSound>DMS_Shot_MBTCannonSound</shotSound> <!-- 射击音效 -->
+    <reloadSound>DMS_Reload_MBTCannonSound</reloadSound> <!-- 装填音效 -->
+    <projectileOffset>5</projectileOffset> <!-- 发射物偏移 -->
+    <!-- 出膛前后偏移，主要是能让子弹能从炮口飞出去 -->
+    <projectileShifting> <!-- 发射物偏移 -->
+      <li>0</li> <!-- 偏移值 -->
+    </projectileShifting>
+    <!-- 射击模式 -->
+    <fireModes> <!-- 射击模式 -->
+      <li>
+        <shotsPerBurst>1</shotsPerBurst> <!-- 点射发数 -->
+        <ticksBetweenBursts>1</ticksBetweenBursts> <!-- 点射间隔 -->
+        <forcedMissRadius>2</forcedMissRadius> <!-- 强制脱靶半径 -->
+        <label>Single Shot</label> <!-- 模式标签 -->
+        <texPath>UI/Gizmos/FireRate_Single</texPath> <!-- 图标路径 -->
+      </li>
+    </fireModes>
+    <motes> <!-- 粒子效果 -->
+      <li>
+        <cycles>1</cycles> <!-- 循环次数 -->
+        <moteDef>Mote_CannonPlume</moteDef> <!-- 粒子定义 -->
+        <animationType>Reset</animationType> <!-- 动画类型 -->
+        <offset>(0,0,5)</offset> <!-- 偏移 -->
+      </li>
+    </motes>
+  </Vehicles.VehicleTurretDef>           
+
+  <!-- 装甲包炮塔外观定义 -->
+  <Vehicles.VehicleTurretDef ParentName="DMS_BaseTurret"> <!-- 继承基础炮塔定义 -->
+    <defName>GrayKnights_Tank_Turret_ArmorPack</defName> <!-- 新炮塔定义的唯一标识符 -->
+    <label>主炮塔</label> <!-- 炮塔在游戏中的显示名称 -->
+    <gizmoIconTexPath>Vehicles/GrayKnights/ArmorPack/armored_package_gizmo</gizmoIconTexPath> <!-- 操作界面图标路径 -->
+    <gizmoDescription>Select Target.\n\nFire for effect\n\n&lt;color=#b0e0e6&gt;CE Ammo:&lt;/color&gt; 120mm Cannon Shell&lt;/color&gt;</gizmoDescription> <!-- 操作界面描述 -->
+    <!-- 炮塔的渲染显示 - 更换装甲包外观，保留原炮管 -->
+    <graphicData> <!-- 炮塔主体图形数据 -->
+      <texPath>Vehicles/GrayKnights/ArmorPack/ArmorPack</texPath> <!-- 装甲包炮塔外观纹理路径 -->
+      <drawSize>5.25</drawSize> <!-- 炮塔主体绘制尺寸 -->
+    </graphicData>
+    <!-- 保留原炮管图形 -->
+    <graphics> <!-- 多层图形定义 -->
+      <li> <!-- 炮管图形定义 -->
+        <graphicData> <!-- 炮管图形数据 -->
+          <texPath>Vehicles/GrayKnights/vehicle_turretTop_barrel</texPath> <!-- 保留原始炮管纹理路径 -->
+          <drawSize>3</drawSize> <!-- 炮管绘制尺寸 -->
+          <drawOffset>(0.05,0,3.5)</drawOffset> <!-- 炮管绘制偏移 -->
+          <graphicClass>Vehicles.Graphic_Turret</graphicClass> <!-- 图形类：炮塔图形 -->
+          <shaderType>CutoutComplexPattern</shaderType> <!-- 着色器类型：复杂图案镂空 -->
+        </graphicData>
+        <recoil> <!-- 后坐力效果 -->
+          <distanceTotal>0.5</distanceTotal> <!-- 后坐总距离 -->
+          <distancePerTick>0.025</distancePerTick> <!-- 每个刻度的后坐距离 -->
+          <speedMultiplierPostRecoil>0.1</speedMultiplierPostRecoil> <!-- 后坐后速度倍数 -->
+        </recoil>
+      </li>
+    </graphics>
+    <!-- 继承原炮塔的性能参数 -->
+    <reloadTimer>5.5</reloadTimer> <!-- 装填时间 -->
+    <magazineCapacity>8</magazineCapacity> <!-- 弹匣容量 -->
+    <chargePerAmmoCount>25</chargePerAmmoCount> <!-- 每发弹药充能时间 -->
+    <genericAmmo>true</genericAmmo> <!-- 是否使用通用弹药 -->
+    <projectile>DMS_Bullet_ChelydridaeShell</projectile> <!-- 发射物定义 -->
+    <ammunition> <!-- 修复后的拼写 -->
+      <thingDefs> <!-- 物品定义列表 -->
+        <li>Steel</li> <!-- 使用钢铁作为弹药材料 -->
+      </thingDefs>
+    </ammunition>
+    <minRange>2</minRange> <!-- 最小射程 -->
+    <maxRange>60.9</maxRange> <!-- 最大射程 -->
+    <rotationSpeed>10</rotationSpeed> <!-- 旋转速度 -->
+    <warmUpTimer>4</warmUpTimer> <!-- 预热时间 -->
+    <shotSound>DMS_Shot_MBTCannonSound</shotSound> <!-- 射击音效 -->
+    <reloadSound>DMS_Reload_MBTCannonSound</reloadSound> <!-- 装填音效 -->
+    <projectileOffset>5</projectileOffset> <!-- 发射物偏移 -->
+    <projectileShifting> <!-- 发射物偏移列表 -->
+      <li>0</li> <!-- 偏移值 -->
+    </projectileShifting>
+    <fireModes> <!-- 射击模式 -->
+      <li> <!-- 单发模式 -->
+        <shotsPerBurst>1</shotsPerBurst> <!-- 每次齐射的弹数 -->
+        <ticksBetweenBursts>1</ticksBetweenBursts> <!-- 齐射间隔 -->
+        <forcedMissRadius>2</forcedMissRadius> <!-- 强制脱靶半径 -->
+        <label>Single Shot</label> <!-- 模式标签 -->
+        <texPath>UI/Gizmos/FireRate_Single</texPath> <!-- 模式图标路径 -->
+      </li>
+    </fireModes>
+    <motes> <!-- 粒子效果 -->
+      <li> <!-- 炮口烟雾效果 -->
+        <cycles>1</cycles> <!-- 循环次数 -->
+        <moteDef>Mote_CannonPlume</moteDef> <!-- 粒子效果定义 -->
+        <animationType>Reset</animationType> <!-- 动画类型：重置 -->
+        <offset>(0,0,5)</offset> <!-- 效果偏移 -->
+      </li>
+    </motes>
+  </Vehicles.VehicleTurretDef>
+
+  <!-- 装甲包炮塔升级 -->
+  <Vehicles.UpgradeTreeDef>
+    <defName>DMS_GrayKnights_UpgradeTree</defName> <!-- 定义升级树的唯一标识符 -->
+    <label>A6炮塔装甲包</label> <!-- 升级树在游戏中的显示名称 -->
+    <description>使用复合材料重构装甲炮塔，可以抵挡高性能破甲弹与穿甲弹</description> <!-- 升级树描述 -->
+    <nodes> <!-- 升级节点列表 -->
+      <!-- 装甲包 -->
+      <li> <!-- 升级选项定义 -->
+        <key>ArmorPack</key> <!-- 升级的唯一标识键 -->
+        <label>A6炮塔装甲包</label> <!-- 升级选项的显示名称 -->
+        <description>使用复合材料重构装甲炮塔，可以抵挡高性能破甲弹与穿甲弹</description> <!-- 升级描述 -->
+        <icon>Vehicles/GrayKnights/ArmorPack/armored_package_gizmo</icon> <!-- 升级图标路径，与Chelydridae保持一致 -->
+        <work>2000</work> <!-- 完成升级所需的工作量 -->
+        <gridCoordinate>(3,5)</gridCoordinate> <!-- 升级在升级界面中的网格坐标 -->
+        <drawSize>(80, 80)</drawSize>
+        <upgrades> <!-- 升级的具体内容 -->
+          <li Class="Vehicles.TurretUpgrade"> <!-- 炮塔升级类 -->
+            <turrets> <!-- 要添加的炮塔列表 -->
+              <li> <!-- 新主炮塔定义 -->
+                <turretDef>GrayKnights_Tank_Turret_ArmorPack</turretDef> <!-- 新主炮塔定义引用 -->
+                <renderProperties> <!-- 炮塔渲染属性 -->
+                  <north>(-0.05,0.2)</north> <!-- 北向渲染位置 -->
+                  <south>(-0.15,0.3)</south> <!-- 南向渲染位置 -->
+                  <east>(0.05,0.08)</east> <!-- 东向渲染位置 -->
+                  <west>(-0.05,0.08)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <gizmoLabel>主炮塔</gizmoLabel> <!-- 操作界面标签 -->
+                <aimPieOffset>(0, 3.35)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <drawLayer>2</drawLayer> <!-- 绘制层级 -->
+                <key>mainTurret</key> <!-- 炮塔键值 -->
+              </li>
+              <li> <!-- 同轴机枪 -->
+                <turretDef>DMS_LMG_Coaxial</turretDef> <!-- 炮塔定义 -->
+                <renderProperties> <!-- 渲染属性 -->
+                  <east>(1.67,0.3)</east> <!-- 东向渲染位置 -->
+                  <south>(-0.4,-1.67)</south> <!-- 南向渲染位置 -->
+                  <north>(0.5,1.67)</north> <!-- 北向渲染位置 -->
+                  <west>(0,0)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <gizmoLabel>同轴机枪</gizmoLabel> <!-- 操作标签 -->
+                <angleRestricted>(345,15)</angleRestricted> <!-- 角度限制 -->
+                <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <key>2coaxialMG</key> <!-- 炮塔键 -->
+                <drawLayer>1</drawLayer> <!-- 绘制层级 -->
+                <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+              </li>
+              <li>
+                <!-- 车顶机枪 -->
+                <turretDef>DMS_GAU4_Turret</turretDef> <!-- 炮塔定义 -->
+                <renderProperties> <!-- 渲染属性 -->
+                  <!-- 这里的坐标系是无视旋转的,所以x就是恒定左右偏移 -->
+                  <north>(-0.6,0.48)</north> <!-- 北向渲染位置 - 调整了位置以适应装甲包 -->
+                  <south>(0,0)</south> <!-- 南向渲染位置 -->
+                  <east>(0,0)</east> <!-- 东向渲染位置 -->
+                  <west>(0,0)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <gizmoLabel>GAU4</gizmoLabel> <!-- 操作标签 -->
+                <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <key>2topMG</key> <!-- 炮塔键 - 修正了键名 -->
+                <drawLayer>3</drawLayer> <!-- 绘制层级 -->
+                <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+              </li>
+              <li>
+                <turretDef>DMS_GrenadeLauncher</turretDef> <!-- 炮塔定义 -->
+                <gizmoLabel>烟雾发射器</gizmoLabel> <!-- 操作标签 -->
+                <renderProperties> <!-- 渲染属性 -->
+                  <north>(0.7, 0.2)</north> <!-- 北向渲染位置 -->
+                  <south>(-0.7, -0.2)</south> <!-- 南向渲染位置 -->
+                  <east>(0.2, -0.7)</east> <!-- 东向渲染位置 -->
+                  <west>(-0.2, 0.7)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <drawLayer>2</drawLayer> <!-- 绘制层级 -->
+                <key>2leftSmoke</key> <!-- 炮塔键 -->
+              </li>
+              <li>
+                <turretDef>DMSL_Double_barrel_machine_gun</turretDef> <!-- 炮塔定义 -->
+                <renderProperties> <!-- 渲染属性 -->
+                  <east>(0.6,-0.48)</east> <!-- 东向渲染位置 -->
+                  <south>(0,0)</south> <!-- 南向渲染位置 -->
+                  <north>(0.6,0.47)</north> <!-- 北向渲染位置 -->
+                  <west>(0,0)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <gizmoLabel>双管机枪</gizmoLabel> <!-- 操作标签 -->
+                <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <key>barrel_machine</key> <!-- 炮塔键 -->
+                <drawLayer>3</drawLayer> <!-- 绘制层级 -->
+                <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+              </li>
+              <li>
+                <!-- 同轴机枪 -->
+                <turretDef>DMSL_81mmMortar</turretDef> <!-- 炮塔定义 -->
+                <renderProperties> <!-- 渲染属性 -->
+                  <east>(0,0)</east> <!-- 东向渲染位置 -->
+                  <south>(0,0)</south> <!-- 南向渲染位置 -->
+                  <north>(0.57,-1.15)</north> <!-- 北向渲染位置 -->
+                  <west>(0,0)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <gizmoLabel>迫击炮</gizmoLabel> <!-- 操作标签 -->
+                <angleRestricted>(345,15)</angleRestricted> <!-- 角度限制 -->
+                <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <key>81mmMortar</key> <!-- 炮塔键 -->
+                <drawLayer>3</drawLayer> <!-- 绘制层级 -->
+                <parentKey>mainTurret</parentKey> <!-- 父炮塔键 -->
+              </li>
+            </turrets>
+            <removeTurrets> <!-- 要移除的炮塔列表 -->
+              <li>mainTurret</li> <!-- 移除原主炮塔 -->
+              <li>2topMG</li> <!-- 移除顶部机枪 -->
+              <li>coaxialMG</li> <!-- 移除同轴机枪 -->
+              <li>leftSmoke</li> 
+             <li>barrel_machine</li><!-- 移除左烟雾发射器 -->
+              <li>81mmMortar</li>
+            </removeTurrets>
+          </li>
+        </upgrades>
+        <ingredients> <!-- 升级所需材料 -->
+          <Tungsteel>150</Tungsteel> <!-- 需要150单位钨钢 -->
+          <ComponentStamped>8</ComponentStamped> <!-- 需要8个工业组件 -->
+        </ingredients>
+
+        <!-- 如果以下节点已启用，则禁用 ArmorPack（与榴弹炮系统互斥） -->
+        <disableIfUpgradeNodesEnabled>
+          <li>PZH2000HowitzerWithGAU4</li>
+          <li>PZH2000Howitzer</li>
+          <li>AAcannonUpgrade</li>
+        </disableIfUpgradeNodesEnabled>
+      </li>
+      
+      <!-- 
+      PZH2000榴弹炮升级节点定义（带GAU4副炮）
+      该升级将主炮替换为强大的155mm自行榴弹炮系统，并保留GAU4副炮，提供远程火力支援能力
+      -->
+      <li>
+        <key>PZH2000HowitzerWithGAU4</key> <!-- 带GAU4的PZH2000榴弹炮升级键 -->
+        <label>PZH2000自行火炮系统</label>
+        <description>装备了155毫米独立炮塔系统的自行火炮</description>
+        <icon>Vehicles/GrayKnights/pzh2000pack/pzh2000_gizmo</icon>
+        <work>35000</work>
+        <gridCoordinate>(3,11)</gridCoordinate> <!-- 升级在升级界面中的网格坐标 -->
+        <drawSize>(80, 80)</drawSize>
+
+        <!-- 炮塔升级配置 -->
+        <upgrades>
+          <li Class="Vehicles.TurretUpgrade">
+            <turrets>
+              <!-- 主炮塔：PZH2000榴弹炮 -->
+              <li>
+                <turretDef>PZH2000_Tank_Turret</turretDef>
+                <renderProperties>
+                  <north>(-0.15,0.2)</north>
+                  <south>(-0.05,0.4)</south>
+                  <east>(-0.4,0.15)</east>
+                  <west>(0.4,0.15)</west>
+                </renderProperties>
+                <gizmoLabel>PZH2000自行火炮系统</gizmoLabel>
+                <aimPieOffset>(0, 3.35)</aimPieOffset>
+                <drawLayer>3</drawLayer>
+                <key>pzh2000Turret</key>
+              </li>
+              
+              <!-- 副炮塔：GAU4机枪 -->
+              <li>
+                <turretDef>DMS_GAU4_Turret</turretDef>
+                <renderProperties>
+                  <!-- 这里的坐标系是无视旋转的,所以x就是恒定左右偏移 -->
+                  <north>(0.6,-0.3)</north> <!-- 北向渲染位置 - 调整了位置以适应PZH2000布局 -->
+                  <south>(0,0)</south> <!-- 南向渲染位置 -->
+                  <east>(0,0)</east> <!-- 东向渲染位置 -->
+                  <west>(0,0)</west> <!-- 西向渲染位置 -->
+                </renderProperties>
+                <gizmoLabel>GAU4</gizmoLabel> <!-- 操作标签 -->
+                <aimPieOffset>(0, 0)</aimPieOffset> <!-- 瞄准饼图偏移 -->
+                <key>2topMG_PZH</key> <!-- 炮塔键 -->
+                <drawLayer>4</drawLayer> <!-- 绘制层级 -->
+                <parentKey>pzh2000Turret</parentKey> <!-- 父炮塔键，使GAU4跟随主炮塔旋转 -->
+              </li>
+            </turrets>
+            
+            <!-- 需要移除的原装炮塔部件 -->
+            <removeTurrets>
+              <li>mainTurret</li> <!-- 移除原主炮塔 -->
+              <li>coaxialMG</li> <!-- 移除同轴机枪 -->
+              <li>2topMG</li> <!-- 移除原车顶机枪 -->
+              <li>barrel_machine</li> <!-- 移除双管机枪 -->
+              <li>leftSmoke</li> <!-- 移除烟雾发射器 -->
+              <li>81mmMortar</li>
+            </removeTurrets>
+          </li>
+        </upgrades>
+
+        <!-- 升级所需材料清单 -->
+        <ingredients>
+          <Tungsteel>200</Tungsteel> <!-- 需要更多钨钢 -->
+          <ReinforcedBarrel>2</ReinforcedBarrel> 
+          <ComponentStamped>10</ComponentStamped> 
+        </ingredients>
+
+        <!-- 如果以下节点已启用，则禁用此升级 -->
+        <disableIfUpgradeNodesEnabled>
+          <li>ArmorPack</li>
+          <li>PZH2000Howitzer</li>
+          <li>AAcannonUpgrade</li>
+        </disableIfUpgradeNodesEnabled>
+      </li>
+
+      <!-- 新增的装甲增强改装 -->
+      <li>
+        <key>AdvancedArmorPack</key>  <!-- 高级装甲包 -->
+        <label>A7装甲标准</label>
+        <description>新型复合材料装甲包使用坦克防御力大幅度提升</description>
+        <icon>Vehicles/GrayKnights/ArmorPack/HID_Upgrade_Armor</icon>
+        <work>1000</work>
+        <gridCoordinate>(10, 5)</gridCoordinate>
+        <drawSize>(80, 80)</drawSize>
+        <prerequisiteNodes>  <!-- 前置条件：必须先安装装甲包 -->
+          <li>ArmorPack</li>
+        </prerequisiteNodes>
+        
+        <upgrades>
+          <li Class="Vehicles.VehicleUpgrade">
+            <armor>
+              <li>
+                <key>FrontERAPlating</key>  <!-- 前ERA装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>TurretERAPlating</key>  <!-- 炮塔ERA装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>BackArmorPlating</key>  <!-- 后装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>MainTurret</key>  <!-- 主炮塔 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>RightERAPlating</key>  <!-- 右ERA装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>LeftERAPlating</key>  <!-- 左ERA装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>RightArmorPlating</key>  <!-- 右装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>LeftArmorPlating</key>  <!-- 左装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+              <li>
+                <key>FrontArmorPlating</key>  <!-- 前装甲板 -->
+                <statModifiers>
+                  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+                  <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+                </statModifiers>
+              </li>
+            </armor>
+            <health>  <!-- 生命值修改 -->
+              <li>
+                <key>FrontERAPlating</key>
+                <value>340</value>  <!-- 原来是240，增加100 -->
+              </li>
+              <li>
+                <key>TurretERAPlating</key>
+                <value>340</value>  <!-- 原来是240，增加100 -->
+              </li>
+              <li>
+                <key>BackArmorPlating</key>
+                <value>325</value>  <!-- 原来是225，增加100 -->
+              </li>
+              <li>
+                <key>MainTurret</key>
+                <value>550</value>  <!-- 原来是450，增加100 -->
+              </li>
+              <li>
+                <key>RightERAPlating</key>
+                <value>220</value>  <!-- 原来是120，增加100 -->
+              </li>
+              <li>
+                <key>LeftERAPlating</key>
+                <value>220</value>  <!-- 原来是120，增加100 -->
+              </li>
+              <li>
+                <key>RightArmorPlating</key>
+                <value>370</value>  <!-- 原来是270，增加100 -->
+              </li>
+              <li>
+                <key>LeftArmorPlating</key>
+                <value>370</value>  <!-- 原来是270，增加100 -->
+              </li>
+              <li>
+                <key>FrontArmorPlating</key>
+                <value>550</value>  <!-- 原来是450，增加100 -->
+              </li>
+            </health>
+          </li>
+        </upgrades>
+        
+        <ingredients>
+          <Tungsteel>200</Tungsteel>
+          <DMS_Ceramics>300</DMS_Ceramics>
+        </ingredients>
+      </li>
+      
+      <!-- AA cannon upgrade -->
+      <li>
+        <key>AAcannonUpgrade</key> <!-- AA炮升级键 -->
+        <label>自行高炮系统</label>
+        <description>高射火炮系统</description>
+        <icon>Vehicles/Common/AAcannon_Icon</icon>
+        <work>15000</work>
+        <gridCoordinate>(10, 11)</gridCoordinate>
+        <drawSize>(80, 80)</drawSize>
+
+        <!-- 炮塔升级配置 -->
+        <upgrades>
+          <li Class="Vehicles.TurretUpgrade">
+            <turrets>
+              <!-- 主炮塔：AA炮 -->
+              <li>
+                <turretDef>DMSL_AAcannon</turretDef>
+                <renderProperties>
+                  <north>(-0.1,0.3)</north>
+                  <south>(-0.1,-0)</south>
+                  <east>(-0,0.15)</east>
+                  <west>(0,0.15)</west>
+                </renderProperties>
+                <gizmoLabel>主炮塔</gizmoLabel>
+                <aimPieOffset>(0, 3.35)</aimPieOffset>
+                <drawLayer>3</drawLayer>
+                <key>aacannonTurret</key>
+              </li>
+            </turrets>
+            
+            <!-- 需要移除的原装炮塔部件 -->
+            <removeTurrets>
+              <li>mainTurret</li> <!-- 移除原主炮塔 -->
+              <li>2topMG</li> <!-- 移除顶部机枪 -->
+              <li>coaxialMG</li> <!-- 移除同轴机枪 -->
+              <li>barrel_machine</li> <!-- 移除双管机枪 -->
+              <li>81mmMortar</li> <!-- 移除迫击炮 -->
+            </removeTurrets>
+          </li>
+        </upgrades>
+
+        <!-- 升级所需材料清单 -->
+        <ingredients>
+          <Tungsteel>150</Tungsteel>
+          <ComponentIndustrial>10</ComponentIndustrial>
+          <ComponentStamped>15</ComponentStamped>
+          <Steel>200</Steel>
+        </ingredients>
+
+        <!-- 如果以下节点已启用，则禁用此升级 -->
+        <disableIfUpgradeNodesEnabled>
+          <li>ArmorPack</li>
+          <li>PZH2000HowitzerWithGAU4</li>
+        </disableIfUpgradeNodesEnabled>
+      </li>
+    </nodes>
+  </Vehicles.UpgradeTreeDef>
+</Defs>

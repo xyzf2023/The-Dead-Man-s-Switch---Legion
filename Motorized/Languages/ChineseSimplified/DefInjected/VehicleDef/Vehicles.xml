@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Motorized Defs/Vehicles - 灰骑士载具本体（VehicleDef） -->
+  <DMS_GrayKnights_MainBattleTank.label>灰骑士</DMS_GrayKnights_MainBattleTank.label>
+  <DMS_GrayKnights_MainBattleTank.description>该载具目前服役于殖民舰队，设计上支持无人驾驶作战。不过出于对战场通信环境的考虑，后舱也预留了两名乘员的空间。</DMS_GrayKnights_MainBattleTank.description>
+  <!-- 乘员角色 -->
+  <DMS_GrayKnights_MainBattleTank.properties.roles.gunner.label>炮手</DMS_GrayKnights_MainBattleTank.properties.roles.gunner.label>
+  <!-- 载具组件 -->
+  <DMS_GrayKnights_MainBattleTank.components.Engine.label>涡轮发动机</DMS_GrayKnights_MainBattleTank.components.Engine.label>
+  <DMS_GrayKnights_MainBattleTank.components.FuelTank.label>装甲油箱</DMS_GrayKnights_MainBattleTank.components.FuelTank.label>
+  <DMS_GrayKnights_MainBattleTank.components.Gearbox.label>变速箱</DMS_GrayKnights_MainBattleTank.components.Gearbox.label>
+  <DMS_GrayKnights_MainBattleTank.components.AmmoRack.label>弹药架</DMS_GrayKnights_MainBattleTank.components.AmmoRack.label>
+  <DMS_GrayKnights_MainBattleTank.components.TransmissionShaft.label>传动轴</DMS_GrayKnights_MainBattleTank.components.TransmissionShaft.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftTrack.label>左侧履带</DMS_GrayKnights_MainBattleTank.components.LeftTrack.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightTrack.label>右侧履带</DMS_GrayKnights_MainBattleTank.components.RightTrack.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftRoadWheels.label>左侧负重轮</DMS_GrayKnights_MainBattleTank.components.LeftRoadWheels.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightRoadWheels.label>右侧负重轮</DMS_GrayKnights_MainBattleTank.components.RightRoadWheels.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftDriveSprocket.label>左侧主动轮</DMS_GrayKnights_MainBattleTank.components.LeftDriveSprocket.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightDriveSprocket.label>右侧主动轮</DMS_GrayKnights_MainBattleTank.components.RightDriveSprocket.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftTensionerWheel.label>左侧诱导轮</DMS_GrayKnights_MainBattleTank.components.LeftTensionerWheel.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightTensionerWheel.label>右侧诱导轮</DMS_GrayKnights_MainBattleTank.components.RightTensionerWheel.label>
+  <DMS_GrayKnights_MainBattleTank.components.FrontArmorPlating.label>前装甲板</DMS_GrayKnights_MainBattleTank.components.FrontArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftArmorPlating.label>左侧装甲板</DMS_GrayKnights_MainBattleTank.components.LeftArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightArmorPlating.label>右侧装甲板</DMS_GrayKnights_MainBattleTank.components.RightArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftERAPlating.label>左侧反应装甲</DMS_GrayKnights_MainBattleTank.components.LeftERAPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightERAPlating.label>右侧反应装甲</DMS_GrayKnights_MainBattleTank.components.RightERAPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.RoofArmorPlating.label>车顶装甲</DMS_GrayKnights_MainBattleTank.components.RoofArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.BackArmorPlating.label>后装甲板</DMS_GrayKnights_MainBattleTank.components.BackArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.MainTurret.label>主炮塔</DMS_GrayKnights_MainBattleTank.components.MainTurret.label>
+  <DMS_GrayKnights_MainBattleTank.components.FrontERAPlating.label>前反应装甲</DMS_GrayKnights_MainBattleTank.components.FrontERAPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.TurretERAPlating.label>炮塔反应装甲</DMS_GrayKnights_MainBattleTank.components.TurretERAPlating.label>
+</LanguageData>

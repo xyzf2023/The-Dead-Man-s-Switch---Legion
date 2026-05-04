@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML声明 -->
+<!-- 根节点：Defs -->
+<Defs>
+
+  <!-- 模板：世界对象（穿梭机飞行中） -->
+  <WorldObjectDef ParentName="ShuttleWorldObjectBase">
+    <!-- 定义名 -->
+    <defName>DMSL_AXF12_OffsetConfig_Traveling</defName>
+    <!-- 显示名称 -->
+    <label>AXF-12「偏构」垂直起降战斗机</label>
+    <!-- 描述文本 -->
+    <description>一艘正在飞行的AXF-12「偏构」垂直起降战斗机。</description>
+    <!-- 展开图标贴图 -->
+    <expandingIconTexture>UI/WorldObject/AFX12Icon</expandingIconTexture>
+    <!-- 展开图标大小 -->
+    <expandingIconDrawSize>1.5</expandingIconDrawSize>
+    <!-- 世界对象组件 -->
+    <comps>
+      <li Class="DMS_Legion.AXF12.WorldObjectCompProperties_AXF12ReconTravel">
+        <loiterTicks>120</loiterTicks>
+      </li>
+    </comps>
+  </WorldObjectDef>
+
+  <!-- 结束：Defs -->
+</Defs>

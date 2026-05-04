@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Projectiles -->
+  <Shell_BaitTarget.label>Electronic Decoy Shell</Shell_BaitTarget.label>
+  <Shell_BaitTarget.description>A special mortar round that generates an electronic decoy signal on impact, diverting aerial bombers to a new target. Used to redirect airstrikes to a chosen location.\n\n&lt;i&gt;"Best way to use it: drop it right on the raiders. They'll get blown sky-high by their own 'support'!"\n      — An anonymous soldier&lt;/i&gt;</Shell_BaitTarget.description>
+  <Bullet_Shell_BaitTarget.label>Electronic Decoy Shell</Bullet_Shell_BaitTarget.label>
+  <DMSL_Projectile_IED.label>IED</DMSL_Projectile_IED.label>
+</LanguageData>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 机体重构读条时的红光效果器：在尸体上显示持续闪烁的红光 -->
+  <EffecterDef>
+    <defName>DMSL_Effecter_MechReconstructionWarmupOnTarget</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_MechResurrectWarmupOnTarget</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType><!-- 在源（尸体）上生成 -->
+        <attachToSpawnThing>true</attachToSpawnThing><!-- 附加到尸体上 -->
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

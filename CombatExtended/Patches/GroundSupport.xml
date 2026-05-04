@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	CE 专用：将「机炮扫射」召唤的空中支援替换为「攻击机轰炸」。
+	机炮扫射使用 CustomLineBulletFire + 原版 Projectile，CE 弹体为 ProjectileCE，当前实现会报错；
+	攻击机轰炸使用 CustomLineBombing，与 CE 无冲突，且同为两格选点、同一机型，交互一致。
+	此文件仅在 CE 启用时由 LoadFolders.xml 加载。
+-->
+<Patch MayRequire="Ludeon.RimWorld.Royalty">
+	<!-- 皇权许可：呼叫机炮扫射 → 实际触发攻击机轰炸 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/RoyalTitlePermitDef[defName="DMSL_RoyalAid_StrafingRun"]/modExtensions/li[@Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport"]/aerialSupportTypeDefName</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RoyalTitlePermitDef[defName="DMSL_RoyalAid_StrafingRun"]/modExtensions/li[@Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport"]/aerialSupportTypeDefName</xpath>
+			<value>
+				<aerialSupportTypeDefName>DMSL_AerialSupport_AttackAircraftBombing</aerialSupportTypeDefName>
+			</value>
+		</match>
+	</Operation>
+	<!-- 通讯台选项：机炮扫射 → 实际触发攻击机轰炸 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/DMS_Legion.CommsAirSupportOptionDef[defName="DMSL_Comms_StrafingRun"]/aerialSupportDefName</xpath>
+		<value>
+			<aerialSupportDefName>DMSL_AerialSupport_AttackAircraftBombing</aerialSupportDefName>
+		</value>
+	</Operation>
+</Patch>

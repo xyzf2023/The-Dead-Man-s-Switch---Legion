@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 贴图出现时：仅负责静音（不播放任何音效）。静音期内除 allowedSoundDefName 外其它音效乘数置 0；耳鸣由白屏组件在到达时播放。 -->
+  <DMS_Legion.GroundSupport.SpawnEffectDef>
+    <defName>DMSL_SpawnEffect_Mute</defName>
+    <label>寂静</label>
+    <workerClass>DMS_Legion.GroundSupport.SpawnEffectWorker_MuteExceptTinnitus</workerClass>
+    <properties>
+      <!-- 静音持续时间（tick） -->
+      <durationTicks>720</durationTicks>
+      <!-- 静音期内不置 0 的 SoundDef defName（与白屏组件的 soundDefDefName 一致，由白屏组件负责播放） -->
+      <allowedSoundDefName>DMSL_AerialRaid_NuclearTinnitus</allowedSoundDefName>
+    </properties>
+  </DMS_Legion.GroundSupport.SpawnEffectDef>
+</Defs>

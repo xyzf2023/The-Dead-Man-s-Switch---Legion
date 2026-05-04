@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ===========================================
+       机炮支援使用的爆炸性子弹
+       使用原版 Projectile_Explosive 类实现
+       =========================================== -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>DMSL_AutocannonRounds</defName>
+    <label>机炮子弹</label>
+    <description>高速度爆炸性子弹，用于机炮支援。在命中时爆炸。</description>
+    
+    <!-- 使用原版爆炸性投射物类 -->
+    <!-- Projectile_Explosive 会在命中或到达目标时自动触发爆炸 -->
+    <thingClass>Projectile_Explosive</thingClass>
+    
+    <!-- 贴图设置 -->
+    <graphicData>
+      <!-- 子弹贴图路径：使用原版迫击炮弹药贴图 -->
+      <texPath>Things/Projectile/ShellHighExplosive</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <!-- 着色器类型：与原版迫击炮弹药一致 -->
+      <shaderType>TransparentPostLight</shaderType>
+      <!-- 绘制大小：0.5（与原版小型子弹一致） -->
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    
+    <!-- 投射物属性 -->
+    <projectile>
+      <!-- 伤害类型：使用炸弹伤害类型（Bomb） -->
+      <damageDef>Bomb</damageDef>
+      
+      <!-- 基础伤害值：20点 -->
+      <damageAmountBase>20</damageAmountBase>
+      
+      <!-- 击退力度：1（影响目标被击退的距离） -->
+      <stoppingPower>1</stoppingPower>
+      
+      <!-- 飞行速度：计算方式：speed / 100f = 每tick移动的格数 -->
+      <speed>2500</speed>
+      
+      <!-- 爆炸半径：1格（爆炸影响范围） -->
+      <explosionRadius>1</explosionRadius>
+      
+      <!-- 基础破甲值：0（不穿透护甲） -->
+      <armorPenetrationBase>0.5</armorPenetrationBase>
+      
+      <!-- 爆炸延迟：0（立即爆炸，不延迟）
+           如果设置为 > 0，子弹会在命中后延迟指定tick数再爆炸
+           例如：explosionDelay>100</explosionDelay> 会延迟约1.67秒（100 ticks） -->
+      <explosionDelay>0</explosionDelay>
+      
+      <!-- 可选：爆炸音效（如果不设置，使用伤害类型的默认音效） -->
+      <!-- <soundExplode>Explosion_Bomb</soundExplode> -->
+      
+      <!-- 可选：爆炸特效（如果不设置，使用伤害类型的默认特效） -->
+      <!-- <explosionEffect>Explosion</explosionEffect> -->
+      
+      <!-- 可选：爆炸伤害衰减（true=距离越远伤害越低，false=范围内伤害相同） -->
+      <!-- <explosionDamageFalloff>true</explosionDamageFalloff> -->
+      
+      <!-- 可选：爆炸后生成物品（例如：弹片、碎片等） -->
+      <!-- <postExplosionSpawnThingDef>Filth_Ash</postExplosionSpawnThingDef> -->
+      <!-- <postExplosionSpawnChance>0.5</postExplosionSpawnChance> -->
+      <!-- <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount> -->
+    </projectile>
+    
+    <!-- 高度层：投射物层（确保子弹绘制在正确的高度） -->
+    <altitudeLayer>Projectile</altitudeLayer>
+  </ThingDef>
+</Defs>

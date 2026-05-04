@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Commanding Bird 无人机定义 -->
+  <ThingDef ParentName="DMS_BaseDroidRace">
+    <defName>DMSL_Drone_CommandingBird</defName>
+    <label>指挥鸟</label>
+    <description>一种由腰带释放出的微型指挥无人机，以帮助机械师在远离前线的地方指挥战斗。</description>
+    
+    <!-- 基础属性 -->
+    <statBases>
+      <MoveSpeed>8.2</MoveSpeed> <!-- 极高的移动速度，适合侦察任务 -->
+    </statBases>
+    
+    <!-- 种族特有属性 -->
+    <race>
+      <body>DMS_Chop</body> <!-- 使用DMS_Chop身体配置 -->
+      <baseBodySize>0.15</baseBodySize> <!-- 非常小的体型 -->
+      <baseHealthScale>0.25</baseHealthScale> <!-- 较低的生命值比例，说明其脆弱性 -->
+      <mechWeightClass>Light</mechWeightClass> <!-- 轻型机械单位 -->
+    </race>
+    
+    <!-- 组件列表 -->
+    <comps>
+      <!-- 近战时自爆组件，增加战术用途 -->
+      <li>
+        <compClass>Fortified.CompExplosiveOnMelee</compClass>
+      </li>
+      
+      <!-- 动力电池组件，设定续航能力 -->
+      <li Class="CompProperties_MechPowerCell">
+        <totalPowerTicks>12000</totalPowerTicks> <!-- 12000tick的总运行时间 -->
+      </li>
+      
+      <!-- 浮动能力组件，使其可以穿越水面 -->
+      <li MayRequire="oskarpotocki.vanillafactionsexpanded.core" Class="VEF.AnimalBehaviours.CompProperties_Floating">
+        <canCrossWater>true</canCrossWater> <!-- 可以穿越水域 -->
+        <isFloater>true</isFloater> <!-- 标记为漂浮单位 -->
+      </li>
+      
+      <!-- 飞行粒子效果组件，提供视觉上的悬停效果 -->
+      <li Class="Fortified.CompProperties_FlyingFleckThrower">
+        <burstOffsetRange>(1,1.5)</burstOffsetRange> <!-- 粒子爆发偏移范围 -->
+        <fleckOnSoil>DustPuff</fleckOnSoil> <!-- 在土壤上产生尘土粒子 -->
+        <fleckOnSnow>AirPuff</fleckOnSnow> <!-- 在雪地上产生空气粒子 -->
+        <activeAnimation>DMS_Hover</activeAnimation> <!-- 激活动画为悬停 -->
+        <sizeRange>(1,1.2)</sizeRange> <!-- 粒子大小范围 -->
+        <speedRange>(0.75,1)</speedRange> <!-- 粒子速度范围 -->
+        <throwRate>1</throwRate> <!-- 抛射频率 -->
+        <throwTick>5</throwTick> <!-- 抛射间隔 -->
+      </li>
+      
+      <!-- 中继组件，扩展机械体控制网络 -->
+      <li Class="Fortified.CompProperties_CommandRelay">
+        <maxWorldMapRadius>15</maxWorldMapRadius> <!-- 世界地图最大中继范围 -->
+        <maxRelayRadius>15</maxRelayRadius> <!-- 当前地图最大中继范围 -->
+        <minRelayRadius>0</minRelayRadius> <!-- 最小中继范围 -->
+      </li>
+      
+      <!-- 指挥范围扩展：范围内友方机械体视为在监管者控制范围内，征召时绘制范围圈 -->
+      <li Class="DMS_Legion.CompProperties_CommandRangeExpansion">
+        <radius>30</radius> <!-- 扩展半径（格），可自定义 -->
+      </li>
+    </comps>
+    
+    <!-- 模组扩展，用于武器兼容性 -->
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter> <!-- 启用武器过滤 -->
+        <UsableWeaponTags> <!-- 可使用的武器标签 -->
+          <li>VerlingBird_Weapon</li> <!-- Verling Bird专用武器 -->
+          <li>DMS_MechWeaponUltraLight</li> <!-- DMS超轻型机械武器 -->
+          <li>PLA_RocketLauncherSingleUse</li> <!-- PLA一次性火箭发射器 -->
+          <li>CE_AI_Grenade</li> <!-- CE AI手榴弹 -->
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter> <!-- 启用科技等级过滤 -->
+        <UsableTechLevels> <!-- 可用科技等级 -->
+          <li>Industrial</li> <!-- 工业级 -->
+        </UsableTechLevels>
+        <BypassUsableWeapons> <!-- 可绕过限制的武器 -->
+          <li MayRequire="ceteam.combatextended">Gun_BinocularsRadio</li> <!-- CE的望远镜/无线电 -->
+        </BypassUsableWeapons>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- Commanding Bird 个体类型定义 -->
+  <PawnKindDef ParentName="DMS_DroidKind">
+    <defName>DMSL_Drone_CommandingBird</defName>
+    <label>指挥鸟</label>
+    <labelPlural>Commanding birds</labelPlural> <!-- 修正复数形式 -->
+    <race>DMSL_Drone_CommandingBird</race> <!-- 修正对应的种族定义，保持ID一致 -->
+    <combatPower>5</combatPower> <!-- 很低的战斗力，符合其侦察定位 -->
+    <lifeStages> <!-- 生命阶段图像 -->
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/CommandingBird/CommandingBird</texPath> <!-- 使用的纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 使用CutoutComplex着色器 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 多方向图形类 -->
+          <drawSize>1</drawSize> <!-- 修正绘制尺寸 -->
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/CommandingBird/CommandingBird</texPath> <!-- 使用相同的纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 使用CutoutComplex着色器 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 多方向图形类 -->
+          <drawSize>1</drawSize> <!-- 修正绘制尺寸 -->
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags> <!-- 武器标签 -->
+      <li>Pistol</li> <!-- 手枪类武器，符合其轻型定位 -->
+    </weaponTags>
+  </PawnKindDef>
+</Defs>

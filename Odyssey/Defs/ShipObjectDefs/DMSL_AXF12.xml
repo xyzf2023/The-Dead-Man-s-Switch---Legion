@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML声明 -->
+<!-- 根节点：Defs -->
+<Defs>
+
+  <!-- 模板：运输船定义（穿梭机） -->
+  <TransportShipDef>
+    <!-- 定义名 -->
+    <defName>DMSL_AXF12_OffsetConfig</defName>
+    <!-- 显示名称 -->
+    <label>AXF-12「偏构」垂直起降战斗机</label>
+    <!-- 船体ThingDef -->
+    <shipThing>DMSL_AXF12_OffsetConfig</shipThing>
+    <!-- 入场天降定义 -->
+    <arrivingSkyfaller>DMSL_AXF12_OffsetConfigIncoming</arrivingSkyfaller>
+    <!-- 离场天降定义 -->
+    <leavingSkyfaller>DMSL_AXF12_OffsetConfigLeaving</leavingSkyfaller>
+    <!-- 世界对象 -->
+    <worldObject>DMSL_AXF12_OffsetConfig_Traveling</worldObject>
+    <!-- 最大起飞距离 -->
+    <maxLaunchDistance>100</maxLaunchDistance>
+    <!-- 玩家可用穿梭机 -->
+    <playerShuttle>true</playerShuttle>
+  </TransportShipDef>
+
+  <!-- 结束：Defs -->
+</Defs>

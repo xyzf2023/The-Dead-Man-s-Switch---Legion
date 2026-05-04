@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 斥候体型：为 CE 装备面板护甲显示添加 CoveredByNaturalArmor 组（CE 的 Pawn.PartialStat 仅对此组返回非零） -->
+<Patch>
+	<!-- 确保 corePart（MechanicalThorax）有 groups 节点 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- 一级子部件：MechanicalNeck、DMS_ArmourPlate、MechanicalShoulder -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="DMS_ArmourPlate"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="DMS_ArmourPlate"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="DMS_ArmourPlate"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- 头部：DMS_SniperHead（已有 groups，追加 CoveredByNaturalArmor） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- 头部内传感器与大脑（嵌套在 DMS_SniperHead/parts 下） -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="SightSensor"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="SightSensor"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="SightSensor"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="HearingSensor"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="HearingSensor"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="HearingSensor"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="SmellSensor"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="SmellSensor"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="SmellSensor"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="ArtificialBrain"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="ArtificialBrain"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalNeck"]/parts/li[def="DMS_SniperHead"]/parts/li[def="ArtificialBrain"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- 四肢：MechanicalArm、MechanicalHand、MechanicalFinger（肩下嵌套） -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/parts/li[def="MechanicalHand"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/parts/li[def="MechanicalHand"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/parts/li[def="MechanicalHand"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/parts/li[def="MechanicalHand"]/parts/li[def="MechanicalFinger"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/parts/li[def="MechanicalHand"]/parts/li[def="MechanicalFinger"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalShoulder"]/parts/li[def="MechanicalArm"]/parts/li[def="MechanicalHand"]/parts/li[def="MechanicalFinger"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- 腿与脚（斥候为机械马体型，四腿） -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalLeg"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalLeg"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalLeg"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalLeg"]/parts/li[def="MechanicalFoot"]/groups</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalLeg"]/parts/li[def="MechanicalFoot"]</xpath>
+			<value><groups /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_MechanicsCavalryman_TypeA"]/corePart/parts/li[def="MechanicalLeg"]/parts/li[def="MechanicalFoot"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+</Patch>

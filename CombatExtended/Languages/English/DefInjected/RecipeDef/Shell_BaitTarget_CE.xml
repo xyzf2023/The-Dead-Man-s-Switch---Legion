@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- CE Defs/Ammo/Shell_BaitTarget_CE.xml -->
+  <MakeDMSL_Shell_BaitTarget.label>Craft 81mm electronic decoy shells x5</MakeDMSL_Shell_BaitTarget.label>
+  <MakeDMSL_Shell_BaitTarget.description>Craft 5 81mm electronic decoy mortar shells.</MakeDMSL_Shell_BaitTarget.description>
+  <MakeDMSL_Shell_BaitTarget.jobString>Making 81mm electronic decoy mortar shells.</MakeDMSL_Shell_BaitTarget.jobString>
+</LanguageData>

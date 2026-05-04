@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 根节点：所有 Def 的容器 -->
+<Defs>
+
+  <!-- DMSL叙事者：参考原版菲比（Phoebe Chillax），节奏稳定、事件间隔长，侧重守护与和平发展 -->
+  <!-- 叙事者 Def：继承 BaseStoryteller 获得通用曲线与事件 -->
+  <StorytellerDef ParentName="BaseStoryteller">
+    <!-- 内部引用名 -->
+    <defName>DMSL_Storyteller_Raphael</defName>
+    <!-- 游戏内显示名称 -->
+    <label>「电子天使」拉斐尔</label>
+    <!-- 叙事者介绍 -->
+    <description>拉斐尔是一名温柔的人工智能。有传闻称她诞生于失能机关的中央司令核心，曾整合一支殖民舰队的遗留武装力量统一了某颗星球，并开始以电子天使的形象示人......\n\n拉斐尔的故事稳定而规律，两个事件间将有充裕的休整时间。她更乐于让你有选择的处理各种任务，并在危难关头伸出援手。</description>
+
+    <!-- 适应期与难度曲线（与菲比一致：长间隔、稳定节奏） -->
+    <adaptDaysGameStartGraceDays>30</adaptDaysGameStartGraceDays>
+    <adaptDaysGrowthRateCurve>
+      <points>
+        <li>(-30.01, 6)</li>
+        <li>(-30,    3)</li>
+        <li>(-0.01,  3)</li>
+        <li>(0,      1)</li>
+        <li>(59.99,  1)</li>
+        <li>(60,     0.5)</li>
+        <li>(119.99, 0.5)</li>
+        <li>(120,    0.25)</li>
+      </points>
+    </adaptDaysGrowthRateCurve>
+    <adaptDaysLossFromColonistLostByPostPopulation>
+      <points>
+        <li>( 0, 30)</li>
+        <li>(11, 30)</li>
+        <li>(20, 20)</li>
+      </points>
+    </adaptDaysLossFromColonistLostByPostPopulation>
+    <adaptDaysLossFromColonistViolentlyDownedByPopulation>
+      <points>
+        <li>(1,  8)</li>
+        <li>(2,  6)</li>
+        <li>(3,  6)</li>
+        <li>(11, 5)</li>
+        <li>(20, 3.5)</li>
+      </points>
+    </adaptDaysLossFromColonistViolentlyDownedByPopulation>
+    <adaptDaysMax>100</adaptDaysMax>
+    <adaptDaysMin>-60</adaptDaysMin>
+
+    <!-- 叙事者组件列表：决定何时、何种事件 -->
+    <comps>
+      <!-- 终局任务：飞船逃亡（固定一次） -->
+      <li Class="StorytellerCompProperties_SingleOnceFixed">
+        <fireAfterDaysPassed>20</fireAfterDaysPassed>
+        <incident>GiveQuest_EndGame_ShipEscape</incident>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 终局任务：灵能树胜利（意识形态 DLC，财富达标后可重复触发） -->
+      <li Class="StorytellerCompProperties_RefiringUniqueQuest">
+        <minColonyWealth>150000</minColonyWealth>
+        <minDaysPassed>0</minDaysPassed>
+        <incident MayRequire="Ludeon.RimWorld.Ideology">GiveQuest_EndGame_ArchonexusVictory</incident>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Ideology</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 终局任务：皇权晋升（皇权 DLC，固定间隔可重复触发） -->
+      <li Class="StorytellerCompProperties_RefiringUniqueQuest">
+        <minDaysPassed>35</minDaysPassed>
+        <refireEveryDays>22</refireEveryDays>
+        <incident MayRequire="Ludeon.RimWorld.Royalty">GiveQuest_EndGame_RoyalAscent</incident>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 深钻虫害：按深钻机数量 MTB 触发虫巢 -->
+      <li Class="StorytellerCompProperties_DeepDrillInfestation">
+        <baseMtbDaysPerDrill>20</baseMtbDaysPerDrill>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+          <li>Map_TempIncident</li>
+          <li>Map_Misc</li>
+          <li>Map_RaidBeacon</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 工作点任务（意识形态 DLC） -->
+      <li Class="StorytellerCompProperties_WorkSite">
+        <incident MayRequire="Ludeon.RimWorld.Ideology">GiveQuest_WorkSite</incident>
+      </li>
+      <!-- 一次性引导任务：懦夫（皇权 DLC） -->
+      <li Class="StorytellerCompProperties_SingleOnceFixed">
+        <fireAfterDaysPassed>8</fireAfterDaysPassed>
+        <incident MayRequire="Ludeon.RimWorld.Royalty">GiveQuest_Intro_Wimp</incident>
+        <skipIfColonistHasMinTitle MayRequire="Ludeon.RimWorld.Royalty">Yeoman</skipIfColonistHasMinTitle>
+        <skipIfOnExtremeBiome>true</skipIfOnExtremeBiome>
+        <minColonistCount>3</minColonistCount>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 一次性引导任务：逃兵（皇权 DLC） -->
+      <li Class="StorytellerCompProperties_SingleOnceFixed">
+        <fireAfterDaysPassed>26</fireAfterDaysPassed>
+        <incident MayRequire="Ludeon.RimWorld.Royalty">GiveQuest_Intro_Deserter</incident>
+        <skipIfOnExtremeBiome>true</skipIfOnExtremeBiome>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 重要任务：机械体信号（奥德赛 DLC） -->
+      <li Class="StorytellerCompProperties_ImportantQuest">
+        <fireAfterDaysPassed>6</fireAfterDaysPassed>
+        <questIncident MayRequire="Ludeon.RimWorld.Odyssey">GiveQuest_MechanoidSignal</questIncident>
+        <questDef MayRequire="Ludeon.RimWorld.Odyssey">MechanoidSignal</questDef>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Odyssey</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 派系互动：贡品收集商队（皇权 DLC） -->
+      <li Class="StorytellerCompProperties_FactionInteraction">
+        <incident MayRequire="Ludeon.RimWorld.Royalty">CaravanArrivalTributeCollector</incident>
+        <minDaysPassed>20</minDaysPassed>
+        <baseIncidentsPerYear>2</baseIncidentsPerYear>
+        <minSpacingDays>30</minSpacingDays>
+        <minWealth>20000</minWealth>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 灵能树生成（皇权 DLC，开/关周期） -->
+      <li Class="StorytellerCompProperties_OnOffCycle">
+        <incident MayRequire="Ludeon.RimWorld.Royalty">AnimaTreeSpawn</incident>
+        <onDays>15</onDays>
+        <offDays>15</offDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 高兰灵联结树生成（意识形态 DLC） -->
+      <li Class="StorytellerCompProperties_GauranlenPodSpawn" MayRequire="Ludeon.RimWorld.Ideology">
+        <incident MayRequire="Ludeon.RimWorld.Ideology">GauranlenPodSpawn</incident>
+        <minDaysPassed>4</minDaysPassed>
+        <daysBetweenPodSpawns>60</daysBetweenPodSpawns>
+        <countdownFactorAnyConnectors>2</countdownFactorAnyConnectors>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Ideology</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 遗迹迁移（异常 DLC） -->
+      <li Class="StorytellerCompProperties_MonolithMigration" MayRequire="Ludeon.RimWorld.Anomaly">
+        <incident MayRequire="Ludeon.RimWorld.Anomaly">MonolithMigration</incident>
+        <mtbDays>4</mtbDays>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Anomaly</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 乞丐任务（意识形态 DLC，开/关周期） -->
+      <li Class="StorytellerCompProperties_OnOffCycle" MayRequire="Ludeon.RimWorld.Ideology">
+        <incident MayRequire="Ludeon.RimWorld.Ideology">GiveQuest_Beggars</incident>
+        <onDays>60</onDays>
+        <offDays>0</offDays>
+        <minSpacingDays>20</minSpacingDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Ideology</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 随机史诗任务（意识形态 DLC） -->
+      <li Class="StorytellerCompProperties_RandomEpicQuest">
+        <category>GiveQuest</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <onDays>40</onDays>
+        <offDays>0</offDays>
+        <minDaysPassed>30</minDaysPassed>
+        <numIncidentsRange>1</numIncidentsRange>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Ideology</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 圣物朝圣者任务（意识形态 DLC，开/关周期） -->
+      <li Class="StorytellerCompProperties_OnOffCycle" MayRequire="Ludeon.RimWorld.Ideology">
+        <incident MayRequire="Ludeon.RimWorld.Ideology">GiveQuest_ReliquaryPilgrims</incident>
+        <onDays>40</onDays>
+        <offDays>0</offDays>
+        <minSpacingDays>20</minSpacingDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Ideology</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 机械师古代复合体任务（生物科技 DLC） -->
+      <li Class="StorytellerCompProperties_MechanitorComplexQuest" MayRequire="Ludeon.RimWorld.Biotech">
+        <incident MayRequire="Ludeon.RimWorld.Biotech">GiveQuest_AncientComplex_Mechanitor</incident>
+        <mtbDays>60</mtbDays>
+        <existingMechanitorOrMechlinkMTBFactor>4</existingMechanitorOrMechlinkMTBFactor>
+        <minSpacingDays>60</minSpacingDays>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Biotech</li>
+        </enableIfAnyModActive>
+        <blockedByQueuedOrActiveQuests>
+          <li>OpportunitySite_AncientComplex_Mechanitor</li>
+          <li>MechanitorShip</li>
+        </blockedByQueuedOrActiveQuests>
+      </li>
+      <!-- 废料包虫害（生物科技 DLC，废料溶解后触发） -->
+      <li Class="StorytellerCompProperties_DissolutionTriggered" MayRequire="Ludeon.RimWorld.Biotech">
+        <incident>WastepackInfestation</incident>
+        <thing>Wastepack</thing>
+        <delayTicks>120</delayTicks>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+          <li>Map_Misc</li>
+        </allowedTargetTags>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Biotech</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 毒雾事件（生物科技 DLC） -->
+      <li Class="StorytellerCompProperties_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+        <lastFireMinMTBThreshold>0.5</lastFireMinMTBThreshold>
+        <lastFireMaxMTBThreshold>2</lastFireMaxMTBThreshold>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+          <li>Map_Misc</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 波吕克斯树生成（生物科技 DLC，开/关周期） -->
+      <li Class="StorytellerCompProperties_OnOffCycle">
+        <incident MayRequire="Ludeon.RimWorld.Biotech">PoluxTreeSpawn</incident>
+        <onDays>15</onDays>
+        <offDays>15</offDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 经典开局介绍 -->
+      <li Class="StorytellerCompProperties_ClassicIntro"></li>
+      <!-- 拉斐尔专属：独立计时，每 60000 tick（1 游戏日）额外生成一个白名单任务；仅对玩家主地图询问，减少每轮检查次数 -->
+      <li Class="DMS_Legion.StorytellerCompProperties_RaphaelExtraQuest">
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <intervalTicks>60000</intervalTicks>
+        <minDaysPassed>0</minDaysPassed>
+        <!-- 任务 defName 白名单 -->
+        <questDefs>
+          <li>TradeRequest</li><!-- 友好派系贸易请求 -->
+          <li>OpportunitySite_PeaceTalks</li><!-- 机会地点：和谈 -->
+          <li>Hospitality_Animals</li><!-- 来访动物接待/寄养 -->
+          <li>Hospitality_Prisoners</li><!-- 囚犯类来访者接待 -->
+          <li>ThreatReward_GameCondition_ItemPod</li><!-- 负面环境 + 物资奖励 -->
+          <li>ThreatReward_Infestation_ItemPod</li><!-- 虫害 + 物资奖励 -->
+          <li>ThreatReward_Manhunters_ItemPod</li><!-- 疯狂动物群 + 物资奖励 -->
+          <li>ThreatReward_Raid_MiscReward</li><!-- 袭击 + 物资奖励 -->
+          <li>ThreatReward_SiteThreat_ItemPod</li><!-- 威胁地点 + 物资奖励 -->
+          <!-- 皇权DLC -->
+          <li MayRequire="Ludeon.RimWorld.Royalty">ThreatReward_MechPods_MiscReward</li><!-- 机械体集群 + 物资奖励 -->
+          <!-- 异象 DLC -->
+          <li MayRequire="Ludeon.RimWorld.Anomaly">OpportunitySite_DistressCall</li><!-- 机会地点：求救信号 -->
+          <!-- AncientCorps（古代军团） -->
+          <li MayRequire="Aoba.DeadManSwitch.AncientCorps">DMSAC_OpportunitySite_Facility</li><!-- 古代机兵军用设施 -->
+          <li MayRequire="Aoba.DeadManSwitch.AncientCorps">DMSAC_OpportunitySite_Graveyard</li><!-- 古代机兵设施：入口/维修站/坟场 -->
+          <li MayRequire="Aoba.DeadManSwitch.AncientCorps">DMSAC_OpportunitySite_LogisticTerminal</li><!-- 古代机兵物流/哨卡 -->
+        </questDefs>
+      </li>
+      <!-- 大威胁周期：8 天有 / 8 天无，稳定节奏（菲比式） -->
+      <li Class="StorytellerCompProperties_OnOffCycle">
+        <category>ThreatBig</category>
+        <minDaysPassed>13</minDaysPassed>
+        <onDays>8</onDays>
+        <offDays>8</offDays>
+        <numIncidentsRange>1~1</numIncidentsRange>
+        <forceRaidEnemyBeforeDaysPassed>20</forceRaidEnemyBeforeDaysPassed>
+        <disallowedTargetTags>
+          <li>Map_RaidBeacon</li>
+        </disallowedTargetTags>
+      </li>
+      <!-- 袭击信标地图的袭击生成（特殊威胁） -->
+      <li Class="StorytellerCompProperties_ThreatsGenerator">
+        <allowedTargetTags>
+          <li>Map_RaidBeacon</li>
+        </allowedTargetTags>
+        <parms>
+          <allowedThreats>Raids</allowedThreats>
+          <onDays>1</onDays>
+          <offDays>0.5</offDays>
+          <minSpacingDays>0.04</minSpacingDays>
+          <numIncidentsRange>1~2</numIncidentsRange>
+          <minThreatPoints>500</minThreatPoints>
+        </parms>
+      </li>
+      <!-- 小威胁周期：8 天有 / 8 天无 -->
+      <li Class="StorytellerCompProperties_OnOffCycle">
+        <category>ThreatSmall</category>
+        <minDaysPassed>13</minDaysPassed>
+        <onDays>8</onDays>
+        <offDays>8</offDays>
+        <numIncidentsRange>0.2~1</numIncidentsRange>
+        <acceptPercentFactorPerThreatPointsCurve>
+          <points>
+            <li>(800, 1)</li>
+            <li>(2800, 0)</li>
+          </points>
+        </acceptPercentFactorPerThreatPointsCurve>
+      </li>
+      <!-- 家园杂项事件（MTB 天） -->
+      <li Class="StorytellerCompProperties_CategoryMTB">
+        <category>Misc</category>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <minDaysPassed>5</minDaysPassed>
+        <mtbDays>4.8</mtbDays>
+      </li>
+      <!-- 飞船残骸坠落 -->
+      <li Class="StorytellerCompProperties_ShipChunkDrop"></li>
+      <!-- 人类疾病事件 -->
+      <li Class="StorytellerCompProperties_Disease">
+        <category>DiseaseHuman</category>
+        <minDaysPassed>12</minDaysPassed>
+      </li>
+      <!-- 动物疾病事件 -->
+      <li Class="StorytellerCompProperties_Disease">
+        <category>DiseaseAnimal</category>
+        <minDaysPassed>12</minDaysPassed>
+      </li>
+      <!-- 派系互动：盟友求助袭击 -->
+      <li Class="StorytellerCompProperties_FactionInteraction">
+        <incident>RaidFriendly</incident>
+        <!-- 每年约多少次 -->
+        <baseIncidentsPerYear>15</baseIncidentsPerYear>
+        <minSpacingDays>0.4</minSpacingDays>
+        <!-- 仅完全盟友 -->
+        <fullAlliesOnly>true</fullAlliesOnly>
+        <minDanger>High</minDanger>
+      </li>
+      <!-- 派系互动：商队到达 -->
+      <li Class="StorytellerCompProperties_FactionInteraction">
+        <incident>TraderCaravanArrival</incident>
+        <minDaysPassed>5</minDaysPassed>
+        <baseIncidentsPerYear>5</baseIncidentsPerYear>
+        <minSpacingDays>6</minSpacingDays>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 派系互动：访客组 -->
+      <li Class="StorytellerCompProperties_FactionInteraction">
+        <incident>VisitorGroup</incident>
+        <minDaysPassed>3</minDaysPassed>
+        <baseIncidentsPerYear>4</baseIncidentsPerYear>
+        <minSpacingDays>5</minSpacingDays>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 派系互动：旅行者组 -->
+      <li Class="StorytellerCompProperties_FactionInteraction">
+        <incident>TravelerGroup</incident>
+        <minDaysPassed>1</minDaysPassed>
+        <baseIncidentsPerYear>6</baseIncidentsPerYear>
+        <minSpacingDays>1</minSpacingDays>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 商队/临时地图：杂项事件（按生物群系 MTB） -->
+      <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+        <category>Misc</category>
+        <allowedTargetTags>
+          <li>Caravan</li>
+          <li>Map_TempIncident</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 商队/临时地图：小威胁 -->
+      <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+        <category>ThreatSmall</category>
+        <!-- 商队可见性影响概率 -->
+        <applyCaravanVisibility>true</applyCaravanVisibility>
+        <allowedTargetTags>
+          <li>Caravan</li>
+          <li>Map_TempIncident</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 商队/临时地图：大威胁 -->
+      <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+        <category>ThreatBig</category>
+        <applyCaravanVisibility>true</applyCaravanVisibility>
+        <allowedTargetTags>
+          <li>Caravan</li>
+          <li>Map_TempIncident</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 无皇权 DLC 时的随机任务 -->
+      <li Class="StorytellerCompProperties_RandomQuest">
+        <category>GiveQuest</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <onDays>10</onDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <!-- 第 8 天前不接，第 15 天后全接 -->
+        <acceptFractionByDaysPassedCurve>
+          <points>
+            <li>(8, 0)</li>
+            <li>(15, 1)</li>
+          </points>
+        </acceptFractionByDaysPassedCurve>
+        <minSpacingDays>3</minSpacingDays>
+        <disableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </disableIfAnyModActive>
+      </li>
+      <!-- 有皇权 DLC 时的随机任务 -->
+      <li Class="StorytellerCompProperties_RandomQuest">
+        <category>GiveQuest</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <onDays>12</onDays>
+        <numIncidentsRange>2</numIncidentsRange>
+        <acceptFractionByDaysPassedCurve>
+          <points>
+            <li>(8, 0)</li>
+            <li>(15, 1)</li>
+          </points>
+        </acceptFractionByDaysPassedCurve>
+        <minSpacingDays>3</minSpacingDays>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 世界地图杂项事件（MTB 天） -->
+      <li Class="StorytellerCompProperties_CategoryMTB">
+        <category>Misc</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <minDaysPassed>15</minDaysPassed>
+        <mtbDays>15</mtbDays>
+      </li>
+      <!-- 轨道商船到达（开/关周期） -->
+      <li Class="StorytellerCompProperties_OnOffCycle">
+        <incident>OrbitalTraderArrival</incident>
+        <onDays>7</onDays>
+        <offDays>8</offDays>
+        <numIncidentsRange>1</numIncidentsRange>
+      </li>
+      <!-- 触发类：满足条件后延迟触发一次（黑衣人加入） -->
+      <li Class="StorytellerCompProperties_Triggered">
+        <incident>StrangerInBlackJoin</incident>
+        <!-- 延迟 180 ticks 后触发 -->
+        <delayTicks>180</delayTicks>
+      </li>
+    </comps>
+
+    <!-- 列表中排序，数字越小越靠前 -->
+    <listOrder>51</listOrder>
+
+    <!-- 威胁点系数曲线（与菲比一致） -->
+    <pointsFactorFromAdaptDays>
+      <points>
+        <li>(-30, 0.40)</li>
+        <li>(  0, 0.80)</li>
+        <li>( 30, 1.00)</li>
+        <li>( 60, 1.20)</li>
+        <li>(120, 1.60)</li>
+        <li>(180, 2.00)</li>
+      </points>
+    </pointsFactorFromAdaptDays>
+    <pointsFactorFromDaysPassed>
+      <points>
+        <li>(10, 0.70)</li>
+        <li>(40, 1.00)</li>
+      </points>
+    </pointsFactorFromDaysPassed>
+    <populationIntentFactorFromPopAdaptDaysCurve>
+      <points>
+        <li>( 0, 0)</li>
+        <li>( 8, 1)</li>
+      </points>
+    </populationIntentFactorFromPopAdaptDaysCurve>
+    <populationIntentFactorFromPopCurve>
+      <points>
+        <li>0,  8.0</li>
+        <li>1,  2.0</li>
+        <li>4,  1.0</li>
+        <li>7,  0.35</li>
+        <li>11, 0.0</li>
+        <li>20,-1.0</li>
+      </points>
+    </populationIntentFactorFromPopCurve>
+
+    <!-- 大立绘贴图路径 -->
+    <portraitLarge>Storyteller/Raphael</portraitLarge>
+    <!-- 小头像贴图路径 -->
+    <portraitTiny>Storyteller/RaphaelTiny</portraitTiny>
+  </StorytellerDef>
+
+</Defs>

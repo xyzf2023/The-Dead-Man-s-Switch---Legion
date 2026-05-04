@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 来自武装殖民舰队的馈赠：与 DMS_Army 盟友时触发，按好感价值空投物品 -->
+  <IncidentDef>
+    <defName>DMSL_GiftFromArmy</defName>
+    <label>来自武装殖民舰队的馈赠</label>
+    <description>一艘武装殖民舰队的运输船刚刚抵达。为了维系双方的友谊，他们送来一份礼物。</description>
+    <letterLabel>来自武装殖民舰队的馈赠</letterLabel>
+    <letterText>一艘武装殖民舰队的运输船刚刚抵达。为了维系双方的友谊，他们送来一份礼物。</letterText>
+    <letterDef>PositiveEvent</letterDef>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>DMS_Legion.Incidents.GiftFromArmy.IncidentWorker_GiftFromArmy</workerClass>
+    <category>Misc</category>
+    <modExtensions>
+      <li Class="DMS_Legion.Incidents.GiftFromArmy.CompProperties_GiftFromArmyIncident">
+        <valuePerGoodwill>10</valuePerGoodwill>
+        <maxTotalValue>1000</maxTotalValue>
+        <thingDefNames>
+          <!-- 原版 -->
+          <li>Steel</li>
+          <li>ComponentStamped</li>
+          <li>Tungsteel</li>
+          <li>ComponentIndustrial</li>
+          <li>MealSurvivalPack</li>
+          <li>MedicineIndustrial</li>
+          <li>Chemfuel</li>
+          <li>Plasteel</li>
+          <li>Gold</li>
+          <li>ComponentSpacer</li>
+          <li>ReinforcedBarrel</li>
+          <li>Uranium</li>
+          <!-- 失能机关 -->
+          <li>ComponentTransmitter</li>
+          <li>DMS_Ceramics</li>
+        </thingDefNames>
+      </li>
+    </modExtensions>
+  </IncidentDef>
+</Defs>

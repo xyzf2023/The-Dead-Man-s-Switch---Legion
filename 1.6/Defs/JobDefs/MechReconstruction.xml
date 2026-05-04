@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 机体重构工作定义：需要走到目标附近才能施放 -->
+  <JobDef ParentName="CastAbilityOnThing">
+    <defName>DMSL_Job_MechReconstruction</defName>
+    <driverClass>DMS_Legion.JobDriver_MechReconstruction</driverClass>
+    <neverShowWeapon>true</neverShowWeapon>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 定义IronFace机甲的实体 -->
+  <ThingDef ParentName="BaseAutomatroidRace">
+    <!-- 机甲的内部标识符 -->
+    <defName>DMSL_Mech_IronFace</defName>
+    <!-- 显示名称 -->
+    <label>RBR-2“铁面”</label>
+    <!-- 机甲描述 -->
+    <description>北约代号“假肢”\n\nRBR-1是为BR-6提供的升级改进方案之一，目的是让这些老东西有和次时代兵器一决高下的能力\n而RBR-2“铁面”是一款重新研制用于外贸的主战机械体，相较于前辈内置了护盾发射器与更强的爆炸反应装甲。</description>
+
+    <!-- 基础属性 -->
+    <statBases>
+      <MoveSpeed>4</MoveSpeed> <!-- 移动速度 -->
+      <ArmorRating_Sharp>2</ArmorRating_Sharp><!-- 锐器抗性 -->
+      <ArmorRating_Blunt>2</ArmorRating_Blunt><!-- 钝器抗性 -->
+      <ArmorRating_Heat>2</ArmorRating_Heat>  <!-- 热能抗性 -->
+      <StaggerDurationFactor>0</StaggerDurationFactor> <!-- 击退时间因子 -->
+      <ShootingAccuracyPawn>3</ShootingAccuracyPawn> <!-- 射击精度 -->
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">6</BandwidthCost>        <!-- 带宽消耗（需要Biotech DLC）-->
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge><!-- 充电时产出废料包（需要Biotech DLC）-->
+    </statBases>
+
+    <!-- 种族特性 -->
+    <race>
+      <body>DMS_Bipedal</body> <!-- 使用的身体类型 -->
+      <nameGenerator>DMS_VanguardMechHeavy</nameGenerator> <!-- 名称生成器 -->
+      <baseBodySize>3.8</baseBodySize> <!-- 基础体型 -->
+      <baseHealthScale>8</baseHealthScale> <!-- 基础生命值比例 -->
+      <mechWeightClass>UltraHeavy</mechWeightClass> <!-- 机甲重量类别：超重型 -->
+
+      <!-- 残骸掉落物 -->
+      <detritusLeavings>
+        <li>
+          <def>DMS_ChunkSlag</def> <!-- 掉落物定义 -->
+          <texOverrideIndex>7</texOverrideIndex> <!-- 纹理索引 -->
+          <spawnChance>0.4</spawnChance> <!-- 掉落概率 -->
+        </li>
+        <li>
+          <def>DMS_ChunkSlag</def>
+          <texOverrideIndex>4</texOverrideIndex>
+          <spawnChance>0.4</spawnChance>
+        </li>
+      </detritusLeavings>
+    </race>
+
+    <!-- 组件定义 -->
+    <comps>
+      <!-- 体型近战加伤标记：攻击时若体型大于目标则追加钝器伤害 -->
+      <li Class="DMS_Legion.CompProperties_BodySizeMeleeMarker" />
+      <!-- 护盾计时器（充能/持续时间与 Gizmo 由下方 CompProjectileInterceptor 触发 patch 提供） -->
+      <li Class="DMS_Legion.CompProperties_TimedShieldController">
+        <maxDurationSeconds>30</maxDurationSeconds>
+        <rechargeRatePerSecond>0.5</rechargeRatePerSecond>
+        <minChargeToActivate>5</minChargeToActivate>
+      </li>
+      <!-- 投射物拦截器：挂载以显示 TimedShield-->
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>6</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <hitPoints>30</hitPoints>
+        <gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+      </li>
+
+      <!-- 载具武器组件 -->
+      <li Class="Fortified.CompProperties_VehicleWeapon">
+        <drawData>
+          <!-- 各个视角下的绘制数据 -->
+          <dataEast>
+            <offset>(0,0,-0.6)</offset> <!-- 向东视角偏移 -->
+          </dataEast>
+          <dataWest>
+            <offset>(0,-1,1)</offset> <!-- 向西视角偏移 -->
+          </dataWest>
+          <dataSouth>
+              <offset>(-1,-1,0)</offset> <!-- 向南视角偏移 -->
+          </dataSouth>
+          <dataNorth>
+              <offset>(1,-1,0)</offset> <!-- 向北视角偏移 -->
+          </dataNorth>
+        </drawData>
+        <turretRotationFollowPawn>true</turretRotationFollowPawn> <!-- 炮塔跟随pawn旋转 -->        
+        <rotationSmoothTime>0.12</rotationSmoothTime> <!-- 旋转平滑时间 -->
+      </li>  
+
+      <!-- 多炮塔枪组件：整合所有副武器 -->
+      <li Class="Fortified.CompPropertiesMultipleTurretGun">
+        <subTurrets>
+          <!-- 霰弹枪子炮塔 -->
+          <li>
+            <ID>ShotgunGunMounted</ID> <!-- ID标识 -->
+            <turret>DMS_ShotgunGunMounted</turret> <!-- 使用的炮塔 -->
+            <autoAttack>true</autoAttack> <!-- 自动攻击 -->
+            <warmingTime>2</warmingTime> <!-- 预热时间 -->
+            <angleOffset>-90</angleOffset> <!-- 角度偏移 -->
+
+            <!-- 渲染节点属性 -->
+            <renderNodeProperties>
+              <li>
+                <nodeClass>Fortified.PawnRenderNode_SubTurretGun</nodeClass> <!-- 节点类 -->
+                <workerClass>Fortified.PawnRenderNodeWorker_SubTurretGun</workerClass> <!-- 工人类 -->
+                <parentTagDef>Body</parentTagDef> <!-- 父级标签定义 -->
+                <drawSize>0.5</drawSize> <!-- 绘制尺寸 -->
+                <baseLayer>-21</baseLayer> <!-- 基础层级 -->
+                <pawnType>Any</pawnType> <!-- pawn类型 -->
+
+                <!-- 各方向绘制数据 -->
+                <drawData>
+                  <dataEast>
+                    <offset>(-1.4,1,-0.1)</offset> <!-- 向东视角偏移 -->
+                    <layer>-22</layer> <!-- 层级 -->
+                  </dataEast>
+                  <dataWest>
+                    <offset>(1.4,1,0.8)</offset> <!-- 向西视角偏移 -->
+                    <rotationOffset>180</rotationOffset> <!-- 旋转偏移 -->
+                  </dataWest>
+                  <dataSouth>
+                    <offset>(-0.5,1,1.5)</offset> <!-- 向南视角偏移 -->
+                    <rotationOffset>-10</rotationOffset> <!-- 旋转偏移 -->
+                  </dataSouth>
+                  <dataNorth>
+                    <offset>(0.6,1,-1.2)</offset> <!-- 向北视角偏移 -->
+                    <rotationOffset>-10</rotationOffset> <!-- 旋转偏移 -->
+                  </dataNorth>
+                </drawData>
+              </li>
+            </renderNodeProperties>
+          </li>
+          
+          <!-- 通用机枪子炮塔 -->
+          <li>
+            <ID>General-purpose machine gun</ID> <!-- ID标识 -->
+            <turret>DMS_Gun_KordTurret</turret> <!-- 使用的炮塔 -->
+            <autoAttack>true</autoAttack> <!-- 自动攻击 -->
+            <warmingTime>5</warmingTime> <!-- 预热时间 -->
+            <angleOffset>-90</angleOffset> <!-- 角度偏移 -->
+
+            <!-- 渲染节点属性 -->
+            <renderNodeProperties>
+              <li>
+                <nodeClass>Fortified.PawnRenderNode_SubTurretGun</nodeClass> <!-- 节点类 -->
+                <workerClass>Fortified.PawnRenderNodeWorker_SubTurretGun</workerClass> <!-- 工人类 -->
+                <parentTagDef>Body</parentTagDef> <!-- 父级标签定义 -->
+                <drawSize>2</drawSize> <!-- 绘制尺寸 -->
+                <baseLayer>-21</baseLayer> <!-- 基础层级 -->
+                <pawnType>Any</pawnType> <!-- pawn类型 -->
+
+                <!-- 各方向绘制数据 -->
+                <drawData>
+                  <dataEast>
+                      <offset>(-0.8,1,0.7)</offset> <!-- 向东视角偏移 -->
+                  </dataEast>
+                  <dataWest>
+                      <offset>(0.9,1,0.4)</offset> <!-- 向西视角偏移 -->
+                      <rotationOffset>180</rotationOffset> <!-- 旋转偏移 -->
+                  </dataWest>
+                  <dataSouth>
+                      <offset>(0.5,1,1)</offset> <!-- 向南视角偏移 -->
+                  </dataSouth>
+                  <dataNorth>
+                      <offset>(-0.4,1,-0.5)</offset> <!-- 向北视角偏移 -->
+                  </dataNorth>
+                </drawData>
+              </li>
+            </renderNodeProperties>
+          </li>
+          
+          <!-- 近防系统子炮塔 -->
+          <li>
+            <ID>close inbound system</ID> <!-- ID标识 -->
+            <turret>DMS_Flameblaster</turret> <!-- 使用的炮塔 -->
+            <autoAttack>true</autoAttack> <!-- 自动攻击 -->
+            <warmingTime>3</warmingTime> <!-- 预热时间 -->
+            <angleOffset>-90</angleOffset> <!-- 角度偏移 -->
+
+            <!-- 渲染节点属性 -->
+            <renderNodeProperties>
+              <li>
+                <nodeClass>Fortified.PawnRenderNode_SubTurretGun</nodeClass> <!-- 节点类 -->
+                <workerClass>Fortified.PawnRenderNodeWorker_SubTurretGun</workerClass> <!-- 工人类 -->
+                <parentTagDef>Body</parentTagDef> <!-- 父级标签定义 -->
+                <drawSize>1</drawSize> <!-- 绘制尺寸 -->
+                <baseLayer>20</baseLayer> <!-- 基础层级 -->
+                <pawnType>Any</pawnType> <!-- pawn类型 -->
+
+                <drawData>
+                  <dataEast>
+                    <offset>(1.5,-0.5,0.4)</offset> <!-- 向东视角偏移 -->
+                    <layer>-22</layer> <!-- 层级 -->
+                  </dataEast>
+                  <dataWest>
+                    <offset>(-1.5,-0.5,-0.4)</offset> <!-- 向西视角偏移 -->
+                    <rotationOffset>180</rotationOffset> <!-- 旋转偏移 -->
+                  </dataWest>
+                  <dataSouth>
+                    <offset>(0.45,-0.3,-1.4)</offset> <!-- 向南视角偏移 -->
+                    <rotationOffset>-10</rotationOffset> <!-- 旋转偏移 -->
+                  </dataSouth>
+                  <dataNorth>
+                    <offset>(-0.45,-0.3,1.4)</offset> <!-- 向北视角偏移 -->
+                    <rotationOffset>-10</rotationOffset> <!-- 旋转偏移 -->
+                  </dataNorth>
+                </drawData>
+              </li>
+            </renderNodeProperties>
+          </li>
+          
+          <!-- ECM系统子炮塔 -->
+          <li>
+            <ID>ECMSystem</ID> <!-- ID标识 -->
+            <turret>DMS_Gun_ECMSystem</turret> <!-- 使用的炮塔 -->
+            <autoAttack>true</autoAttack> <!-- 自动攻击 -->
+            <warmingTime>3</warmingTime> <!-- 预热时间 -->
+            <angleOffset>-90</angleOffset> <!-- 角度偏移 -->
+
+            <!-- 渲染节点属性 -->
+            <renderNodeProperties>
+              <li>
+                <nodeClass>Fortified.PawnRenderNode_SubTurretGun</nodeClass> <!-- 节点类 -->
+                <workerClass>Fortified.PawnRenderNodeWorker_SubTurretGun</workerClass> <!-- 工人类 -->
+                <parentTagDef>Body</parentTagDef> <!-- 父级标签定义 -->
+                <drawSize>1</drawSize> <!-- 绘制尺寸 -->
+                <baseLayer>-21</baseLayer> <!-- 基础层级 -->
+                <pawnType>Any</pawnType> <!-- pawn类型 -->
+
+                <!-- 各方向绘制数据 -->
+                <drawData>
+                  <dataEast>
+                      <offset>(0,0,0)</offset> <!-- 向东视角偏移 -->
+                  </dataEast>
+                  <dataWest>
+                      <offset>(0,0,0)</offset> <!-- 向西视角偏移 -->
+                      <rotationOffset>180</rotationOffset> <!-- 旋转偏移 -->
+                  </dataWest>
+                  <dataSouth>
+                      <offset>(0,0,0)</offset> <!-- 向南视角偏移 -->
+                  </dataSouth>
+                  <dataNorth>
+                      <offset>(0,0,0)</offset> <!-- 向北视角偏移 -->
+                  </dataNorth>
+                </drawData>
+              </li>
+            </renderNodeProperties>
+          </li>
+        </subTurrets>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <!-- 机械武器扩展 -->
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter>                             <!-- 启用武器过滤 -->
+        <UsableWeaponTags>                                                        <!-- 可使用的武器标签 -->
+          <li MayRequire="vanillaexpanded.vwehw">HeavyGun</li><!-- 重型武器扩展 -->
+          <li>DMS_Tarbosaurus_Gun</li>                                           <!-- 塔尔博龙专用武器 -->
+          <li>DMS_MechWeaponUltraHeavy</li>                                      <!-- 超重型机械武器 -->
+          <li>DMS_MechWeaponHeavy</li>                                           <!-- 重型机械武器 -->
+          <li>H_Gatling20mm</li>                                                 <!-- 20mm加特林 -->
+          <li>V_Gatling30mm</li>                                                 <!-- 30mm加特林 -->
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>                       <!-- 启用科技等级过滤 -->
+        <UsableTechLevels>                                                        <!-- 可使用的科技等级 -->
+          <li>Industrial</li>
+        </UsableTechLevels>
+      </li>
+    </modExtensions>
+
+    <tools Inherit="False">
+      <li>
+        <label>Mechanical Head</label>                                           <!-- 机械头部 -->
+        <capacities>
+          <li>DMS_HeavySweep</li>                                                <!-- 重型扫荡攻击 -->
+        </capacities>
+        <power>35</power>                                                        <!-- 攻击力 -->
+        <cooldownTime>5.5</cooldownTime>                                         <!-- 冷却时间 -->
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>              <!-- 关联身体部位组 -->
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.08</chanceFactor>                                        <!-- 攻击概率因子 -->
+        <surpriseAttack>                                                         <!-- 偷袭攻击 -->
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>                                                    <!-- 致眩效果 -->
+              <amount>20</amount>                                                <!-- 效果强度 -->
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>Left Leg</label>                                                  <!-- 左腿 -->
+        <capacities>
+          <li>DMS_HeavySweep</li>
+        </capacities>
+        <power>24</power>
+        <cooldownTime>3.5</cooldownTime>
+        <linkedBodyPartsGroup>LeftMechanicalLeg</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>16</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>Right Leg</label>                                                 <!-- 右腿 -->
+        <capacities>
+          <li>DMS_HeavySweep</li>
+        </capacities>
+        <power>24</power>
+        <cooldownTime>3.5</cooldownTime>
+        <linkedBodyPartsGroup>RightMechanicalLeg</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>16</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+    </tools>
+    
+    <!-- 伤害倍数调整 -->
+    <damageMultipliers>                                                          
+      <li>
+        <damageDef>Blunt</damageDef>                                             <!-- 钝击伤害 -->
+        <multiplier>0.5</multiplier>                                             <!-- 降低50%钝击伤害 -->
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>                                              <!-- 爆炸伤害 -->
+        <multiplier>0.5</multiplier>                                             <!-- 降低50%爆炸伤害 -->
+      </li>
+    </damageMultipliers>
+
+    <!-- 分解产物 -->
+    <butcherProducts>
+      <Steel>100</Steel> <!-- 钢铁100个 -->
+      <DMS_ChunkSlag>3</DMS_ChunkSlag> <!-- 渣块3个 -->
+      <ComponentIndustrial>4</ComponentIndustrial> <!-- 工业部件4个 -->
+    </butcherProducts>
+
+    <!-- 击杀后敌人掉落物品 -->
+    <killedLeavingsPlayerHostile>
+      <ComponentFireControl>1</ComponentFireControl> <!-- 火控组件1个 -->
+    </killedLeavingsPlayerHostile>
+
+    <!-- 阴影设置 -->
+    <castEdgeShadows>false</castEdgeShadows> <!-- 不投射边缘阴影 -->
+    <staticSunShadowHeight>0</staticSunShadowHeight> <!-- 静态太阳阴影高度为0 -->
+  </ThingDef>
+
+  <!-- 定义IronFace机甲的种类 -->
+  <PawnKindDef ParentName="BaseAutomatroidKind" Name="DMSL_Mech_IronFace_Kind" Abstract="True">
+    <defName>DMSL_Mech_IronFace</defName> <!-- 内部标识符 -->
+    <label>铁面</label> <!-- 显示名称 -->
+    <race>DMSL_Mech_IronFace</race> <!-- 使用的种族定义 -->
+    <isFighter>true</isFighter> <!-- 是战斗单位 -->
+    <combatPower>1000</combatPower> <!-- 战斗力：1000威胁点数 -->
+    <maxPerGroup>2</maxPerGroup> <!-- 单个集群内最大数量：2 -->
+    <isBoss>true</isBoss> <!-- 是Boss单位 -->
+
+    <!-- 
+    <techHediffsRequired>
+      <li>DMS_CeramicsPlating</li>
+    </techHediffsRequired>
+    -->
+
+    <!-- 生命阶段图形 -->
+    <lifeStages>
+      <!-- 第一阶段 -->
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/IronFace/IronFace</texPath> <!-- 纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 着色器类型 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+          <drawSize>4</drawSize> <!-- 绘制大小 -->
+
+          <!-- 阴影数据 -->
+          <shadowData>
+            <volume>(1.25,1,1.25)</volume> <!-- 体积 -->
+            <offset>(0,0,-0.5)</offset> <!-- 偏移 -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+
+      <!-- 第二阶段（旧纹理） -->
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/IronFace/IronFace</texPath> <!-- 纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 着色器类型 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+          <drawSize>4.</drawSize> <!-- 绘制大小 -->
+          <shadowData>
+            <volume>(1.25,1,1.25)</volume> <!-- 体积 -->
+            <offset>(0,0,-0.5)</offset> <!-- 偏移 -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+
+    <weaponTags>
+      <li>DMS_MechWeaponUltraHeavy</li>                                         <!-- 超重型机械武器标签 -->
+    </weaponTags>
+    <weaponMoney>4000~9999</weaponMoney>                                        <!-- 武器价值范围 -->
+
+    <!-- 战争践踏：向指定地点跳跃，落地造成 5 格范围 50 钝器伤害 -->
+    <abilities>
+      <li>DMSL_Ability_WarStomp</li>
+    </abilities>
+  </PawnKindDef>
+  
+  <!-- 实际使用的PawnKindDef -->
+  <PawnKindDef ParentName="DMSL_Mech_IronFace_Kind" Name="DMSL_Mech_IronFace_Actual">
+  </PawnKindDef>
+
+</Defs>

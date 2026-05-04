@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 根节点：所有 Def 的容器 -->
+<Defs>
+
+  <!-- DMSL叙事者：参考原版兰迪（Randy Random），数值与其一致，描述待填 -->
+  <!-- 叙事者 Def：继承 BaseStoryteller 获得通用曲线与事件 -->
+  <StorytellerDef ParentName="BaseStoryteller">
+    <!-- 内部引用名，脚本/补丁用 -->
+    <defName>DMSL_Storyteller_Elisa</defName>
+    <!-- 游戏内显示名称 -->
+    <label>「军官」艾丽萨</label>
+    <!-- 叙事者介绍文（选人界面） -->
+    <description>艾丽萨是一名来自武装殖民舰队的军官。她的故事充满随机性，但是更倾向于与武装殖民舰队的互动以及大型威胁事件。倘若你能有序管理机兵，她也会对你青睐有加。</description>
+    <!-- 大立绘贴图路径 -->
+    <portraitLarge>Storyteller/Elisa</portraitLarge>
+    <!-- 小头像贴图路径 -->
+    <portraitTiny>Storyteller/ElisaTiny</portraitTiny>
+    <!-- 是否在叙事者列表中显示 -->
+    <listVisible>true</listVisible>
+    <!-- 列表中排序，数字越小越靠前 -->
+    <listOrder>50</listOrder>
+    <!-- 叙事者组件列表：决定何时、何种事件 -->
+    <comps>
+      <!-- 艾丽萨的认可-->
+      <li Class="DMS_Legion.StorytellerCompProperties_ElisaBandwidthApproval">
+        <intervalDays>15</intervalDays>
+        <factionDefName>DMS_Army</factionDefName>
+        <goodwillPerBandwidth>2</goodwillPerBandwidth>
+        <honorPerBandwidth MayRequire="Ludeon.RimWorld.Royalty">5</honorPerBandwidth>
+        <historyEventDefName>DMSL_ElisaApproval</historyEventDefName>
+      </li>
+      <!-- 招募代理商队：每隔固定天数生成一支 DMS 徵募代理（囚犯/奴隶换荣誉），需皇权 DLC 与失能机关派系 -->
+      <li Class="DMS_Legion.StorytellerCompProperties_ElisaRecruitmentAgencyCaravan" MayRequire="Ludeon.RimWorld.Royalty">
+        <intervalDays>15</intervalDays>
+        <factionDefName>DMS_Army</factionDefName>
+        <traderKindDefName>DMS_Caravan_TributeCollector</traderKindDefName>
+        <minDaysPassed>5</minDaysPassed>
+      </li>
+      <!-- 家园随机主事件：按权重随机抽事件类型，派系到达偏向 DMS_Army -->
+      <li Class="DMS_Legion.StorytellerCompProperties_DMSRandomMain">
+        <!-- 仅作用于玩家主地图 -->
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <!-- 优先派系 defName 列表（多派系时权重均分） -->
+        <preferredFactionDefNames>
+          <li>DMS_Army</li>
+        </preferredFactionDefNames>
+        <!-- 额外权重倍率（越大越偏向优先派系，如 4 约 75% 概率） -->
+        <preferredFactionWeightMultiplier>2.5</preferredFactionWeightMultiplier>
+        <!-- 开局至少经过多少天后才开始 -->
+        <minDaysPassed>3</minDaysPassed>
+        <!-- 事件间隔的 MTB 天数系数 -->
+        <spaceMtbDayFactor>2</spaceMtbDayFactor>
+        <!-- 两次事件最小间隔（天） -->
+        <spaceMinSpacingDays>0.5</spaceMinSpacingDays>
+        <!-- 平均多少天一次事件（MTB） -->
+        <mtbDays>1</mtbDays>
+        <!-- 两次“大威胁”之间最大间隔天数 -->
+        <maxThreatBigIntervalDays>10</maxThreatBigIntervalDays>
+        <!-- 人口意图对事件概率的最小影响系数 -->
+        <minIncChancePopulationIntentFactor>0.2</minIncChancePopulationIntentFactor>
+        <!-- 威胁点随机系数范围（0.5~1.5） -->
+        <randomPointsFactorRange>1~2</randomPointsFactorRange>
+        <!-- 若存在袭击信标则跳过抽大威胁 -->
+        <skipThreatBigIfRaidBeacon>true</skipThreatBigIfRaidBeacon>
+        <!-- 事件类别权重：Misc 杂项、ThreatBig 大威胁 等（已把人类疾病权重转移至大威胁） -->
+        <categoryWeights>
+          <!-- 杂项（贸易、访客、坠机等） -->
+          <Misc>2.75</Misc>
+          <!-- 大威胁（袭击、机械集群等）-->
+          <ThreatBig>2.6</ThreatBig>
+          <!-- 轨道访客/商船 -->
+          <OrbitalVisitor>1.5</OrbitalVisitor>
+          <!-- 派系到达（商队、旅行者等） -->
+          <FactionArrival>2.8</FactionArrival>
+          <!-- 小威胁（疯动物、单人袭击等） -->
+          <ThreatSmall>0.05</ThreatSmall>
+          <!-- 飞船残骸坠落 -->
+          <ShipChunkDrop>0.22</ShipChunkDrop>
+        </categoryWeights>
+      </li>
+      <!-- 人类疾病事件 -->
+      <li Class="StorytellerCompProperties_Disease">
+        <!-- 人类疾病（瘟疫、流感等） -->
+        <category>DiseaseHuman</category>
+        <!-- 初始触发天数-->
+        <minDaysPassed>120</minDaysPassed>
+      </li>
+      <!-- 动物疾病事件 -->
+      <li Class="StorytellerCompProperties_Disease">
+        <category>DiseaseAnimal</category>
+        <minDaysPassed>0</minDaysPassed>
+      </li>
+      <!-- 袭击信标地图的袭击生成（特殊威胁） -->
+      <li Class="StorytellerCompProperties_ThreatsGenerator">
+        <allowedTargetTags>
+          <li>Map_RaidBeacon</li>
+        </allowedTargetTags>
+        <parms>
+          <allowedThreats>Raids</allowedThreats>
+          <onDays>1.0</onDays>
+          <offDays>0.5</offDays>
+          <minSpacingDays>0.04</minSpacingDays>
+          <numIncidentsRange>1~2</numIncidentsRange>
+          <minThreatPoints>500</minThreatPoints>
+        </parms>
+      </li>
+      <!-- 派系互动：盟友/中立来访等 -->
+      <li Class="StorytellerCompProperties_FactionInteraction">
+        <incident>RaidFriendly</incident>
+        <!-- 每年约多少次 -->
+        <baseIncidentsPerYear>10</baseIncidentsPerYear>
+        <minSpacingDays>0.4</minSpacingDays>
+        <!-- 仅完全盟友 -->
+        <fullAlliesOnly>true</fullAlliesOnly>
+        <minDanger>High</minDanger>
+      </li>
+      <!-- 商队/临时地图：杂项事件（按生物群系 MTB） -->
+      <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+        <category>Misc</category>
+        <allowedTargetTags>
+          <li>Caravan</li>
+          <li>Map_TempIncident</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 商队/临时地图：小威胁 -->
+      <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+        <category>ThreatSmall</category>
+        <!-- 商队可见性影响概率 -->
+        <applyCaravanVisibility>true</applyCaravanVisibility>
+        <allowedTargetTags>
+          <li>Caravan</li>
+          <li>Map_TempIncident</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 商队/临时地图：大威胁 -->
+      <li Class="StorytellerCompProperties_CategoryIndividualMTBByBiome">
+        <category>ThreatBig</category>
+        <applyCaravanVisibility>true</applyCaravanVisibility>
+        <allowedTargetTags>
+          <li>Caravan</li>
+          <li>Map_TempIncident</li>
+        </allowedTargetTags>
+      </li>
+      <!-- 无皇权 DLC 时的随机任务 -->
+      <li Class="StorytellerCompProperties_RandomQuest">
+        <category>GiveQuest</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <onDays>10</onDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <!-- 第 8 天前不接，第 15 天后全接 -->
+        <acceptFractionByDaysPassedCurve>
+          <points>
+            <li>(8, 0)</li>
+            <li>(15, 1)</li>
+          </points>
+        </acceptFractionByDaysPassedCurve>
+        <minSpacingDays>0.2</minSpacingDays>
+        <disableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </disableIfAnyModActive>
+      </li>
+      <!-- 有皇权 DLC 时的随机任务 -->
+      <li Class="StorytellerCompProperties_RandomQuest">
+        <category>GiveQuest</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <onDays>12</onDays>
+        <numIncidentsRange>1~3</numIncidentsRange>
+        <acceptFractionByDaysPassedCurve>
+          <points>
+            <li>(8, 0)</li>
+            <li>(15, 1)</li>
+          </points>
+        </acceptFractionByDaysPassedCurve>
+        <minSpacingDays>0.2</minSpacingDays>
+        <enableIfAnyModActive>
+          <li>Ludeon.RimWorld.Royalty</li>
+        </enableIfAnyModActive>
+      </li>
+      <!-- 世界地图杂项事件（MTB 天） -->
+      <li Class="StorytellerCompProperties_CategoryMTB">
+        <category>Misc</category>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+        <minDaysPassed>1</minDaysPassed>
+        <mtbDays>15</mtbDays>
+      </li>
+      <!-- 艾丽萨事件循环：每 5-10 天遍历指定事件列表，寻找可执行事件并触发，尽量不连续重复同一事件 -->
+      <li Class="DMS_Legion.StorytellerCompProperties_ElisaIncidentCycle">
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+        <minIntervalDays>5</minIntervalDays>
+        <maxIntervalDays>15</maxIntervalDays>
+        <minDaysPassed>10</minDaysPassed>
+        <incidents>
+          <!-- DMS Legion 自定义事件 -->
+          <li>DMSL_AerialRaid_Army</li><!-- 空袭：武装殖民舰队轰炸机编队对地打击 -->
+          <li>DMSL_AerialRaid_Pager</li><!-- 空袭支援：袭击者携带传呼器呼叫轰炸 -->
+          <li>DMSL_GiftFromArmy</li><!-- 来自武装殖民舰队的馈赠 -->
+          <li MayRequire="GoGaTio.DeadManSwitch.RenegadeClan">DMSRC_Sabotage</li><!-- 脱序者联动：破坏 -->
+          <li MayRequire="DMS.FleshandBloodLegion">InfectedmechanicalAttack</li><!-- 血肉军团联动：血肉飞船 -->
+          <li MayRequire="AOBA.USAC.Core">USAC_MiningRaid</li><!-- USAC联动：USAC 盗采空降事件 -->
+        </incidents>
+      </li>
+      <!-- 触发类：满足条件后延迟触发一次 -->
+      <li Class="StorytellerCompProperties_Triggered">
+        <incident>StrangerInBlackJoin</incident>
+        <!-- 延迟 180  ticks 后触发 -->
+        <delayTicks>180</delayTicks>
+      </li>
+    </comps>
+  </StorytellerDef>
+
+</Defs>

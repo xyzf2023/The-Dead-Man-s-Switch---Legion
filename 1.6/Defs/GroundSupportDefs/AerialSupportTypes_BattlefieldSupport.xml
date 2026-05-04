@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空中支援类型定义 -->
+
+  <!-- 投放烟雾弹 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_Smoke</defName>
+    <label>投放烟雾弹</label>
+    <description>向目标地点投放一颗大型烟雾弹以掩护行动。</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <!-- 延迟配置示例：声音先播放，然后绘制 -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Smoke">
+        <smokeRadius>30</smokeRadius>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <!-- 投放毒气弹 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_ToxGas</defName>
+    <label>投放毒气弹</label>
+    <description>向目标地点投放一颗大型毒气弹，在30格内生成毒气云。</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_ToxGas">
+        <gasRadius>30</gasRadius>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <!-- EMP脉冲 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_Emp</defName>
+    <label>EMP脉冲</label>
+    <description>向目标地点投放一颗电子脉冲弹，强大的电磁脉冲将瘫痪所有接触的用电器、炮台和机械体，并灼烧所有机械体的核心处理器。\n注意此脉冲没有敌我识别功能，谨防误伤友方。</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_EmpRipple">
+        <!-- 最大扩散半径（格） -->
+        <maxRadius>30</maxRadius>
+        <!-- 环带宽度（格） -->
+        <ringThicknessCells>5</ringThicknessCells>
+        <!-- 扩散速度（格/tick） -->
+        <expandSpeedCellsPerTick>1</expandSpeedCellsPerTick>
+        <!-- 机械体/炮台/建筑禁用时长（tick），1800 = 30 秒 -->
+        <disableTicks>900</disableTicks>
+        <!-- 是否对无 CompStunnable 的用电建筑造成临时断电：true 触发，false 不触发 -->
+        <disablePowerBuildings>true</disablePowerBuildings>
+        <!-- 效果冷却（tick）：同一实体在此时间内只受一次 EMP 效果，超过后再次被波扫到可再受一次；0=整次序列内仅一次 -->
+        <effectCooldownTicks>120</effectCooldownTicks>
+        <!-- 是否对被波扫到的机械体的意识处理部位（ConsciousnessSource）造成 DMSL_Damage_NuclearEMP 伤害：true=造成，false=不造成 -->
+        <damageConsciousnessPart>true</damageConsciousnessPart>
+        <!-- 意识处理部位受到的伤害量（仅当 damageConsciousnessPart 为 true 时生效） -->
+        <consciousnessPartDamageAmount>50</consciousnessPartDamageAmount>
+        <!-- 机械体眩晕延迟（tick）：先造成伤害，经此 tick 后再尝试施加眩晕；被伤害击杀的机械体不再被眩晕。0=立即眩晕 -->
+        <mechanoidStunDelayTicks>1</mechanoidStunDelayTicks>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+</Defs>

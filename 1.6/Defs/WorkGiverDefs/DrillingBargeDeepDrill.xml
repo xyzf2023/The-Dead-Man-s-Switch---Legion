@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 仅分配给钻井驳机（DMSL_Mech_DrillingBarge）：以格为目标的直接深钻，由 Worker 限制种族 -->
+  <WorkGiverDef>
+    <defName>DMSL_WorkGiver_DrillingBargeDeepDrill</defName>
+    <label>开采深层矿脉</label>
+    <giverClass>DMS_Legion.WorkGiver_DrillingBargeDeepDrill</giverClass>
+    <workType>Mining</workType>
+    <priorityInType>100</priorityInType>
+    <verb>开采深层矿脉</verb>
+    <gerund>正在开采深层矿脉......</gerund>
+    <scanCells>true</scanCells>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>true</canBeDoneByMechs>
+  </WorkGiverDef>
+</Defs>

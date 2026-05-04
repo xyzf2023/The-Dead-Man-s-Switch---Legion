@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 心灵迷彩 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_PsychicCamouflage</defName><!-- Hediff定义名称 -->
+    <label>心灵迷彩</label><!-- 显示名称 -->
+    <description>万心失聪添加的隐身状态，可以遮蔽心灵信号，进而使敌方不可见。</description><!-- 效果描述 -->
+    <hediffClass>HediffWithComps</hediffClass><!-- Hediff类：带组件的Hediff -->
+    <isBad>false</isBad><!-- 标记为非负面效果 -->
+    <comps><!-- 组件列表 -->
+      <li Class="HediffCompProperties_Invisibility"><!-- 隐身组件属性 -->
+        <visibleToPlayer>true</visibleToPlayer><!-- 对玩家可见（玩家可以看到自己的单位） -->
+        <fadeDurationTicks>60</fadeDurationTicks><!-- 淡入淡出持续时间：60 ticks（约1秒） -->
+        <recoverFromDisruptedTicks>90</recoverFromDisruptedTicks><!-- 干扰后恢复时间：90 ticks（约1.5秒） -->
+        <affectedByDisruptor>false</affectedByDisruptor><!-- 受干扰器影响 -->
+      </li>
+      <li Class="HediffCompProperties_Disappears"><!-- 消失组件属性 -->
+        <disappearsAfterTicks>2500</disappearsAfterTicks><!-- 消失时间：2500 ticks（1游戏小时 = 1 * 2500 ticks） -->
+        <showRemainingTime>true</showRemainingTime><!-- 显示剩余时间 -->
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/><!-- 死亡时消失组件 -->
+    </comps>
+  </HediffDef>
+</Defs>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 铁面机械体制造配方：参照 DMS 超重型培育配方结构 -->
+  <RecipeDef ParentName="DMS_SuperHeavyMechanoidRecipe">
+    <defName>DMSL_Make_IronFace</defName>
+    <label>培育铁面</label>
+    <description>Gestate an IronFace.</description>
+    <products>
+      <DMSL_Mech_IronFace>1</DMSL_Mech_IronFace>
+    </products>
+    <researchPrerequisite>DMS_Synthroid</researchPrerequisite>
+    <gestationCycles>5</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_IronFace</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>450</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Neurocomputer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>DMS_Ceramics</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentFireControl</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Artifuscle</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <!-- 皇权DLC：护盾核心 x2 -->
+      <li MayRequire="Ludeon.RimWorld.Royalty">
+        <filter>
+          <thingDefs>
+            <li>BroadshieldCore</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Steel</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentSpacer</li>
+        <li>ComponentStamped</li>
+        <li>Neurocomputer</li>
+        <li>DMS_Ceramics</li>
+        <li>ComponentFireControl</li>
+        <li>Artifuscle</li>
+        <li MayRequire="Ludeon.RimWorld.Royalty">BroadshieldCore</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

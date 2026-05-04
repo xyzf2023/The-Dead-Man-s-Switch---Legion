@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/ThingDefs_Races - PawnKindDef labels -->
+  <DMSL_Mech_panzer.label>Panzer</DMSL_Mech_panzer.label>
+  <DMSL_Mech_STGeorge.label>Saint George</DMSL_Mech_STGeorge.label>
+  <DMSL_Mech_ZBZ59D.label>ZBZ59D</DMSL_Mech_ZBZ59D.label>
+  <DMSL_Mech_IronFace.label>RBR-2 "Iron Face"</DMSL_Mech_IronFace.label>
+  <DMSL_Mech_leopard.label>Leopard</DMSL_Mech_leopard.label>
+</LanguageData>

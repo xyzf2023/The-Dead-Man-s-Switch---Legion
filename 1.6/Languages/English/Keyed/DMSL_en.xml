@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- MOD Settings -->
+  <DMSL_Settings_EventSection>Event Settings</DMSL_Settings_EventSection>
+  <DMSL_Settings_EnableAerialRaid>Enable Armed Colonial Fleet bombing events</DMSL_Settings_EnableAerialRaid>
+  <DMSL_Settings_EnableAerialRaid_Desc>Allow Armed Colonial Fleet air raid incidents to occur. When hostile to the player, the Armed Colonial Fleet may dispatch bombers to strike your colony.</DMSL_Settings_EnableAerialRaid_Desc>
+  <DMSL_Settings_EnableAerialRaidPager>Enable pirate aerial raid vanguard incidents</DMSL_Settings_EnableAerialRaidPager>
+  <DMSL_Settings_EnableAerialRaidPager_Desc>Allow pirate aerial raid vanguard incidents.</DMSL_Settings_EnableAerialRaidPager_Desc>
+  <DMSL_Settings_ResetToDefault>Reset all settings to default</DMSL_Settings_ResetToDefault>
+
+  <!-- Audio-visual settings -->
+  <DMSL_Settings_AudioVisualSection>Audio-Visual Effects</DMSL_Settings_AudioVisualSection>
+  <DMSL_Settings_PlayAirRaidSiren>Play air raid siren</DMSL_Settings_PlayAirRaidSiren>
+  <DMSL_Settings_PlayAirRaidSiren_Desc>Play the air raid siren when the aerial raid countdown begins.</DMSL_Settings_PlayAirRaidSiren_Desc>
+  <DMSL_Settings_PlayNuclearStrikeAudioVisual>Play nuclear strike audio-visual effects</DMSL_Settings_PlayNuclearStrikeAudioVisual>
+  <DMSL_Settings_PlayNuclearStrikeAudioVisual_Desc>Play white screen and tinnitus effects during nuclear strike.</DMSL_Settings_PlayNuclearStrikeAudioVisual_Desc>
+  <DMSL_Settings_PlayIEDDetonateSound>Play IED detonation sound</DMSL_Settings_PlayIEDDetonateSound>
+  <DMSL_Settings_PlayIEDDetonateSound_Desc>Play sound when detonating IEDs.</DMSL_Settings_PlayIEDDetonateSound_Desc>
+
+  <!-- Work-related settings -->
+  <DMSL_Settings_WorkSection>Work</DMSL_Settings_WorkSection>
+  <DMSL_Settings_EnableDrillingBargeDeepDrill>Allow drilling barge to mine deep veins</DMSL_Settings_EnableDrillingBargeDeepDrill>
+  <DMSL_Settings_EnableDrillingBargeDeepDrill_Desc>When enabled, the drilling barge can mine mineral resources like a deep drill.</DMSL_Settings_EnableDrillingBargeDeepDrill_Desc>
+
+  <!-- Storyteller-related settings -->
+  <DMSL_Settings_StorytellerSection>Storyteller</DMSL_Settings_StorytellerSection>
+  <DMSL_Settings_EnableElectronicAngelSupport>Enable Electronic Angel support incidents</DMSL_Settings_EnableElectronicAngelSupport>
+  <DMSL_Settings_EnableElectronicAngelSupport_Desc>Allow replacing Man in Black incidents with Electronic Angel support when the storyteller is Raphael or Elisa.</DMSL_Settings_EnableElectronicAngelSupport_Desc>
+  <DMSL_Settings_ElectronicAngelNoStorytellerLimit>Electronic Angel incidents ignore storyteller limits</DMSL_Settings_ElectronicAngelNoStorytellerLimit>
+  <DMSL_Settings_ElectronicAngelNoStorytellerLimit_Desc>When enabled, Electronic Angel-related incidents are no longer restricted by the current storyteller type.</DMSL_Settings_ElectronicAngelNoStorytellerLimit_Desc>
+  <DMSL_Settings_EnableUnknownMechSupport>Enable Unknown Mech support incidents</DMSL_Settings_EnableUnknownMechSupport>
+  <DMSL_Settings_EnableUnknownMechSupport_Desc>Allow Unknown Mech support incidents to be generated when the storyteller is Raphael.</DMSL_Settings_EnableUnknownMechSupport_Desc>
+  <DMSL_Settings_UnknownMechNoStorytellerLimit>Unknown Mech support ignores storyteller limits</DMSL_Settings_UnknownMechNoStorytellerLimit>
+  <DMSL_Settings_UnknownMechNoStorytellerLimit_Desc>When enabled, Unknown Mech support incidents are no longer restricted by the current storyteller type.</DMSL_Settings_UnknownMechNoStorytellerLimit_Desc>
+  <DMSL_Settings_EnableRaphaelExtraQuest>Enable Raphael extra quest component</DMSL_Settings_EnableRaphaelExtraQuest>
+  <DMSL_Settings_EnableRaphaelExtraQuest_Desc>When enabled, Raphael will try to offer one extra quest per day. If this component causes issues, disable this option.</DMSL_Settings_EnableRaphaelExtraQuest_Desc>
+
+  <!-- Misc settings -->
+  <DMSL_Settings_MiscSection>Misc</DMSL_Settings_MiscSection>
+  <DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic>Enable experimental drilling barge work logic</DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic>
+  <DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic_Desc>Enable this option if the drilling barge causes long freezes when searching for mineable minerals. It replaces the barge's search logic with a gentler, incremental scan.\n\nNote: Enabling this adds ongoing performance cost and longer delay before new veins are assigned. Do not enable unless you experience noticeable stutter.</DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic_Desc>
+  <DMSL_Settings_EnableExtraStopReconOption>Enable extra stop recon option</DMSL_Settings_EnableExtraStopReconOption>
+  <DMSL_Settings_EnableExtraStopReconOption_Desc>Adds a button on the AXF-12 building and a "Stop recon" option in the comms console air support menu. Use these to stop maintaining the observed map when the world-map stop-observing button is missing.</DMSL_Settings_EnableExtraStopReconOption_Desc>
+  <DMSL_Settings_AutoAddDigitalAngelFaction>Automatically add Electronic Angel faction</DMSL_Settings_AutoAddDigitalAngelFaction>
+  <DMSL_Settings_AutoAddDigitalAngelFaction_Desc>When loading a save, if the world is missing the Electronic Angel faction, automatically generate a hidden Electronic Angel faction.</DMSL_Settings_AutoAddDigitalAngelFaction_Desc>
+  <DMSL_Settings_EnableTankCrushEffect>Enable tank crush effect</DMSL_Settings_EnableTankCrushEffect>
+  <DMSL_Settings_EnableTankCrushEffect_Desc>When enabled, super-heavy mechanoids deal additional blunt damage in melee based on body size difference.\nNote: This option also applies to hostile mechanoids.</DMSL_Settings_EnableTankCrushEffect_Desc>
+
+  <!-- IED remote detonation gizmo and tips -->
+  <DMSL_IED_Detonate>Detonate IEDs</DMSL_IED_Detonate>
+  <DMSL_IED_DetonateDesc>Immediately detonate all deployed IEDs placed by this weapon.</DMSL_IED_DetonateDesc>
+  <DMSL_IED_MaxDeployed>Maximum number of deployed IEDs reached.</DMSL_IED_MaxDeployed>
+  <DMSL_IED_NoIEDToDetonate>No IEDs available to detonate.</DMSL_IED_NoIEDToDetonate>
+  <!-- IED clear gizmo -->
+  <DMSL_IED_Clear>Clear IEDs</DMSL_IED_Clear>
+  <DMSL_IED_ClearDesc>Clear all IEDs associated with this weapon on the map.</DMSL_IED_ClearDesc>
+  <DMSL_IED_NoIEDToClear>No IEDs to clear.</DMSL_IED_NoIEDToClear>
+
+  <!-- Repair Designate ability -->
+  <DMSL_RepairDesignateFailedMessage>This mech does not need repairs.</DMSL_RepairDesignateFailedMessage>
+  <!-- Medical Glue ability: no bleeding wound on target -->
+  <DMSL_MedicalGlueNoBleedingWound>Target has no tendable bleeding wounds.</DMSL_MedicalGlueNoBleedingWound>
+  <!-- Mech Reconstruction ability -->
+  <DMSL_MechReconstruction_FailedMessage>Can only be used on friendly mechanoid corpses.</DMSL_MechReconstruction_FailedMessage>
+  <DMSL_MechReconstruction_ReportWithTarget>Reconstructing {0}</DMSL_MechReconstruction_ReportWithTarget>
+  <DMSL_MechReconstruction_ReportDefault>Reconstructing mech frame</DMSL_MechReconstruction_ReportDefault>
+
+  <!-- Commander restrictions -->
+  <DMSL_Commander_CannotBeControlledByMech>Commander cannot be controlled by mechanoids.</DMSL_Commander_CannotBeControlledByMech>
+  <DMSL_Commander_CannotGestateCommander>Commander cannot gestate another Commander.</DMSL_Commander_CannotGestateCommander>
+  
+  <!-- Weapon mode -->
+  <DMSL_WeaponMode_Label>Mode: {0}</DMSL_WeaponMode_Label>
+  
+  <!-- Timed shield -->
+  <DMSL_ShieldTimer_Label>Shield Charge</DMSL_ShieldTimer_Label>
+  <DMSL_ShieldActivate_Label>Activate Shield</DMSL_ShieldActivate_Label>
+  <DMSL_ShieldDeactivate_Label>Deactivate Shield</DMSL_ShieldDeactivate_Label>
+  <DMSL_ShieldActive_Desc>Shield is active. Click to deactivate.</DMSL_ShieldActive_Desc>
+  <DMSL_ShieldInactive_Desc>Click to activate shield.</DMSL_ShieldInactive_Desc>
+  <DMSL_ShieldRecharging_Message_Simple>Shield requires at least 5s of charge to activate.</DMSL_ShieldRecharging_Message_Simple>
+  <DMSL_ShieldTimer_Tooltip>How long the shield can remain active. Recharges at 0.5s per second while inactive.</DMSL_ShieldTimer_Tooltip>
+
+  <!-- Static Defense / channeling -->
+  <DMSL_ChannelingGate_DisabledReason>State transition in progress</DMSL_ChannelingGate_DisabledReason>
+
+  <!-- Resource storage -->
+  <DMSL_ResourceStorage>Resource Reserves</DMSL_ResourceStorage>
+  <DMSL_ResourceStorage_AmountFormat>{0}: {1}/{2}</DMSL_ResourceStorage_AmountFormat>
+
+  <!-- Bandwidth amplifier: inspect panel shows buffer charge duration when building is selected -->
+  <DMSL_BandwidthAmplifier_BufferDuration>Charge available duration: {0} sec</DMSL_BandwidthAmplifier_BufferDuration>
+  
+  <!-- Aerial raid vanguard intro -->
+  <DMSL_AerialRaidPagerIntro_LetterLabel>About Aerial Raid Vanguard</DMSL_AerialRaidPagerIntro_LetterLabel>
+  <DMSL_AerialRaidPagerIntro_LetterText>As your colony grows, more factions begin to pay attention, and pirates naturally want their share. Pirate raiding parties carrying air support pagers may visit your colony. An air support pager is a portable device used to call aerial support. Pirates use it to call bombing runs to weaken your colony before launching their assault.\n\nAfter pirates arrive, the raider carrying the pager will first attempt to transmit bombing coordinates. If you can interrupt this process, you can prevent the follow-up bombing. If bombers are already airborne, you can fire Electronic Decoy Shells from mortars to interfere with target selection. If your colony can deploy AXF-12 fighters, you may also intercept them directly.\n\n&lt;i&gt;If you provoke the Armed Colonial Fleet, they may also dispatch bomber formations against your colony. Maybe we can handle that the same way?&lt;/i&gt;</DMSL_AerialRaidPagerIntro_LetterText>
+
+  <!-- Ally intro letter -->
+  <DMSL_ArmyAllyIntro_LetterLabel>Message from the Armed Colonial Fleet</DMSL_ArmyAllyIntro_LetterLabel>
+  <DMSL_ArmyAllyIntro_LetterText>As your colony has entered an alliance with the Armed Colonial Fleet, Fleet Command issues the following notice:\n\nBombers called by air support pagers belong to the Ancient Main Battle Division. Their combat protocols still accept top-level command directives from the Fleet, and they can be ordered to return.\n\nIf pirates illegally call ground bombardment via spoofed signals, the Fleet can send a recall command once confirmed, terminating the bomber formation's current attack cycle.\n\nIf needed, request intervention via the comms console.</DMSL_ArmyAllyIntro_LetterText>
+
+  <!-- Half-downed support request (Raphael storyteller): unknown signal letter -->
+  <DMSL_UnknownSignal_LetterTitle>Unknown Signal</DMSL_UnknownSignal_LetterTitle>
+  <DMSL_UnknownSignal_LetterText>Colonists have received a signal from an unknown source (■■■■), seemingly asking whether military assistance is needed.\n\nShall we respond?</DMSL_UnknownSignal_LetterText>
+  <DMSL_UnknownSignal_OptionRespond>Try to respond</DMSL_UnknownSignal_OptionRespond>
+  <DMSL_UnknownSignal_OptionSilent>Remain silent</DMSL_UnknownSignal_OptionSilent>
+
+  <!-- Air raid warnings -->
+  <DMSL_AerialRaid_Warning_Label>Hostile Bombers Approaching</DMSL_AerialRaid_Warning_Label>
+  <DMSL_AerialRaid_AssaultStarted>The enemy has begun its assault.</DMSL_AerialRaid_AssaultStarted>
+  
+  <!-- Army air raid fallback text -->
+  <DMSL_AerialRaid_Army_LetterLabel>Air Raid Warning</DMSL_AerialRaid_Army_LetterLabel>
+  <DMSL_AerialRaid_Army_LetterText>An air raid is imminent.</DMSL_AerialRaid_Army_LetterText>
+
+  <!-- Raid call job reports -->
+  <DMSL_RaidCall_ReportGotoRally>Moving to rally point</DMSL_RaidCall_ReportGotoRally>
+  <DMSL_RaidCall_ReportCalling>Calling aerial support</DMSL_RaidCall_ReportCalling>
+  <DMSL_RaidCall_NoPrePhaseComponent>Aerial raid pre-phase component missing. Assault started immediately.</DMSL_RaidCall_NoPrePhaseComponent>
+
+  <!-- Pager raid state messages -->
+  <DMSL_PagerRaid_MessageCallFailed>Call failed. Enemy assault has begun.</DMSL_PagerRaid_MessageCallFailed>
+  <DMSL_PagerRaid_MessageRaidComplete>Air raid phase complete. Enemy assault has begun.</DMSL_PagerRaid_MessageRaidComplete>
+
+  <!-- Incoming air raid alert -->
+  <DMSL_Alert_AerialRaidIncoming_LabelSingle>Air raid incoming in {0} hours</DMSL_Alert_AerialRaidIncoming_LabelSingle>
+  <DMSL_Alert_AerialRaidIncoming_LabelMultiple>Air raid incoming in {0} hours ({1} total)</DMSL_Alert_AerialRaidIncoming_LabelMultiple>
+  <DMSL_Alert_AerialRaidIncoming_ExplanationIntro>Bombers are airborne and will arrive soon. Use Electronic Decoy Shells to redirect targets, or intercept them in advance!</DMSL_Alert_AerialRaidIncoming_ExplanationIntro>
+  <DMSL_Alert_AerialRaidIncoming_CountdownList>Countdown list:</DMSL_Alert_AerialRaidIncoming_CountdownList>
+  <DMSL_Alert_AerialRaidIncoming_CountdownLine>- {0} hours</DMSL_Alert_AerialRaidIncoming_CountdownLine>
+
+  <!-- AXF12 recon airspace violation -->
+  <DMSL_AXF12_ReconAirspaceConfirmText>Aerial reconnaissance is an airspace violation. Recon over non-hostile faction territory will severely damage relations and may even cause hostility.\n\nAre you sure you still want to recon this location?</DMSL_AXF12_ReconAirspaceConfirmText>
+
+  <!-- AXF12 recon launch gizmo labels (CompProperties_AXF12ReconLaunch) -->
+  <DMSL_AXF12_ReconLaunch_GizmoLabel>Recon</DMSL_AXF12_ReconLaunch_GizmoLabel>
+  <DMSL_AXF12_ReconLaunch_GizmoDesc>Perform reconnaissance on a world tile.</DMSL_AXF12_ReconLaunch_GizmoDesc>
+  <DMSL_AXF12_ReconLaunch_InterceptGizmoLabel>Intercept</DMSL_AXF12_ReconLaunch_InterceptGizmoLabel>
+  <DMSL_AXF12_ReconLaunch_InterceptGizmoDesc>Intercept incoming bomber formation. Return after successful interception.</DMSL_AXF12_ReconLaunch_InterceptGizmoDesc>
+  <DMSL_AXF12_ReconLaunch_BombGizmoLabel>Bomb</DMSL_AXF12_ReconLaunch_BombGizmoLabel>
+  <DMSL_AXF12_ReconLaunch_BombGizmoDesc>Execute a bombing run on the target location. Return after bombing is complete.</DMSL_AXF12_ReconLaunch_BombGizmoDesc>
+
+  <!-- AXF12 intercept -->
+  <DMSL_AXF12_InterceptNoTarget>No interception target.</DMSL_AXF12_InterceptNoTarget>
+  <DMSL_AXF12_InterceptSuccessLetterTitle>Interception Successful</DMSL_AXF12_InterceptSuccessLetterTitle>
+  <DMSL_AXF12_InterceptSuccessLetterText>All incoming bombers were shot down or driven off. No bombing run will reach the colony.</DMSL_AXF12_InterceptSuccessLetterText>
+
+  <!-- AXF12 bomb reserve -->
+  <DMSL_AXF12_AmmoReserve_GizmoLabel>Bomb Reserve</DMSL_AXF12_AmmoReserve_GizmoLabel>
+  <DMSL_AXF12_AmmoReserve_Tooltip>Aerial bombs required for bombing runs. Maximum reserve: 3.</DMSL_AXF12_AmmoReserve_Tooltip>
+  <DMSL_AXF12_AmmoReserve_Inspect>Bombs: {0} {1} / {2}</DMSL_AXF12_AmmoReserve_Inspect>
+
+  <!-- AXF12 prioritized reload -->
+  <DMSL_AXF12_FillAmmo_Label>Reload AXF-12</DMSL_AXF12_FillAmmo_Label>
+  <DMSL_AXF12_FillAmmo_NoAmmo>No aerial bombs available.</DMSL_AXF12_FillAmmo_NoAmmo>
+
+  <!-- AXF12 bomb options -->
+  <DMSL_AXF12_BombOption_One>Drop one bomb</DMSL_AXF12_BombOption_One>
+  <DMSL_AXF12_BombOption_Two>Drop two bombs</DMSL_AXF12_BombOption_Two>
+  <DMSL_AXF12_BombOption_Three>Drop three bombs</DMSL_AXF12_BombOption_Three>
+  <DMSL_AXF12_BombNoAmmo>Insufficient bombs</DMSL_AXF12_BombNoAmmo>
+
+  <!-- AXF12 bombing target and observe -->
+  <DMSL_AXF12_SelectBombCell>Select bomb impact point</DMSL_AXF12_SelectBombCell>
+  <DMSL_AXF12_StopObserving_Label>Stop observing this area</DMSL_AXF12_StopObserving_Label>
+  <DMSL_AXF12_StopObserving_Desc>Terminate intel gathering for this area.</DMSL_AXF12_StopObserving_Desc>
+  <DMSL_AXF12_StopObservingAll_Label>Stop observing all recon areas</DMSL_AXF12_StopObservingAll_Label>
+  <DMSL_AXF12_StopObservingAll_Desc>Stop observing all areas under AXF-12 recon. You will no longer receive vision of these areas.</DMSL_AXF12_StopObservingAll_Desc>
+  <DMSL_AXF12_NoObservedMap>No map is currently being observed.</DMSL_AXF12_NoObservedMap>
+
+  <!-- AXF12 gizmo disabled reasons -->
+  <DMSL_AXF12_Disable_NoFuel>Insufficient fuel</DMSL_AXF12_Disable_NoFuel>
+  <DMSL_AXF12_Disable_NoPilot>No pilot aboard. Unable to take off.</DMSL_AXF12_Disable_NoPilot>
+  <DMSL_AXF12_Disable_NotReadyToLaunch>Takeoff preparation not complete</DMSL_AXF12_Disable_NotReadyToLaunch>
+  <DMSL_AXF12_Disable_InvalidFaction_Bomb>Invalid target faction. Bombing unavailable.</DMSL_AXF12_Disable_InvalidFaction_Bomb>
+
+  <!-- AXF12 custom return landing gizmo -->
+  <DMSL_AXF12_CustomLanding_Label>Custom landing point</DMSL_AXF12_CustomLanding_Label>
+  <DMSL_AXF12_CustomLanding_Desc>When enabled, allows choosing a custom landing point when the AXF-12 returns.</DMSL_AXF12_CustomLanding_Desc>
+
+  <!-- AXF12 target and map messages -->
+  <DMSL_AXF12_Message_NoWorldMapPos>Unable to get world map position.</DMSL_AXF12_Message_NoWorldMapPos>
+  <DMSL_AXF12_Message_NoFuelCost>Unable to calculate fuel consumption.</DMSL_AXF12_Message_NoFuelCost>
+  <DMSL_AXF12_Message_NoFuelNeed>Insufficient fuel. Need {0}.</DMSL_AXF12_Message_NoFuelNeed>
+  <DMSL_AXF12_Message_MapNotLoaded>This map is not loaded.</DMSL_AXF12_Message_MapNotLoaded>
+  <DMSL_AXF12_Message_InvalidTarget>Invalid target.</DMSL_AXF12_Message_InvalidTarget>
+  <DMSL_AXF12_Message_NoSettlement>No enterable location at this position.</DMSL_AXF12_Message_NoSettlement>
+  <DMSL_AXF12_Message_NoMapSelect>No map currently active. Cannot select target.</DMSL_AXF12_Message_NoMapSelect>
+  <DMSL_AXF12_Message_LaunchFailed>Launch failed.</DMSL_AXF12_Message_LaunchFailed>
+  <DMSL_AXF12_Label_OutOfRange>Out of effective range.</DMSL_AXF12_Label_OutOfRange>
+  <DMSL_AXF12_Label_BombNeedVision>Bombing requires target vision.</DMSL_AXF12_Label_BombNeedVision>
+  <DMSL_AXF12_Label_BombFuel>Bomb this location. Estimated fuel cost: {0}.</DMSL_AXF12_Label_BombFuel>
+  <DMSL_AXF12_Label_ReconFuel>Recon this location. Estimated fuel cost: {0}.</DMSL_AXF12_Label_ReconFuel>
+  <DMSL_AXF12_Label_NoReconValue>No recon value at this location.</DMSL_AXF12_Label_NoReconValue>
+  <DMSL_AXF12_Reason_NoMapGen>This location cannot generate a map.</DMSL_AXF12_Reason_NoMapGen>
+
+  <!-- Knight's Lance speed scaling -->
+  <DMSL_LanceMoveSpeedDamage>Knight's Lance speed bonus: current speed {0} cells/sec, melee damage {1}</DMSL_LanceMoveSpeedDamage>
+
+  <!-- Momentum movement -->
+  <DMSL_MomentumMoveSpeed>Sprint reaches maximum speed after {1} cells. Distance moved: {0} cells, currently at {2} of initial speed.\n\nAt maximum speed, movement is no longer affected by terrain.</DMSL_MomentumMoveSpeed>
+  <DMSL_StaggerDurationMomentum>At maximum sprint speed, stagger effects no longer apply.</DMSL_StaggerDurationMomentum>
+
+  <!-- Commander mech bandwidth / control groups bonus -->
+  <DMSL_MechCommanderBandwidth>Commander bonus bandwidth: {0}</DMSL_MechCommanderBandwidth>
+  <DMSL_MechCommanderControlGroups>Commander bonus control groups: {0}</DMSL_MechCommanderControlGroups>
+
+  <!-- Message: Electronic Angel (Man in Black branch) -->
+  <DMSL_ElectronicAngelSignal_LetterTitle>Message: "Electronic Angel"</DMSL_ElectronicAngelSignal_LetterTitle>
+  <DMSL_ElectronicAngelSignal_LetterText>When all colonists have lost the ability to act, a transmission from "Electronic Angel" cuts into the colony channel. She offers to grant us final shelter.\n\nShall we ask for her protection?</DMSL_ElectronicAngelSignal_LetterText>
+  <DMSL_ElectronicAngelSignal_OptionRequestShelter>Request shelter</DMSL_ElectronicAngelSignal_OptionRequestShelter>
+  <DMSL_ElectronicAngelSignal_OptionKeepSilent>Remain silent</DMSL_ElectronicAngelSignal_OptionKeepSilent>
+
+  <DMSL_AerialRaid_Warning_Text>Air defense radar has picked up anomalous signals during long-range sweep.\n\nA bomber formation belonging to the Armed Colonial Fleet is approaching this region. Flight trajectory indicates a ground strike mission.\n\nHostile aircraft are expected to enter effective attack range shortly. Without interference, their ordnance will fall directly on colony-controlled territory.\n\nYou may order fighters to intercept incoming targets, or deploy electronic decoys to force the enemy to change bombing coordinates.\n\nTime is limited. Take countermeasures as soon as possible.</DMSL_AerialRaid_Warning_Text>
+
+  <!-- Comms: DMS_Army air support -->
+  <DMSL_Comms_RequestAirSupport>Request Air Support</DMSL_Comms_RequestAirSupport>
+  <DMSL_Comms_AirSupportPrompt>{0} asks what kind of air support you need.</DMSL_Comms_AirSupportPrompt>
+  <DMSL_Comms_BomberOption>Request recall of bomber formation assigned to strike the colony (Cost: {0} goodwill)</DMSL_Comms_BomberOption>
+  <DMSL_Comms_NoBomberToRecall>No bomber available to recall</DMSL_Comms_NoBomberToRecall>
+  <DMSL_Comms_RecallSuccessDialog>{0} accepted your request and claims a recall order will be sent immediately.</DMSL_Comms_RecallSuccessDialog>
+  <DMSL_Comms_RecallSuccessLetterTitle>Bomber Formation Recalled</DMSL_Comms_RecallSuccessLetterTitle>
+  <DMSL_Comms_RecallSuccessLetterText>The incoming bomber formation has returned to base after receiving a signal from the Armed Colonial Fleet. No bombing run will reach the colony.</DMSL_Comms_RecallSuccessLetterText>
+  <DMSL_Comms_FireStrikeOption>Request Fire Strike</DMSL_Comms_FireStrikeOption>
+  <DMSL_Comms_BattlefieldSupportOption>Request Battlefield Support</DMSL_Comms_BattlefieldSupportOption>
+  <DMSL_Comms_SpecialStrikeOption>Request Special Strike</DMSL_Comms_SpecialStrikeOption>
+  <DMSL_Comms_ComingSoon>Coming Soon</DMSL_Comms_ComingSoon>
+  <DMSL_Comms_ConfirmSupportPrompt>{0}: {1}\n\n{0} will be executed shortly. Please transmit target coordinates.</DMSL_Comms_ConfirmSupportPrompt>
+  <DMSL_Comms_SupportEtaMessage>Target coordinates confirmed. Support ETA: {0} seconds.</DMSL_Comms_SupportEtaMessage>
+  <DMSL_Comms_OptionCooldown>Next support is preparing. Available again in {0} hours.</DMSL_Comms_OptionCooldown>
+  <DMSL_Comms_UndergroundMapRejected>Air support cannot reach this area.</DMSL_Comms_UndergroundMapRejected>
+  <DMSL_AerialSupport_Cancelled>Air support canceled.</DMSL_AerialSupport_Cancelled>
+  <DMSL_AerialSupport_AreaUnavailable>Aerial support is not available in this area.</DMSL_AerialSupport_AreaUnavailable>
+  <DMSL_AerialSupport_ConfirmedSingle>{0} confirmed. Target: {1}</DMSL_AerialSupport_ConfirmedSingle>
+  <DMSL_AerialSupport_ConfirmedRange>{0} confirmed. Bombing area: {1} → {2}</DMSL_AerialSupport_ConfirmedRange>
+  <DMSL_AerialSupport_ConfirmedMultiple>{0} confirmed. {1} target(s) selected.</DMSL_AerialSupport_ConfirmedMultiple>
+  <DMSL_AerialSupport_SupportCalled>{0} support called. Target location: {1}</DMSL_AerialSupport_SupportCalled>
+  <DMSL_Comms_NoTargetVisibility>No vision on target location</DMSL_Comms_NoTargetVisibility>
+  <DMSL_Comms_ExecuteSupportInArea>Execute {0} in this area</DMSL_Comms_ExecuteSupportInArea>
+  <DMSL_Comms_ReconTargetOption>Request Recon on Target Area</DMSL_Comms_ReconTargetOption>
+  <DMSL_Comms_ReconPrompt>{0} asks which area you need intelligence on.</DMSL_Comms_ReconPrompt>
+  <DMSL_Comms_ProvideCoordinates>Provide Coordinates</DMSL_Comms_ProvideCoordinates>
+  <DMSL_Comms_ReconEtaMessage>Recon aircraft ETA to target area: {0} seconds.</DMSL_Comms_ReconEtaMessage>
+  <DMSL_Comms_ReconExecuteInArea>Execute recon in this area</DMSL_Comms_ReconExecuteInArea>
+  <DMSL_Comms_ReconNoTargetIntel>No recon value at target location</DMSL_Comms_ReconNoTargetIntel>
+  <DMSL_Comms_ReconNotHostile>Not hostile to this faction</DMSL_Comms_ReconNotHostile>
+  <DMSL_Comms_StopReconOption>Stop recon</DMSL_Comms_StopReconOption>
+
+  <!-- Comms: DMS_Army nuclear strike -->
+  <DMSL_Comms_NukeStrike_Connect>*Connect to Nuclear Strike System*</DMSL_Comms_NukeStrike_Connect>
+  <DMSL_Comms_NukeStrike_InsufficientPermission>*Insufficient Permission*</DMSL_Comms_NukeStrike_InsufficientPermission>
+  <DMSL_Comms_NukeStrike_Clicked>Clicked</DMSL_Comms_NukeStrike_Clicked>
+  <DMSL_Comms_NukeStrike_Terminal>System</DMSL_Comms_NukeStrike_Terminal>
+  <DMSL_NukeStrike_Connecting>> Establishing communication link...</DMSL_NukeStrike_Connecting>
+  <DMSL_NukeStrike_ChannelEncrypted>> Communication channel: encrypted</DMSL_NukeStrike_ChannelEncrypted>
+  <DMSL_NukeStrike_SystemOnline>> System status: online</DMSL_NukeStrike_SystemOnline>
+  <DMSL_NukeStrike_IdentityConfirm>> Communicator identity confirmed: {0} {1}</DMSL_NukeStrike_IdentityConfirm>
+  <DMSL_NukeStrike_SystemReady>> Nuclear strike system ready. Awaiting further command.</DMSL_NukeStrike_SystemReady>
+  <DMSL_NukeStrike_NoMessage>No system message</DMSL_NukeStrike_NoMessage>
+  <DMSL_NukeStrike_CooldownMessage>Preparation sequence not complete. Estimated completion in {0} days.</DMSL_NukeStrike_CooldownMessage>
+  <DMSL_NukeStrike_PermissionAuth>Execute Permission Authentication</DMSL_NukeStrike_PermissionAuth>
+  <DMSL_NukeStrike_EnterKey>Enter Key</DMSL_NukeStrike_EnterKey>
+  <DMSL_NukeStrike_Disconnect>Disconnect</DMSL_NukeStrike_Disconnect>
+  <DMSL_NukeStrike_DisconnectMsg>> Command received. Closing communication link...</DMSL_NukeStrike_DisconnectMsg>
+  <DMSL_NukeStrike_AuthRequest>> Submitting permission authentication request...\n> Authentication node responding</DMSL_NukeStrike_AuthRequest>
+  <DMSL_NukeStrike_AuthResult>> Permission validation complete\n> Result: passed.</DMSL_NukeStrike_AuthResult>
+  <DMSL_NukeStrike_KeyTransferConfirm>> Key transfer confirmed\n> Verifying...</DMSL_NukeStrike_KeyTransferConfirm>
+  <DMSL_NukeStrike_KeyValidResult>> Key confirmed.\n> Status: valid.</DMSL_NukeStrike_KeyValidResult>
+  <DMSL_NukeStrike_TransmitCoords>Transmit Strike Coordinates</DMSL_NukeStrike_TransmitCoords>
+  <DMSL_NukeStrike_AllowCoords>> Strike coordinate input enabled</DMSL_NukeStrike_AllowCoords>
+  <DMSL_NukeStrike_EtaMessage>Nuclear strike ETA: {0} hours.</DMSL_NukeStrike_EtaMessage>
+  <DMSL_NukeStrike_TargetInvalid>Invalid target.</DMSL_NukeStrike_TargetInvalid>
+  <DMSL_NukeStrike_MapNotLoaded>No vision on target.</DMSL_NukeStrike_MapNotLoaded>
+  <DMSL_NukeStrike_NoMapParent>This coordinate has no strike value.</DMSL_NukeStrike_NoMapParent>
+  <DMSL_NukeStrike_AlertLabel>ETA to target coordinates: {0} hours</DMSL_NukeStrike_AlertLabel>
+  <DMSL_NukeStrike_AlertExplanationIntro>Nuclear strike sequence initiated.</DMSL_NukeStrike_AlertExplanationIntro>
+
+  <!-- Wandering Engineer arrival -->
+  <DMSL_EngineerArrival_LetterLabel>Wandering Mech Arrival</DMSL_EngineerArrival_LetterLabel>
+  <DMSL_EngineerArrival_LetterText>A wandering mech has received a signal from the mechanitor link and wandered near your colony. You may attempt to claim control.\n\nNote: If it remains uncontrolled, it may leave the colony.</DMSL_EngineerArrival_LetterText>
+
+  <!-- Gift from Armed Colonial Fleet -->
+  <DMSL_GiftFromArmy_LetterLabel>Gift from the Armed Colonial Fleet</DMSL_GiftFromArmy_LetterLabel>
+  <DMSL_GiftFromArmy_LetterText>A transport ship from the Armed Colonial Fleet has just arrived. To maintain friendship between both sides, they have sent a gift.</DMSL_GiftFromArmy_LetterText>
+
+  <!-- Elisa favor letters -->
+  <DMSL_ElisaFavor_LetterTitle>Elisa's Favor</DMSL_ElisaFavor_LetterTitle>
+  <DMSL_ElisaFavor_LetterText>Your orderly mech management has earned the favor of the Armed Colonial Fleet. Goodwill toward you increased by {INCREASE}.</DMSL_ElisaFavor_LetterText>
+  <DMSL_ElisaFavor_LetterTextRoyalty>In recognition of your colony, the Armed Colonial Fleet grants one colonist {AMOUNT} Honor.\n\nWho should receive this honor?</DMSL_ElisaFavor_LetterTextRoyalty>
+
+  <!-- Integrated Detection Array: Generate decoy signal gizmo -->
+  <DMSL_IntegratedDetectionArray_GenerateDecoyCoords>Generate decoy signal</DMSL_IntegratedDetectionArray_GenerateDecoyCoords>
+  <DMSL_IntegratedDetectionArray_GenerateDecoyCoordsDesc>Place a decoy signal at the chosen cell for five hours. Incoming bombers may retarget to this location.</DMSL_IntegratedDetectionArray_GenerateDecoyCoordsDesc>
+  <DMSL_IntegratedDetectionArray_NoBaitComponent>Could not create bait target component.</DMSL_IntegratedDetectionArray_NoBaitComponent>
+  <DMSL_IntegratedDetectionArray_DecoySet>Decoy coordinate set at {0} (lasts 5 hours).</DMSL_IntegratedDetectionArray_DecoySet>
+  <DMSL_IntegratedDetectionArray_Disable_NoPower>Generating decoy coordinates requires power.</DMSL_IntegratedDetectionArray_Disable_NoPower>
+  <!-- Integrated Detection Array: scan mode and progress -->
+  <DMSL_IntegratedDetectionArray_ScanProgress>Current scan progress: {0}%</DMSL_IntegratedDetectionArray_ScanProgress>
+  <DMSL_IntegratedDetectionArray_ModeLocal>Local vein scan</DMSL_IntegratedDetectionArray_ModeLocal>
+  <DMSL_IntegratedDetectionArray_ModeLocalDesc>Focus on scanning for vein signals within the colony. Discovers local mineral deposits at regular intervals.</DMSL_IntegratedDetectionArray_ModeLocalDesc>
+  <DMSL_IntegratedDetectionArray_ModeLongRange>Long-range vein scan</DMSL_IntegratedDetectionArray_ModeLongRange>
+  <DMSL_IntegratedDetectionArray_ModeLongRangeDesc>Focus on scanning for vein signals at a distance. Discovers mineral deposits at other locations at regular intervals.</DMSL_IntegratedDetectionArray_ModeLongRangeDesc>
+</LanguageData>

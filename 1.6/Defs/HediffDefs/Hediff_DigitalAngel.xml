@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 电子天使健康状态 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_DigitalAngel</defName>
+    <label>&lt;i&gt;"电子天使"&lt;/i&gt;</label>
+    <description>此机兵似乎经过特殊改装，拥有更强的作战能力。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/><!-- 死亡时消失（原版组件） -->
+      <li Class="DMS_Legion.HediffCompProperties_SelfMechHeal"><!-- 每60tick对随机身体部位回复血量 -->
+        <healAmount>5</healAmount>
+        <intervalTicks>60</intervalTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+          <!-- 承伤系数 0.75 -->
+          <IncomingDamageFactor>0.75</IncomingDamageFactor>
+        </statFactors>
+        <statOffsets>
+          <!-- 移动速度 +2 -->
+          <MoveSpeed>3</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

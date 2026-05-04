@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/IncidentDefs -->
+  <DMSL_AerialRaid_Pager.label>Raid: Aerial Raid Vanguard</DMSL_AerialRaid_Pager.label>
+  <DMSL_AerialRaid_Pager.letterLabel>Raid: Aerial Raid Vanguard</DMSL_AerialRaid_Pager.letterLabel>
+  <DMSL_AerialRaid_Pager.letterText>A pirate raiding party has entered the colony's perimeter. At least one raider has been confirmed carrying an air support pager.\n\nIntelligence suggests this device can call in close air support from the Ancient Main Battle Division. The pirates may conduct an air-to-ground strike to weaken defenses before the main assault.\n\nIf the signal is successfully established, aircraft will enter the strike corridor shortly. Eliminate or jam the signal source before the call completes; if hostile aircraft have already taken off, deploy fighter interception or electronic decoys to divert the bombers away from colony coordinates.\n\nTime is limited. Take countermeasures immediately.</DMSL_AerialRaid_Pager.letterText>
+  <DMSL_AerialRaid_Army.label>Raid: Aerial Raid</DMSL_AerialRaid_Army.label>
+  <DMSL_AerialRaid_Army.letterLabel>Hostile Bombers Approaching</DMSL_AerialRaid_Army.letterLabel>
+  <DMSL_AerialRaid_Army.letterText>Air defense radar has picked up anomalous signals during long-range sweep.\n\nA bomber formation belonging to the Armed Colonial Fleet is approaching this region. Flight trajectory indicates a ground strike mission.\n\nHostile aircraft are expected to enter effective attack range shortly. Without interference, their ordnance will fall directly on colony-controlled territory.\n\nYou may order friendly fighters to intercept incoming targets, or deploy electronic decoys to force the enemy to change their bombing coordinates.\n\nTime is limited. Take countermeasures as soon as possible.</DMSL_AerialRaid_Army.letterText>
+  <DMSL_EngineerArrival.label>Wandering Mech Arrival</DMSL_EngineerArrival.label>
+  <DMSL_EngineerArrival.letterLabel>Wandering Mech Arrival</DMSL_EngineerArrival.letterLabel>
+  <DMSL_EngineerArrival.letterText>A wandering mech has received a signal from the mechanitor link and wandered near the colony. You may claim it for your own.\n\nNote: It remains uncontrolled and may leave the colony.</DMSL_EngineerArrival.letterText>
+
+  <!-- Unknown mech support (half-downed letter response) -->
+  <DMSL_UnknownMechSupport.label>Unknown Mech Support</DMSL_UnknownMechSupport.label>
+  <DMSL_UnknownMechSupport.description>A mech force of unknown origin has entered the battlefield. Its IFF does not match any known faction, but it does not appear hostile to the colony. The unit's trajectory suggests it will assist you in clearing hostile targets.</DMSL_UnknownMechSupport.description>
+  <DMSL_UnknownMechSupport.letterLabel>Unknown Mech Support</DMSL_UnknownMechSupport.letterLabel>
+  <DMSL_UnknownMechSupport.letterText>A mech force of unknown origin has entered the battlefield. Its IFF does not match any known faction, but it does not appear hostile to the colony. The unit's trajectory suggests it will assist you in clearing hostile targets.</DMSL_UnknownMechSupport.letterText>
+
+  <!-- "Electronic Angel" mech support -->
+  <DMSL_ElectronicAngelSupport.label>"Electronic Angel"</DMSL_ElectronicAngelSupport.label>
+  <DMSL_ElectronicAngelSupport.description>A mech squad from "Electronic Angel" has arrived on the battlefield. They will help you defend your home.</DMSL_ElectronicAngelSupport.description>
+  <DMSL_ElectronicAngelSupport.letterLabel>"Electronic Angel"</DMSL_ElectronicAngelSupport.letterLabel>
+  <DMSL_ElectronicAngelSupport.letterText>A mech squad from "Electronic Angel" has arrived on the battlefield. They will help you defend your home.</DMSL_ElectronicAngelSupport.letterText>
+</LanguageData>

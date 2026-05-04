@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 机械体修理机械体的工作给予者 -->
+  <WorkGiverDef>
+    <defName>DMSL_WorkGiver_MechRepairMech</defName>
+    <label>修理机械体</label>
+    <giverClass>DMS_Legion.WorkGiver_MechRepairMech</giverClass>
+    <workType>Smithing</workType>
+    <verb>修理</verb>
+    <gerund>修理中</gerund>
+    <priorityInType>2000</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>true</canBeDoneByMechs>
+    <canBeDoneWhileDrafted>false</canBeDoneWhileDrafted>
+  </WorkGiverDef>
+</Defs>

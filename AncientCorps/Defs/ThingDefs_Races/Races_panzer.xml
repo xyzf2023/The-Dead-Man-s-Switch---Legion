@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 定义STGeorge机甲的实体 -->
+  <ThingDef ParentName="BaseAutomatroidRace">
+    <!-- 机甲的内部标识符 -->
+    <defName>DMSL_Mech_panzer</defName>
+    <!-- 显示名称 -->
+    <label>陆龟</label>
+    <!-- 机甲描述 -->
+    <description>一台超重型战斗机械体，配备了多种武器系统。</description>
+
+    <!-- 基础属性 -->
+    <statBases>
+      <MoveSpeed>3</MoveSpeed> <!-- 移动速度 -->
+      <ArmorRating_Sharp>2</ArmorRating_Sharp><!-- 锐器抗性 -->
+      <ArmorRating_Blunt>2</ArmorRating_Blunt><!-- 钝器抗性 -->
+      <ArmorRating_Heat>2</ArmorRating_Heat>  <!-- 热能抗性 -->
+      <StaggerDurationFactor>0</StaggerDurationFactor> <!-- 击退时间因子 -->
+      <ShootingAccuracyPawn>1</ShootingAccuracyPawn> <!-- 射击精度 -->
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>        <!-- 带宽消耗（需要Biotech DLC）-->
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge><!-- 充电时产出废料包（需要Biotech DLC）-->
+    </statBases>
+
+    <!-- 种族特性 -->
+    <race>
+      <body>DMS_KillDozer</body> <!-- 使用的身体类型 -->
+      <nameGenerator>DMS_VanguardMechHeavy</nameGenerator> <!-- 名称生成器 -->
+      <baseBodySize>3.8</baseBodySize> <!-- 基础体型 -->
+      <baseHealthScale>8</baseHealthScale> <!-- 基础生命值比例 -->
+      <mechWeightClass>UltraHeavy</mechWeightClass> <!-- 机甲重量类别：超重型 -->
+
+      <!-- 残骸掉落物 -->
+      <detritusLeavings>
+        <li>
+          <def>DMS_ChunkSlag</def> <!-- 掉落物定义 -->
+          <texOverrideIndex>7</texOverrideIndex> <!-- 纹理索引 -->
+          <spawnChance>0.4</spawnChance> <!-- 掉落概率 -->
+        </li>
+        <li>
+          <def>DMS_ChunkSlag</def>
+          <texOverrideIndex>4</texOverrideIndex>
+          <spawnChance>0.4</spawnChance>
+        </li>
+      </detritusLeavings>
+    </race>
+
+    <!-- 组件定义 -->
+    <comps>
+      <!-- 体型近战加伤标记：攻击时若体型大于目标则追加钝器伤害 -->
+      <li Class="DMS_Legion.CompProperties_BodySizeMeleeMarker" />
+      <!-- 载具武器组件：无主武器时由框架配备 50mm 炮 -->
+      <li Class="Fortified.CompProperties_VehicleWeapon">
+        <defaultWeapon>DMSL_Gun_57MM</defaultWeapon>
+        <drawData>
+          <!-- 各个视角下的绘制数据 -->
+          <dataEast>
+            <offset>(0,0,0.19)</offset>
+          </dataEast>
+          <dataWest>
+            <offset>(0,0,0.19)</offset>
+          </dataWest>
+          <dataSouth>
+            <offset>(0,0,0.2)</offset>
+          </dataSouth>
+          <dataNorth>
+            <offset>(0,0,0)</offset>
+          </dataNorth>
+        </drawData>
+        <turretRotationFollowPawn>true</turretRotationFollowPawn>
+        <rotationSmoothTime>0.12</rotationSmoothTime>
+      </li>
+    </comps>
+
+    <!-- 分解产物 -->
+    <butcherProducts>
+      <Steel>200</Steel> <!-- 钢铁200个 -->
+      <DMS_ChunkSlag>3</DMS_ChunkSlag> <!-- 渣块3个 -->
+      <ComponentIndustrial>2</ComponentIndustrial> <!-- 工业部件2个 -->
+    </butcherProducts>
+
+    <!-- 阴影设置 -->
+    <castEdgeShadows>false</castEdgeShadows> <!-- 不投射边缘阴影 -->
+    <staticSunShadowHeight>0</staticSunShadowHeight> <!-- 静态太阳阴影高度为0 -->
+  </ThingDef>
+
+  <!-- 定义STGeorge机甲的种类 -->
+  <PawnKindDef ParentName="BaseAutomatroidKind" Name="DMSL_Mech_panzer_Kind" Abstract="True">
+    <defName>DMSL_Mech_panzer</defName> <!-- 修正内部标识符 -->
+    <label>陆龟</label> <!-- 显示名称 -->
+    <race>DMSL_Mech_panzer</race> <!-- 使用的种族定义 -->
+    <destroyGearOnDrop>true</destroyGearOnDrop> <!-- 倒地时销毁装备（武器），而非掉落 -->
+    <isFighter>true</isFighter> <!-- 是战斗单位 -->
+    <combatPower>500</combatPower> <!-- 战斗力：1000威胁点数 -->
+    <maxPerGroup>2</maxPerGroup> <!-- 单个集群内最大数量：2 -->
+    <isBoss>true</isBoss> <!-- 是Boss单位 -->
+
+    <!-- 
+    <techHediffsRequired>
+      <li>DMS_CeramicsPlating</li>
+    </techHediffsRequired>
+    -->
+
+    <!-- 生命阶段图形 -->
+    <lifeStages>
+      <!-- 第一阶段 -->
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/panzer/panzer</texPath> <!-- 纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 着色器类型 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+          <drawSize>4.5</drawSize> <!-- 绘制大小 -->
+
+          <!-- 阴影数据 -->
+          <shadowData>
+            <volume>(1.25,1,1.25)</volume> <!-- 体积 -->
+            <offset>(0,0,-0.5)</offset> <!-- 偏移 -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+
+      <!-- 第二阶段（旧纹理） -->
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/panzer/panzer</texPath> <!-- 纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 着色器类型 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+          <drawSize>4.5</drawSize> <!-- 绘制大小 -->
+          <shadowData>
+            <volume>(1.25,1,1.25)</volume> <!-- 体积 -->
+            <offset>(0,0,-0.5)</offset> <!-- 偏移 -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+
+    <weaponMoney>1~9999</weaponMoney>
+    <weaponTags>
+      <li>DMSL_panzer</li>                                               <!-- STGeorge专用武器标签 -->
+    </weaponTags>
+  </PawnKindDef>
+  
+  <!-- 实际使用的PawnKindDef -->
+  <PawnKindDef ParentName="DMSL_Mech_panzer_Kind" Name="DMSL_Mech_panzer_Actual">
+  </PawnKindDef>
+
+</Defs>

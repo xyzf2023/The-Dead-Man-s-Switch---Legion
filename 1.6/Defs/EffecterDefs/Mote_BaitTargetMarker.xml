@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 诱饵目标持续标记效果：灰白色脉冲效果，持续显示在诱饵坐标位置 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_DMSL_BaitTargetMarker</defName>
+    <thingClass>DMS_Legion.AerialRaid.Mote_BaitTargetMarker</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.25</fadeInTime>
+      <fadeOutTime>0.25</fadeOutTime>
+      <solidTime>999999</solidTime><!-- 持续很长时间 -->
+      <needsMaintenance>true</needsMaintenance>
+      <fadeOutUnmaintained>true</fadeOutUnmaintained>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass><!-- 随时间变化的图形 -->
+      <color>(0.9, 0.9, 0.9, 1.0)</color><!-- 灰白色 -->
+      <shaderType>MoteApocritonPulse</shaderType><!-- 动态脉冲着色器 -->
+      <texPath>Things/Mote/PsychicDistortionApocriton</texPath>
+      <drawSize>5.0</drawSize><!-- 绘制大小 -->
+      <shaderParameters>
+        <_PulseTex>/Things/Mote/ApocritonWaves</_PulseTex>
+        <_distortionIntensity>0</_distortionIntensity><!-- 设置为0，因为使用脉冲着色器不需要扭曲 -->
+        <_ScrollSpeed>-0.9</_ScrollSpeed>
+        <_ScrollScale>0.22</_ScrollScale>
+        <_distortionTint>(0.9, 0.9, 0.9, 0.5)</_distortionTint><!-- 灰白色调 -->
+        <_pulseSpeed>2</_pulseSpeed><!-- 脉冲速度，参考原版设置为2 -->
+      </shaderParameters>
+    </graphicData>
+  </ThingDef>
+</Defs>

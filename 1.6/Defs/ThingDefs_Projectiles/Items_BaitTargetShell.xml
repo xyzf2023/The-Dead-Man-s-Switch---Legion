@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 诱饵目标迫击炮弹药物品 -->
+  <ThingDef ParentName="MakeableShellBase">
+    <defName>Shell_BaitTarget</defName>
+    <label>电子诱饵弹</label>
+    <description>一种特殊的迫击炮弹药，在落地时会生成电子诱饵信号，改变空袭轰炸机的目标，可以用于将空袭引导到指定位置，常常作为应对空袭的手段。\n\n&lt;i&gt;”最好的使用方式是把它丢到来袭击的家伙堆里，这样他们就会被自己呼叫的‘支援’炸上天！”\n      ————来自某位不愿意透露姓名的士兵&lt;/i&gt;</description>
+    <possessionCount>1</possessionCount>
+    <graphicData>
+      <texPath>Things/Item/Resource/Shell/Shell_HighExplosive</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <compClass>DMS_Legion.AerialRaid.Comp_BaitTargetExplosive</compClass>
+        <explosiveRadius>0</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <explosiveExpandPerStackcount>0</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.7</startWickHitPointsPercent>
+        <wickTicks>30~60</wickTicks>
+      </li>
+    </comps>
+    <projectileWhenLoaded>Bullet_Shell_BaitTarget</projectileWhenLoaded>
+    <costList>
+      <Steel>10</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>Mortars</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+  
+  <!-- 诱饵目标迫击炮弹药 Projectile -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_BaitTarget</defName>
+    <label>电子诱饵弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellSmoke</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>DMS_Legion.AerialRaid.Projectile_BaitTargetShell</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>41</speed>
+      <explosionRadius>0</explosionRadius>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>MortarBomb_Explode</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+      <explosionDelay>0</explosionDelay>
+      <doExplosionVFX>false</doExplosionVFX>
+    </projectile>
+  </ThingDef>
+</Defs>

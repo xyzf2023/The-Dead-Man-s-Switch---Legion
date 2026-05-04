@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 定义支援框架（AgriculturalFrame）的 ThingDef 配置 -->
+  <ThingDef Name="DMSL_Mech_AgriculturalFrame" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_AgriculturalFrame</defName>
+    <label>农业框架</label>
+    <description>战斗框架的改进型号之一，用于执行耕作任务。常在某些文学作品里作为和平与爱的象征之一。当它完成收获时会额外掉落2-3个干草</description>
+
+    <!-- 基础属性配置 -->
+    <statBases>
+      <MoveSpeed>4.2</MoveSpeed> <!-- 移动速度 -->
+      <ArmorRating_Blunt>0.3</ArmorRating_Blunt> <!-- 钝器护甲值 -->
+      <ArmorRating_Sharp>0.3</ArmorRating_Sharp> <!-- 锐器护甲值 -->
+      <ArmorRating_Heat>0.6</ArmorRating_Heat> <!-- 热能护甲值 -->
+      <ShootingAccuracyPawn>2</ShootingAccuracyPawn> <!-- 射击精度 -->
+      <AimingDelayFactor>1</AimingDelayFactor> <!-- 瞄准延迟系数 -->
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost> <!-- 带宽消耗（需 Biotech 模组支持） -->
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge> <!-- 充电时产生的废料包数量（需 Biotech 模组支持） -->
+      <WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">1.6</WorkSpeedGlobal>
+    </statBases>
+
+    <!-- 种族特性配置 -->
+    <race>
+      <mechFixedSkillLevel>14</mechFixedSkillLevel> <!-- 固定技能等级 -->
+      <body>DMS_Bipedal</body> <!-- 使用的身体类型 -->
+      <baseBodySize>1.8</baseBodySize> <!-- 基础体型大小 -->
+      <baseHealthScale>2</baseHealthScale> <!-- 基础生命值缩放比例 -->
+      <mechWeightClass>Heavy</mechWeightClass> <!-- 机械重量类别为重型 -->
+      <mechEnabledWorkTypes>
+        <li>Hunting</li> <!-- 启用的工作类型：狩猎 -->
+        <li>Growing</li>
+        <li>PlantCutting</li>
+      </mechEnabledWorkTypes>
+    </race>
+
+    <!-- 解剖产物配置 -->
+    <butcherProducts>
+      <DMS_ChunkSlag>1</DMS_ChunkSlag> <!-- 分解后产出的渣块数量 -->
+      <Tungsteel>30</Tungsteel> <!-- 分解后产出的钨钢数量 -->
+    </butcherProducts>
+
+    <!-- 收获/割除完成后额外掉落干草 -->
+    <comps>
+      <li Class="DMS_Legion.CompProperties_AgriculturalFrameHay">
+        <extraCountMin>2</extraCountMin>
+        <extraCountMax>3</extraCountMax>
+      </li>
+    </comps>
+
+    <!-- 扩展模块配置 -->
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter> <!-- 启用武器过滤功能（与运输框架一致） -->
+        <UsableWeaponTags>
+          <li>DMS_MechWeaponLight</li>
+          <li>Autopistol</li>
+          <li>Revolver</li>
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>
+        <UsableTechLevels>
+          <li>Industrial</li>
+        </UsableTechLevels>
+        <BypassUsableWeapons />
+      </li>
+    </modExtensions>
+
+  </ThingDef>
+
+  <!-- 定义支援机架（AgriculturalFrame）的 PawnKindDef 配置 -->
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <defName>DMSL_Mech_AgriculturalFrame</defName>
+    <label>农业框架</label>
+    <race>DMSL_Mech_AgriculturalFrame</race> <!-- 关联的种族定义 -->
+    <isFighter>true</isFighter> <!-- 是否为战斗单位 -->
+    <combatPower>300</combatPower> <!-- 战斗力评分 -->
+    <maxPerGroup>12</maxPerGroup> <!-- 每组最大数量 -->
+
+    <!-- 生命周期阶段图形配置 -->
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/AgriculturalFrame/AgriculturalFrame</texPath> <!-- 纹理路径 -->
+          <shaderType>CutoutComplex</shaderType> <!-- 着色器类型 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+          <drawSize>3</drawSize> <!-- 绘制尺寸 -->
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume> <!-- 阴影体积 -->
+            <offset>(0,0,0)</offset> <!-- 阴影偏移 -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <!-- 第二个生命周期阶段与第一个相同 -->
+        <bodyGraphicData>
+          <texPath>Mechanoid/AgriculturalFrame/AgriculturalFrame</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+
+    <!-- 武器标签配置（与运输框架一致） -->
+    <weaponTags>
+      <li>Autopistol</li>
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs>

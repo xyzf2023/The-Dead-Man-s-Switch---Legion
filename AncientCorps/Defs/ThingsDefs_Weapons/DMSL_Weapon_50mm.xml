@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 北方红旗(Type59 100mm gun "North Red Flag") - 游戏武器配置文件 -->
+<!-- 定义一个重型自动机枪武器的配置 -->
+<Defs>
+
+    <!-- 主武器定义：Type59 100mm gun "North Red Flag" -->
+    <ThingDef ParentName="DMS_AutomatroidHeavyGun">
+        <!-- 内部标识符，用于在游戏中引用此武器 -->
+        <defName>DMSL_Gun_57MM</defName>
+        
+        <!-- 显示名称，在游戏界面中显示为"Type59 100mm gun "North Red Flag"" -->
+        <label>57MM</label>
+        
+        <!-- 武器描述：半自动反坦克炮，由超重型自动机携带，结构简单可靠 -->
+        <description>由超重型机械体携带的半自动反坦克炮，结构简单可靠，广泛用于各类装甲平台，用于打击坦克与重型机甲等重装甲目标。</description>
+        
+        <!-- 武器标签列表，定义武器分类和特性 -->
+        <weaponTags>
+            <!-- 武器属于Panzer系列 -->
+            <li>DMSL_panzer</li>
+        </weaponTags>
+
+
+        <!-- 图形数据显示设置 -->
+        <graphicData>
+            <!-- 武器纹理路径 -->
+            <texPath>Weapons/DMSL_Weapon_57MM/DMSL_Weapon_57MM</texPath>
+            <!-- 绘制尺寸，控制武器在游戏中的显示大小 -->
+            <drawSize>6.5</drawSize>
+        </graphicData>
+        
+       <!-- 交易属性 -->
+       <tradeability>None</tradeability>
+       <!-- 丢弃时是否销毁 -->
+       <destroyOnDrop>true</destroyOnDrop>
+       <!-- 是否为遗物 -->
+       <relicChance>0</relicChance> 
+
+        <!-- 不可制作 -->
+        <recipeMaker IsNull="True" />
+
+        <!-- 基础属性统计，包括重量、制作工作量和各种距离下的准确度 -->
+        <statBases>
+            <!-- 武器质量：265单位 -->
+            <Mass>265</Mass>
+            <!-- 近距离命中率：89% -->
+            <AccuracyTouch>0.89</AccuracyTouch>
+            <!-- 短距离命中率：100% -->
+            <AccuracyShort>0.8</AccuracyShort>
+            <!-- 中距离命中率：100% -->
+            <AccuracyMedium>0.85</AccuracyMedium>
+            <!-- 远距离命中率：99% -->
+            <AccuracyLong>0.77</AccuracyLong>
+            <!-- 射程武器冷却时间：4 -->
+            <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
+            <MarketValue>0</MarketValue>
+        </statBases>
+        
+        <!-- 组件列表，定义武器可装备性和样式等特性 -->
+        <comps Inherit="False">
+            <!-- 可装备组件，使武器能够被单位装备 -->
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <!-- 禁止性组件，允许玩家禁止此物品 -->
+            <li Class="CompProperties_Forbiddable"/>
+            <!-- 可定制外观组件，允许改变武器外观 -->
+            <li Class="CompProperties_Styleable"/>
+        </comps>
+        
+        <!-- 武器动作定义，包括射击参数和声音效果 -->
+        <verbs>
+            <!-- 定义武器的射击动作 -->
+            <li>
+                <!-- 是否有标准命令，允许玩家直接命令单位使用此武器 -->
+                <hasStandardCommand>true</hasStandardCommand>
+                <!-- 动作类，使用基本射击动作 -->
+                <verbClass>Verb_Shoot</verbClass>
+                <!-- 默认发射的弹药类型 -->
+                <defaultProjectile>DMSL_Bullet_57mm</defaultProjectile>
+                <!-- 是否需要直线视野才能攻击 -->
+                <requireLineOfSight>true</requireLineOfSight>
+                <!-- 预热时间，开火前需要准备的时间 -->
+                <warmupTime>3</warmupTime>
+                <!-- 最小攻击距离：3格 -->
+                <minRange>3</minRange>
+                <!-- 最大攻击距离：48格 -->
+                <range>79.9</range>
+                <!-- AI避免误伤友军的半径 -->
+                <ai_AvoidFriendlyFireRadius>6.9</ai_AvoidFriendlyFireRadius>
+                <!-- 连发次数：单发 -->
+                <burstShotCount>2</burstShotCount>
+                <!-- 开火音效 -->
+                <soundCast>DMS_AC_Shot_MBTCannonSound</soundCast>
+                <!-- 射击尾音 -->
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <!-- 枪口火焰规模 -->
+                <muzzleFlashScale>20</muzzleFlashScale>
+                <!-- 目标参数 -->
+                <targetParams>
+                    <!-- 是否可以攻击地点 -->
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <!-- 强制偏差半径 -->
+                <forcedMissRadius>0.25</forcedMissRadius>
+            </li>
+        </verbs>
+        
+        <!-- 模组扩展功能，包括枪口闪光效果和重型装备扩展 -->
+        <modExtensions>
+            <!-- 枪口闪光效果，需要MuzzleFlash模组支持 -->
+            <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+                <!-- 闪光效果定义 -->
+                <def>MF_StandardMuzzleFalsh</def>
+                <!-- 闪光绘制尺寸 -->
+                <drawSize>(5,5)</drawSize>
+                <!-- 闪光偏移位置 -->
+                <offsets>
+                    <li>(2.1,0)</li>
+                </offsets>
+                <!-- 是否交替闪烁 -->
+                <isAlternately>true</isAlternately>
+            </li>
+            <!-- 重型装备扩展，指定可装备的单位类型 -->
+            <li Class="Fortified.HeavyEquippableExtension">
+                <!-- 指定只有超重型自动机可以装备 -->
+                <EquippableDef>UltraHeavyAutomatroid</EquippableDef>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <!-- 定义与该武器对应的弹药配置 -->
+    <ThingDef ParentName="BaseBullet">
+        <!-- 弹药内部标识符 -->
+        <defName>DMSL_Bullet_57mm</defName>
+        
+        <!-- 弹药显示名称 -->
+        <label>脱壳穿甲弹</label>
+        
+        <!-- 实体类，使用锥形爆炸投射物 -->
+        <thingClass>Fortified.Projectile_ConeExplosive</thingClass>
+        
+        <!-- 弹药图形数据显示设置 -->
+        <graphicData>
+            <!-- 弹药纹理路径 -->
+            <texPath>Things/Projectile/Bullet_Big</texPath>
+            <!-- 图形类，使用单一图形 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 弹药绘制尺寸 -->
+            <drawSize>1</drawSize>
+        </graphicData>
+        
+        <!-- 投射物属性定义，包括飞行、爆炸延迟、伤害等参数 -->
+        <projectile>
+            <!-- 是否从头顶飞过 -->
+            <flyOverhead>true</flyOverhead>
+            <!-- 爆炸延迟：1 -->
+            <explosionDelay>1</explosionDelay>
+            <!-- 爆炸音效 -->
+            <soundExplode>Explosion_Rocket</soundExplode>
+            <!-- 伤害类型：子弹 -->
+            <damageDef>Bullet</damageDef>
+            <!-- 基础伤害值：160 -->
+            <damageAmountBase>60</damageAmountBase>
+            <!-- 基础护甲穿透力：1.5 -->
+            <armorPenetrationBase>0.7</armorPenetrationBase>
+            <!-- 制动功率：10，影响目标移动能力 -->
+            <stoppingPower>10</stoppingPower>
+            <!-- 飞行速度：110 -->
+            <speed>110</speed>
+            <!-- 弧线高度因子：0.1 -->
+            <arcHeightFactor>0.1</arcHeightFactor>
+            <!-- 阴影大小：0.6 -->
+            <shadowSize>0.6</shadowSize>
+        </projectile>
+        
+        <!-- 扩展爆炸效果属性 -->
+        <modExtensions>
+            <!-- 爆炸扩展 -->
+            <li Class="Fortified.ExplosiveExtension">
+                <!-- 爆炸伤害类型 -->
+                <damage>Bullet</damage>
+                <!-- 爆炸伤害数值：60 -->
+                <damageAmount>40</damageAmount>
+                <!-- 爆炸穿甲能力：1.1 -->
+                <armorPen>0.6</armorPen>
+                <!-- 预爆炸偏移：4 -->
+                <preExplosionOffset>4</preExplosionOffset>
+                <!-- 爆炸范围：10 -->
+                <range>6</range>
+                <!-- 摇摆角度：8 -->
+                <swayAngle>8</swayAngle>
+                <!-- 是否有视觉效果：否 -->
+                <doVisualEffects>false</doVisualEffects>
+                <!-- 效果器定义 -->
+                <effecterDef>DMS_ConeExplosion</effecterDef>
+            </li>
+        </modExtensions>
+        
+        <!-- 弹药组件，包括发射效果和爆炸效果 -->
+        <comps>
+            <!-- 投射物效果器组件：发射尘土效果 -->
+            <li Class="CompProperties_ProjectileEffecter">
+                <effecterDef>DMS_LaunchDust</effecterDef>
+            </li>
+            <!-- 爆炸组件 -->
+            <li Class="CompProperties_Explosive">
+                <!-- 爆炸半径：1.1 -->
+                <explosiveRadius>1.1</explosiveRadius>
+                <!-- 爆炸伤害类型：子弹 -->
+                <explosiveDamageType>Bullet</explosiveDamageType>
+                <!-- 爆炸基础护甲穿透：0.4 -->
+                <armorPenetrationBase>0.7</armorPenetrationBase>
+                <!-- 爆炸基础伤害：100 -->
+                <damageAmountBase>100</damageAmountBase>
+                <!-- 被摧毁时爆炸：是 -->
+                <explodeOnDestroyed>true</explodeOnDestroyed>
+                <!-- 被击杀时爆炸：是 -->
+                <explodeOnKilled>true</explodeOnKilled>
+                <!-- 是否播放音效：否 -->
+                <doSoundEffects>false</doSoundEffects>
+                <!-- 是否对爆炸周围格子造成伤害：是 -->
+                <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+            </li>
+        </comps>
+    </ThingDef>
+</Defs>

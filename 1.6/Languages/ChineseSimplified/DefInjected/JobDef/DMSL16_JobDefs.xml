@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 1.6 Defs/JobDefs -->
+  <DMSL_Job_HighVoltageShockStrike.label>释放高压电击</DMSL_Job_HighVoltageShockStrike.label>
+  <DMSL_Job_HighVoltageShockStrike.reportString>正在对{0}释放高压电击。</DMSL_Job_HighVoltageShockStrike.reportString>
+</LanguageData>

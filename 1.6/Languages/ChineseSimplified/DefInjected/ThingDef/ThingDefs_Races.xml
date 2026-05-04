@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Races - 机兵与无人机 -->
+  <DMSL_Mech_Commander.label>指挥官</DMSL_Mech_Commander.label>
+  <DMSL_Mech_Commander.description>用于承担军团内信息指挥链的指挥机机兵，用于带宽分流能力，可以协助机械师控制机械体。拥有带领远征队的能力。</DMSL_Mech_Commander.description>
+  <DMSL_Mech_Shaman.label>萨满</DMSL_Mech_Shaman.label>
+  <DMSL_Mech_Shaman.description>一种搭载了起灵装置的、拥有提供群体隐身能力的机械体。</DMSL_Mech_Shaman.description>
+  <DMSL_Mech_Scout.label>斥候</DMSL_Mech_Scout.label>
+  <DMSL_Mech_Scout.description>一种配备了机械马的先锋，由人工肌肉提供无与伦比的速度使得它在侦查方面有不可替代的优势。</DMSL_Mech_Scout.description>
+  <DMSL_Mech_Guardian.label>近卫</DMSL_Mech_Guardian.label>
+  <DMSL_Mech_Guardian.description>为高烈度战区准备的装备厚重装甲与高集成度观瞄设备的机兵。</DMSL_Mech_Guardian.description>
+  <DMSL_Mech_Arsonist.label>纵火者</DMSL_Mech_Arsonist.label>
+  <DMSL_Mech_Arsonist.description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</DMSL_Mech_Arsonist.description>
+  <DMSL_Mech_SupportFrame.label>支援框架</DMSL_Mech_SupportFrame.label>
+  <DMSL_Mech_SupportFrame.description>战斗框架的改进型号之一，用于测试重武器在步行机上的效果</DMSL_Mech_SupportFrame.description>
+  <DMSL_Drone_CommandingBird.label>指挥鸟</DMSL_Drone_CommandingBird.label>
+  <DMSL_Drone_CommandingBird.description>一种由腰带释放出的微型指挥无人机，以帮助机械师在远离前线的地方指挥战斗。</DMSL_Drone_CommandingBird.description>
+  <DMSL_Mech_Terra.label>尘世</DMSL_Mech_Terra.label>
+  <DMSL_Mech_Terra.description>一款曾用于执行突袭任务的机械体，特殊的仿生适配可以使其自由穿戴人类装备。</DMSL_Mech_Terra.description>
+  <DMSL_Mech_Engineer.label>工程师</DMSL_Mech_Engineer.label>
+  <DMSL_Mech_Engineer.description>配备了机械体重启设备的工程机机兵。可以维修受损机械体，或者修复已经关机的机械体并将其重启。</DMSL_Mech_Engineer.description>
+  <DMSL_Mech_Commandos.label>机动射手</DMSL_Mech_Commandos.label>
+  <DMSL_Mech_Commandos.description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</DMSL_Mech_Commandos.description>
+  <DMSL_Mech_SpecialPolice.label>特种警察</DMSL_Mech_SpecialPolice.label>
+  <DMSL_Mech_SpecialPolice.description>装备了电击设备与喷气护肩的镇暴机兵。</DMSL_Mech_SpecialPolice.description>
+  <DMSL_Mech_DesignatedMarksman.label>精确射手</DMSL_Mech_DesignatedMarksman.label>
+  <DMSL_Mech_DesignatedMarksman.description>狙击手昂贵的价格使他难以承担班组狙击手的任务，而精确射手应运而生。</DMSL_Mech_DesignatedMarksman.description>
+  <DMSL_Mech_ArmoredGrenadiers.label>装甲掷弹兵</DMSL_Mech_ArmoredGrenadiers.label>
+  <DMSL_Mech_ArmoredGrenadiers.description>用于承担高烈度战区的反坦克任务与投掷各种手雷的机兵。</DMSL_Mech_ArmoredGrenadiers.description>
+  <DMSL_Mech_DoctorFrame.label>医护框架</DMSL_Mech_DoctorFrame.label>
+  <DMSL_Mech_DoctorFrame.description>战斗框架的改进型号之一，可以承担救护和烹饪工作。您不会拿他做救死扶伤以外的事情，对吧？</DMSL_Mech_DoctorFrame.description>
+  <DMSL_Mech_AgriculturalFrame.label>农业框架</DMSL_Mech_AgriculturalFrame.label>
+  <DMSL_Mech_AgriculturalFrame.description>战斗框架的改进型号之一，用于执行耕作任务。常在某些文学作品里作为和平与爱的象征之一。当它完成收获时会额外掉落2-3个干草</DMSL_Mech_AgriculturalFrame.description>
+  <DMSL_Mech_DrillingBarge.label>钻井驳机</DMSL_Mech_DrillingBarge.label>
+  <DMSL_Mech_DrillingBarge.description>战斗框架的改进型号之一，主要用于矿业领域，也能自主开采地下的矿层。</DMSL_Mech_DrillingBarge.description>
+</LanguageData>

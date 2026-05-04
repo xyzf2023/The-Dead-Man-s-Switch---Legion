@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ==================== AmmoCategory ========================== -->
+
+	<CombatExtended.AmmoCategoryDef>
+		<defName>DMSL_Decoy</defName>
+		<label>电子诱饵弹</label>
+		<description>发射后在落点生成电子诱饵信号，可改变空袭轰炸机的攻击目标。</description>
+	</CombatExtended.AmmoCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<!-- 诱饵弹弹药注入到 81mm 迫击炮弹药集 (通过 Patch 实现) -->
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="81mmMortarShellBaseCraftableBase">
+		<defName>DMSL_Shell_BaitTarget</defName>
+		<label>81mm电子诱饵弹</label>
+		<description>一种特殊的迫击炮弹药，在落地时会生成电子诱饵信号，改变空袭轰炸机的目标，可以用于将空袭引导到指定位置，常常作为应对空袭的手段。使用81mm迫击炮发射。\n\n&lt;i&gt;"最好的使用方式是把它丢到来袭击的家伙堆里，这样他们就会被自己呼叫的'支援'炸上天！"\n      ————来自某位不愿意透露姓名的士兵&lt;/i&gt;</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Shell/Shell_HighExplosive</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>4.1</Mass>
+			<Bulk>8.17</Bulk>
+		</statBases>
+		<ammoClass>DMSL_Decoy</ammoClass>
+		<detonateProjectile>DMSL_Bullet_81mmMortarShell_BaitTarget</detonateProjectile>
+		<spawnAsSiegeAmmo>false</spawnAsSiegeAmmo>
+		<modExtensions>
+			<li Class="CombatExtended.GenericLabelExtension">
+				<genericLabel>电子诱饵弹</genericLabel>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ==================== Projectile ========================== -->
+
+	<ThingDef ParentName="Base81mmMortarShell">
+		<defName>DMSL_Bullet_81mmMortarShell_BaitTarget</defName>
+		<label>81mm电子诱饵弹</label>
+		<thingClass>DMS_Legion.AerialRaid.ProjectileCE_BaitTargetShell</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/ShellSmoke</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Smoke</damageDef>
+			<suppressionFactor>0.0</suppressionFactor>
+			<dangerFactor>0.0</dangerFactor>
+			<explosionRadius>1</explosionRadius>
+			<flyOverhead>true</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>MortarBomb_Explode</soundExplode>
+			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+			<postExplosionGasType>BlindSmoke</postExplosionGasType>
+			<preExplosionSpawnChance>1</preExplosionSpawnChance>
+			<shellingProps>
+				<damage>0</damage>
+			</shellingProps>
+		</projectile>
+		<modExtensions>
+			<li Class="CombatExtended.GenericLabelExtension">
+				<genericLabel>电子诱饵弹</genericLabel>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ==================== Recipe ========================== -->
+
+	<RecipeDef ParentName="ArtilleryAmmoRecipeBase">
+		<defName>MakeDMSL_Shell_BaitTarget</defName>
+		<label>制作81mm电子诱饵弹x5</label>
+		<description>Craft 5 81mm electronic decoy mortar shells.</description>
+		<jobString>Making 81mm electronic decoy mortar shells.</jobString>
+		<workAmount>6600</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>50</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<DMSL_Shell_BaitTarget>5</DMSL_Shell_BaitTarget>
+		</products>
+		<modExtensions>
+			<li Class="CombatExtended.GenericLabelExtension">
+				<genericLabel>制作81mm电子诱饵弹x5</genericLabel>
+				<genericDescription>Craft 5 81mm electronic decoy mortar shells.</genericDescription>
+				<genericJobString>Making 81mm electronic decoy mortar shells.</genericJobString>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- CE Defs/Ammo/Shell_BaitTarget_CE.xml -->
+  <DMSL_Shell_BaitTarget.label>81mm Electronic Decoy Shell</DMSL_Shell_BaitTarget.label>
+  <DMSL_Shell_BaitTarget.description>A special mortar round that generates an electronic decoy signal on impact, diverting aerial bombers to a new target. Fired from 81mm mortars. Can be used to redirect airstrikes to a chosen location.\n\n&lt;i&gt;"Best way to use it: drop it right on the raiders. They'll get blown sky-high by their own 'support'!"\n      — An anonymous soldier&lt;/i&gt;</DMSL_Shell_BaitTarget.description>
+  <DMSL_Bullet_81mmMortarShell_BaitTarget.label>81mm Electronic Decoy Shell</DMSL_Bullet_81mmMortarShell_BaitTarget.label>
+</LanguageData>

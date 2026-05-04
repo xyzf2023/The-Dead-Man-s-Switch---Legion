@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Buildings/DMSL_BandwidthAmplifier.xml; 御械师→mechanitor、集群收发器→Cluster Transceiver（参考失能机关） -->
+  <DMSL_Building_BandwidthAmplifier.label>Bandwidth amplifier</DMSL_Building_BandwidthAmplifier.label>
+  <DMSL_Building_BandwidthAmplifier.description>A device that assists mechanitors in controlling mechanoids. It has a built-in energy storage unit and can continue to provide stable bandwidth when power is cut.\n\nProvides 2 bandwidth by default. After researching "Cluster Transceiver", it is enhanced to provide 3 bandwidth and improves charge rate and capacity while reducing power demand.</DMSL_Building_BandwidthAmplifier.description>
+
+  <!-- Defs/ThingDefs_Buildings/DMSL_IntegratedDetectionArray.xml -->
+  <DMSL_Building_IntegratedDetectionArray.label>Integrated Detection Array</DMSL_Building_IntegratedDetectionArray.label>
+  <DMSL_Building_IntegratedDetectionArray.description>A combined tactical facility for electronic warfare and resource reconnaissance. It can automatically perform local vein scanning or long-range mineral scanning, and can also produce decoy coordinates to disrupt enemy airstrike target selection.</DMSL_Building_IntegratedDetectionArray.description>
+</LanguageData>

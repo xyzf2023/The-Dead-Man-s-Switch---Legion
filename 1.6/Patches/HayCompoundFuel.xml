@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 将干草加入「用有机物制作化合燃料」配方 -->
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/RecipeDef[defName='Make_ChemfuelFromOrganics']/fixedIngredientFilter/disallowedThingDefs/li[.='Hay']</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/RecipeDef[defName='Make_ChemfuelFromOrganics']/ingredients/li/filter/disallowedThingDefs/li[.='Hay']</xpath>
+	</Operation>
+</Patch>

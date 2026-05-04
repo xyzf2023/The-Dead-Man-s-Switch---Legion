@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 1.6 Defs/JobDefs -->
+  <DMSL_Job_HighVoltageShockStrike.label>Discharge High-Voltage Shock</DMSL_Job_HighVoltageShockStrike.label>
+  <DMSL_Job_HighVoltageShockStrike.reportString>Discharging High-Voltage Shock at {0}.</DMSL_Job_HighVoltageShockStrike.reportString>
+</LanguageData>

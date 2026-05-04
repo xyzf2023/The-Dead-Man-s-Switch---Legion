@@ -1,0 +1,692 @@
+<Defs>
+  <BodyDef>
+    <!-- 定义名称，用于在游戏中引用此身体结构 -->
+    <defName>DMSL_MechanicsCavalryman_TypeA</defName>
+    <!-- 显示标签，游戏中显示的名称 -->
+    <label>斥候体型</label>
+    <!-- 核心身体部分定义 -->
+    <corePart>
+      <!-- 核心躯干部分，使用机械胸腔作为基础 -->
+      <def>MechanicalThorax</def>
+      <!-- 身体高度设定为中等 -->
+      <height>Middle</height>
+      <!-- 深度层级设定为外部 -->
+      <depth>Outside</depth>
+      <!-- 身体组成部分列表 -->
+      <parts>
+        <!-- 机械颈部连接头部 -->
+        <li>
+          <def>MechanicalNeck</def>
+          <!-- 颈部占躯干面积的5% -->
+          <coverage>0.05</coverage>
+          <!-- 位置高度设定为顶部 -->
+          <height>Top</height>
+          <!-- 颈部连接的子部件 -->
+          <parts>
+            <!-- 主要头部组件，使用狙击头传感器 -->
+            <li>
+              <def>DMS_SniperHead</def>
+              <!-- 头部占颈部面积的40% -->
+              <coverage>0.40</coverage>
+              <!-- 将头部标记为攻击工具组 -->
+              <groups>
+                <li>HeadAttackTool</li>
+              </groups>
+              <!-- 头部内部的子部件 -->
+              <parts>
+                <!-- 人工大脑，作为处理核心 -->
+                <li>
+                  <def>ArtificialBrain</def>
+                  <!-- 人工大脑占头部面积的5% -->
+                  <coverage>0.05</coverage>
+                  <!-- 内部深度 -->
+                  <depth>Inside</depth>
+                </li>
+                <!-- 中央视觉传感器 -->
+                <li>
+                  <def>SightSensor</def>
+                  <!-- 自定义标签为中央视觉传感器 -->
+                  <customLabel>中央视觉传感器</customLabel>
+                  <!-- 占头部面积的20% -->
+                  <coverage>0.20</coverage>
+                </li>
+                <!-- 左红外传感器 -->
+                <li>
+                  <def>SightSensor</def>
+                  <!-- 自定义标签为左红外传感器 -->
+                  <customLabel>左红外传感器</customLabel>
+                  <!-- 占头部面积的10% -->
+                  <coverage>0.10</coverage>
+                </li>
+                <!-- 右红外传感器 -->
+                <li>
+                  <def>SightSensor</def>
+                  <!-- 自定义标签为右红外传感器 -->
+                  <customLabel>右红外传感器</customLabel>
+                  <!-- 占头部面积的10% -->
+                  <coverage>0.10</coverage>
+                </li>
+                <!-- 左视觉传感器 -->
+                <li>
+                  <def>SightSensor</def>
+                  <!-- 自定义标签为左视觉传感器 -->
+                  <customLabel>左视觉传感器</customLabel>
+                  <!-- 占头部面积的10% -->
+                  <coverage>0.10</coverage>
+                </li>
+                <!-- 右视觉传感器 -->
+                <li>
+                  <def>SightSensor</def>
+                  <!-- 自定义标签为右视觉传感器 -->
+                  <customLabel>右视觉传感器</customLabel>
+                  <!-- 占头部面积的10% -->
+                  <coverage>0.10</coverage>
+                </li>
+                <!-- 左听觉传感器 -->
+                <li>
+                  <def>HearingSensor</def>
+                  <!-- 自定义标签为左听觉传感器 -->
+                  <customLabel>左听觉传感器</customLabel>
+                  <!-- 占头部面积的5% -->
+                  <coverage>0.05</coverage>
+                </li>
+                <!-- 右听觉传感器 -->
+                <li>
+                  <def>HearingSensor</def>
+                  <!-- 自定义标签为右听觉传感器 -->
+                  <customLabel>右听觉传感器</customLabel>
+                  <!-- 占头部面积的5% -->
+                  <coverage>0.05</coverage>
+                </li>
+                <!-- 嗅觉传感器 -->
+                <li>
+                  <def>SmellSensor</def>
+                  <!-- 占头部面积的5% -->
+                  <coverage>0.05</coverage>
+                </li>
+              </parts>
+            </li>
+            <!-- 头部顶部装甲板 -->
+            <li>
+              <def>DMS_ArmourPlate</def>
+              <!-- 装甲板占头部面积的40% -->
+              <coverage>0.40</coverage>
+              <!-- 位置高度设定为顶部 -->
+              <height>Top</height>
+            </li>
+          </parts>
+        </li>
+        <!-- 左肩组件 -->
+        <li>
+          <def>MechanicalShoulder</def>
+          <!-- 自定义标签为左肩 -->
+          <customLabel>左肩</customLabel>
+          <!-- 占躯干面积的8% -->
+          <coverage>0.08</coverage>
+          <!-- 左肩的子部件 -->
+          <parts>
+            <!-- 左臂组件 -->
+            <li>
+              <def>MechanicalArm</def>
+              <!-- 自定义标签为左臂 -->
+              <customLabel>左臂</customLabel>
+              <!-- 占左肩面积的85% -->
+              <coverage>0.85</coverage>
+              <!-- 左臂的子部件 -->
+              <parts>
+                <!-- 左手组件 -->
+                <li>
+                  <def>MechanicalHand</def>
+                  <!-- 自定义标签为左手 -->
+                  <customLabel>左手</customLabel>
+                  <!-- 占左臂面积的20% -->
+                  <coverage>0.2</coverage>
+                  <!-- 位置高度设定为底部 -->
+                  <height>Bottom</height>
+                  <!-- 左手的子部件 -->
+                  <parts>
+                    <!-- 左小指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为左小指 -->
+                      <customLabel>左小指</customLabel>
+                      <!-- 占左手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 归属到左手工具组 -->
+                      <groups>
+                        <li>LeftHand</li>
+                      </groups>
+                    </li>
+                    <!-- 左中指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为左中指 -->
+                      <customLabel>左中指</customLabel>
+                      <!-- 占左手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 同时归属到左手工具组和中指工具组 -->
+                      <groups>
+                        <li>LeftHand</li>
+                        <li>MiddleFingers</li>
+                      </groups>
+                    </li>
+                    <!-- 左食指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为左食指 -->
+                      <customLabel>左食指</customLabel>
+                      <!-- 占左手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 归属到左手工具组 -->
+                      <groups>
+                        <li>LeftHand</li>
+                      </groups>
+                    </li>
+                    <!-- 左拇指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为左拇指 -->
+                      <customLabel>左拇指</customLabel>
+                      <!-- 占左手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 归属到左手工具组 -->
+                      <groups>
+                        <li>LeftHand</li>
+                      </groups>
+                    </li>
+                  </parts>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+        <!-- 右肩组件 -->
+        <li>
+          <def>MechanicalShoulder</def>
+          <!-- 自定义标签为右机械肩 -->
+          <customLabel>右肩</customLabel>
+          <!-- 占躯干面积的8% -->
+          <coverage>0.08</coverage>
+          <!-- 右肩的子部件 -->
+          <parts>
+            <!-- 右臂组件 -->
+            <li>
+              <def>MechanicalArm</def>
+              <!-- 自定义标签为右臂 -->
+              <customLabel>右臂</customLabel>
+              <!-- 占右肩面积的85% -->
+              <coverage>0.85</coverage>
+              <!-- 右臂的子部件 -->
+              <parts>
+                <!-- 右手组件 -->
+                <li>
+                  <def>MechanicalHand</def>
+                  <!-- 自定义标签为右手 -->
+                  <customLabel>右手</customLabel>
+                  <!-- 占右臂面积的20% -->
+                  <coverage>0.2</coverage>
+                  <!-- 位置高度设定为底部 -->
+                  <height>Bottom</height>
+                  <!-- 右手的子部件 -->
+                  <parts>
+                    <!-- 右小指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为右小指 -->
+                      <customLabel>右小指</customLabel>
+                      <!-- 占右手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 归属到右手工具组 -->
+                      <groups>
+                        <li>RightHand</li>
+                      </groups>
+                    </li>
+                    <!-- 右中指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为右中指 -->
+                      <customLabel>右中指</customLabel>
+                      <!-- 占右手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 同时归属到右手工具组和中指工具组 -->
+                      <groups>
+                        <li>RightHand</li>
+                        <li>MiddleFingers</li>
+                      </groups>
+                    </li>
+                    <!-- 右食指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为右食指 -->
+                      <customLabel>右食指</customLabel>
+                      <!-- 占右手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 归属到右手工具组 -->
+                      <groups>
+                        <li>RightHand</li>
+                      </groups>
+                    </li>
+                    <!-- 右拇指 -->
+                    <li>
+                      <def>MechanicalFinger</def>
+                      <!-- 自定义标签为右拇指 -->
+                      <customLabel>右拇指</customLabel>
+                      <!-- 占右手面积的15% -->
+                      <coverage>0.15</coverage>
+                      <!-- 归属到右手工具组 -->
+                      <groups>
+                        <li>RightHand</li>
+                      </groups>
+                    </li>
+                  </parts>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+        <!-- 前左腿组件 (新增) -->
+        <li>
+          <def>MechanicalLeg</def>
+          <!-- 自定义标签为前左机械马腿 -->
+          <customLabel>前左机械马腿</customLabel>
+          <!-- 占躯干面积的10% -->
+          <coverage>0.10</coverage>
+          <!-- 位置高度设定为底部 -->
+          <height>Bottom</height>
+          <!-- 前左腿的子部件 -->
+          <parts>
+            <!-- 前左马蹄组件 -->
+            <li>
+              <def>MechanicalFoot</def>
+              <!-- 自定义标签为前左机械马蹄 -->
+              <customLabel>前左机械马蹄</customLabel>
+              <!-- 占前左腿面积的20% -->
+              <coverage>0.2</coverage>
+            </li>
+          </parts>
+        </li>
+        <!-- 前右腿组件 (新增) -->
+        <li>
+          <def>MechanicalLeg</def>
+          <!-- 自定义标签为前右机械马腿 -->
+          <customLabel>前右机械马腿</customLabel>
+          <!-- 占躯干面积的10% -->
+          <coverage>0.10</coverage>
+          <!-- 位置高度设定为底部 -->
+          <height>Bottom</height>
+          <!-- 前右腿的子部件 -->
+          <parts>
+            <!-- 前右马蹄组件 -->
+            <li>
+              <def>MechanicalFoot</def>
+              <!-- 自定义标签为前右机械马蹄 -->
+              <customLabel>前右机械马蹄</customLabel>
+              <!-- 占前右腿面积的20% -->
+              <coverage>0.2</coverage>
+            </li>
+          </parts>
+        </li>
+        <!-- 后左腿组件 (新增) -->
+        <li>
+          <def>MechanicalLeg</def>
+          <!-- 自定义标签为后左机械马腿 -->
+          <customLabel>后左机械马腿</customLabel>
+          <!-- 占躯干面积的10% -->
+          <coverage>0.10</coverage>
+          <!-- 位置高度设定为底部 -->
+          <height>Bottom</height>
+          <!-- 后左腿的子部件 -->
+          <parts>
+            <!-- 后左马蹄组件 -->
+            <li>
+              <def>MechanicalFoot</def>
+              <!-- 自定义标签为后左机械马蹄 -->
+              <customLabel>后左机械马蹄</customLabel>
+              <!-- 占后左腿面积的20% -->
+              <coverage>0.2</coverage>
+            </li>
+          </parts>
+        </li>
+        <!-- 后右腿组件 (新增) -->
+        <li>
+          <def>MechanicalLeg</def>
+          <!-- 自定义标签为后右机械马腿 -->
+          <customLabel>后右机械马腿</customLabel>
+          <!-- 占躯干面积的10% -->
+          <coverage>0.10</coverage>
+          <!-- 位置高度设定为底部 -->
+          <height>Bottom</height>
+          <!-- 后右腿的子部件 -->
+          <parts>
+            <!-- 后右马蹄组件 -->
+            <li>
+              <def>MechanicalFoot</def>
+              <!-- 自定义标签为后右机械马蹄 -->
+              <customLabel>后右机械马蹄</customLabel>
+              <!-- 占后右腿面积的20% -->
+              <coverage>0.2</coverage>
+            </li>
+          </parts>
+        </li>
+        <!-- 腰部装甲板 -->
+        <li>
+          <def>DMS_ArmourPlate</def>
+          <!-- 自定义标签为腰部装甲板 -->
+          <customLabel>腰部装甲板</customLabel>
+          <!-- 占躯干面积的8% -->
+          <coverage>0.08</coverage>
+          <!-- 外部深度 -->
+          <depth>Outside</depth>
+        </li>
+        <!-- 胸部装甲板 -->
+        <li>
+          <def>DMS_ArmourPlate</def>
+          <!-- 自定义标签为胸部装甲板 -->
+          <customLabel>胸部装甲板</customLabel>
+          <!-- 占躯干面积的10% -->
+          <coverage>0.10</coverage>
+          <!-- 外部深度 -->
+          <depth>Outside</depth>
+        </li>
+        <!-- 主电池 -->
+        <li>
+          <def>DMS_Battery</def>
+          <!-- 自定义标签为主电池 -->
+          <customLabel>主电池</customLabel>
+          <!-- 占躯干面积的1.5% -->
+          <coverage>0.015</coverage>
+          <!-- 内部深度 -->
+          <depth>Inside</depth>
+        </li>
+        <!-- 辅助电池1 -->
+        <li>
+          <def>DMS_Battery</def>
+          <!-- 自定义标签为辅助电池1 -->
+          <customLabel>第一辅助电池</customLabel>
+          <!-- 占躯干面积的1.5% -->
+          <coverage>0.015</coverage>
+          <!-- 内部深度 -->
+          <depth>Inside</depth>
+        </li>
+        <!-- 辅助电池2 (新增) -->
+        <li>
+          <def>DMS_Battery</def>
+          <!-- 自定义标签为辅助电池2 -->
+          <customLabel>第二辅助电池</customLabel>
+          <!-- 占躯干面积的1.5% -->
+          <coverage>0.015</coverage>
+          <!-- 内部深度 -->
+          <depth>Inside</depth>
+        </li>
+        <!-- 流体处理器1 -->
+        <li>
+          <def>FluidReprocessor</def>
+          <!-- 占躯干面积的3% -->
+          <coverage>0.03</coverage>
+          <!-- 内部深度 -->
+          <depth>Inside</depth>
+        </li>
+        <!-- 流体处理器2 -->
+        <li>
+          <def>FluidReprocessor</def>
+          <!-- 占躯干面积的3% -->
+          <coverage>0.03</coverage>
+          <!-- 内部深度 -->
+          <depth>Inside</depth>
+        </li>
+        <!-- 流体处理器3 (新增) -->
+        <li>
+          <def>FluidReprocessor</def>
+          <!-- 占躯干面积的3% -->
+          <coverage>0.03</coverage>
+          <!-- 内部深度 -->
+          <depth>Inside</depth>
+        </li>
+      </parts>
+    </corePart>
+  </BodyDef>
+
+<!-- 尘世：简化体型，仅保留重要大型部位，便于人类装备兼容 -->
+  <BodyDef>
+    <defName>DMSL_Body_Terra</defName>
+    <label>尘世</label>
+    <corePart>
+      <!-- 躯干 -->
+      <def>Torso</def>
+      <customLabel>躯干</customLabel>
+      <height>Middle</height>
+      <depth>Outside</depth>
+      <groups>
+        <li>Torso</li>
+      </groups>
+      <parts>
+        <!-- 脊柱 -->
+        <li>
+          <def>Spine</def>
+          <customLabel>脊柱</customLabel>
+          <coverage>0.025</coverage>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <!-- 反应堆 -->
+        <li>
+          <def>Reactor</def>
+          <customLabel>反应堆</customLabel>
+          <coverage>0.020</coverage>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <!-- 颈部 -->
+        <li>
+          <def>Neck</def>
+          <customLabel>颈部</customLabel>
+          <coverage>0.075</coverage>
+          <height>Top</height>
+          <groups>
+            <li>Neck</li>
+          </groups>
+          <parts>
+            <!-- 头部（保留双眼，命名为视觉传感器） -->
+            <li>
+              <def>Head</def>
+              <customLabel>头部</customLabel>
+              <coverage>0.80</coverage>
+              <groups>
+                <li>UpperHead</li>
+                <li>FullHead</li>
+                <li>HeadAttackTool</li>
+              </groups>
+              <parts>
+                <!-- 颅骨 + 大脑 -->
+                <li>
+                  <def>Skull</def>
+                  <customLabel>颅骨</customLabel>
+                  <coverage>0.18</coverage>
+                  <depth>Inside</depth>
+                  <groups>
+                    <li>UpperHead</li>
+                    <li>FullHead</li>
+                  </groups>
+                  <parts>
+                    <li>
+                      <def>Brain</def>
+                      <customLabel>大脑</customLabel>
+                      <coverage>0.8</coverage>
+                      <groups>
+                        <li>UpperHead</li>
+                        <li>FullHead</li>
+                      </groups>
+                    </li>
+                  </parts>
+                </li>
+                <!-- 左视觉传感器 -->
+                <li>
+                  <def>Eye</def>
+                  <customLabel>左视觉传感器</customLabel>
+                  <coverage>0.07</coverage>
+                  <groups>
+                    <li>FullHead</li>
+                    <li>Eyes</li>
+                  </groups>
+                  <woundAnchorTag>LeftEye</woundAnchorTag>
+                  <flipGraphic>true</flipGraphic>
+                  <visibleHediffRots>
+                    <li>South</li>
+                    <li>West</li>
+                  </visibleHediffRots>
+                </li>
+                <!-- 右视觉传感器 -->
+                <li>
+                  <def>Eye</def>
+                  <customLabel>右视觉传感器</customLabel>
+                  <coverage>0.07</coverage>
+                  <groups>
+                    <li>FullHead</li>
+                    <li>Eyes</li>
+                  </groups>
+                  <woundAnchorTag>RightEye</woundAnchorTag>
+                  <visibleHediffRots>
+                    <li>South</li>
+                    <li>East</li>
+                  </visibleHediffRots>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+        <!-- 左肩（无锁骨） -->
+        <li>
+          <def>Shoulder</def>
+          <customLabel>左肩</customLabel>
+          <coverage>0.12</coverage>
+          <woundAnchorTag>LeftShoulder</woundAnchorTag>
+          <flipGraphic>true</flipGraphic>
+          <groups>
+            <li>Shoulders</li>
+          </groups>
+          <parts>
+            <!-- 左臂（无肱骨、桡骨） -->
+            <li>
+              <def>Arm</def>
+              <customLabel>左臂</customLabel>
+              <coverage>0.77</coverage>
+              <flipGraphic>true</flipGraphic>
+              <groups>
+                <li>Arms</li>
+              </groups>
+              <parts>
+                <!-- 左手（无手指，groups 保留以兼容武器） -->
+                <li>
+                  <def>Hand</def>
+                  <customLabel>左手</customLabel>
+                  <coverage>0.35</coverage>
+                  <height>Bottom</height>
+                  <flipGraphic>true</flipGraphic>
+                  <groups>
+                    <li>Hands</li>
+                    <li>LeftHand</li>
+                    <li>MiddleFingers</li>
+                  </groups>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+        <!-- 右肩（无锁骨） -->
+        <li>
+          <def>Shoulder</def>
+          <customLabel>右肩</customLabel>
+          <coverage>0.12</coverage>
+          <woundAnchorTag>RightShoulder</woundAnchorTag>
+          <groups>
+            <li>Shoulders</li>
+          </groups>
+          <parts>
+            <!-- 右臂（无肱骨、桡骨） -->
+            <li>
+              <def>Arm</def>
+              <customLabel>右臂</customLabel>
+              <coverage>0.77</coverage>
+              <groups>
+                <li>Arms</li>
+              </groups>
+              <parts>
+                <!-- 右手（无手指） -->
+                <li>
+                  <def>Hand</def>
+                  <customLabel>右手</customLabel>
+                  <coverage>0.35</coverage>
+                  <height>Bottom</height>
+                  <groups>
+                    <li>Hands</li>
+                    <li>RightHand</li>
+                    <li>MiddleFingers</li>
+                  </groups>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+        <!-- 腰部 -->
+        <li>
+          <def>Waist</def>
+          <coverage>0</coverage>
+          <height>Bottom</height>
+          <groups>
+            <li>Waist</li>
+          </groups>
+        </li>
+        <!-- 左腿（无股骨、胫骨） -->
+        <li>
+          <def>Leg</def>
+          <customLabel>左腿</customLabel>
+          <coverage>0.14</coverage>
+          <height>Bottom</height>
+          <groups>
+            <li>Legs</li>
+          </groups>
+          <woundAnchorTag>LeftLeg</woundAnchorTag>
+          <flipGraphic>true</flipGraphic>
+          <parts>
+            <!-- 左脚（无脚趾） -->
+            <li>
+              <def>Foot</def>
+              <customLabel>左脚</customLabel>
+              <coverage>0.4</coverage>
+              <flipGraphic>true</flipGraphic>
+              <groups>
+                <li>Feet</li>
+              </groups>
+            </li>
+          </parts>
+        </li>
+        <!-- 右腿（无股骨、胫骨） -->
+        <li>
+          <def>Leg</def>
+          <customLabel>右腿</customLabel>
+          <coverage>0.14</coverage>
+          <height>Bottom</height>
+          <groups>
+            <li>Legs</li>
+          </groups>
+          <woundAnchorTag>RightLeg</woundAnchorTag>
+          <parts>
+            <!-- 右脚（无脚趾） -->
+            <li>
+              <def>Foot</def>
+              <customLabel>右脚</customLabel>
+              <coverage>0.4</coverage>
+              <groups>
+                <li>Feet</li>
+              </groups>
+            </li>
+          </parts>
+        </li>
+      </parts>
+    </corePart>
+  </BodyDef>
+</Defs>

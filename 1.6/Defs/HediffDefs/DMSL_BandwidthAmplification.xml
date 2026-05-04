@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 频段增幅：由频段增幅装置为该御械师提供的带宽加成，效果由 Hediff_BandwidthAmplification 计算 -->
+  <!-- 健康状态颜色与机控中枢(ControlSublinkImplant)一致：(0.6, 0.6, 1.0) -->
+  <HediffDef>
+    <defName>DMSL_Hediff_BandwidthAmplification</defName>
+    <label>频段增幅</label>
+    <description>频段增幅装置正在为该单位提供带宽。</description>
+    <hediffClass>DMS_Legion.Hediff_BandwidthAmplification</hediffClass>
+    <defaultLabelColor>(0.6, 0.6, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+  </HediffDef>
+</Defs>

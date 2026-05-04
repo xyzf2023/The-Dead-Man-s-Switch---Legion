@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML声明，指定版本和编码 -->
+<Defs>
+  <!-- DesignatedMarksman 精确射手（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_DesignatedMarksman" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_DesignatedMarksman</defName>
+    <label>精确射手</label>
+    <description>狙击手昂贵的价格使他难以承担班组狙击手的任务，而精确射手应运而生。</description>
+    <statBases>
+      <MoveSpeed>4.5</MoveSpeed>
+      <ArmorRating_Blunt>0.9</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.9</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.5</ArmorRating_Heat>
+      <ShootingAccuracyPawn>10</ShootingAccuracyPawn>
+      <AimingDelayFactor>0.8</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>12</mechFixedSkillLevel>
+      <body>DMS_Humanoid_TypeA</body>
+      <baseBodySize>1.1</baseBodySize>
+      <baseHealthScale>1.3</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <DMS_ChunkSlag>2</DMS_ChunkSlag>
+      <Tungsteel>50</Tungsteel>
+    </butcherProducts>
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter>               <!-- 啟用武器過濾: 是 -->
+        <UsableWeaponTags>                                          <!-- 可使用武器標籤 -->
+          <li>SimpleGun</li>                                        <!-- 簡單槍械 -->
+          <li>DMS_MechWeaponLight</li>                              <!-- DMS機兵輕型武器 -->
+          <li>SniperRifle</li>                                      <!-- 狙擊步槍 -->
+          <li>A_SC_LongRifle</li>                                   <!-- 狙擊卡賓槍長槍管 -->
+          <li>A_SR_LongRifle</li>                                   <!-- 狙擊步槍長槍管 -->
+          <li>A_DMR_LongRifle</li>                                  <!-- 精確射手步槍長槍管 -->
+          <li>A_SR_GrenadeLauncher</li>                             <!-- 狙擊榴彈發射器 -->
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>         <!-- 啟用科技等級過濾: 是 -->
+        <UsableTechLevels>                                          <!-- 可使用科技等級 -->
+          <li>Industrial</li>                                       <!-- 工業時代 -->
+        </UsableTechLevels>
+        <BypassUsableWeapons>                                       <!-- 繞過可用武器限制 -->
+          <li MayRequire="vanillaexpanded.vwehw">VWE_Gun_UraniumSlugRifle</li><!-- 重武器拓展鈾彈槍 -->
+        </BypassUsableWeapons>
+      </li>
+      <li Class="Fortified.TurretMannableExtension"/>               <!-- 可操作砲塔擴展 -->
+    </modExtensions>
+  </ThingDef>
+
+  <!-- PawnKind定义，即机械体种类定义 -->
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <defName>DMSL_Mech_DesignatedMarksman</defName>  <!-- 定义名称 -->
+    <label>精确射手</label>               <!-- 显示标签 -->
+    <race>DMSL_Mech_DesignatedMarksman</race>        <!-- 关联的种族 -->
+    <isFighter>true</isFighter>                     <!-- 是否为战斗单位 -->
+    <combatPower>200</combatPower>                  <!-- 战斗力量值 -->
+    <maxPerGroup>12</maxPerGroup>                   <!-- 每组最大数量 -->
+    
+    <!-- 生命阶段列表（用于定义不同阶段的贴图） -->
+    <lifeStages>
+      <!-- 第一个生命阶段 -->
+      <li>
+        <bodyGraphicData>                           <!-- 身体图形数据 -->
+          <texPath>Mechanoid/DesignatedMarksman/DesignatedMarksman</texPath> <!-- 贴图路径 -->
+          <shaderType>CutoutComplex</shaderType>    <!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize>                  <!-- 绘制大小 -->
+          <shadowData>                              <!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume>          <!-- 阴影体积 -->
+            <offset>(0,0,0)</offset>                <!-- 阴影偏移 -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <!-- 第二个生命阶段（可能是备用或旧版贴图） -->
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/DesignatedMarksman/DesignatedMarksman</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.5</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    
+    <weaponTags>                                                    <!-- 武器標籤 -->
+      <li>A_SR_GrenadeLauncher</li>                                 <!-- 狙擊榴彈發射器 -->
+      <li>A_SR_LongRifle</li>                                       <!-- 狙擊步槍長槍管 -->
+      <li>A_SC_LongRifle</li>                                       <!-- 狙擊卡賓槍長槍管 -->
+    </weaponTags>
+    
+    <!-- 能力列表 -->
+<abilities>
+      <li>DMS_RangeFinder</li>
+    </abilities>
+  </PawnKindDef>
+</Defs>

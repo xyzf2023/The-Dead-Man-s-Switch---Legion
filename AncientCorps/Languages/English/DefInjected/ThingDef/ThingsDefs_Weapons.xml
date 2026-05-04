@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/ThingsDefs_Weapons -->
+  <DMSL_Gun_RH120L55A.label>"Right Hand of Freedom"</DMSL_Gun_RH120L55A.label>
+  <DMSL_Gun_RH120L55A.description>The standard tank smoothbore cannon used by Western nations.</DMSL_Gun_RH120L55A.description>
+  <DMSL_Bullet_RH120L55A.label>APFSDS</DMSL_Bullet_RH120L55A.label>
+  <DMSL_Gun_NorthRedFlag.label>"New October"</DMSL_Gun_NorthRedFlag.label>
+  <DMSL_Gun_NorthRedFlag.description>A 100mm rifled tank cannon.</DMSL_Gun_NorthRedFlag.description>
+  <DMSL_Bullet_NorthRedFlag.label>APFSDS</DMSL_Bullet_NorthRedFlag.label>
+  <DMSL_Gun_M777A.label>M777 "Second Amendment"</DMSL_Gun_M777A.label>
+  <DMSL_Gun_M777A.description>An ultra-light 155mm artillery gun developed for helicopter sling deployment.</DMSL_Gun_M777A.description>
+  <DMSL_Gun_57MM.label>57MM</DMSL_Gun_57MM.label>
+  <DMSL_Gun_57MM.description>A semi-automatic anti-tank gun carried by ultra-heavy mechs. Simple and reliable, widely used on armored platforms against tanks and other heavily armored targets.</DMSL_Gun_57MM.description>
+  <DMSL_Bullet_57mm.label>APFSDS</DMSL_Bullet_57mm.label>
+</LanguageData>

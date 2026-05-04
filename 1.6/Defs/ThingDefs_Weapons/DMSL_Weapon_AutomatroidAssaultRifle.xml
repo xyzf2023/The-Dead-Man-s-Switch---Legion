@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- ================================================ -->
+    <!-- 子弹定义部分 - Automatroid重型机枪子弹 -->
+    <!-- ================================================ -->
+    <ThingDef ParentName="BaseBullet">
+        <!-- 子弹的唯一标识符 -->
+        <defName>DMSL_Bullet_2AutomatroidAssaultRifle</defName>
+        <!-- 游戏中显示的子弹名称 -->
+        <label>Automatroid Heavy MachineGun</label>
+        
+        <!-- 子弹视觉效果配置 -->
+        <graphicData>
+            <!-- 子弹纹理路径 -->
+            <texPath>Things/Projectile/Bullet_Small</texPath>
+            <!-- 图形渲染类 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 着色器类型，支持透明和光照效果 -->
+            <shaderType>TransparentPostLight</shaderType>
+            <!-- 子弹绘制尺寸：标准大小 -->
+            <drawSize>1</drawSize>
+        </graphicData>
+        
+        <!-- 子弹弹道和伤害属性 -->
+        <projectile>
+            <!-- 伤害类型：标准子弹伤害 -->
+            <damageDef>Bullet</damageDef>
+            <!-- 基础伤害值：25点 -->
+            <damageAmountBase>18</damageAmountBase>
+            <!-- 飞行速度：60格/秒 -->
+            <speed>60</speed>
+            <!-- 制止力：影响击退效果 -->
+            <stoppingPower>2</stoppingPower>
+            <!-- 护甲穿透率：40% -->
+            <armorPenetrationBase>0.28</armorPenetrationBase>
+        </projectile>
+    </ThingDef>
+
+  <!-- 主炮的投射物定义：155mm高爆炮弹 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 定义唯一标识符 -->
+    <defName>DMSL_Bullet_40mm</defName>
+    
+    <!-- 显示名称 -->
+    <label>81mm high-explosive shell</label>
+    
+    <!-- 实体类别：爆炸性投射物 -->
+    <thingClass>Projectile_Explosive</thingClass>
+    
+    <!-- 图像数据 -->
+    <graphicData>
+      <!-- 纹理路径：使用大型子弹纹理 -->
+      <texPath>Things/Projectile/Bullet_Big</texPath>
+      
+      <!-- 图形类别：单个图像 -->
+      <graphicClass>Graphic_Single</graphicClass>
+      
+      <!-- 绘制尺寸：放大2倍 -->
+      <drawSize>1</drawSize>
+    </graphicData>
+    
+    <!-- 投射物属性 -->
+    <projectile>
+      <!-- 伤害类型：炸弹爆炸伤害 -->
+      <damageDef>Bomb</damageDef>
+      
+      <!-- 基础伤害数值：360点 -->
+      <damageAmountBase>40</damageAmountBase>
+      
+      <!-- 护甲穿透值：0.77 -->
+      <armorPenetrationBase>0.30</armorPenetrationBase>
+      
+      <!-- 移动速度：100单位/秒 -->
+      <speed>55</speed>
+      
+      <!-- 爆炸半径：15.9格 -->
+      <explosionRadius>3</explosionRadius>
+      
+      <!-- 是否飞越头顶：是（适用于曲射火炮） -->
+      <flyOverhead>true</flyOverhead>
+      <!-- 声音效果 -->
+      <!-- 击中厚屋顶的声音 -->
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <!-- 爆炸声音 -->
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <!-- 撞击预兆声音 -->
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <!-- 环境声音（飞行中） -->
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+
+    <!-- ================================================ -->
+    <!-- 武器定义部分 - 机兵重机枪 -->
+    <!-- ================================================ -->
+    <ThingDef ParentName="DMS_AutomatroidGun">
+        <!-- 武器唯一标识符 -->
+        <defName>DMSL_Weapon_AutomatroidAssaultRifle</defName>
+        <!-- 武器显示名称 -->
+        <label>机兵突击步枪（下挂榴弹）</label>
+        <!-- 武器详细描述 -->
+        <description>一种增加了下挂榴弹发射器的机兵突击步枪。</description>
+        
+        <!-- 武器视觉表现配置 -->
+        <graphicData>
+            <!-- 武器纹理文件路径 -->
+            <texPath>Weapons/DMSL_Weapon_AAM/DMSL_Weapon_AAM</texPath>
+            <!-- 图形渲染类 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 武器绘制尺寸-->
+            <drawSize>1.2</drawSize>
+        </graphicData>
+
+        <!-- 武器分类：DMS 突击步枪使用 LongShots + RangedHeavy + Ranged -->
+        <weaponClasses>
+            <li>LongShots</li>
+            <li>RangedHeavy</li>
+            <li>Ranged</li>
+        </weaponClasses>
+      
+        <!-- 制造配方配置 -->
+        <recipeMaker>
+            <!-- 制造前提研究项目 -->
+            <researchPrerequisites>
+                <li>GasOperation</li>        <!-- 气体操作技术 -->
+                <li>DMS_EquipmentElite</li>  <!-- 精英装备技术 -->
+            </researchPrerequisites>
+            <!-- 制造技能要求 -->
+            <skillRequirements>
+                <Crafting>6</Crafting>       <!-- 需要6级制造技能 -->
+            </skillRequirements>
+            <!-- 制造菜单显示优先级 -->
+            <displayPriority>440</displayPriority>
+        </recipeMaker>
+        
+        <!-- 武器基础属性 -->
+        <statBases>
+            <WorkToMake>40000</WorkToMake>      <!-- 制造工作量：40000 ticks -->
+            <Mass>3.5</Mass>                    <!-- 重量：3.5kg -->
+            <AccuracyTouch>0.65</AccuracyTouch>  <!-- 近距离命中率：40% -->
+            <AccuracyShort>0.70</AccuracyShort>  <!-- 短距离命中率：30% -->
+            <AccuracyMedium>0.70</AccuracyMedium><!-- 中距离命中率：40% -->
+            <AccuracyLong>0.65</AccuracyLong>    <!-- 长距离命中率：40% -->
+            <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>  <!-- 射击冷却：1.65秒 -->
+            <MarketValue>1200</MarketValue>     <!-- 市场价值：1200银 -->
+            <!-- <DMS_HeavyGears>1.1</DMS_HeavyGears> -->
+            <!-- 体型要求：1.4级（标准自动化单位） -->
+        </statBases>
+        
+        <!-- 制造材料成本 -->
+        <costList>
+            <Tungsteel>75</Tungsteel>          <!-- 钨钢：70单位 -->
+            <ComponentStamped>5</ComponentStamped> <!-- 冲压组件：5个 -->
+            <Chemfuel>35</Chemfuel>
+        </costList>
+        
+        <!-- 武器攻击行为定义 -->
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>           <!-- 射击动作类 -->
+                <hasStandardCommand>true</hasStandardCommand> <!-- 启用标准命令 -->
+                <defaultProjectile>DMSL_Bullet_2AutomatroidAssaultRifle</defaultProjectile> <!-- 使用的子弹类型 -->
+                <warmupTime>1</warmupTime>               <!-- 射击准备时间：0.9秒 -->
+                <range>30</range>                        <!-- 射程：36.9格 -->
+                <burstShotCount>3</burstShotCount>        <!-- 连发子弹数：20发 -->
+                <ticksBetweenBurstShots>9</ticksBetweenBurstShots> <!-- 连发间隔：9 ticks -->
+                <soundCast>Shot_HeavySMG</soundCast>       <!-- 射击音效 -->
+                <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 射击尾音 -->
+                <muzzleFlashScale>6</muzzleFlashScale>     <!-- 枪口火焰大小 -->
+            </li>
+        </verbs>
+        
+        <!-- 武器组件设置，Inherit="False"表示不继承父级组件 -->
+        <comps Inherit="False">
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <!-- 双模式武器组件，支持切换主副攻击模式（通过Gizmo按钮切换） -->
+            <li Class="DMS_Legion.CompProperties_SecondaryVerb_Rework">
+                <!-- 主武器模式标签 -->
+                <mainWeaponLabel>下挂榴弹发射器</mainWeaponLabel>
+                <!-- 主模式命令图标 -->
+                <mainCommandIcon>UI/Abilities/WeaponModeSwitch</mainCommandIcon>
+                <!-- 副武器模式标签 -->
+                <secondaryWeaponLabel>半自动</secondaryWeaponLabel>
+                <!-- 副模式命令图标 -->
+                <secondaryCommandIcon>UI/Abilities/WeaponModeSwitch</secondaryCommandIcon>
+                <!-- 组件描述 -->
+                <description>这个武器装备了下挂榴弹发射器</description>
+                <!-- 副攻击模式参数（狙击步枪模式） -->
+                <verbProps>
+                    <!-- 使用射击动作类 -->
+                    <verbClass>Verb_Shoot</verbClass>
+                    <!-- 是否使用标准指令 -->
+                    <hasStandardCommand>true</hasStandardCommand>
+                    <!-- 使用狙击步枪弹药 -->
+                    <defaultProjectile>DMSL_Bullet_40mm</defaultProjectile>
+                    <!-- 较长的准备时间，适合精确射击 -->
+                    <warmupTime>2</warmupTime>
+                    <!-- 更远的射击距离 -->
+                    <range>30</range>
+                    <!-- 狙击步枪射击音效 -->
+                    <soundCast>Shot_SniperRifle</soundCast>
+                    <!-- 射击尾音 -->
+                    <soundCastTail>GunTail_Heavy</soundCastTail>
+                    <!-- 枪口火焰大小 -->
+                    <muzzleFlashScale>9</muzzleFlashScale>
+                </verbProps>
+            </li>
+            <!-- 可禁止组件，允许标记为禁止使用 -->
+            <li Class="CompProperties_Forbiddable"/>
+            <!-- 可样式化组件，允许应用样式 -->
+            <li Class="CompProperties_Styleable"/>
+        </comps>
+
+        <!-- 武器标签：DMS 机兵突击步枪（下挂榴弹） -->
+        <weaponTags>
+            <li>DMS_MechWeaponMedium</li>     <!-- DMS 中型机兵武器 -->
+            <li>DMS_MechWeaponAntiTank</li>   <!-- DMS 反坦克/榴弹武器（下挂榴弹） -->
+            <li>A_AR_LongRifle</li>           <!-- AR 系列长枪管 -->
+            <li>A_SR_GrenadeLauncher</li>     <!-- 狙击型榴弹发射器 -->
+        </weaponTags>
+
+        <!-- 重型装备扩展配置 -->
+        <modExtensions>
+            <li Class="Fortified.HeavyEquippableExtension">
+                <!-- 指定只有标准自动化单位可以装备 -->
+                <EquippableDef>StandardAutomatroid</EquippableDef>
+            </li>
+        </modExtensions>
+        
+        <!-- 近战攻击配置 -->
+        <tools>
+            <!-- 握把攻击 -->
+            <li>
+                <label>grip</label>              <!-- 攻击部位：握把 -->
+                <capacities>
+                    <li>Blunt</li>               <!-- 攻击类型：钝击 -->
+                </capacities>
+                <power>9</power>                 <!-- 攻击威力：9点 -->
+                <cooldownTime>2</cooldownTime>   <!-- 冷却时间：2秒 -->
+            </li>
+            <!-- 枪管戳击 -->
+            <li>
+                <label>barrel</label>            <!-- 攻击部位：枪管 -->
+                <capacities>
+                    <li>Blunt</li>               <!-- 攻击类型：钝击 -->
+                    <li>Poke</li>                <!-- 攻击类型：戳刺 -->
+                </capacities>
+                <power>9</power>                 <!-- 攻击威力：9点 -->
+                <cooldownTime>2</cooldownTime>   <!-- 冷却时间：2秒 -->
+            </li>
+        </tools>
+    </ThingDef>
+</Defs>

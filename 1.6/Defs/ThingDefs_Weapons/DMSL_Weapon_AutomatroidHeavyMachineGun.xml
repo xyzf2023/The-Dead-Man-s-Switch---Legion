@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- ================================================ -->
+    <!-- 子弹定义部分 - Automatroid重型机枪子弹 -->
+    <!-- ================================================ -->
+    <ThingDef ParentName="BaseBullet">
+        <!-- 子弹的唯一标识符 -->
+        <defName>DMSL_Bullet_AutomatroidHeavyMachineGun</defName>
+        <!-- 游戏中显示的子弹名称 -->
+        <label>Automatroid Heavy MachineGun</label>
+        
+        <!-- 子弹视觉效果配置 -->
+        <graphicData>
+            <!-- 子弹纹理路径 -->
+            <texPath>Things/Projectile/Bullet_Small</texPath>
+            <!-- 图形渲染类 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 着色器类型，支持透明和光照效果 -->
+            <shaderType>TransparentPostLight</shaderType>
+            <!-- 子弹绘制尺寸：标准大小 -->
+            <drawSize>1</drawSize>
+        </graphicData>
+        
+        <!-- 子弹弹道和伤害属性 -->
+        <projectile>
+            <!-- 伤害类型：标准子弹伤害 -->
+            <damageDef>Bullet</damageDef>
+            <!-- 基础伤害值：16点 -->
+            <damageAmountBase>16</damageAmountBase>
+            <!-- 飞行速度：60格/秒 -->
+            <speed>60</speed>
+            <!-- 制止力：影响击退效果 -->
+            <stoppingPower>3</stoppingPower>
+            <!-- 护甲穿透率：40% -->
+            <armorPenetrationBase>0.4</armorPenetrationBase>
+        </projectile>
+    </ThingDef>
+
+    <!-- ================================================ -->
+    <!-- 武器定义部分 - 机兵重机枪 -->
+    <!-- ================================================ -->
+    <ThingDef ParentName="DMS_AutomatroidGun">
+        <!-- 武器唯一标识符 -->
+        <defName>DMSL_Weapon_AutomatroidHeavyMachineGun</defName>
+        <!-- 武器显示名称 -->
+        <label>机兵链锯</label>
+        <!-- 武器详细描述 -->
+        <description>被安装上提把的车载重机枪，大口径子弹有着很强的穿透力。</description>
+        
+        <!-- 武器视觉表现配置 -->
+        <graphicData>
+            <!-- 武器纹理文件路径 -->
+            <texPath>Weapons/DMSL_Weapon_AutomatroidHeavyMachineGun/DMSL_Weapon_AutomatroidHeavyMachineGun</texPath>
+            <!-- 图形渲染类 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 武器绘制尺寸：2倍标准大小 -->
+            <drawSize>2.5</drawSize>
+        </graphicData>
+
+        <!-- 武器分类：DMS 轻机枪使用 RangedHeavy + LongShots + Ranged -->
+        <weaponClasses>
+            <li>RangedHeavy</li>
+            <li>LongShots</li>
+            <li>Ranged</li>
+        </weaponClasses>
+      
+        <!-- 制造配方配置 -->
+        <recipeMaker>
+            <!-- 制造前提研究项目 -->
+            <researchPrerequisites>
+                <li>GasOperation</li>        <!-- 气体操作技术 -->
+                <li>DMS_EquipmentElite</li>  <!-- 精英装备技术 -->
+            </researchPrerequisites>
+            <!-- 制造技能要求 -->
+            <skillRequirements>
+                <Crafting>6</Crafting>       <!-- 需要6级制造技能 -->
+            </skillRequirements>
+            <!-- 制造菜单显示优先级 -->
+            <displayPriority>440</displayPriority>
+        </recipeMaker>
+        
+        <!-- 武器基础属性 -->
+        <statBases>
+            <WorkToMake>40000</WorkToMake>      <!-- 制造工作量：40000 ticks -->
+            <Mass>3.5</Mass>                    <!-- 重量：3.5kg -->
+            <AccuracyTouch>0.5</AccuracyTouch>  <!-- 近距离命中率：50% -->
+            <AccuracyShort>0.45</AccuracyShort>  <!-- 短距离命中率：45% -->
+            <AccuracyMedium>0.55</AccuracyMedium><!-- 中距离命中率：55% -->
+            <AccuracyLong>0.5</AccuracyLong>    <!-- 长距离命中率：50% -->
+            <RangedWeapon_Cooldown>1.65</RangedWeapon_Cooldown>  <!-- 射击冷却：1.65秒 -->
+            <MarketValue>1200</MarketValue>     <!-- 市场价值：1200银 -->
+            <!-- <DMS_HeavyGears>1.1</DMS_HeavyGears> -->
+            <!-- 体型要求：1.4级（标准自动化单位） -->
+        </statBases>
+        
+        <!-- 制造材料成本 -->
+        <costList>
+            <Tungsteel>70</Tungsteel>          <!-- 钨钢：70单位 -->
+            <ComponentStamped>5</ComponentStamped> <!-- 冲压组件：5个 -->
+        </costList>
+        
+        <!-- 武器攻击行为定义 -->
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>           <!-- 射击动作类 -->
+                <hasStandardCommand>true</hasStandardCommand> <!-- 启用标准命令 -->
+                <defaultProjectile>DMSL_Bullet_AutomatroidHeavyMachineGun</defaultProjectile> <!-- 使用的子弹类型 -->
+                <warmupTime>0.9</warmupTime>               <!-- 射击准备时间：0.9秒 -->
+                <range>36.9</range>                        <!-- 射程：36.9格 -->
+                <burstShotCount>12</burstShotCount>        <!-- 连发子弹数：12发 -->
+                <ticksBetweenBurstShots>9</ticksBetweenBurstShots> <!-- 连发间隔：9 ticks -->
+                <soundCast>Shot_HeavySMG</soundCast>       <!-- 射击音效 -->
+                <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 射击尾音 -->
+                <muzzleFlashScale>6</muzzleFlashScale>     <!-- 枪口火焰大小 -->
+            </li>
+        </verbs>
+        
+        <!-- 武器标签：DMS 机兵重机枪（压制武器） -->
+        <weaponTags>
+            <li>DMS_MechWeaponLongRifle</li>  <!-- DMS 长步枪级机兵武器 -->
+            <li>A_SuppressWeapon</li>         <!-- 压制武器 -->
+            <li>A_MG_Light</li>               <!-- 轻型机枪 -->
+        </weaponTags>
+
+        <!-- 重型装备扩展配置 -->
+        <modExtensions>
+            <li Class="Fortified.HeavyEquippableExtension">
+                <!-- 指定只有标准自动化单位可以装备 -->
+                <EquippableDef>StandardAutomatroid</EquippableDef>
+            </li>
+        </modExtensions>
+        
+        <!-- 近战攻击配置 -->
+        <tools>
+            <!-- 握把攻击 -->
+            <li>
+                <label>grip</label>              <!-- 攻击部位：握把 -->
+                <capacities>
+                    <li>Blunt</li>               <!-- 攻击类型：钝击 -->
+                </capacities>
+                <power>9</power>                 <!-- 攻击威力：9点 -->
+                <cooldownTime>2</cooldownTime>   <!-- 冷却时间：2秒 -->
+            </li>
+            <!-- 枪管戳击 -->
+            <li>
+                <label>barrel</label>            <!-- 攻击部位：枪管 -->
+                <capacities>
+                    <li>Blunt</li>               <!-- 攻击类型：钝击 -->
+                    <li>Poke</li>                <!-- 攻击类型：戳刺 -->
+                </capacities>
+                <power>9</power>                 <!-- 攻击威力：9点 -->
+                <cooldownTime>2</cooldownTime>   <!-- 冷却时间：2秒 -->
+            </li>
+        </tools>
+    </ThingDef>
+</Defs>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML声明 -->
+<!-- 根节点：Defs -->
+<Defs>
+
+  <!-- 模板：穿梭机天降/起飞定义（入场） -->
+  <ThingDef ParentName="ShuttleSkyfallerBase">
+    <!-- 定义名 -->
+    <defName>DMSL_AXF12_OffsetConfigIncoming</defName>
+    <!-- 显示名称 -->
+    <label>AXF-12「偏构」垂直起降战斗机（入场）</label>
+    <!-- 实际类 -->
+    <thingClass>PassengerShuttleIncoming</thingClass>
+    <!-- 贴图数据 -->
+    <graphicData>
+      <!-- 渲染类（支持多朝向贴图） -->
+      <graphicClass>Graphic_Multi</graphicClass>
+      <!-- 贴图路径（对应 Content/Textures/Buildings/AXF12/AXF12_*.png） -->
+      <texPath>Shuttle/AXF12fly</texPath>
+      <!-- 着色器类型（奥德赛载客穿梭机同款） -->
+      <shaderType>CutoutComplex</shaderType>
+      <!-- 绘制尺寸 -->
+      <drawSize>(11,11)</drawSize>
+    </graphicData>
+    <!-- 尺寸 -->
+    <size>(11,11)</size>
+    <!-- 天降参数 -->
+    <skyfaller>
+      <!-- 预告音效 -->
+      <anticipationSound>Shuttle_Landing</anticipationSound>
+      <!-- 预告音效时长 -->
+      <anticipationSoundTicks>250</anticipationSoundTicks>
+      <!-- 落地时间范围 -->
+      <ticksToImpactRange>200~250</ticksToImpactRange>
+      <!-- 最小化屋顶破坏 -->
+      <minimalRoofDestruction>true</minimalRoofDestruction>
+      <!-- 阴影贴图 -->
+      <shadow>Shuttle/AXF12_shadow</shadow>
+      <!-- 阴影尺寸 -->
+      <shadowSize>(5.5,5.5)</shadowSize>
+      <!-- 旋转曲线 -->
+      <rotationCurve>
+        <!-- 曲线点列表 -->
+        <points>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0,30)</li>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0.5,5)</li>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0.9,-5)</li>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0.95,0)</li>
+        </points>
+      </rotationCurve>
+      <!-- Z轴位置曲线 -->
+      <zPositionCurve>
+        <!-- 曲线点列表 -->
+        <points>
+          <!-- 曲线点：时间/Z轴 -->
+          <li>(0.95,2.5)</li>
+          <!-- 曲线点：时间/Z轴 -->
+          <li>(1,0)</li>
+        </points>
+      </zPositionCurve>
+      <!-- 速度曲线 -->
+      <speedCurve>
+        <!-- 曲线点列表 -->
+        <points>
+          <!-- 曲线点：时间/速度 -->
+          <li>(0.6,0.6)</li>
+          <!-- 曲线点：时间/速度 -->
+          <li>(0.95,0.1)</li>
+        </points>
+      </speedCurve>
+    </skyfaller>
+  </ThingDef>
+
+  <!-- 模板：穿梭机天降/起飞定义（离场） -->
+  <ThingDef ParentName="ShuttleSkyfallerBase">
+    <!-- 定义名 -->
+    <defName>DMSL_AXF12_OffsetConfigLeaving</defName>
+    <!-- 显示名称 -->
+    <label>AXF-12「偏构」垂直起降战斗机（离场）</label>
+    <!-- 实际类 -->
+    <thingClass>PassengerShuttleLeaving</thingClass>
+    <!-- 是否可旋转 -->
+    <rotatable>true</rotatable>
+    <!-- 贴图数据 -->
+    <graphicData>
+      <!-- 渲染类（支持多朝向贴图） -->
+      <graphicClass>Graphic_Multi</graphicClass>
+      <!-- 贴图路径（对应 Content/Textures/Buildings/AXF12/AXF12_*.png） -->
+      <texPath>Shuttle/AXF12fly</texPath>
+      <!-- 着色器类型（奥德赛载客穿梭机同款） -->
+      <shaderType>CutoutComplex</shaderType>
+      <!-- 绘制尺寸 -->
+      <drawSize>(11,11)</drawSize>
+    </graphicData>
+    <!-- 尺寸 -->
+    <size>(11,11)</size>
+    <!-- 天降参数 -->
+    <skyfaller>
+      <!-- 是否反向播放 -->
+      <reversed>true</reversed>
+      <!-- 预告音效 -->
+      <anticipationSound>Shuttle_Leaving</anticipationSound>
+      <!-- 预告音效时长 -->
+      <anticipationSoundTicks>-10</anticipationSoundTicks>
+      <!-- 起飞时间范围 -->
+      <ticksToImpactRange>-40~-15</ticksToImpactRange>
+      <!-- 粒子生成时间 -->
+      <moteSpawnTime>0.05</moteSpawnTime>
+      <!-- 阴影贴图 -->
+      <shadow>Shuttle/AXF12_shadow</shadow>
+      <!-- 阴影尺寸 -->
+      <shadowSize>(5.5,5.5)</shadowSize>
+      <!-- 每格粒子数 -->
+      <motesPerCell>1</motesPerCell>
+      <!-- 旋转曲线 -->
+      <rotationCurve>
+        <!-- 曲线点列表 -->
+        <points>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0,0)</li>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0.15,10)</li>
+          <!-- 曲线点：时间/旋转 -->
+          <li>(0.5,-5)</li>
+        </points>
+      </rotationCurve>
+      <!-- Z轴位置曲线 -->
+      <zPositionCurve>
+        <!-- 曲线点列表 -->
+        <points>
+          <!-- 曲线点：时间/Z轴 -->
+          <li>(0,0)</li>
+          <!-- 曲线点：时间/Z轴 -->
+          <li>(0.08,2)</li>
+        </points>
+      </zPositionCurve>
+      <!-- 速度曲线 -->
+      <speedCurve>
+        <!-- 曲线点列表 -->
+        <points>
+          <!-- 曲线点：时间/速度 -->
+          <li>(0,0.2)</li>
+          <!-- 曲线点：时间/速度 -->
+          <li>(0.4,0.7)</li>
+        </points>
+      </speedCurve>
+    </skyfaller>
+  </ThingDef>
+
+  <!-- 结束：Defs -->
+</Defs>

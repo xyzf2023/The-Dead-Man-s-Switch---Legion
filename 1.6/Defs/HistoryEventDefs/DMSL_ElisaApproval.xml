@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 艾丽萨认可：因机兵有序管理导致武装殖民舰队好感增加的理由 -->
+  <HistoryEventDef>
+    <defName>DMSL_ElisaApproval</defName>
+    <label>艾莉莎的认可</label>
+  </HistoryEventDef>
+</Defs>

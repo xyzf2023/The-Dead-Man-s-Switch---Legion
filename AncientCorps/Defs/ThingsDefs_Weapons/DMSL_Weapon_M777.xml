@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 北方红旗(Type59 100mm gun "North Red Flag") - 游戏武器配置文件 -->
+<!-- 定义一个重型自动机枪武器的配置 -->
+<Defs>
+
+    <!-- 主武器定义：Type59 100mm gun "North Red Flag" -->
+    <ThingDef ParentName="DMS_AutomatroidHeavyGun">
+        <!-- 内部标识符，用于在游戏中引用此武器 -->
+        <defName>DMSL_Gun_M777A</defName>
+        
+        <!-- 显示名称，在游戏界面中显示为"Type59 100mm gun "North Red Flag"" -->
+        <label>M777“第二修正案”</label>
+        
+        <!-- 武器描述：半自动反坦克炮，由超重型自动机携带，结构简单可靠 -->
+        <description>一种被研发用于被直升机吊运部署的超轻型155mm火炮。</description>
+        
+        <!-- 武器标签列表，定义武器分类和特性 -->
+        <weaponTags>
+            <!-- 武器属于Tarbosaurus系列 -->
+            <li>DMSL_STGeorge</li>
+        </weaponTags>
+        
+        <!-- 图形数据显示设置 -->
+        <graphicData>
+            <!-- 武器纹理路径 -->
+            <texPath>Weapons/DMSL_Weapon_M777/DMSL_Weapon_M777</texPath>
+            <!-- 绘制尺寸，控制武器在游戏中的显示大小 -->
+            <drawSize>10</drawSize>
+        </graphicData>
+        
+        <soundInteract>Artillery_ShellLoaded</soundInteract> <!-- 火炮装弹音效 -->
+
+       <!-- 交易属性 -->
+       <tradeability>None</tradeability>
+       <!-- 丢弃时是否销毁 -->
+       <destroyOnDrop>true</destroyOnDrop>
+       <!-- 是否为遗物 -->
+       <relicChance>0</relicChance> 
+
+        <!-- 不可制作 -->
+        <recipeMaker IsNull="True" />
+
+        <!-- 基础属性统计，包括重量、制作工作量和各种距离下的准确度 -->
+        <statBases>
+            <!-- 武器质量：265单位 -->
+            <Mass>265</Mass>
+            <!-- 近距离命中率：89% -->
+            <AccuracyTouch>0.89</AccuracyTouch>
+            <!-- 短距离命中率：100% -->
+            <AccuracyShort>1.00</AccuracyShort>
+            <!-- 中距离命中率：100% -->
+            <AccuracyMedium>1.00</AccuracyMedium>
+            <!-- 远距离命中率：99% -->
+            <AccuracyLong>0.99</AccuracyLong>
+            <!-- 射程武器冷却时间：4 -->
+            <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+               <MarketValue>1200</MarketValue>
+        </statBases>
+        
+        <!-- 组件列表，定义武器可装备性和样式等特性 -->
+        <comps Inherit="False">
+            <!-- 可装备组件，使武器能够被单位装备 -->
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <!-- 禁止性组件，允许玩家禁止此物品 -->
+            <li Class="CompProperties_Forbiddable"/>
+            <!-- 可定制外观组件，允许改变武器外观 -->
+            <li Class="CompProperties_Styleable"/>
+        </comps>
+        
+        <!-- 武器动作定义，包括射击参数和声音效果 -->
+        <verbs>
+            <!-- 定义武器的射击动作 -->
+            <li>
+                <!-- 是否有标准命令，允许玩家直接命令单位使用此武器 -->
+                <hasStandardCommand>true</hasStandardCommand>
+                <!-- 动作类，使用基本射击动作 -->
+                <verbClass>Verb_Shoot</verbClass>
+                <!-- 默认发射的弹药类型 -->
+                <defaultProjectile>DMSL_Bullet_PZH2000Shell</defaultProjectile>
+                <!-- 是否需要直线视野才能攻击 -->
+                <requireLineOfSight>false</requireLineOfSight>
+                <!-- 预热时间，开火前需要准备的时间 -->
+                <warmupTime>5</warmupTime>
+                <!-- 最小攻击距离：3格 -->
+                <minRange>9</minRange>
+                <!-- 最大攻击距离：48格 -->
+                <range>500</range>
+                <!-- AI避免误伤友军的半径 -->
+                <ai_AvoidFriendlyFireRadius>9</ai_AvoidFriendlyFireRadius>
+                <!-- 连发次数：单发 -->
+                <burstShotCount>1</burstShotCount>
+                <!-- 开火音效 -->
+                <soundCast>DMS_AC_Shot_MBTCannonSound</soundCast>
+                <!-- 射击尾音 -->
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <!-- 枪口火焰规模 -->
+                <muzzleFlashScale>20</muzzleFlashScale>
+                <!-- 目标参数 -->
+                <targetParams>
+                    <!-- 是否可以攻击地点 -->
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <!-- 强制偏差半径 -->
+                <forcedMissRadius>0.25</forcedMissRadius>
+                <sprayEffecterDef>DMS_LaunchDust</sprayEffecterDef> <!-- 发射灰尘效果定义 -->
+               <muzzleFlashScale>100</muzzleFlashScale> <!-- 大型火焰效果规模 -->
+            </li>
+        </verbs>
+        
+        <!-- 模组扩展功能，包括枪口闪光效果和重型装备扩展 -->
+        <modExtensions>
+            <!-- 枪口闪光效果，需要MuzzleFlash模组支持 -->
+            <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+                <!-- 闪光效果定义 -->
+                <def>MF_StandardMuzzleFalsh</def>
+                <!-- 闪光绘制尺寸 -->
+                <drawSize>(5,5)</drawSize>
+                <!-- 闪光偏移位置 -->
+                <offsets>
+                    <li>(2.1,0)</li>
+                </offsets>
+                <!-- 是否交替闪烁 -->
+                <isAlternately>true</isAlternately>
+            </li>
+            <!-- 重型装备扩展，指定可装备的单位类型 -->
+            <li Class="Fortified.HeavyEquippableExtension">
+                <!-- 指定只有超重型自动机可以装备 -->
+                <EquippableDef>UltraHeavyAutomatroid</EquippableDef>
+            </li>
+        </modExtensions>
+    </ThingDef>
+</Defs>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/StatDef[defName="MeleeDamageFactor"]/parts</xpath>
+    <value>
+      <li Class="DMS_Legion.StatPart_LanceMoveSpeedDamage"/>
+    </value>
+  </Operation>
+</Patch>

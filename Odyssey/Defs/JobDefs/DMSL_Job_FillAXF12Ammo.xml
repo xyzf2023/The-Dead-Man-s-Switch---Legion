@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 装填 AXF12 航弹储备：Target A = 容器建筑，Target B = 航弹，targetQueueB = 其余航弹。由 JobDriver_FillAXF12Ammo 放入 Comp 的 InnerContainer。 -->
+  <JobDef>
+    <defName>DMSL_Job_FillAXF12Ammo</defName>
+    <label>装填航弹</label>
+    <driverClass>DMS_Legion.AXF12.JobDriver_FillAXF12Ammo</driverClass>
+    <reportString>正在向{0}装填航弹。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

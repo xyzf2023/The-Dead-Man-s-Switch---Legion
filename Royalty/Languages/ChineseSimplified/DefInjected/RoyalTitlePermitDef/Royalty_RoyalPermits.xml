@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Royalty Defs/DMSL_RoyalPermits.xml -->
+  <DMSL_RoyalAid_Smoke.label>呼叫烟雾弹</DMSL_RoyalAid_Smoke.label>
+  <DMSL_RoyalAid_Smoke.description>向殖民舰队呼叫一次烟雾弹投放。</DMSL_RoyalAid_Smoke.description>
+  <DMSL_RoyalAid_StrafingRun.label>呼叫机炮扫射</DMSL_RoyalAid_StrafingRun.label>
+  <DMSL_RoyalAid_StrafingRun.description>向殖民舰队呼叫一次机炮扫射。</DMSL_RoyalAid_StrafingRun.description>
+  <DMSL_RoyalAid_Emp.label>呼叫EMP脉冲弹</DMSL_RoyalAid_Emp.label>
+  <DMSL_RoyalAid_Emp.description>向殖民舰队呼叫一次EMP脉冲弹投放。将向目标地点投放一颗电子脉冲弹，强大的电磁脉冲将瘫痪所有接触的用电器、炮台和机械体，并灼烧所有机械体的核心处理器。\n注意此脉冲没有敌我识别功能，谨防误伤友方。</DMSL_RoyalAid_Emp.description>
+  <DMSL_RoyalAid_ToxGas.label>呼叫毒气弹</DMSL_RoyalAid_ToxGas.label>
+  <DMSL_RoyalAid_ToxGas.description>向殖民舰队呼叫一次毒气弹投放。将向目标地点投放一颗毒气弹，在30格内生成毒气云。</DMSL_RoyalAid_ToxGas.description>
+  <DMSL_RoyalAid_AttackAircraftBombing.label>呼叫攻击机轰炸</DMSL_RoyalAid_AttackAircraftBombing.label>
+  <DMSL_RoyalAid_AttackAircraftBombing.description>向殖民舰队呼叫一次攻击机轰炸。将命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计五枚小型炸弹。\n\n（如果你加载了CE，此支援会被替换为攻击机轰炸）</DMSL_RoyalAid_AttackAircraftBombing.description>
+  <DMSL_RoyalAid_FighterBomberBombing.label>呼叫战斗轰炸机轰炸</DMSL_RoyalAid_FighterBomberBombing.label>
+  <DMSL_RoyalAid_FighterBomberBombing.description>向殖民舰队呼叫一次战斗轰炸机轰炸。将命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十枚大型炸弹。</DMSL_RoyalAid_FighterBomberBombing.description>
+  <DMSL_RoyalAid_CarpetBombing.label>呼叫地毯式轰炸</DMSL_RoyalAid_CarpetBombing.label>
+  <DMSL_RoyalAid_CarpetBombing.description>向殖民舰队呼叫一次地毯式轰炸。将命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十枚高爆弹。</DMSL_RoyalAid_CarpetBombing.description>
+  <DMSL_RoyalAid_AMS2.label>呼叫ASM-2「白鲨」导弹群打击</DMSL_RoyalAid_AMS2.label>
+  <DMSL_RoyalAid_AMS2.description>向殖民舰队呼叫一次ASM-2「白鲨」导弹群打击。你需要传入五个目标地点坐标，随后导弹群会依次打击你传入的所有坐标。</DMSL_RoyalAid_AMS2.description>
+  <DMSL_RoyalAid_CM4.label>呼叫CM-4巡航导弹打击</DMSL_RoyalAid_CM4.label>
+  <DMSL_RoyalAid_CM4.description>向殖民舰队呼叫一次CM-4巡航导弹打击。CM-4杀伤范围较大，请确保打击目标周围50格内无友方单位。</DMSL_RoyalAid_CM4.description>
+  <DMSL_Join_AXF12OffsetConfig.label>扩编AXF-12</DMSL_Join_AXF12OffsetConfig.label>
+  <DMSL_Join_AXF12OffsetConfig.description>向殖民舰队申请调配一架AXF-12「偏构」垂直起降战斗机。这架战斗机将归你的殖民地所有。</DMSL_Join_AXF12OffsetConfig.description>
+</LanguageData>

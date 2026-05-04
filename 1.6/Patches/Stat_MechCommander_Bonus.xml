@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- MechBandwidth 原版无 parts 节点，添加整个 parts 并注入 StatPart -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/StatDef[defName="MechBandwidth"]</xpath>
+    <value>
+      <parts>
+        <li Class="DMS_Legion.StatPart_MechCommanderBonus"/>
+      </parts>
+    </value>
+  </Operation>
+
+  <!-- MechControlGroups 原版无 parts 节点，添加整个 parts 并注入 StatPart -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/StatDef[defName="MechControlGroups"]</xpath>
+    <value>
+      <parts>
+        <li Class="DMS_Legion.StatPart_MechCommanderBonus"/>
+      </parts>
+    </value>
+  </Operation>
+</Patch>

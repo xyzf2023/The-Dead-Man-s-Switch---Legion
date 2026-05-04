@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/HediffDefs -->
+  <DMSL_Hediff_WanderingEngineer.label>游荡中</DMSL_Hediff_WanderingEngineer.label>
+  <DMSL_Hediff_WanderingEngineer.description>该机兵接收到了机控中枢的信号并游荡到殖民地附近，处于未受控状态。一段时间后会尝试离开地图。</DMSL_Hediff_WanderingEngineer.description>
+  <DMSL_Hediff_PsychicCamouflage.label>心灵迷彩</DMSL_Hediff_PsychicCamouflage.label>
+  <DMSL_Hediff_PsychicCamouflage.description>万心失聪添加的隐身状态，可以遮蔽心灵信号，进而使敌方不可见。</DMSL_Hediff_PsychicCamouflage.description>
+  <DMSL_Hediff_ElectroshockStun.label>电击昏迷</DMSL_Hediff_ElectroshockStun.label>
+  <DMSL_Hediff_ElectroshockStun.description>因被高压电击中而陷入的昏迷。</DMSL_Hediff_ElectroshockStun.description>
+  <DMSL_Hediff_RadiationCorrosion.label>辐射侵蚀</DMSL_Hediff_RadiationCorrosion.label>
+  <DMSL_Hediff_RadiationCorrosion.description>巨量辐射穿透血肉与装甲，破坏细胞结构与电子元件。无论是有机体还是机械族，都难以在如此巨量的辐射中生还。</DMSL_Hediff_RadiationCorrosion.description>
+  <DMSL_Hediff_BandwidthAmplification.label>频段增幅</DMSL_Hediff_BandwidthAmplification.label>
+  <DMSL_Hediff_BandwidthAmplification.description>频段增幅装置正在为该单位提供带宽。</DMSL_Hediff_BandwidthAmplification.description>
+</LanguageData>

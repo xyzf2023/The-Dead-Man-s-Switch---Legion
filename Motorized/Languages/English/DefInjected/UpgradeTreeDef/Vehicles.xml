@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Motorized Defs/Vehicles -->
+  <DMS_GrayKnights_UpgradeTree.label>A6 Turret Armor Package</DMS_GrayKnights_UpgradeTree.label>
+  <DMS_GrayKnights_UpgradeTree.description>Reconstruct the turret with composite armor to resist high-performance HEAT and armor-piercing rounds.</DMS_GrayKnights_UpgradeTree.description>
+  <!-- Upgrade nodes -->
+  <DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.label>A6 Turret Armor Package</DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.description>Reconstruct the turret with composite armor to resist high-performance HEAT and armor-piercing rounds.</DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.description>
+  <DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.label>PZH2000 Self-Propelled Howitzer System</DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.description>Self-propelled artillery with a 155mm independent turret system.</DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.description>
+  <DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.label>A7 Armor Standard</DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.description>New composite armor package significantly improves tank defense.</DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.description>
+  <DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.label>Self-Propelled AA Gun System</DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.description>Anti-aircraft artillery system.</DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.description>
+</LanguageData>

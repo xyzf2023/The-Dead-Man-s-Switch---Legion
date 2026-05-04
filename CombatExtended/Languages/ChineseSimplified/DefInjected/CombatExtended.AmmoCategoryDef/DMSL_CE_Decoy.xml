@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- CE 弹药类别：81mm 诱饵弹 -->
+  <DMSL_Decoy.label>电子诱饵弹</DMSL_Decoy.label>
+  <DMSL_Decoy.description>发射后在落点生成电子诱饵信号，可改变空袭轰炸机的攻击目标。</DMSL_Decoy.description>
+</LanguageData>

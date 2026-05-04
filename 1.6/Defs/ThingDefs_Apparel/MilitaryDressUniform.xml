@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- DMS防卫队大衣定义 -->
+	<ThingDef ParentName="ApparelMakeableBase">
+		<!-- 定义唯一标识符 -->
+		<defName>DMSL_Apparel_MilitaryDressUniform</defName>
+		<!-- 在游戏中显示的名称 -->
+		<label>军礼服</label>
+		<!-- 物品描述，向玩家说明该物品的用途和特点 -->
+		<description>一种被高度简化的军礼服，用于维持在边缘世界军官们的体面。</description>
+		<!-- 角色默认拥有的此物品数量 -->
+		<possessionCount>1</possessionCount>
+		<!-- 制作配方设置 -->
+		<recipeMaker>
+		  <!-- 制作该物品需要的前提研究科技 -->
+		  <researchPrerequisite>DMS_EquipmentBasis</researchPrerequisite>
+		</recipeMaker>
+		<!-- 图像数据显示 -->
+		<graphicData>
+			<!-- 物品图标纹理路径 -->
+			<texPath>Clothes/MilitaryDressUniform/Apparel_Female_south</texPath>
+			<!-- 图像类别，单个图像 -->
+			<graphicClass>Graphic_Single</graphicClass>
+			<!-- 绘制尺寸 -->
+			<drawSize>0.85</drawSize>
+		</graphicData>
+		<!-- 制作该物品需要的基础材料数量 -->
+		<costStuffCount>80</costStuffCount>
+		<!-- 可用于制作该物品的材料类别 -->
+		<stuffCategories>
+		  <li>Fabric</li>      <!-- 布料类 -->
+		  <li>Leathery</li>    <!-- 皮质类 -->
+		</stuffCategories>
+		<!-- 物品类别，决定其在库存中的分类 -->
+		<thingCategories>
+		  <li>ApparelMisc</li>  <!-- 服装杂项 -->
+		</thingCategories>
+		<!-- 基础属性数值 -->
+		<statBases>
+		  <!-- 最大耐久度 -->
+		  <MaxHitPoints>160</MaxHitPoints>
+		  <!-- 制作所需工作量 -->
+		  <WorkToMake>7000</WorkToMake>
+		  <!-- 物品重量 -->
+		  <Mass>1.5</Mass>
+		  <!-- 材料护甲效果乘数 -->
+		  <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+		  <!-- 寒冷绝缘效果乘数 -->
+		  <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+		  <!-- 炎热绝缘效果乘数 -->
+		  <StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+		  <!-- 装备所需延迟时间 -->
+		  <EquipDelay>1</EquipDelay>
+		</statBases>
+		<!-- 添加装备时的属性加成 -->
+		<equippedStatOffsets>
+        <!-- 减少精神崩溃阈值，使角色更稳定 -->
+       <MentalBreakThreshold>-0.10</MentalBreakThreshold>
+          </equippedStatOffsets>
+		<!-- 服装特有属性 -->
+		<apparel>
+		  <!-- 此服装覆盖的身体部位组 -->
+		  <bodyPartGroups>
+			<li>Torso</li>      <!-- 躯干 -->
+			<li>Neck</li>       <!-- 颈部 -->
+			<li>Shoulders</li>  <!-- 肩膀 -->
+			<li>Arms</li>       <!-- 手臂 -->
+		  </bodyPartGroups>
+		  <!-- 穿戴时的图形路径 -->
+		  <wornGraphicPath>Clothes/MilitaryDressUniform/Apparel</wornGraphicPath>
+		  <!-- 是否遮挡身体部位上的伤口图形显示 -->
+		  <blocksAddedPartWoundGraphics>true</blocksAddedPartWoundGraphics>
+		  <!-- 服装穿戴层级 -->
+		  <layers>
+			<li>Shell</li>  <!-- 外壳层 -->
+		  </layers>
+		  <!-- 服装标签，用于分类和功能识别 -->
+		  <tags>
+			<li>IndustrialAdvanced</li>  <!-- 工业先进级别 -->
+			<li>DMS_Garrison</li>        <!-- DMS驻军系列 -->
+			<li>DMS_Officer</li>         <!-- DMS军官适用 -->
+		  </tags>
+		  <!-- 是否可以成为意识形态偏好的服装 -->
+		  <canBeDesiredForIdeo>true</canBeDesiredForIdeo>
+		</apparel>
+		<!-- 颜色生成器设置 -->
+		<colorGenerator Class="ColorGenerator_Options">
+		  <options>
+			<!-- 深灰色选项 -->
+			<li>
+			  <weight>10</weight>
+			  <only>(0.33,0.33,0.33)</only>
+			</li>
+			<!-- 浅灰色选项 -->
+			<li>
+			  <weight>10</weight>
+			  <only>(0.65,0.65,0.65)</only>
+			</li>
+			<!-- 棕色调选项 -->
+			<li>
+			  <weight>10</weight>
+			  <only>(0.4,0.3,0.15)</only>
+			</li>
+			<!-- 灰色渐变选项 -->
+			<li>
+			  <weight>15</weight>
+			  <min>(0.3,0.3,0.3)</min>
+			  <max>(0.5,0.5,0.5)</max>
+			</li>
+			<!-- 更亮的灰色渐变选项 -->
+			<li>
+			  <weight>6</weight>
+			  <min>(0.5,0.5,0.5)</min>
+			  <max>(1,1,1)</max>
+			</li>
+		  </options>
+		</colorGenerator>
+		<!-- 交易标签，影响交易行为 -->
+		<tradeTags>
+		  <li>BasicClothing</li>  <!-- 基础服装 -->
+		  <li>DMS_Clothing</li>   <!-- DMS服装系列 -->
+		</tradeTags>
+	</ThingDef>
+</Defs>

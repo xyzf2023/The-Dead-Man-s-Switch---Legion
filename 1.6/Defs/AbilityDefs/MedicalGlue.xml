@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 医用胶水 -->
+  <AbilityDef ParentName="AbilityTouchBase">
+    <defName>DMSL_Ability_MedicalGlue</defName>
+    <label>医用胶水</label>
+    <description>在病患身上大范围喷涂的医用胶水，可以迅速处理流血伤口。常用于在战场紧急止血。</description>
+    <iconPath>UI/Abilities/MedicalGlue</iconPath><!-- 图标路径：暂用原版伤口凝结图标，可后续替换为模组自有图标 -->
+    <charges>10</charges>
+    <cooldownTicksRange>7500</cooldownTicksRange><!-- 每颗充能的冷却时间-->
+    <cooldownPerCharge>true</cooldownPerCharge><!-- 储存式技能 -->
+    <sendMessageOnCooldownComplete>false</sendMessageOnCooldownComplete><!-- 回复 1 次充能时通知玩家（可选） -->
+    <stunTargetWhileCasting>true</stunTargetWhileCasting><!-- 施放时使目标眩晕，避免目标移动打断 -->
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted><!-- 未征召时也显示能力按钮 -->
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted><!-- 未征召时不禁用按钮 -->
+    <warmupMote>Mote_CoagulateStencil</warmupMote><!-- 预热时的贴花效果，沿用原版伤口凝结 -->
+    <warmupEffecter>Coagulate</warmupEffecter><!-- 预热时的特效，沿用原版伤口凝结 -->
+    <warmupStartSound>Coagulate_Cast</warmupStartSound><!-- 开始施放时的音效，沿用原版伤口凝结 -->
+    <jobDef>CastAbilityOnThingMelee</jobDef><!-- 工作类型 -->
+    <hostile>false</hostile><!-- 非敌对能力 -->
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence><!-- 施放者不需要具备暴力能力 -->
+    <verbProperties><!-- 动词/施放属性 -->
+      <verbClass>Verb_CastAbilityTouch</verbClass><!-- 触摸类能力动词 -->
+      <drawAimPie>false</drawAimPie><!-- 不绘制瞄准饼图 -->
+      <range>-1</range><!-- -1 表示近战触摸距离 -->
+      <warmupTime>1</warmupTime><!-- 预热时间 -->
+      <targetParams><!-- 可选取的目标类型 -->
+        <canTargetAnimals>true</canTargetAnimals><!-- 可对动物使用 -->
+        <canTargetSelf>false</canTargetSelf><!-- 不可对自己使用 -->
+        <canTargetBuildings>false</canTargetBuildings><!-- 不可对建筑使用 -->
+        <canTargetMechs>false</canTargetMechs><!-- 不可对机械体使用 -->
+        <canTargetBloodfeeders>true</canTargetBloodfeeders><!-- 可对血族使用 -->
+      </targetParams>
+    </verbProperties>
+    <comps><!-- 能力组件列表 -->
+      <li Class="DMS_Legion.CompProperties_AbilityMedicalGlue">
+        <tendQualityRange>0.1~0.2</tendQualityRange><!-- 包扎品质范围 -->
+        <noBleedingWoundMessage>DMSL_MedicalGlueNoBleedingWound</noBleedingWoundMessage><!-- 目标无流血伤口时的提示翻译键 -->
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

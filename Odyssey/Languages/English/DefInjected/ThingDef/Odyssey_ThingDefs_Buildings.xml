@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Odyssey Defs/ThingDefs_Buildings -->
+  <DMSL_AXF12_OffsetConfig.label>AXF-12 "Offset-Config" VTOL Fighter</DMSL_AXF12_OffsetConfig.label>
+  <DMSL_AXF12_OffsetConfig.description>The AXF-12 "Offset-Config" is a fighter with rapid vertical takeoff and landing capability. Its airframe is specially optimized for constrained colony launch environments.\nIt can perform standard airspace interception to suppress and repel incoming bomber formations, and can also conduct forward reconnaissance or carry a limited bomb payload for tactical strikes on designated targets.</DMSL_AXF12_OffsetConfig.description>
+</LanguageData>

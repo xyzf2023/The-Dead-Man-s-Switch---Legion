@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DMS 头衔许可点数补丁
+    在 DMS 本体各头衔原许可点数基础上 +1，便于后续按需再改数值。
+    每个 Operation 上方注释标明该补丁修改的是哪个头衔（defName / 名称）。
+-->
+<Patch>
+    <!-- DMS_PreSergeant（预备军士）：原 1 → 2 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_PreSergeant"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>2</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_Sergeant（军士）：原 1 → 2 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_Sergeant"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>2</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_WarrantOfficer（准尉）：原 1 → 2 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_WarrantOfficer"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>2</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_Lieutenant（中尉）：原 1 → 2 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_Lieutenant"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>2</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_Captain（上尉）：原 2 → 3 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_Captain"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>3</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_Major（少校）：原 2 → 3 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_Major"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>3</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_Colonel（上校）：原 2 → 3 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_Colonel"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>3</permitPointsAwarded>
+        </value>
+    </Operation>
+
+    <!-- DMS_Brigadier（准将）：原 2 → 3 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RoyalTitleDef[defName="DMS_Brigadier"]/permitPointsAwarded</xpath>
+        <value>
+            <permitPointsAwarded>4</permitPointsAwarded>
+        </value>
+    </Operation>
+</Patch>

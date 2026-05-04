@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空CM-4巡航导弹打击 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_CM4</defName>
+    <label>CM-4巡航导弹打击</label>
+    <description>呼叫一次CM-4巡航导弹打击目标地点。CM-4杀伤范围较大，请确保打击目标周围50格内无友方单位。</description>
+    <aircraftTexturePath>GroundSupport/CM-4</aircraftTexturePath>
+    <flightSpeed>0.015</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>6</drawSize>
+    <appearSoundDef>AerialSupport_Missile</appearSoundDef>
+    <enableExhaust>true</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <exhaustSpawnRate>1.0</exhaustSpawnRate> <!-- 每tick尾气生成概率(0-1) -->
+    <exhaustParticlesPerTick>30</exhaustParticlesPerTick> <!-- 平均每tick生成的尾气Fleck数量 -->
+    <exhaustBaseScale>3</exhaustBaseScale> <!-- 尾气基础缩放系数 -->
+    <exhaustMinSpeed>15</exhaustMinSpeed> <!-- 尾气扩散最小速度 -->
+    <exhaustMaxSpeed>20</exhaustMaxSpeed> <!-- 尾气扩散最大速度 -->
+    <exhaustAngleVariance>4</exhaustAngleVariance> <!-- 尾气角度扰动范围(±度数) -->
+    <exhaustRotationRange>10</exhaustRotationRange> <!-- 尾气旋转范围(±度/秒) -->
+    <continueDrawingAfterArrival>false</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <startDirection>Random</startDirection>
+    <preferNorthEntry>false</preferNorthEntry>
+    <!-- 延迟配置：绘制先开始，声音后播放 -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Message">
+        <message>CM-4巡航导弹打击已到达</message>
+      </li>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_NuclearShockwave">
+        <!-- 最大扩散半径（格） -->
+        <maxRadius>50</maxRadius>
+        <!-- 环带宽度（格） -->
+        <ringThicknessCells>3</ringThicknessCells>
+        <!-- 扩散速度（格/tick） -->
+        <expandSpeedCellsPerTick>2</expandSpeedCellsPerTick>
+        <!-- 冲击波伤害量（单次命中时传入 DamageInfo 的 amount） -->
+        <damageAmount>2000</damageAmount>
+        <!-- 伤害类型 defName，用于伤害与每格爆炸 Fleck -->
+        <damageDefDefName>DMSL_Damage_BlastWave</damageDefDefName>
+        <!-- 伤害冷却（tick） -->
+        <damageCooldownTicks>120</damageCooldownTicks>
+      </li>
+
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_NuclearShockwave">
+        <!-- 最大扩散半径（格） -->
+        <maxRadius>50</maxRadius>
+        <!-- 环带宽度（格） -->
+        <ringThicknessCells>5</ringThicknessCells>
+        <!-- 扩散速度（格/tick） -->
+        <expandSpeedCellsPerTick>1.5</expandSpeedCellsPerTick>
+        <!-- 冲击波伤害量（单次命中时传入 DamageInfo 的 amount） -->
+        <damageAmount>800</damageAmount>
+        <!-- 伤害类型 defName，用于伤害与每格爆炸 Fleck -->
+        <damageDefDefName>DMSL_Damage_ThermalRadiation</damageDefDefName>
+        <!-- 伤害冷却（tick） -->
+        <damageCooldownTicks>120</damageCooldownTicks>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <!-- 空中支援类型定义 - 导弹群打击 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_AMS2</defName>
+    <label>ASM-2「白鲨」导弹群打击</label>
+    <description>使用ASM-2「白鲨」导弹群打击目标地点。你需要传入五个目标地点坐标，随后导弹群会依次打击你传入的所有坐标。</description>
+    <aircraftTexturePath>GroundSupport/AMS-2</aircraftTexturePath>
+    <flightSpeed>0.05</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Missile</appearSoundDef>
+    <enableExhaust>true</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <exhaustSpawnRate>1.0</exhaustSpawnRate> <!-- 每tick尾气生成概率(0-1) -->
+    <exhaustParticlesPerTick>15</exhaustParticlesPerTick> <!-- 平均每tick生成的尾气Fleck数量 -->
+    <exhaustBaseScale>1</exhaustBaseScale> <!-- 尾气基础缩放系数 -->
+    <exhaustMinSpeed>0.7</exhaustMinSpeed> <!-- 尾气扩散最小速度 -->
+    <exhaustMaxSpeed>1.1</exhaustMaxSpeed> <!-- 尾气扩散最大速度 -->
+    <exhaustAngleVariance>4</exhaustAngleVariance> <!-- 尾气角度扰动范围(±度数) -->
+    <exhaustRotationRange>10</exhaustRotationRange> <!-- 尾气旋转范围(±度/秒) -->
+    <continueDrawingAfterArrival>false</continueDrawingAfterArrival>
+    <flightPathType>MultiTarget</flightPathType>
+    <selectionPointCount>5</selectionPointCount>
+    <!-- 打击间隔：每个目标之间的间隔时间（ticks） -->
+    <selectionIntervalFrames>3</selectionIntervalFrames>
+    <!-- 可选：指定支援起始方向（North/South/East/West/Random） -->
+    <startDirection>East</startDirection>
+    <!-- 可选：东/西进入时优先北部位置（仅当startDirection为East/West时有效） -->
+    <preferNorthEntry>true</preferNorthEntry>
+    <!-- 延迟配置：同时开始（多目标支援示例） -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Bombing">
+        <explosionRadius>8</explosionRadius>
+        <damageAmount>1200</damageAmount>
+        <explosionCount>1</explosionCount>
+        <targetAreaRadius>0</targetAreaRadius>
+        <explosionsPerTick>1</explosionsPerTick>
+        <explosionIntervalSeconds>0</explosionIntervalSeconds>
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <!-- 武装殖民舰队侦察 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_ArmyRecon</defName>
+    <label>武装殖民舰队侦察</label>
+    <description>来自武装殖民舰队的侦察</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.025</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>1.0</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+
+</Defs>

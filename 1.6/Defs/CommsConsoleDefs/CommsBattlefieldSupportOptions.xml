@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 通讯台战场支援选项：投放烟雾弹 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_Smoke</defName>
+    <label>投放烟雾弹</label>
+    <goodwillCostBase>8</goodwillCostBase>
+    <cooldownTicks>600</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_Smoke</aerialSupportDefName>
+    <category>BattlefieldSupport</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
+  <!-- 通讯台战场支援选项：EMP脉冲 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_Emp</defName>
+    <label>EMP脉冲</label>
+    <goodwillCostBase>15</goodwillCostBase>
+    <cooldownTicks>5000</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_Emp</aerialSupportDefName>
+    <category>BattlefieldSupport</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+</Defs>

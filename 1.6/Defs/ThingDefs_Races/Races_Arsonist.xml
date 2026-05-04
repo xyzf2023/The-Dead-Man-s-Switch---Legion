@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Arsonist 纵火者（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_Arsonist" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_Arsonist</defName>
+    <label>纵火者</label>
+    <description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</description>
+    <statBases>
+      <MoveSpeed>4.2</MoveSpeed>
+      <ArmorRating_Blunt>1.25</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.25</ArmorRating_Sharp>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
+      <ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+      <AimingDelayFactor>1</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>8</mechFixedSkillLevel>
+      <body>DMS_Humanoid_TypeA</body>
+      <baseBodySize>1.3</baseBodySize>
+      <baseHealthScale>1.3</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <DMS_ChunkSlag>2</DMS_ChunkSlag>
+      <Tungsteel>70</Tungsteel>
+    </butcherProducts>
+    <comps>
+      <li Class="DMS_Legion.CompProperties_MeleeHitIgnite">
+        <igniteChance>0.5</igniteChance>
+        <fireSize>0.5</fireSize>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter>
+        <UsableWeaponTags>
+          <li>SimpleGun</li>
+          <li>DMS_MechWeaponLight</li>
+          <li>A_AR_LongRifle</li>
+          <li>A_SAR_LongRifle</li>
+          <li>A_BR_LongRifle</li>
+          <li>A_MG_Light</li>
+          <li>ElephantGun</li>
+          <li>SniperRifle</li>
+          <li>AssaultRifle</li>
+          <li>DMS_Gun_Recoilless</li>
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>
+        <UsableTechLevels>
+          <li>Industrial</li>
+        </UsableTechLevels>
+        <BypassUsableWeapons>
+          <li>Weapon_GrenadeMolotov</li>
+          <li>Gun_IncendiaryLauncher</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Gun_Incinerator</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Gun_HellcatRifle</li>
+          <li MayRequire="vanillaexpanded.vwehw">VWE_Gun_UraniumSlugRifle</li>
+          <li MayRequire="oskarpotocki.vfe.pirates">VFEP_WarcasketGun_UraniumSlugRifle</li>
+        </BypassUsableWeapons>
+      </li>
+      <li Class="Fortified.TurretMannableExtension"/>
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <defName>DMSL_Mech_Arsonist</defName>
+    <label>纵火者</label>
+    <race>DMSL_Mech_Arsonist</race>
+    <isFighter>true</isFighter>
+    <combatPower>250</combatPower>
+    <maxPerGroup>12</maxPerGroup>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/Arsonist/Arsonist</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/Arsonist/Arsonist</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>A_MG_Light</li>
+      <li>A_DMR_LongRifle</li>
+    </weaponTags>
+    <abilities>
+      <li>FireBurst</li>
+      <li MayRequire="Aoba.DeadManSwitch.AncientCorps">DMSAC_ExplosiveFlamer</li>
+    </abilities>
+  </PawnKindDef>
+
+</Defs>

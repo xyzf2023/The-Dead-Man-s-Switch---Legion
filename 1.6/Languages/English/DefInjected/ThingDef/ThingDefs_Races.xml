@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Races - Mechs and Drones -->
+  <DMSL_Mech_Commander.label>Commander</DMSL_Mech_Commander.label>
+  <DMSL_Mech_Commander.description>A command mech for the legion's information chain. Provides bandwidth offloading and assists the mechanitor in controlling mechanoids. Can lead caravans.</DMSL_Mech_Commander.description>
+  <DMSL_Mech_Shaman.label>Shaman</DMSL_Mech_Shaman.label>
+  <DMSL_Mech_Shaman.description>A mechanoid equipped with a soul-calling device that provides group stealth.</DMSL_Mech_Shaman.description>
+  <DMSL_Mech_Scout.label>Scout</DMSL_Mech_Scout.label>
+  <DMSL_Mech_Scout.description>A vanguard equipped with mechanical horse legs. Artificial muscles provide unmatched speed, making it indispensable for reconnaissance.</DMSL_Mech_Scout.description>
+  <DMSL_Mech_Guardian.label>Guardian</DMSL_Mech_Guardian.label>
+  <DMSL_Mech_Guardian.description>A heavily armored mech with integrated fire control for high-intensity combat zones.</DMSL_Mech_Guardian.description>
+  <DMSL_Mech_Arsonist.label>Arsonist</DMSL_Mech_Arsonist.label>
+  <DMSL_Mech_Arsonist.description>A heavily armored mech developed for high-intensity combat. Fitted with integrated fire control for long-range accuracy comparable to musketeers.</DMSL_Mech_Arsonist.description>
+  <DMSL_Mech_SupportFrame.label>Support Frame</DMSL_Mech_SupportFrame.label>
+  <DMSL_Mech_SupportFrame.description>An improved variant of the combat frame for testing heavy weapons on walkers.</DMSL_Mech_SupportFrame.description>
+  <DMSL_Drone_CommandingBird.label>Commanding Bird</DMSL_Drone_CommandingBird.label>
+  <DMSL_Drone_CommandingBird.description>A mini command drone deployed from the belt to help the mechanitor direct combat from behind the lines.</DMSL_Drone_CommandingBird.description>
+  <DMSL_Mech_Terra.label>Terra</DMSL_Mech_Terra.label>
+  <DMSL_Mech_Terra.description>A mechanoid once used for raid missions. Special bionic adapters allow it to freely equip human gear.</DMSL_Mech_Terra.description>
+  <DMSL_Mech_Engineer.label>Engineer</DMSL_Mech_Engineer.label>
+  <DMSL_Mech_Engineer.description>An engineering mech with mechanoid restart equipment. Repairs damaged mechanoids or reboots shut-down ones.</DMSL_Mech_Engineer.description>
+  <DMSL_Mech_Commandos.label>Commandos</DMSL_Mech_Commandos.label>
+  <DMSL_Mech_Commandos.description>A heavily armored mech developed for high-intensity combat. Fitted with integrated fire control for long-range accuracy comparable to musketeers.</DMSL_Mech_Commandos.description>
+  <DMSL_Mech_SpecialPolice.label>Special Police</DMSL_Mech_SpecialPolice.label>
+  <DMSL_Mech_SpecialPolice.description>A riot control mech equipped with stun devices and jet shoulders.</DMSL_Mech_SpecialPolice.description>
+  <DMSL_Mech_DesignatedMarksman.label>Designated Marksman</DMSL_Mech_DesignatedMarksman.label>
+  <DMSL_Mech_DesignatedMarksman.description>Full snipers proved too expensive for squad-level marksmanship. The designated marksman filled that role.</DMSL_Mech_DesignatedMarksman.description>
+  <DMSL_Mech_ArmoredGrenadiers.label>Armored Grenadiers</DMSL_Mech_ArmoredGrenadiers.label>
+  <DMSL_Mech_ArmoredGrenadiers.description>A mech for anti-tank and grenade-throwing duties in high-intensity combat zones.</DMSL_Mech_ArmoredGrenadiers.description>
+  <DMSL_Mech_DoctorFrame.label>Doctor Frame</DMSL_Mech_DoctorFrame.label>
+  <DMSL_Mech_DoctorFrame.description>An improved variant of the combat frame that can perform doctoring and cooking. You wouldn't use it for anything but saving lives, would you?</DMSL_Mech_DoctorFrame.description>
+  <DMSL_Mech_AgriculturalFrame.label>Agricultural Frame</DMSL_Mech_AgriculturalFrame.label>
+  <DMSL_Mech_AgriculturalFrame.description>An improved variant of the combat frame for farming tasks. Often a symbol of peace and love in literature. Drops 2-3 extra hay when harvesting.</DMSL_Mech_AgriculturalFrame.description>
+  <DMSL_Mech_DrillingBarge.label>Drilling Barge</DMSL_Mech_DrillingBarge.label>
+  <DMSL_Mech_DrillingBarge.description>An improved variant of the combat frame, primarily for mining—it can also operate deep drills to extract underground deposits.</DMSL_Mech_DrillingBarge.description>
+</LanguageData>

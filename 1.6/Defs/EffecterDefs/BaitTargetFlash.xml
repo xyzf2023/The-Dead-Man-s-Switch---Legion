@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 诱饵目标闪光效果器：在设置诱饵坐标时触发灰白色闪光 -->
+  <EffecterDef>
+    <defName>DMSL_Effecter_BaitTargetFlash</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_DMSL_BaitTargetFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnTarget</spawnLocType><!-- 在目标位置生成 -->
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

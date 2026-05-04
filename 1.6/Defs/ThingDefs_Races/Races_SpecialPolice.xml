@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- SpecialPolice 特警/镇爆机兵（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_SpecialPolice" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_SpecialPolice</defName>
+    <label>特种警察</label>
+    <description>装备了电击设备与喷气护肩的镇暴机兵。</description>
+    <statBases>
+      <MoveSpeed>4.5</MoveSpeed>
+      <ArmorRating_Blunt>1.2</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.2</ArmorRating_Sharp>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
+      <ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+      <AimingDelayFactor>1</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>8</mechFixedSkillLevel>
+      <body>DMS_Humanoid_TypeA</body>
+      <baseBodySize>1.1</baseBodySize>
+      <baseHealthScale>2</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <Tungsteel>50</Tungsteel>
+    </butcherProducts>
+    <modExtensions>
+      <!-- 模组扩展列表 -->
+      <li Class="Fortified.MechWeaponExtension">
+        <!-- 机械武器扩展 -->
+        <EnableWeaponFilter>true</EnableWeaponFilter>
+        <!-- 启用武器过滤器：是 -->
+        <UsableWeaponTags>
+          <li>SimpleGun</li>
+          <!-- 简单枪械 -->
+          <li>ShortShots</li>
+          <!-- 短射程武器 -->
+          <li>DMS_MechWeaponShotgun</li>
+          <!-- DMS霰弹枪 -->
+          <li>DMS_MechWeaponLight</li>
+          <!-- DMS轻型武器 -->
+          <li>A_AR_LongRifle</li>
+          <!-- AR长步枪 -->
+          <li>MedievalMeleeBasic</li>
+          <!-- 基础冷兵器 -->
+          <li>MedievalMeleeAdvanced</li>
+          <!-- 高级冷兵器 -->
+          <li>DMS_MeleeWeapon</li>
+          <!-- DMS近战武器 -->
+          <li>AssaultRifle</li>
+          <!-- 突击步枪 -->
+          <li>Minigun</li>
+          <!-- 迷你枪 -->
+          <li>V_Gatling556mm</li>
+          <!-- 加特林机枪 -->
+          <li>A_AP</li>
+          <!-- AP武器 -->
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>
+        <!-- 启用科技等级过滤器：是 -->
+        <UsableTechLevels>
+          <!-- 可使用的科技等级列表 -->
+          <li>Industrial</li>
+          <!-- 工业时代科技等级 -->
+        </UsableTechLevels>
+      </li>
+      <li Class="Fortified.TurretMannableExtension" />
+      <!-- 可操作炮塔扩展 -->
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <!-- 定义机械体种类，继承自基础机械体种类 -->
+    <defName>DMSL_Mech_SpecialPolice</defName>
+    <!-- 定义名称：DMS_Mech_Arquebusier -->
+    <label>特种警察</label>
+    <!-- 显示标签：arquebusier -->
+    <race>DMSL_Mech_SpecialPolice</race>
+    <!-- 关联的种族：DMS_Mech_Guardian -->
+    <isFighter>true</isFighter>
+    <!-- 是否为战斗单位：是 -->
+    <combatPower>200</combatPower>
+    <!-- 战斗力量：250 -->
+    <maxPerGroup>12</maxPerGroup>
+    <!-- 每组最大数量：12 -->
+    <lifeStages>
+      <!-- 生命阶段列表（用于定义不同阶段的贴图） -->
+      <li>
+        <!-- 第一个生命阶段 -->
+        <bodyGraphicData>
+          <!-- 身体图形数据 -->
+          <texPath>Mechanoid/SpecialPolice/SpecialPolice</texPath>
+          <!-- 贴图路径：Mechanoid/Guardian/Guardian（相对于Textures目录） -->
+          <shaderType>CutoutComplex</shaderType>
+          <!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass>
+          <!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize>
+          <!-- 绘制大小：1.4 -->
+          <shadowData>
+            <!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume>
+            <!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset>
+            <!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <!-- 第二个生命阶段（旧贴图） -->
+        <bodyGraphicData>
+          <!-- 身体图形数据 -->
+          <texPath>Mechanoid/SpecialPolice/SpecialPolice</texPath>
+          <!-- 贴图路径：Things/Automatroid/OldTexture/arquebusier（旧纹理） -->
+          <shaderType>CutoutComplex</shaderType>
+          <!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass>
+          <!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize>
+          <!-- 绘制大小：1.4 -->
+          <shadowData>
+            <!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume>
+            <!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset>
+            <!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <!-- 武器标签列表（生成时可能携带的武器类型） -->
+      <li>A_SAR_LongRifle</li>
+      <li>AssaultRifle</li>
+      <li>DMS_MechWeaponShotgun</li>
+      <!-- 轻型机枪标签 -->
+    </weaponTags>
+    
+    <!-- 能力列表 -->
+    <abilities>
+       <li>LongjumpMech</li>
+      <li>DMSL_Ability_HighVoltageShock</li>
+      <!-- 高压电击能力：消耗50%能量对目标释放高压电击 -->
+    </abilities>
+  </PawnKindDef>
+</Defs>

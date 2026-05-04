@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 工程师：中型复活列表，参照 DMS 中型组装配方结构 -->
+  <RecipeDef ParentName="DMS_MediumMechanoidRecipe">
+    <defName>DMSL_Make_Engineer</defName>
+    <label>组装工程师</label>
+    <description>组装一个工程师。</description>
+    <products>
+      <DMSL_Mech_Engineer>1</DMSL_Mech_Engineer>
+    </products>
+    <researchPrerequisite>DMS_HumanoidEngineering</researchPrerequisite>
+    <gestationCycles>2</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_Engineer</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>85</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Synthread</li>
+            <li>Polyester</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Steel</li>
+        <li>Synthread</li>
+        <li>Polyester</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentSpacer</li>
+        <li>ComponentStamped</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

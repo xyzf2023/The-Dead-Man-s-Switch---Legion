@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- 移除原版诱饵弹定义（与 CE 迫击炮弹药系统不兼容） -->
+	<!-- 通过 ParentName 精确匹配原版定义，避免误删 CombatExtended/Defs 中的 CE 版本 -->
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[@ParentName="MakeableShellBase" and defName="Shell_BaitTarget"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[@ParentName="BaseBullet" and defName="Bullet_Shell_BaitTarget"]</xpath>
+	</Operation>
+
+	<!-- 将诱饵弹注入 CE 81mm 迫击炮弹药集 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/CombatExtended.AmmoSetDef[defName="AmmoSet_81mmMortarShell"]/ammoTypes</xpath>
+		<value>
+			<DMSL_Shell_BaitTarget>DMSL_Bullet_81mmMortarShell_BaitTarget</DMSL_Shell_BaitTarget>
+		</value>
+	</Operation>
+
+</Patch>

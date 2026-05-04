@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- MOD 设置界面 -->
+  <DMSL_Settings_EventSection>事件设置</DMSL_Settings_EventSection>
+  <DMSL_Settings_EnableAerialRaid>启用武装殖民舰队轰炸事件</DMSL_Settings_EnableAerialRaid>
+  <DMSL_Settings_EnableAerialRaid_Desc>允许生成武装殖民舰队空袭事件。武装殖民舰队会在与玩家敌对时尝试派遣轰炸机打击殖民地。</DMSL_Settings_EnableAerialRaid_Desc>
+  <DMSL_Settings_EnableAerialRaidPager>启用海盗空袭先导袭击事件</DMSL_Settings_EnableAerialRaidPager>
+  <DMSL_Settings_EnableAerialRaidPager_Desc>允许启用海盗空袭先导袭击事件。</DMSL_Settings_EnableAerialRaidPager_Desc>
+  <DMSL_Settings_ResetToDefault>重置所有设置为默认</DMSL_Settings_ResetToDefault>
+
+  <!-- 视听效果设置 -->
+  <DMSL_Settings_AudioVisualSection>视听效果</DMSL_Settings_AudioVisualSection>
+  <DMSL_Settings_PlayAirRaidSiren>播放防空警报</DMSL_Settings_PlayAirRaidSiren>
+  <DMSL_Settings_PlayAirRaidSiren_Desc>在进入空袭倒计时时播放防空警报。</DMSL_Settings_PlayAirRaidSiren_Desc>
+  <DMSL_Settings_PlayNuclearStrikeAudioVisual>播放核打击视听效果</DMSL_Settings_PlayNuclearStrikeAudioVisual>
+  <DMSL_Settings_PlayNuclearStrikeAudioVisual_Desc>在核打击时播放白屏和耳鸣音效。</DMSL_Settings_PlayNuclearStrikeAudioVisual_Desc>
+  <DMSL_Settings_PlayIEDDetonateSound>播放IED爆炸音效</DMSL_Settings_PlayIEDDetonateSound>
+  <DMSL_Settings_PlayIEDDetonateSound_Desc>在引爆IED时播放奇妙の音效。</DMSL_Settings_PlayIEDDetonateSound_Desc>
+
+  <!-- 工作相关设置 -->
+  <DMSL_Settings_WorkSection>工作相关</DMSL_Settings_WorkSection>
+  <DMSL_Settings_EnableDrillingBargeDeepDrill>允许钻井驳机直接开采深层矿脉</DMSL_Settings_EnableDrillingBargeDeepDrill>
+  <DMSL_Settings_EnableDrillingBargeDeepDrill_Desc>启用后，允许钻井驳机像深钻井一样开采矿物资源。</DMSL_Settings_EnableDrillingBargeDeepDrill_Desc>
+
+  <!-- 叙事者相关设置 -->
+  <DMSL_Settings_StorytellerSection>叙事者相关</DMSL_Settings_StorytellerSection>
+  <DMSL_Settings_EnableElectronicAngelSupport>启用电子天使支援事件</DMSL_Settings_EnableElectronicAngelSupport>
+  <DMSL_Settings_EnableElectronicAngelSupport_Desc>允许在叙事者为拉斐尔/艾丽萨时，用电子天使支援替代黑衣人事件。</DMSL_Settings_EnableElectronicAngelSupport_Desc>
+  <DMSL_Settings_ElectronicAngelNoStorytellerLimit>电子天使事件不受叙事者限制</DMSL_Settings_ElectronicAngelNoStorytellerLimit>
+  <DMSL_Settings_ElectronicAngelNoStorytellerLimit_Desc>启用后，电子天使相关事件将不再受当前叙事者限制。</DMSL_Settings_ElectronicAngelNoStorytellerLimit_Desc>
+  <DMSL_Settings_EnableUnknownMechSupport>启用未知机兵支援事件</DMSL_Settings_EnableUnknownMechSupport>
+  <DMSL_Settings_EnableUnknownMechSupport_Desc>允许叙事者为拉斐尔时生成未知机兵支援事件。</DMSL_Settings_EnableUnknownMechSupport_Desc>
+  <DMSL_Settings_UnknownMechNoStorytellerLimit>未知机兵支援不受叙事者限制</DMSL_Settings_UnknownMechNoStorytellerLimit>
+  <DMSL_Settings_UnknownMechNoStorytellerLimit_Desc>启用后，未知机兵支援事件将不再受当前叙事者限制。</DMSL_Settings_UnknownMechNoStorytellerLimit_Desc>
+  <DMSL_Settings_EnableRaphaelExtraQuest>启用拉斐尔额外任务组件</DMSL_Settings_EnableRaphaelExtraQuest>
+  <DMSL_Settings_EnableRaphaelExtraQuest_Desc>启用后，拉斐尔每天会尝试额外发布一个任务。如果发现启用此组件会导致问题，请关闭此选项。</DMSL_Settings_EnableRaphaelExtraQuest_Desc>
+
+  <!-- 杂项设置 -->
+  <DMSL_Settings_MiscSection>杂项</DMSL_Settings_MiscSection>
+  <DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic>启用钻井驳机实验性工作逻辑</DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic>
+  <DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic_Desc>如果发现钻井驳机查找可开采矿物时会导致长时间卡顿，请开启此选项。此选项会替换钻井驳机的查找逻辑，使用更温和的方式查找矿脉。\n\n注意：开启此选项会导致额外的性能损耗和较长的开采延迟。如果没有显著卡顿不要开启。</DMSL_Settings_EnableDrillingBargeExperimentalWorkLogic_Desc>
+  <DMSL_Settings_EnableExtraStopReconOption>启用额外的终止侦察选项</DMSL_Settings_EnableExtraStopReconOption>
+  <DMSL_Settings_EnableExtraStopReconOption_Desc>在AXF-12和通讯台选项中各添加一个用于终止侦察的选项，以便在世界地图的终止侦察按钮丢失时停止维持地图。</DMSL_Settings_EnableExtraStopReconOption_Desc>
+  <DMSL_Settings_AutoAddDigitalAngelFaction>允许自动添加派系：电子天使</DMSL_Settings_AutoAddDigitalAngelFaction>
+  <DMSL_Settings_AutoAddDigitalAngelFaction_Desc>在加载存档时，如果不存在电子天使派系，则尝试添加。</DMSL_Settings_AutoAddDigitalAngelFaction_Desc>
+  <DMSL_Settings_EnableTankCrushEffect>启用坦克碾压效果</DMSL_Settings_EnableTankCrushEffect>
+  <DMSL_Settings_EnableTankCrushEffect_Desc>启用后，超重型机兵在近战时将根据体型差造成额外钝器伤害。\n注意：此选项对敌对机兵同样生效。</DMSL_Settings_EnableTankCrushEffect_Desc>
+
+  <!-- IED 遥控引爆 Gizmo 与提示 -->
+  <DMSL_IED_Detonate>引爆 IED</DMSL_IED_Detonate>
+  <DMSL_IED_DetonateDesc>立即引爆由此武器部署的所有已落地 IED。</DMSL_IED_DetonateDesc>
+  <DMSL_IED_MaxDeployed>已达IED部署上限。</DMSL_IED_MaxDeployed>
+  <DMSL_IED_NoIEDToDetonate>没有可引爆的IED</DMSL_IED_NoIEDToDetonate>
+  <!-- IED 清除 Gizmo -->
+  <DMSL_IED_Clear>清除IED</DMSL_IED_Clear>
+  <DMSL_IED_ClearDesc>清除场上此武器关联的IED。</DMSL_IED_ClearDesc>
+  <DMSL_IED_NoIEDToClear>没有可清除的IED</DMSL_IED_NoIEDToClear>
+
+  <!-- 维修指定能力相关翻译 -->
+  <DMSL_RepairDesignateFailedMessage>该机械体不需要维修</DMSL_RepairDesignateFailedMessage>
+  <!-- 医用胶水能力：目标无流血伤口时 -->
+  <DMSL_MedicalGlueNoBleedingWound>目标没有可包扎的流血伤口。</DMSL_MedicalGlueNoBleedingWound>
+  <!-- 机体重构能力：验证失败提示、工作报告 -->
+  <DMSL_MechReconstruction_FailedMessage>只能对友方机械体尸体使用</DMSL_MechReconstruction_FailedMessage>
+  <DMSL_MechReconstruction_ReportWithTarget>正在对{0}进行机体重构</DMSL_MechReconstruction_ReportWithTarget>
+  <DMSL_MechReconstruction_ReportDefault>正在进行机体重构</DMSL_MechReconstruction_ReportDefault>
+
+  <!-- 指挥官不能被其他机械体监管 -->
+  <DMSL_Commander_CannotBeControlledByMech>指挥官不能被机械体控制。</DMSL_Commander_CannotBeControlledByMech>
+  <!-- 指挥官不能培育指挥官（账单配置 / 培育限制） -->
+  <DMSL_Commander_CannotGestateCommander>指挥官不能培育指挥官。</DMSL_Commander_CannotGestateCommander>
+  
+  <!-- 武器模式切换相关翻译 -->
+  <DMSL_WeaponMode_Label>模式：{0}</DMSL_WeaponMode_Label>
+  
+  <!-- 定时护盾相关翻译 -->
+  <DMSL_ShieldTimer_Label>护盾充能</DMSL_ShieldTimer_Label>
+  <DMSL_ShieldActivate_Label>激活护盾</DMSL_ShieldActivate_Label>
+  <DMSL_ShieldDeactivate_Label>关闭护盾</DMSL_ShieldDeactivate_Label>
+  <DMSL_ShieldActive_Desc>护盾已激活。点击以关闭。</DMSL_ShieldActive_Desc>
+  <DMSL_ShieldInactive_Desc>点击以激活护盾。</DMSL_ShieldInactive_Desc>
+  <DMSL_ShieldRecharging_Message_Simple>开启护盾至少需要5s的能量。</DMSL_ShieldRecharging_Message_Simple>
+  <DMSL_ShieldTimer_Tooltip>护盾能持续的时间。关闭时以0.5s/s的速率充能。</DMSL_ShieldTimer_Tooltip>
+
+  <!-- 固守指令 / 吟唱相关翻译 -->
+  <DMSL_ChannelingGate_DisabledReason>状态切换正在进行</DMSL_ChannelingGate_DisabledReason>
+
+  <!-- 集群建设资源储存相关翻译 -->
+  <DMSL_ResourceStorage>资源储备</DMSL_ResourceStorage>
+  <DMSL_ResourceStorage_AmountFormat>{0}：{1}/{2}</DMSL_ResourceStorage_AmountFormat>
+
+  <!-- 频段增幅装置：选中建筑时检查信息面板显示充能缓冲可用时长 -->
+  <DMSL_BandwidthAmplifier_BufferDuration>充能可用时长：{0}秒</DMSL_BandwidthAmplifier_BufferDuration>
+  
+  <!-- 空袭先导袭击（财富达到 3000 时介绍信） -->
+  <DMSL_AerialRaidPagerIntro_LetterLabel>关于空袭先导袭击</DMSL_AerialRaidPagerIntro_LetterLabel>
+  <DMSL_AerialRaidPagerIntro_LetterText>关于随着殖民地规模扩大，越来越多的势力开始关注殖民地，而海盗自然也想分一杯羹。携带空中支援传呼器的海盗劫掠队将有可能造访殖民地。空中支援传呼器是一种用于调用空中支援的便携式传呼装置，海盗将使用此设备呼叫轰炸以削弱你的殖民地，并在轰炸后发起进攻。\n\n海盗到达殖民地后，携带传呼器的劫掠者会先尝试传输轰炸坐标，此时若能中断其呼叫流程，将能避免后续轰炸。倘若轰炸机已经起飞，可以使用迫击炮发射电子诱饵弹以干扰轰炸机选择打击地点；如果殖民地已具备部署AXF-12战斗机的能力，也可使用此战斗机进行拦截。\n\n&lt;i&gt;如果你招惹了武装殖民舰队，他们也可能派出飞行编队轰炸你的殖民地。也许我们可以使用一样的处理方式？&lt;/i&gt;</DMSL_AerialRaidPagerIntro_LetterText>
+
+  <!-- 与 DMS_Army 结盟且财富达到 3000 时的正面信件 -->
+  <DMSL_ArmyAllyIntro_LetterLabel>来自武装殖民舰队的讯息</DMSL_ArmyAllyIntro_LetterLabel>
+  <DMSL_ArmyAllyIntro_LetterText>鉴于你方已与武装殖民舰队建立盟约关系，殖民舰队指挥部通报如下：\n\n空中支援传呼器调用的轰炸机隶属古代主战师，其作战协议仍接收殖民舰队的最高指令，可向相关编队下达返航命令。\n\n若海盗通过伪造信号非法呼叫对地轰炸，舰队方面可在确认后发送遣返指令，终止轰炸机编队当前攻击流程。\n\n如有需要，可于通讯台请求介入。</DMSL_ArmyAllyIntro_LetterText>
+
+  <!-- 半数倒地支援请求（拉斐尔叙事者）：未知讯号选择信 -->
+  <DMSL_UnknownSignal_LetterTitle>未知讯号</DMSL_UnknownSignal_LetterTitle>
+  <DMSL_UnknownSignal_LetterText>殖民者们收到一条来源为■■■■的信号，似乎在询问是否需要军事援助。\n\n我们要回应它吗？</DMSL_UnknownSignal_LetterText>
+  <DMSL_UnknownSignal_OptionRespond>尝试回应</DMSL_UnknownSignal_OptionRespond>
+  <DMSL_UnknownSignal_OptionSilent>保持静默</DMSL_UnknownSignal_OptionSilent>
+
+  <!-- 空袭警告信封相关翻译 -->
+  <DMSL_AerialRaid_Warning_Label>敌方轰炸机接近</DMSL_AerialRaid_Warning_Label>
+  <DMSL_AerialRaid_AssaultStarted>敌人已开始进攻</DMSL_AerialRaid_AssaultStarted>
+  
+  <!-- 空袭事件（Army）信件回退文案 -->
+  <DMSL_AerialRaid_Army_LetterLabel>空袭警告</DMSL_AerialRaid_Army_LetterLabel>
+  <DMSL_AerialRaid_Army_LetterText>空袭即将到来。</DMSL_AerialRaid_Army_LetterText>
+
+  <!-- 呼叫空袭 Job 工作报告 / 错误消息 -->
+  <DMSL_RaidCall_ReportGotoRally>前往集合点</DMSL_RaidCall_ReportGotoRally>
+  <DMSL_RaidCall_ReportCalling>正在呼叫空中支援</DMSL_RaidCall_ReportCalling>
+  <DMSL_RaidCall_NoPrePhaseComponent>空袭倒计时组件不存在，已直接进入进攻</DMSL_RaidCall_NoPrePhaseComponent>
+
+  <!-- 空袭支援袭击 Lord 状态转换消息 -->
+  <DMSL_PagerRaid_MessageCallFailed>呼叫失败，敌人开始进攻</DMSL_PagerRaid_MessageCallFailed>
+  <DMSL_PagerRaid_MessageRaidComplete>空袭阶段结束，敌人开始进攻</DMSL_PagerRaid_MessageRaidComplete>
+
+  <!-- 空袭即将到达 Alert -->
+  <DMSL_Alert_AerialRaidIncoming_LabelSingle>空袭即将到达：{0} 小时</DMSL_Alert_AerialRaidIncoming_LabelSingle>
+  <DMSL_Alert_AerialRaidIncoming_LabelMultiple>空袭即将到达：{0} 小时（共{1}次）</DMSL_Alert_AerialRaidIncoming_LabelMultiple>
+  <DMSL_Alert_AerialRaidIncoming_ExplanationIntro>轰炸机已起飞，将在不久后抵达。务必使用电子诱饵弹改变攻击目标或提前拦截！</DMSL_Alert_AerialRaidIncoming_ExplanationIntro>
+  <DMSL_Alert_AerialRaidIncoming_CountdownList>倒计时列表：</DMSL_Alert_AerialRaidIncoming_CountdownList>
+  <DMSL_Alert_AerialRaidIncoming_CountdownLine>- {0} 小时</DMSL_Alert_AerialRaidIncoming_CountdownLine>
+
+  <!-- AXF12 侦察领空冒犯确认与历史事件 -->
+  <DMSL_AXF12_ReconAirspaceConfirmText>空中侦察属于冒犯他人领空的行为。对非敌对派系领土执行侦察将严重恶化与该派系的关系，甚至导致敌对。\n\n是否确认仍要对该地点执行侦察？</DMSL_AXF12_ReconAirspaceConfirmText>
+
+  <!-- AXF12 侦察发射 Gizmo 标签（CompProperties_AXF12ReconLaunch） -->
+  <DMSL_AXF12_ReconLaunch_GizmoLabel>侦察</DMSL_AXF12_ReconLaunch_GizmoLabel>
+  <DMSL_AXF12_ReconLaunch_GizmoDesc>对一个世界格执行一次侦察。</DMSL_AXF12_ReconLaunch_GizmoDesc>
+  <DMSL_AXF12_ReconLaunch_InterceptGizmoLabel>拦截</DMSL_AXF12_ReconLaunch_InterceptGizmoLabel>
+  <DMSL_AXF12_ReconLaunch_InterceptGizmoDesc>拦截来袭的轰炸机编队。拦截成功后返航。</DMSL_AXF12_ReconLaunch_InterceptGizmoDesc>
+  <DMSL_AXF12_ReconLaunch_BombGizmoLabel>轰炸</DMSL_AXF12_ReconLaunch_BombGizmoLabel>
+  <DMSL_AXF12_ReconLaunch_BombGizmoDesc>对目标地点执行一次投弹。投弹完成后返航。</DMSL_AXF12_ReconLaunch_BombGizmoDesc>
+
+  <!-- AXF12 拦截 Gizmo 禁用理由 -->
+  <DMSL_AXF12_InterceptNoTarget>无拦截目标。</DMSL_AXF12_InterceptNoTarget>
+
+  <!-- AXF12 拦截成功信件 -->
+  <DMSL_AXF12_InterceptSuccessLetterTitle>拦截成功</DMSL_AXF12_InterceptSuccessLetterTitle>
+  <DMSL_AXF12_InterceptSuccessLetterText>所有的来袭轰炸机都被击落或逼离了。轰炸不会到达殖民地。</DMSL_AXF12_InterceptSuccessLetterText>
+
+  <!-- AXF12 航弹储备 Gizmo / Job / 检查栏 -->
+  <DMSL_AXF12_AmmoReserve_GizmoLabel>航弹储备</DMSL_AXF12_AmmoReserve_GizmoLabel>
+  <DMSL_AXF12_AmmoReserve_Tooltip>进行轰炸所需的航弹。最多储备三颗。</DMSL_AXF12_AmmoReserve_Tooltip>
+  <DMSL_AXF12_AmmoReserve_Inspect>航弹：{0} {1} / {2}</DMSL_AXF12_AmmoReserve_Inspect>
+
+  <!-- AXF12 右键优先装填（与战争女皇装填一致） -->
+  <DMSL_AXF12_FillAmmo_Label>装填 AXF-12</DMSL_AXF12_FillAmmo_Label>
+  <DMSL_AXF12_FillAmmo_NoAmmo>无可用航弹</DMSL_AXF12_FillAmmo_NoAmmo>
+
+  <!-- AXF12 轰炸弹数菜单 -->
+  <DMSL_AXF12_BombOption_One>投放一枚航弹</DMSL_AXF12_BombOption_One>
+  <DMSL_AXF12_BombOption_Two>投放两枚航弹</DMSL_AXF12_BombOption_Two>
+  <DMSL_AXF12_BombOption_Three>投放三枚航弹</DMSL_AXF12_BombOption_Three>
+  <DMSL_AXF12_BombNoAmmo>航弹数量不足</DMSL_AXF12_BombNoAmmo>
+
+  <!-- AXF12 轰炸选点按钮 / 关注区域 Gizmo -->
+  <DMSL_AXF12_SelectBombCell>选择轰炸落点</DMSL_AXF12_SelectBombCell>
+  <DMSL_AXF12_StopObserving_Label>停止关注此区域</DMSL_AXF12_StopObserving_Label>
+  <DMSL_AXF12_StopObserving_Desc>终止对此区域的信息获取。</DMSL_AXF12_StopObserving_Desc>
+  <DMSL_AXF12_StopObservingAll_Label>停止关注所有侦察区域</DMSL_AXF12_StopObservingAll_Label>
+  <DMSL_AXF12_StopObservingAll_Desc>停止对AXF-12侦察的所有区域的关注，不再获取这些区域的视野。</DMSL_AXF12_StopObservingAll_Desc>
+  <DMSL_AXF12_NoObservedMap>没有正在观察的地图。</DMSL_AXF12_NoObservedMap>
+
+  <!-- AXF12 Gizmo 禁用理由（燃料/机内/起飞/阵营） -->
+  <DMSL_AXF12_Disable_NoFuel>燃料不足</DMSL_AXF12_Disable_NoFuel>
+  <DMSL_AXF12_Disable_NoPilot>机内无人，无法起飞。</DMSL_AXF12_Disable_NoPilot>
+  <DMSL_AXF12_Disable_NotReadyToLaunch>起飞准备未完成</DMSL_AXF12_Disable_NotReadyToLaunch>
+  <DMSL_AXF12_Disable_InvalidFaction_Bomb>目标阵营无效，无法执行轰炸。</DMSL_AXF12_Disable_InvalidFaction_Bomb>
+
+  <!-- AXF12 自定义返航降落点 Gizmo -->
+  <DMSL_AXF12_CustomLanding_Label>自定义降落点</DMSL_AXF12_CustomLanding_Label>
+  <DMSL_AXF12_CustomLanding_Desc>开启后允许在AXF-12返航时自定义降落点。</DMSL_AXF12_CustomLanding_Desc>
+
+  <!-- AXF12 选点/世界/燃料等消息与标签-->
+  <DMSL_AXF12_Message_NoWorldMapPos>无法获取世界地图位置。</DMSL_AXF12_Message_NoWorldMapPos>
+  <DMSL_AXF12_Message_NoFuelCost>无法计算燃料消耗。</DMSL_AXF12_Message_NoFuelCost>
+  <DMSL_AXF12_Message_NoFuelNeed>燃料不足，需要 {0}。</DMSL_AXF12_Message_NoFuelNeed>
+  <DMSL_AXF12_Message_MapNotLoaded>该地图未加载。</DMSL_AXF12_Message_MapNotLoaded>
+  <DMSL_AXF12_Message_InvalidTarget>目标无效。</DMSL_AXF12_Message_InvalidTarget>
+  <DMSL_AXF12_Message_NoSettlement>该位置没有可进入的地点。</DMSL_AXF12_Message_NoSettlement>
+  <DMSL_AXF12_Message_NoMapSelect>当前无地图，无法选点。</DMSL_AXF12_Message_NoMapSelect>
+  <DMSL_AXF12_Message_LaunchFailed>发射失败。</DMSL_AXF12_Message_LaunchFailed>
+  <DMSL_AXF12_Label_OutOfRange>位于有效航程外。</DMSL_AXF12_Label_OutOfRange>
+  <DMSL_AXF12_Label_BombNeedVision>轰炸需要目标视野。</DMSL_AXF12_Label_BombNeedVision>
+  <DMSL_AXF12_Label_BombFuel>轰炸此地点。预计消耗{0}单位燃料。</DMSL_AXF12_Label_BombFuel>
+  <DMSL_AXF12_Label_ReconFuel>侦察此地点。预计消耗{0}单位燃料。</DMSL_AXF12_Label_ReconFuel>
+  <DMSL_AXF12_Label_NoReconValue>此地点无视野价值。</DMSL_AXF12_Label_NoReconValue>
+  <DMSL_AXF12_Reason_NoMapGen>该地点不可生成地图。</DMSL_AXF12_Reason_NoMapGen>
+
+  <!-- 骑士长枪移速增伤 Stat 说明（移速、伤害乘数） -->
+  <DMSL_LanceMoveSpeedDamage>骑士长枪移速增伤：当前移速 {0} 格/秒，近战伤害 {1}</DMSL_LanceMoveSpeedDamage>
+
+  <!-- 移动动量（侦察兵加速）Stat 说明 -->
+  <DMSL_MomentumMoveSpeed>冲刺将在{1}格后达到最大速度。当前已移动： {0}格，为初始速度的 {2}。\n\n速度达到最大值时，移动将不受地形影响。</DMSL_MomentumMoveSpeed>
+  <!-- 移速达上限时抑止时间乘数为 0 的说明 -->
+  <DMSL_StaggerDurationMomentum>冲刺达到最大速度时不再受抑止效果影响。</DMSL_StaggerDurationMomentum>
+
+  <!-- 指挥官额外机械带宽/控制组 -->
+  <DMSL_MechCommanderBandwidth>指挥官额外带宽：{0}</DMSL_MechCommanderBandwidth>
+  <DMSL_MechCommanderControlGroups>指挥官额外控制组：{0}</DMSL_MechCommanderControlGroups>
+
+  <DMSL_AerialRaid_Warning_Text>防空雷达系统在远程扫描中捕获到异常信号。\n\n一支隶属于武装殖民舰队的轰炸机编队正在向本区域接近，飞行轨迹表明其任务为对地打击。\n\n敌方航空单位预计在短时间内进入有效攻击范围。若不加以干扰，其轰炸将直接落入殖民地控制区。\n\n你可以命令战斗机对来袭目标进行拦截，或部署电子诱饵迫使敌方改变轰炸目标区域。\n\n时间有限，务必尽快采取反制措施。</DMSL_AerialRaid_Warning_Text>
+
+  <!-- 通讯台 DMS_Army 空中支援对话 -->
+  <DMSL_Comms_RequestAirSupport>请求空中支援</DMSL_Comms_RequestAirSupport>
+  <DMSL_Comms_AirSupportPrompt>{0}询问你需要什么空中支援。</DMSL_Comms_AirSupportPrompt>
+  <DMSL_Comms_BomberOption>请求命令空袭殖民地的轰炸机编队遣返（花费: {0}好感度）</DMSL_Comms_BomberOption>
+  <DMSL_Comms_NoBomberToRecall>无可遣返的轰炸机</DMSL_Comms_NoBomberToRecall>
+  <DMSL_Comms_RecallSuccessDialog>{0}答应了你的请求，并声称会尽快发送遣返指令。</DMSL_Comms_RecallSuccessDialog>
+  <DMSL_Comms_RecallSuccessLetterTitle>轰炸机编队已返航</DMSL_Comms_RecallSuccessLetterTitle>
+  <DMSL_Comms_RecallSuccessLetterText>前来轰炸的轰炸机编队因接收到武装殖民舰队的信号而返航。轰炸不会到达殖民地。</DMSL_Comms_RecallSuccessLetterText>
+  <!-- 空中支援子界面新选项 -->
+  <DMSL_Comms_FireStrikeOption>请求火力打击</DMSL_Comms_FireStrikeOption>
+  <DMSL_Comms_BattlefieldSupportOption>请求战场支援</DMSL_Comms_BattlefieldSupportOption>
+  <DMSL_Comms_SpecialStrikeOption>请求特殊打击</DMSL_Comms_SpecialStrikeOption>
+  <DMSL_Comms_ComingSoon>即将推出</DMSL_Comms_ComingSoon>
+  <!-- 通讯台空中支援确认 / 倒计时 / 冷却 -->
+  <DMSL_Comms_ConfirmSupportPrompt>{0}：{1}\n\n即将执行{0}，请传输目标地点坐标。</DMSL_Comms_ConfirmSupportPrompt>
+  <DMSL_Comms_SupportEtaMessage>目标坐标已确认，支援预计在{0}秒后到达。</DMSL_Comms_SupportEtaMessage>
+  <DMSL_Comms_OptionCooldown>下次支援正在准备，预计在{0}小时后完成。</DMSL_Comms_OptionCooldown>
+  <DMSL_Comms_UndergroundMapRejected>空中支援无法到达此区域。</DMSL_Comms_UndergroundMapRejected>
+  <!-- 空中支援选点：取消 / 已调用 / 区域不可用 / 确认消息 -->
+  <DMSL_AerialSupport_Cancelled>空中支援已取消。</DMSL_AerialSupport_Cancelled>
+  <DMSL_AerialSupport_AreaUnavailable>当前区域空中支援不可用</DMSL_AerialSupport_AreaUnavailable>
+  <DMSL_AerialSupport_ConfirmedSingle>{0}已确认，目标位置：{1}</DMSL_AerialSupport_ConfirmedSingle>
+  <DMSL_AerialSupport_ConfirmedRange>{0}已确认，轰炸区域：{1} → {2}</DMSL_AerialSupport_ConfirmedRange>
+  <DMSL_AerialSupport_ConfirmedMultiple>{0}已确认，选择了{1}个目标位置</DMSL_AerialSupport_ConfirmedMultiple>
+  <DMSL_AerialSupport_SupportCalled>已调用{0}支援，目标地点：{1}</DMSL_AerialSupport_SupportCalled>
+  <DMSL_Comms_NoTargetVisibility>无目标地点视野</DMSL_Comms_NoTargetVisibility>
+  <DMSL_Comms_ExecuteSupportInArea>在此区域执行{0}</DMSL_Comms_ExecuteSupportInArea>
+  <!-- 通讯台侦察目标区域 -->
+  <DMSL_Comms_ReconTargetOption>请求侦察目标区域</DMSL_Comms_ReconTargetOption>
+  <DMSL_Comms_ReconPrompt>{0}询问你需要哪片区域的情报。</DMSL_Comms_ReconPrompt>
+  <DMSL_Comms_ProvideCoordinates>提供坐标</DMSL_Comms_ProvideCoordinates>
+  <DMSL_Comms_ReconEtaMessage>侦察飞机预计{0}秒后到达目标地点。</DMSL_Comms_ReconEtaMessage>
+  <DMSL_Comms_ReconExecuteInArea>在此区域执行侦察</DMSL_Comms_ReconExecuteInArea>
+  <DMSL_Comms_ReconNoTargetIntel>目标地点无侦察价值</DMSL_Comms_ReconNoTargetIntel>
+  <DMSL_Comms_ReconNotHostile>未与此派系敌对</DMSL_Comms_ReconNotHostile>
+  <DMSL_Comms_StopReconOption>停止侦察</DMSL_Comms_StopReconOption>
+
+  <!-- 通讯台 DMS_Army 核打击（皇权，头衔不低于准将） -->
+  <DMSL_Comms_NukeStrike_Connect>*连接核打击系统*</DMSL_Comms_NukeStrike_Connect>
+  <DMSL_Comms_NukeStrike_InsufficientPermission>*权限不足*</DMSL_Comms_NukeStrike_InsufficientPermission>
+  <DMSL_Comms_NukeStrike_Clicked>已点击</DMSL_Comms_NukeStrike_Clicked>
+  <DMSL_Comms_NukeStrike_Terminal>System</DMSL_Comms_NukeStrike_Terminal>
+  <!-- 核打击连接窗口：分阶段显示文字 -->
+  <DMSL_NukeStrike_Connecting>> 通讯链路建立中......</DMSL_NukeStrike_Connecting>
+  <DMSL_NukeStrike_ChannelEncrypted>> 通讯通道：已加密</DMSL_NukeStrike_ChannelEncrypted>
+  <DMSL_NukeStrike_SystemOnline>> 系统状态：在线</DMSL_NukeStrike_SystemOnline>
+  <DMSL_NukeStrike_IdentityConfirm>> 通讯者身份确认：{0} {1}</DMSL_NukeStrike_IdentityConfirm>
+  <DMSL_NukeStrike_SystemReady>> 核打击系统已就绪。等待下一步指令。</DMSL_NukeStrike_SystemReady>
+  <DMSL_NukeStrike_NoMessage>暂无系统消息</DMSL_NukeStrike_NoMessage>
+  <DMSL_NukeStrike_CooldownMessage>准备流程尚未结束。预计{0}天后完成。</DMSL_NukeStrike_CooldownMessage>
+
+  <!-- 左下角按钮与相关文案 -->
+  <DMSL_NukeStrike_PermissionAuth>执行权限认证</DMSL_NukeStrike_PermissionAuth>
+  <DMSL_NukeStrike_EnterKey>输入密钥</DMSL_NukeStrike_EnterKey>
+  <DMSL_NukeStrike_Disconnect>断开连接</DMSL_NukeStrike_Disconnect>
+  <DMSL_NukeStrike_DisconnectMsg>> 收到指令，正在关闭通讯链接...</DMSL_NukeStrike_DisconnectMsg>
+  <DMSL_NukeStrike_AuthRequest>> 正在提交权限认证请求……\n> 认证节点响应中</DMSL_NukeStrike_AuthRequest>
+  <DMSL_NukeStrike_AuthResult>> 权限校验完成\n> 校验结果：通过。</DMSL_NukeStrike_AuthResult>
+  <!-- 输入密钥 → 传输打击坐标 -->
+  <DMSL_NukeStrike_KeyTransferConfirm>> 已确认密钥传输\n> 检验中...</DMSL_NukeStrike_KeyTransferConfirm>
+  <DMSL_NukeStrike_KeyValidResult>> 密钥已确认。\n> 状态：有效。</DMSL_NukeStrike_KeyValidResult>
+  <DMSL_NukeStrike_TransmitCoords>传输打击坐标</DMSL_NukeStrike_TransmitCoords>
+  <DMSL_NukeStrike_AllowCoords>> 允许传入打击坐标</DMSL_NukeStrike_AllowCoords>
+  <DMSL_NukeStrike_EtaMessage>核打击预计将于{0}小时后到达。</DMSL_NukeStrike_EtaMessage>
+  <!-- 核打击选点禁止原因 -->
+  <DMSL_NukeStrike_TargetInvalid>此目标无效。</DMSL_NukeStrike_TargetInvalid>
+  <DMSL_NukeStrike_MapNotLoaded>无目标视野。</DMSL_NukeStrike_MapNotLoaded>
+  <DMSL_NukeStrike_NoMapParent>该坐标无打击价值。</DMSL_NukeStrike_NoMapParent>
+  <!-- 核打击即将到达 严重警告 Alert -->
+  <DMSL_NukeStrike_AlertLabel>预计将于{0}小时后抵达目标坐标</DMSL_NukeStrike_AlertLabel>
+  <DMSL_NukeStrike_AlertExplanationIntro>核打击流程已启动。</DMSL_NukeStrike_AlertExplanationIntro>
+
+  <!-- 游荡机兵到达事件信件 -->
+  <DMSL_EngineerArrival_LetterLabel>游荡机兵到达</DMSL_EngineerArrival_LetterLabel>
+  <DMSL_EngineerArrival_LetterText>一个游荡的机兵接收到了机控中枢的信号，并游荡到殖民地附近。你可以去获取它的控制权。\n\n注意：如果它一直处于未受控状态，它可能会离开殖民地。</DMSL_EngineerArrival_LetterText>
+
+  <!-- 来自武装殖民舰队的馈赠事件信件 -->
+  <DMSL_GiftFromArmy_LetterLabel>来自武装殖民舰队的馈赠</DMSL_GiftFromArmy_LetterLabel>
+  <DMSL_GiftFromArmy_LetterText>一艘武装殖民舰队的运输船刚刚抵达。为了维系双方的友谊，他们送来一份礼物。</DMSL_GiftFromArmy_LetterText>
+
+  <!-- 艾丽萨带宽认可叙事者：信件标题与正文 -->
+  <DMSL_ElisaFavor_LetterTitle>艾丽萨的青睐</DMSL_ElisaFavor_LetterTitle>
+  <DMSL_ElisaFavor_LetterText>你对机兵的有序管理获得了武装殖民舰队的青睐，武装殖民舰队对你的好感增加了{INCREASE}点。</DMSL_ElisaFavor_LetterText>
+  <DMSL_ElisaFavor_LetterTextRoyalty>同时，出于对殖民地的认可，武装殖民舰队决定授予一名殖民者{AMOUNT}点荣誉点数。\n\n你想让谁接受这份荣誉？</DMSL_ElisaFavor_LetterTextRoyalty>
+
+  <!-- 讯息：电子天使（黑衣人事件分支） -->
+  <DMSL_ElectronicAngelSignal_LetterTitle>讯息：电子天使</DMSL_ElectronicAngelSignal_LetterTitle>
+  <DMSL_ElectronicAngelSignal_LetterText>当所有殖民者失去行动能力时，一条来自“电子天使”的讯息传入殖民地频道。她愿意为我们提供最后的庇护。\n\n我们要请求她的庇护吗？</DMSL_ElectronicAngelSignal_LetterText>
+  <DMSL_ElectronicAngelSignal_OptionRequestShelter>请求庇护</DMSL_ElectronicAngelSignal_OptionRequestShelter>
+  <DMSL_ElectronicAngelSignal_OptionKeepSilent>保持沉默</DMSL_ElectronicAngelSignal_OptionKeepSilent>
+
+  <!-- 综合探测阵列：生成诱饵信号 Gizmo -->
+  <DMSL_IntegratedDetectionArray_GenerateDecoyCoords>生成诱饵信号</DMSL_IntegratedDetectionArray_GenerateDecoyCoords>
+  <DMSL_IntegratedDetectionArray_GenerateDecoyCoordsDesc>在指定坐标生成一个持续五小时的诱饵信号，可以更改来袭轰炸机的轰炸目标。</DMSL_IntegratedDetectionArray_GenerateDecoyCoordsDesc>
+  <DMSL_IntegratedDetectionArray_NoBaitComponent>无法创建诱饵目标组件。</DMSL_IntegratedDetectionArray_NoBaitComponent>
+  <DMSL_IntegratedDetectionArray_DecoySet>已在 {0} 设置诱饵坐标（持续 5 小时）</DMSL_IntegratedDetectionArray_DecoySet>
+  <DMSL_IntegratedDetectionArray_Disable_NoPower>生成诱饵坐标需要通电。</DMSL_IntegratedDetectionArray_Disable_NoPower>
+  <!-- 综合探测阵列：扫描模式与进度 -->
+  <DMSL_IntegratedDetectionArray_ScanProgress>当前扫描进度：{0}%</DMSL_IntegratedDetectionArray_ScanProgress>
+  <DMSL_IntegratedDetectionArray_ModeLocal>本地矿脉扫描</DMSL_IntegratedDetectionArray_ModeLocal>
+  <DMSL_IntegratedDetectionArray_ModeLocalDesc>重点扫描殖民地范围的矿脉信号。每隔一段时间发现本地的矿脉资源。</DMSL_IntegratedDetectionArray_ModeLocalDesc>
+  <DMSL_IntegratedDetectionArray_ModeLongRange>远程矿脉扫描</DMSL_IntegratedDetectionArray_ModeLongRange>
+  <DMSL_IntegratedDetectionArray_ModeLongRangeDesc>重点扫描较远处的矿脉信号。每隔一段时间发现其他地点的矿脉资源。</DMSL_IntegratedDetectionArray_ModeLongRangeDesc>
+</LanguageData>

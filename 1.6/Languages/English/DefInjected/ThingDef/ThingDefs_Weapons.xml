@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Weapons - Weapons and ammunition -->
+  <DMSL_Bullet_AutomatroidHeavyMachineGun.label>Automatroid Heavy Machine Gun</DMSL_Bullet_AutomatroidHeavyMachineGun.label>
+  <DMSL_Weapon_AutomatroidHeavyMachineGun.label>Automatroid Heavy Machine Gun</DMSL_Weapon_AutomatroidHeavyMachineGun.label>
+  <DMSL_Weapon_AutomatroidHeavyMachineGun.description>A vehicle-mounted heavy machine gun fitted with a carry handle. Large-caliber rounds provide strong penetration.</DMSL_Weapon_AutomatroidHeavyMachineGun.description>
+  <DMSL_Bullet_AutomatroidHeavyShotgun.label>Automatroid Heavy Shotgun</DMSL_Bullet_AutomatroidHeavyShotgun.label>
+  <DMSL_Bullet_2AutomatroidHeavyShotgun.label>Automatroid Heavy Shotgun (Stun)</DMSL_Bullet_2AutomatroidHeavyShotgun.label>
+  <DMSL_Weapon_AutomatroidHeavyShotgun.label>Automatroid Heavy Shotgun</DMSL_Weapon_AutomatroidHeavyShotgun.label>
+  <DMSL_Weapon_AutomatroidHeavyShotgun.description>A large-caliber shotgun usable only by mechanoids or power-armored personnel. Can fire stun rounds.</DMSL_Weapon_AutomatroidHeavyShotgun.description>
+  <DMSL_Weapon_CompetitiveRifle.label>Competitive Rifle</DMSL_Weapon_CompetitiveRifle.label>
+  <DMSL_Weapon_CompetitiveRifle.description>A competitive rifle that switches between semi-auto and full-auto. An ideal choice for full-auto beginners.</DMSL_Weapon_CompetitiveRifle.description>
+  <DMSL_Bullet_2AutomatroidAssaultRifle.label>Automatroid Assault Rifle Round</DMSL_Bullet_2AutomatroidAssaultRifle.label>
+  <DMSL_Bullet_40mm.label>81mm High-Explosive Shell</DMSL_Bullet_40mm.label>
+  <DMSL_Weapon_AutomatroidAssaultRifle.label>Automatroid Assault Rifle (Underbarrel Grenade Launcher)</DMSL_Weapon_AutomatroidAssaultRifle.label>
+  <DMSL_Weapon_AutomatroidAssaultRifle.description>An automatroid assault rifle with an underbarrel grenade launcher.</DMSL_Weapon_AutomatroidAssaultRifle.description>
+  <DMSL_Weapon_Lance.label>Knight's Lance</DMSL_Weapon_Lance.label>
+  <DMSL_Weapon_Lance.description>A cavalry lance designed for Scouts. Damage increases with movement speed.\n\n&lt;i&gt;"Past a certain speed threshold, the lance becomes unstoppable."&lt;/i&gt;</DMSL_Weapon_Lance.description>
+  <DMSL_Weapon_IED.label>IED</DMSL_Weapon_IED.label>
+  <DMSL_Weapon_IED.description>As you can see, this is a remote-detonated bomb. Up to four can be deployed at once.</DMSL_Weapon_IED.description>
+  <DMSL_Bullet_2HuntingRifle.label>Hunting Rifle Round</DMSL_Bullet_2HuntingRifle.label>
+  <DMSL_Weapon_HuntingRifle.label>Hunting Rifle</DMSL_Weapon_HuntingRifle.label>
+  <DMSL_Weapon_HuntingRifle.description>An old military marksman rifle. No longer active on the battlefield, it gradually became a well-regarded hunting weapon after entering civilian use.</DMSL_Weapon_HuntingRifle.description>
+</LanguageData>

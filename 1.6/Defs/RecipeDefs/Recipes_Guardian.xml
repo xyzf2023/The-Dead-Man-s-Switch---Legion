@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 近卫：中型复活列表，参照 DMS 中型组装配方结构 -->
+  <RecipeDef ParentName="DMS_MediumMechanoidRecipe">
+    <defName>DMSL_Make_Guardian</defName>
+    <label>组装近卫</label>
+    <description>组装一个近卫。</description>
+    <products>
+      <DMSL_Mech_Guardian>1</DMSL_Mech_Guardian>
+    </products>
+    <researchPrerequisite>DMS_HumanoidEngineering</researchPrerequisite>
+    <gestationCycles>4</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_Guardian</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>220</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Synthread</li>
+            <li>Polyester</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Synthread</li>
+        <li>Polyester</li>
+        <li>ComponentStamped</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 陆龟型机械体制造配方：参照 DMS 超重型培育配方结构 -->
+  <RecipeDef ParentName="DMS_SuperHeavyMechanoidRecipe">
+    <defName>DMSL_Make_panzer</defName>
+    <label>培育陆龟</label>
+    <description>Gestate a Panzer automatroid.</description>
+    <products>
+      <DMSL_Mech_panzer>1</DMSL_Mech_panzer>
+    </products>
+    <researchPrerequisite>DMS_HeavyAutomatroid</researchPrerequisite>
+    <gestationCycles>5</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_panzer</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>350</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Neurocomputer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>DMS_Ceramics</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentFireControl</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Steel</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentStamped</li>
+        <li>Neurocomputer</li>
+        <li>DMS_Ceramics</li>
+        <li>ComponentFireControl</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

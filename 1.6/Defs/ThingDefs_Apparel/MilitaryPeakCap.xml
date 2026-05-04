@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="HatMakeableBase">
+		<!-- 军便帽 -->
+		<defName>DMSL_Apparel_MilitaryPeakCap</defName>
+		
+		<label>大檐帽</label>
+		
+		<description>与军礼服搭配，彰显军官的气质与威严。</description>
+		
+		<graphicData>
+			<texPath>Clothes/MilitaryPeakCap/headgear_icon</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		
+		<recipeMaker>
+			<researchPrerequisite>DMS_EquipmentBasis</researchPrerequisite>
+		</recipeMaker>
+		
+		<costStuffCount>55</costStuffCount>
+		
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToMake>2500</WorkToMake>
+			<Mass>0.05</Mass>
+			<EquipDelay>1</EquipDelay>
+		</statBases>
+		
+		<equippedStatOffsets>
+			<MentalBreakThreshold>-0.20</MentalBreakThreshold>
+		</equippedStatOffsets>
+		
+		<apparel>
+			<bodyPartGroups>
+				<li>UpperHead</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<wornGraphicPath>Clothes/MilitaryPeakCap/headgear</wornGraphicPath>
+			<tags>
+				<li>DMS_Tactical</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+</Defs>

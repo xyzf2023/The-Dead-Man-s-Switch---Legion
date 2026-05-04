@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Odyssey Defs/GroundSupportDefs -->
+  <DMSL_AerialSupport_AXF12Recon.label>AXF12侦察</DMSL_AerialSupport_AXF12Recon.label>
+  <DMSL_AerialSupport_AXF12Recon.description>来自AXF12的侦察</DMSL_AerialSupport_AXF12Recon.description>
+  <DMSL_AerialSupport_AXF12Bombing_Once.label>AXF12轰炸一次</DMSL_AerialSupport_AXF12Bombing_Once.label>
+  <DMSL_AerialSupport_AXF12Bombing_Once.description>AXF12投放一颗航弹。</DMSL_AerialSupport_AXF12Bombing_Once.description>
+  <DMSL_AerialSupport_AXF12Bombing_Twice.label>AXF12轰炸两次</DMSL_AerialSupport_AXF12Bombing_Twice.label>
+  <DMSL_AerialSupport_AXF12Bombing_Twice.description>AXF12投放两颗航弹。</DMSL_AerialSupport_AXF12Bombing_Twice.description>
+  <DMSL_AerialSupport_AXF12Bombing_Thrice.label>AXF12轰炸三次</DMSL_AerialSupport_AXF12Bombing_Thrice.label>
+  <DMSL_AerialSupport_AXF12Bombing_Thrice.description>AXF12投放三颗航弹。</DMSL_AerialSupport_AXF12Bombing_Thrice.description>
+</LanguageData>

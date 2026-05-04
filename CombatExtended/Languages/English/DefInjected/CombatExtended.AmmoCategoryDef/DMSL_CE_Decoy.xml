@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- CE AmmoCategory: 81mm Bait Target -->
+  <DMSL_Decoy.label>Electronic Decoy</DMSL_Decoy.label>
+  <DMSL_Decoy.description>Generates an electronic decoy signal on impact, diverting aerial bombers to a new target.</DMSL_Decoy.description>
+</LanguageData>

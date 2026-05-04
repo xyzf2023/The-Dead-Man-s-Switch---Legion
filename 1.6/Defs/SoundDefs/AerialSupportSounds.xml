@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空中支援飞机出现音效 -->
+  <SoundDef>
+    <defName>AerialSupport_Normal</defName>
+    <maxSimultaneous>3</maxSimultaneous>
+    <subSounds>
+      <li>
+        <onCamera>true</onCamera>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>AerialSupport_Normal</clipPath>
+          </li>
+        </grains>
+        <volumeRange>75~85</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 导弹音效 -->
+  <SoundDef>
+    <defName>AerialSupport_Missile</defName>
+    <maxSimultaneous>10</maxSimultaneous>
+    <subSounds>
+      <li>
+        <onCamera>true</onCamera>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>AerialSupport_Missile</clipPath>
+          </li>
+        </grains>
+        <volumeRange>75~85</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+    <!-- 空袭前置阶段初始化完成音效 -->
+    <SoundDef>
+      <defName>DMSL_AerialRaid_AirRaidSiren</defName>
+      <maxSimultaneous>1</maxSimultaneous>
+      <subSounds>
+        <li>
+          <onCamera>true</onCamera>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>AirRaidSiren</clipPath>
+            </li>
+          </grains>
+          <volumeRange>100~100</volumeRange>
+          <pitchRange>0.95~1.05</pitchRange>
+        </li>
+      </subSounds>
+    </SoundDef>
+
+        <!-- 耳鸣音效 -->
+    <SoundDef>
+        <defName>DMSL_AerialRaid_NuclearTinnitus</defName>
+        <maxSimultaneous>1</maxSimultaneous>
+        <subSounds>
+          <li>
+            <onCamera>true</onCamera>
+            <grains>
+              <li Class="AudioGrain_Clip">
+                 <clipPath>NuclearTinnitus</clipPath>
+              </li>
+            </grains>
+            <volumeRange>150~150</volumeRange>
+            <pitchRange>0.95~1.05</pitchRange>
+          </li>
+        </subSounds>
+    </SoundDef>
+    
+
+</Defs>

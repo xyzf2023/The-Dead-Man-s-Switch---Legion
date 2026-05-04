@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ZBZ59D 型机械体制造配方：参照 DMS 重型培育配方结构 -->
+  <RecipeDef ParentName="DMS_HeavyMechanoidRecipe">
+    <defName>DMSL_Make_ZBZ59D</defName>
+    <label>培育 ZBZ59D</label>
+    <description>Gestate a ZBZ59D automatroid.</description>
+    <products>
+      <DMSL_Mech_ZBZ59D>1</DMSL_Mech_ZBZ59D>
+    </products>
+    <researchPrerequisite>DMS_BattleFrame</researchPrerequisite>
+    <gestationCycles>5</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_ZBZ59D</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>250</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Steel</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentStamped</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

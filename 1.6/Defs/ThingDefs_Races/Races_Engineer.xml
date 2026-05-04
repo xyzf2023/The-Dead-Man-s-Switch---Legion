@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Engineer 工程师（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_Engineer" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_Engineer</defName>
+    <label>工程师</label>
+    <description>配备了机械体重启设备的工程机机兵。可以维修受损机械体，或者修复已经关机的机械体并将其重启。</description>
+    <statBases>
+      <MoveSpeed>4.2</MoveSpeed>
+      <ArmorRating_Blunt>0.9</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.9</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.8</ArmorRating_Heat>
+      <ShootingAccuracyPawn>0</ShootingAccuracyPawn>
+      <AimingDelayFactor>1.3</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">2</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>8</mechFixedSkillLevel>
+      <body>DMS_Humanoid_TypeA</body>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>1.3</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Construction</li>
+        <li>Crafting</li>
+        <li>Smithing</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <Steel>50</Steel>
+    </butcherProducts>
+    <comps>
+      <!-- 可修理组件：允许工程师机械体被修理（参考战术人形的实现） -->
+      <li Class="CompProperties_MechRepairable" />
+    </comps>
+    <modExtensions>
+      <!-- 模组扩展列表 -->
+      <li Class="Fortified.MechWeaponExtension">
+        <!-- 机械武器扩展 -->
+        <EnableWeaponFilter>true</EnableWeaponFilter>
+        <!-- 启用武器过滤器：是 -->
+        <UsableWeaponTags>
+          <li>SimpleGun</li><!-- 简单枪械标签 -->
+          <li>DMS_MechWeaponLight</li><!-- DMS轻型机械武器标签 -->
+          <li>A_AR_LongRifle</li><!-- 突击步枪长步枪标签 -->
+          <li>A_SAR_LongRifle</li><!-- 半自动步枪长步枪标签 -->
+          <li>A_BR_LongRifle</li><!-- 战斗步枪长步枪标签 -->
+          <li>A_MG_Light</li><!-- 轻型机枪标签 -->
+          <li>ElephantGun</li><!-- 象枪标签 -->
+          <li>SniperRifle</li><!-- 狙击步枪标签 -->
+          <li>AssaultRifle</li>
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>
+        <!-- 启用科技等级过滤器：是 -->
+        <UsableTechLevels>
+          <!-- 可使用的科技等级列表 -->
+          <li>Industrial</li>
+          <!-- 工业时代科技等级 -->
+        </UsableTechLevels>
+      </li>
+      <li Class="Fortified.TurretMannableExtension" />
+      <!-- 可操作炮塔扩展 -->
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <!-- 定义机械体种类，继承自基础机械体种类 -->
+    <defName>DMSL_Mech_Engineer</defName>
+    <!-- 定义名称：DMS_Mech_Engineer -->
+    <label>工程师</label>
+    <!-- 显示标签：Engineer -->
+    <race>DMSL_Mech_Engineer</race>
+    <!-- 关联的种族：DMS_Mech_Engineer -->
+    <isFighter>true</isFighter>
+    <!-- 是否为战斗单位：是 -->
+    <combatPower>50</combatPower>
+    <!-- 战斗力量：50 -->
+    <maxPerGroup>12</maxPerGroup>
+    <!-- 每组最大数量：12 -->
+    <lifeStages>
+      <!-- 生命阶段列表（用于定义不同阶段的贴图） -->
+      <li>
+        <!-- 第一个生命阶段 -->
+        <bodyGraphicData>
+          <!-- 身体图形数据 -->
+          <texPath>Mechanoid/Engineer/Engineer</texPath>
+          <!-- 贴图路径：Mechanoid/Engineer/Engineer（相对于Textures目录） -->
+          <shaderType>CutoutComplex</shaderType>
+          <!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass>
+          <!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize>
+          <!-- 绘制大小：1 -->
+          <shadowData>
+            <!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume>
+            <!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset>
+            <!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <!-- 第二个生命阶段 -->
+        <bodyGraphicData>
+          <!-- 身体图形数据 -->
+          <texPath>Mechanoid/Engineer/Engineer</texPath>
+          <!-- 贴图路径：Mechanoid/Engineer/Engineer -->
+          <shaderType>CutoutComplex</shaderType>
+          <!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass>
+          <!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize>
+          <!-- 绘制大小：1.4 -->
+          <shadowData>
+            <!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume>
+            <!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset>
+            <!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    
+    <weaponTags><!-- 武器标签列表（生成时可能携带的武器类型） -->
+          <li>SimpleGun</li><!-- 简单枪械标签 -->
+          <li>DMS_MechWeaponLight</li><!-- DMS轻型机械武器标签 -->
+          <li>A_AR_LongRifle</li><!-- 突击步枪长步枪标签 -->
+          <li>A_SAR_LongRifle</li><!-- 半自动步枪长步枪标签 -->
+          <li>A_BR_LongRifle</li><!-- 战斗步枪长步枪标签 -->
+          <li>A_MG_Light</li><!-- 轻型机枪标签 -->
+          <li>ElephantGun</li><!-- 象枪标签 -->
+          <li>SniperRifle</li><!-- 狙击步枪标签 -->
+          <li>AssaultRifle</li>
+    </weaponTags>
+    
+    <!-- 能力列表 -->
+    <abilities>
+      <li>DMSL_Ability_MechReconstruction</li>
+      <!-- 机体重构能力：可以复活友方机械体尸体 -->
+      <li>DMSL_Ability_EmergencyRepair</li>
+      <!-- 应急维修能力：获得500%的全局工作速度加成，持续三小时 -->
+      <li>DMSL_Ability_RepairDesignate</li>
+      <!-- 维修指定能力：指定一个机械体进行维修 -->
+    </abilities>
+  </PawnKindDef>
+</Defs>

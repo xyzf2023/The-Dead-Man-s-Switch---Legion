@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 失能机关皇权支援扩展，需皇权 DLC 与 DMS_Army 派系 -->
+<Defs>
+  <!-- 空中支援类：在 Def 中直接填写 aerialSupportTypeDefName 关联，仅成功召唤后进 CD / 扣好感 -->
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_Smoke</defName>
+    <label>呼叫烟雾弹</label>
+    <description>向殖民舰队呼叫一次烟雾弹投放。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Private</minTitle>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(0,0)</uiPosition>
+    <cooldownDays>2</cooldownDays>
+    <royalAid>
+      <favorCost>1</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_Smoke</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_StrafingRun</defName>
+    <label>呼叫机炮扫射</label>
+    <description>向殖民舰队呼叫一次机炮扫射。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Corporal</minTitle>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(1,0)</uiPosition>
+    <cooldownDays>3</cooldownDays>
+    <royalAid>
+      <favorCost>2</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_StrafingRun</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_Emp</defName>
+    <label>呼叫EMP脉冲弹</label>
+    <description>向殖民舰队呼叫一次EMP脉冲弹投放。将向目标地点投放一颗电子脉冲弹，强大的电磁脉冲将瘫痪所有接触的用电器、炮台和机械体，并灼烧所有机械体的核心处理器。\n注意此脉冲没有敌我识别功能，谨防误伤友方。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_WarrantOfficer</minTitle>
+    <permitPointCost>2</permitPointCost>
+    <uiPosition>(0,8)</uiPosition>
+    <cooldownDays>3</cooldownDays>
+    <royalAid>
+      <favorCost>3</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_Emp</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_ToxGas</defName>
+    <label>呼叫毒气弹</label>
+    <description>向殖民舰队呼叫一次毒气弹投放。将向目标地点投放一颗毒气弹，在30格内生成毒气云。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Private</minTitle>
+    <permitPointCost>2</permitPointCost>
+    <uiPosition>(1,8)</uiPosition>
+    <cooldownDays>3</cooldownDays>
+    <royalAid>
+      <favorCost>1</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_ToxGas</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_AttackAircraftBombing</defName>
+    <label>呼叫攻击机轰炸</label>
+    <description>向殖民舰队呼叫一次攻击机轰炸。将命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计五枚小型炸弹。\n\n（如果你加载了CE，此支援会被替换为攻击机轰炸）</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_WarrantOfficer</minTitle>
+    <permitPointCost>2</permitPointCost>
+    <uiPosition>(0,9)</uiPosition>
+    <cooldownDays>12</cooldownDays>
+    <royalAid>
+      <favorCost>10</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_AttackAircraftBombing</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+    <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_FighterBomberBombing</defName>
+    <label>呼叫战斗轰炸机轰炸</label>
+    <description>向殖民舰队呼叫一次战斗轰炸机轰炸。将命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十枚大型炸弹。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Captain</minTitle>
+    <prerequisite>DMSL_RoyalAid_AttackAircraftBombing</prerequisite>
+    <permitPointCost>3</permitPointCost>
+    <uiPosition>(1,9)</uiPosition>
+    <cooldownDays>10</cooldownDays>
+    <royalAid>
+      <favorCost>10</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_FighterBomberBombing</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_CarpetBombing</defName>
+    <label>呼叫地毯式轰炸</label>
+    <description>向殖民舰队呼叫一次地毯式轰炸。将命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十枚高爆弹。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Colonel</minTitle>
+    <prerequisite>DMSL_RoyalAid_FighterBomberBombing</prerequisite>
+    <permitPointCost>4</permitPointCost>
+    <uiPosition>(2,9)</uiPosition>
+    <cooldownDays>8</cooldownDays>
+    <royalAid>
+      <favorCost>10</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_CarpetBombing</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_AMS2</defName>
+    <label>呼叫ASM-2「白鲨」导弹群打击</label>
+    <description>向殖民舰队呼叫一次ASM-2「白鲨」导弹群打击。你需要传入五个目标地点坐标，随后导弹群会依次打击你传入的所有坐标。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Captain</minTitle>
+    <permitPointCost>3</permitPointCost>
+    <uiPosition>(2,8)</uiPosition>
+    <cooldownDays>12</cooldownDays>
+    <royalAid>
+      <favorCost>10</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_AMS2</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_CM4</defName>
+    <label>呼叫CM-4巡航导弹打击</label>
+    <description>向殖民舰队呼叫一次CM-4巡航导弹打击。CM-4杀伤范围较大，请确保打击目标周围50格内无友方单位。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Captain</minTitle>
+    <permitPointCost>3</permitPointCost>
+    <uiPosition>(3,8)</uiPosition>
+    <cooldownDays>12</cooldownDays>
+    <royalAid>
+      <favorCost>10</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_CM4</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+
+  <RoyalTitlePermitDef MayRequire="Ludeon.RimWorld.Odyssey">
+    <defName>DMSL_Join_AXF12OffsetConfig</defName>
+    <label>扩编AXF-12</label>
+    <description>向殖民舰队申请调配一架AXF-12「偏构」垂直起降战斗机。这架战斗机将归你的殖民地所有。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_RewardAXF12</workerClass>
+    <faction>DMS_Army</faction> 
+    <minTitle>DMS_Brigadier</minTitle> <!-- 最低头衔，准将及以上可解锁 -->
+    <!--<prerequisite>DMS_Join_Shuttle</prerequisite>  前置 -->
+    <permitPointCost>5</permitPointCost> <!-- 解锁消耗的许可点数 -->
+    <uiPosition>(6,6)</uiPosition> <!-- 扩编轨道运输机正右方，其坐标为 (6,5) -->
+    <cooldownDays>150</cooldownDays>
+    <royalAid>
+      <favorCost>30</favorCost> <!-- 每次使用消耗的好感度 -->
+      <targetingRange>44.9</targetingRange> <!-- 选落点时的最大距离（格） -->
+      <targetingRequireLOS>false</targetingRequireLOS> <!-- 选落点是否要求视线，false 允许选雾区 -->
+    </royalAid>
+  </RoyalTitlePermitDef>
+</Defs>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空中支援类型定义 - 自定义直线测试 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_AttackAircraftBombing</defName>
+    <label>攻击机轰炸</label>
+    <description>命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计五枚小型炸弹。</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>CustomLine</flightPathType>
+    <!-- 延迟配置：自定义直线支援示例（同时开始） -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
+        <!-- 沿航线生成的爆炸点数量 -->
+        <explosionCount>5</explosionCount>
+        <!-- 单次爆炸伤害量 -->
+        <damageAmount>100</damageAmount>
+        <!-- 单次爆炸半径（格） -->
+        <explosionRadius>8</explosionRadius>
+        <!-- 伤害类型 defName（原版 Bomb 等） -->
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <!-- 战斗轰炸机轰炸 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_FighterBomberBombing</defName>
+    <label>战斗轰炸机轰炸</label>
+    <description>命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十枚大型炸弹。</description>
+    <aircraftTexturePath>GroundSupport/IDS</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>CustomLine</flightPathType>
+    <!-- 延迟配置：自定义直线支援示例（同时开始） -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
+        <!-- 沿航线生成的爆炸点数量 -->
+        <explosionCount>10</explosionCount>
+        <!-- 单次爆炸伤害量 -->
+        <damageAmount>125</damageAmount>
+        <!-- 单次爆炸半径（格） -->
+        <explosionRadius>12</explosionRadius>
+        <!-- 伤害类型 defName（原版 Bomb 等） -->
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+<!-- 地毯式轰炸 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_CarpetBombing</defName>
+    <label>地毯式轰炸</label>
+    <description>命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十枚高爆弹。</description>
+    <aircraftTexturePath>GroundSupport/LASB-25</aircraftTexturePath>
+    <flightSpeed>0.015</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>CustomLine</flightPathType>
+    <!-- 延迟配置：自定义直线支援示例（同时开始） -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
+        <!-- 沿航线生成的爆炸点数量 -->
+        <explosionCount>30</explosionCount>
+        <!-- 单次爆炸伤害量 -->
+        <damageAmount>150</damageAmount>
+        <!-- 单次爆炸半径（格） -->
+        <explosionRadius>18</explosionRadius>
+        <!-- 伤害类型 defName（原版 Bomb 等） -->
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+
+  <!-- 机炮扫射-->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_StrafingRun</defName>
+    <label>机炮扫射</label>
+    <description>命令麻雀执行一次机炮扫射任务。你需要传入两个坐标，随后麻雀将沿此路径在区间内使用机炮扫射。\n\n（如果你加载了CE，此支援会被替换为攻击机轰炸）</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.008</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>0.05</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>CustomLine</flightPathType>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <!-- 飞机出现时的状态影响效果 -->
+    <!-- <spawnEffects>
+      <li>DMS_SpawnEffect_EMP</li>
+      <li>DMS_SpawnEffect_ElectronicJamming</li>
+    </spawnEffects> -->
+    <effectComps>
+      <!-- 机炮支援效果组件（使用原版Projectile系统） -->
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBulletFire">
+        <!-- 发射次数：在用户线段上总共发射100发子弹 -->
+        <bulletCount>100</bulletCount>
+        <!-- 发射间隔：每1%进度发射一次（0.0-1.0） -->
+        <fireInterval>0.005</fireInterval>
+        <!-- 子弹射程：每发子弹飞行的最大距离（格） -->
+        <bulletRange>60</bulletRange>
+        <!-- 子弹ThingDef：使用DMSL_AutocannonRounds定义 -->
+        <bulletThingDef>DMSL_AutocannonRounds</bulletThingDef>
+        <!-- 并排发射的子弹数量：1=单发，2=并排2发，以此类推 -->
+        <bulletsPerShot>2</bulletsPerShot>
+        <!-- 并排子弹之间的间距（格） -->
+        <bulletSpacing>0.2</bulletSpacing>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+</Defs>

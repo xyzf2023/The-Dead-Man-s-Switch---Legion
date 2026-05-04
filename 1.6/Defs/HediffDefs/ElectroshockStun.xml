@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 电击昏迷 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_ElectroshockStun</defName><!-- Hediff定义名称 -->
+    <label>电击昏迷</label><!-- 显示名称 -->
+    <description>因被高压电击中而陷入的昏迷。</description><!-- 效果描述 -->
+    <hediffClass>HediffWithComps</hediffClass><!-- Hediff类：带组件的Hediff -->
+    <stages><!-- 阶段列表 -->
+      <li><!-- 第一阶段（唯一阶段） -->
+        <capMods><!-- 容量修改器 -->
+          <li>
+            <capacity>Consciousness</capacity><!-- 意识容量 -->
+            <setMax>0.1</setMax><!-- 设置意识最大值为10%（0.1 = 10%） -->
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps><!-- 组件列表 -->
+      <li Class="HediffCompProperties_Disappears"><!-- 消失组件属性 -->
+        <disappearsAfterTicks>30000~30000</disappearsAfterTicks><!-- 消失时间：30000 ticks（12游戏小时 = 12 * 2500 ticks） -->
+        <showRemainingTime>true</showRemainingTime><!-- 显示剩余时间 -->
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/><!-- 死亡时消失组件 -->
+    </comps>
+  </HediffDef>
+</Defs>

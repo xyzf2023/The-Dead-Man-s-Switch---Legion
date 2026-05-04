@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--空中支援传呼器-->
+<Defs>
+  <ThingDef ParentName="OrbitalUtilityBase">
+    <!-- 定义名称，用于代码中引用 -->
+    <defName>DMSL_AirSupportPager</defName>
+    <!-- 显示名称 -->
+    <label>空中支援传呼器</label>
+    <!-- 物品描述（使用 \n 表示换行） -->
+    <description>一种用于调用空中支援的便携式传呼装置。\n\n该设备通过伪造旧式军用识别信号，向仍在运作的古代航空设施发送对地轰炸请求，而无需建立任何实际通讯链路。\n\n一旦信号被接受，相关机场将按照既定流程出动轰炸机，对目标区域实施空袭。\n\n由于内部协议无法重置，且关键部件在每次信号广播后都会进一步劣化，这种传呼器只能在有限的几次调用中保持可靠工作状态，随后将彻底失效。</description>
+    
+    <!-- 物品在地面上的图形数据 -->
+    <graphicData>
+      <!-- 纹理路径（临时使用轨道轰炸靶向器的贴图） -->
+      <texPath>Clothes/AirSupportPager/AirSupportPager</texPath>
+      <!-- 绘制大小 -->
+      <drawSize>(0.7,0.7)</drawSize>
+    </graphicData>
+    
+    <!-- 服装/装备相关配置 -->
+    <apparel>
+      <!-- AI 会主动拾取此物品 -->
+      <ai_pickUpOpportunistically>true</ai_pickUpOpportunistically>
+    </apparel>
+    
+    <!-- 物品生成标签（用于任务奖励等） -->
+    <thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+    
+    <!-- 动词/动作配置 -->
+    <verbs>
+      <li>
+        <!-- 动词类：空中支援传呼器 -->
+        <verbClass>DMS_Legion.GroundSupport.Items.Verb_AirSupportPager</verbClass>
+        <!-- 显示标准命令 -->
+        <hasStandardCommand>true</hasStandardCommand>
+        <!-- 不可在小地图中使用 -->
+        <useableInPocketMaps>true</useableInPocketMaps>
+        <!-- 预热时间（秒） -->
+        <warmupTime>3</warmupTime>
+        <!-- AI 避免友军误伤半径 -->
+        <ai_AvoidFriendlyFireRadius>23</ai_AvoidFriendlyFireRadius>
+        <!-- AI 视为建筑摧毁者 -->
+        <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+        <!-- 使用范围（移除距离限制，设置为极大值） -->
+        <range>9999</range>
+        <!-- 连发数量 -->
+        <burstShotCount>1</burstShotCount>
+        <!-- 瞄准音效 -->
+        <soundAiming>OrbitalTargeter_Aiming</soundAiming>
+        <!-- 发射音效 -->
+        <soundCast>OrbitalTargeter_Fire</soundCast>
+        <!-- 仅手动使用（不可自动） -->
+        <onlyManualCast>true</onlyManualCast>
+        <!-- 目标参数 -->
+        <targetParams>
+          <!-- 可以瞄准位置（而非仅单位） -->
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+    
+    <!-- 组件配置 -->
+    <comps>
+      <!-- 可重载组件：使物品具有使用次数限制 -->
+      <li Class="CompProperties_ApparelReloadable">
+        <!-- 最大充能次数 -->
+        <maxCharges>3</maxCharges>
+        <!-- 用完后销毁 -->
+        <destroyOnEmpty>true</destroyOnEmpty>
+        <!-- 快捷键 -->
+        <hotKey>Misc4</hotKey>
+        <!-- 充能名词 -->
+        <chargeNoun>charge</chargeNoun>
+        <!-- 未选中时也显示按钮 -->
+        <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

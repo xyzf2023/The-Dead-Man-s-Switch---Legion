@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- IED -->
+    <ThingDef ParentName="BaseMakeableGrenade">
+        <defName>DMSL_Weapon_IED</defName>
+        <label>IED</label>
+        <description>如你所见，这是一个遥控炸弹。最多同时丢出四个。</description>
+        <graphicData>
+            <texPath>Things/IED/IED</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+        <techLevel>Industrial</techLevel>
+        <statBases>
+            <Mass>1</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.5</Flammability>
+            <DeteriorationRate>2</DeteriorationRate>
+            <Beauty>-3</Beauty>
+            <SellPriceFactor>1</SellPriceFactor>
+            <MarketValue>2000</MarketValue>
+            <RangedWeapon_Cooldown>2.66</RangedWeapon_Cooldown>
+            <WorkToMake>12000</WorkToMake>
+        </statBases>
+        <costList>
+            <Chemfuel>300</Chemfuel>
+            <ComponentIndustrial>10</ComponentIndustrial>
+        </costList>
+        <thingCategories>
+            <li>Grenades</li>
+        </thingCategories>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers Inherit="False">
+                <li>DMS_TableMachinePrinter</li>
+            </recipeUsers>
+            <displayPriority>330</displayPriority>
+        </recipeMaker>
+        <verbs>
+            <li>
+                <verbClass>DMS_Legion.Verb_IEDLaunch</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <range>6</range>
+                <forcedMissRadius>0.5</forcedMissRadius>
+                <warmupTime>1.5</warmupTime>
+                <noiseRadius>4</noiseRadius>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <soundCast>ThrowGrenade</soundCast>
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <defaultProjectile>DMSL_Projectile_IED</defaultProjectile>
+                <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+            </li>
+        </verbs>
+        <comps Inherit="False">
+            <li Class="CompProperties_Forbiddable"/>
+            <!-- CompIEDLauncher 继承 CompEquippable，同时提供装备与引爆 Gizmo；选中装备该武器的 pawn 时显示引爆按钮 -->
+            <li Class="DMS_Legion.CompProperties_IEDLauncher">
+                <projectileDef>DMSL_Projectile_IED</projectileDef>
+            </li>
+        </comps>
+    </ThingDef>
+</Defs>

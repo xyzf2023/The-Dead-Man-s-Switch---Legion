@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Motorized Defs/Vehicles - Gray Knight vehicle (VehicleDef) -->
+  <DMS_GrayKnights_MainBattleTank.label>Gray Knight</DMS_GrayKnights_MainBattleTank.label>
+  <DMS_GrayKnights_MainBattleTank.description>This vehicle is currently in service with the colonial fleet and is designed for unmanned combat. However, due to concerns about the battlefield communication environment, space for two crew members was also reserved in the rear compartment.</DMS_GrayKnights_MainBattleTank.description>
+  <!-- Roles -->
+  <DMS_GrayKnights_MainBattleTank.properties.roles.gunner.label>gunner</DMS_GrayKnights_MainBattleTank.properties.roles.gunner.label>
+  <!-- Components -->
+  <DMS_GrayKnights_MainBattleTank.components.Engine.label>turbine engine</DMS_GrayKnights_MainBattleTank.components.Engine.label>
+  <DMS_GrayKnights_MainBattleTank.components.FuelTank.label>armoured fuel tank</DMS_GrayKnights_MainBattleTank.components.FuelTank.label>
+  <DMS_GrayKnights_MainBattleTank.components.Gearbox.label>gearbox</DMS_GrayKnights_MainBattleTank.components.Gearbox.label>
+  <DMS_GrayKnights_MainBattleTank.components.AmmoRack.label>ammo rack</DMS_GrayKnights_MainBattleTank.components.AmmoRack.label>
+  <DMS_GrayKnights_MainBattleTank.components.TransmissionShaft.label>transmission shaft</DMS_GrayKnights_MainBattleTank.components.TransmissionShaft.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftTrack.label>left track</DMS_GrayKnights_MainBattleTank.components.LeftTrack.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightTrack.label>right track</DMS_GrayKnights_MainBattleTank.components.RightTrack.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftRoadWheels.label>left road wheels</DMS_GrayKnights_MainBattleTank.components.LeftRoadWheels.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightRoadWheels.label>right road wheels</DMS_GrayKnights_MainBattleTank.components.RightRoadWheels.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftDriveSprocket.label>left drive sprocket</DMS_GrayKnights_MainBattleTank.components.LeftDriveSprocket.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightDriveSprocket.label>right drive sprocket</DMS_GrayKnights_MainBattleTank.components.RightDriveSprocket.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftTensionerWheel.label>left tensioner wheel</DMS_GrayKnights_MainBattleTank.components.LeftTensionerWheel.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightTensionerWheel.label>right tensioner wheel</DMS_GrayKnights_MainBattleTank.components.RightTensionerWheel.label>
+  <DMS_GrayKnights_MainBattleTank.components.FrontArmorPlating.label>front armor plating</DMS_GrayKnights_MainBattleTank.components.FrontArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftArmorPlating.label>left armor plating</DMS_GrayKnights_MainBattleTank.components.LeftArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightArmorPlating.label>right armor plating</DMS_GrayKnights_MainBattleTank.components.RightArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.LeftERAPlating.label>left ERA plating</DMS_GrayKnights_MainBattleTank.components.LeftERAPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.RightERAPlating.label>right ERA plating</DMS_GrayKnights_MainBattleTank.components.RightERAPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.RoofArmorPlating.label>roof armor plating</DMS_GrayKnights_MainBattleTank.components.RoofArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.BackArmorPlating.label>rear armor plating</DMS_GrayKnights_MainBattleTank.components.BackArmorPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.MainTurret.label>Main Turret</DMS_GrayKnights_MainBattleTank.components.MainTurret.label>
+  <DMS_GrayKnights_MainBattleTank.components.FrontERAPlating.label>front ERA plating</DMS_GrayKnights_MainBattleTank.components.FrontERAPlating.label>
+  <DMS_GrayKnights_MainBattleTank.components.TurretERAPlating.label>turret ERA plating</DMS_GrayKnights_MainBattleTank.components.TurretERAPlating.label>
+</LanguageData>

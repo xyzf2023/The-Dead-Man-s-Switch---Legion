@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<!-- 指挥鸟：完整 statBases 替换（CE 推算值） -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>8.2</MoveSpeed>
+						<ArmorRating_Blunt>2</ArmorRating_Blunt>
+						<ArmorRating_Sharp>3</ArmorRating_Sharp>
+						<ArmorRating_Heat>0</ArmorRating_Heat>
+						<SmokeSensitivity>0</SmokeSensitivity>
+						<NightVisionEfficiency>0.25</NightVisionEfficiency>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>280</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>10</Steel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>50</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+
+			<!-- 指挥鸟 CE 组件与扩展 -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]/comps</xpath>
+				<value>
+					<li><compClass>CombatExtended.CompPawnGizmo</compClass></li>
+					<li><compClass>CombatExtended.CompAmmoGiver</compClass></li>
+					<li Class="CombatExtended.CompProperties_MechAmmo">
+						<gizmoIconSetMagCount>UI/Buttons/SetMagCount</gizmoIconSetMagCount>
+						<gizmoIconTakeAmmoNow>UI/Buttons/TakeAmmoNow</gizmoIconTakeAmmoNow>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAddModExtension">
+				<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]</xpath>
+				<value>
+					<li Class="CombatExtended.RacePropertiesExtensionCE">
+						<bodyShape>QuadrupedLow</bodyShape>
+					</li>
+					<li Class="CombatExtended.PartialArmorExt">
+						<stats>
+							<li>
+								<ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+								<parts>
+									<li>SightSensor</li>
+									<li>HearingSensor</li>
+									<li>SmellSensor</li>
+								</parts>
+							</li>
+							<li>
+								<ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+								<parts>
+									<li>SightSensor</li>
+									<li>HearingSensor</li>
+									<li>SmellSensor</li>
+								</parts>
+							</li>
+						</stats>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]/tools</xpath>
+				<match Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]/tools</xpath>
+					<value>
+						<tools>
+							<li Class="CombatExtended.ToolCE">
+								<label>head</label>
+								<capacities><li>Blunt</li></capacities>
+								<power>6</power>
+								<cooldownTime>2.5</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<armorPenetrationBlunt>1.875</armorPenetrationBlunt>
+							</li>
+						</tools>
+					</value>
+				</match>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Drone_CommandingBird"]</xpath>
+					<value>
+						<tools>
+							<li Class="CombatExtended.ToolCE">
+								<label>head</label>
+								<capacities><li>Blunt</li></capacities>
+								<power>6</power>
+								<cooldownTime>2.5</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<armorPenetrationBlunt>1.875</armorPenetrationBlunt>
+							</li>
+						</tools>
+					</value>
+				</nomatch>
+			</li>
+
+			<!-- Ensure <comps> exists for each mech that gets ArmorDurability (per-def, else Add fails) -->
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_ArmoredGrenadiers"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_ArmoredGrenadiers"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Arsonist"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Arsonist"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Commander"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Commander"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Commandos"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Commandos"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DesignatedMarksman"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_DesignatedMarksman"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Engineer"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Engineer"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Guardian"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Guardian"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Scout"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Scout"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Shaman"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Shaman"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_SpecialPolice"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_SpecialPolice"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Terra"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_Terra"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_AgriculturalFrame"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_AgriculturalFrame"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DoctorFrame"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_DoctorFrame"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DrillingBarge"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_DrillingBarge"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_SupportFrame"]/comps</xpath>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Mech_SupportFrame"]</xpath>
+					<value><comps /></value>
+				</nomatch>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[starts-with(defName, 'DMSL_Mech_') and not(comps/li[@Class="CombatExtended.CompProperties_Suppressable"])]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_Suppressable" />
+				</value>
+			</li>
+
+			<!-- ========== 中型/重型机械体：客制化 CE statBases（完整替换，含原 def 特有 stat） ========== -->
+			<!-- 装甲掷弹兵 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_ArmoredGrenadiers"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4</MoveSpeed>
+						<ArmorRating_Blunt>50</ArmorRating_Blunt>
+						<ArmorRating_Sharp>20</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.5</ArmorRating_Heat>
+						<CarryWeight>60</CarryWeight>
+						<CarryBulk>45</CarryBulk>
+						<AimingAccuracy>1</AimingAccuracy>
+						<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>0.7</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 纵火者 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Arsonist"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>38</ArmorRating_Blunt>
+						<ArmorRating_Sharp>16</ArmorRating_Sharp>
+						<ArmorRating_Heat>2</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>20</CarryBulk>
+						<AimingAccuracy>1.2</AimingAccuracy>
+						<ShootingAccuracyPawn>1.1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 指挥官 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Commander"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.6</MoveSpeed>
+						<ArmorRating_Blunt>28</ArmorRating_Blunt>
+						<ArmorRating_Sharp>16</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.2</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>20</CarryBulk>
+						<AimingAccuracy>1</AimingAccuracy>
+						<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 机动射手 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Commandos"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>5.2</MoveSpeed>
+						<ArmorRating_Blunt>30</ArmorRating_Blunt>
+						<ArmorRating_Sharp>14</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.2</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>20</CarryBulk>
+						<AimingAccuracy>1.35</AimingAccuracy>
+						<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>0.7</AimingDelayFactor>
+						<ReloadSpeed>1.2</ReloadSpeed>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 精确射手 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DesignatedMarksman"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.5</MoveSpeed>
+						<ArmorRating_Blunt>30</ArmorRating_Blunt>
+						<ArmorRating_Sharp>14</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.2</ArmorRating_Heat>
+						<CarryWeight>65</CarryWeight>
+						<CarryBulk>50</CarryBulk>
+						<AimingAccuracy>1.8</AimingAccuracy>
+						<ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.85</NightVisionEfficiency>
+						<AimingDelayFactor>0.7</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 工程师 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Engineer"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>30</ArmorRating_Blunt>
+						<ArmorRating_Sharp>14</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.4</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>30</CarryBulk>
+						<AimingAccuracy>1</AimingAccuracy>
+						<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>1.1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">2</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 近卫 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Guardian"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>60</ArmorRating_Blunt>
+						<ArmorRating_Sharp>24</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.4</ArmorRating_Heat>
+						<CarryWeight>65</CarryWeight>
+						<CarryBulk>40</CarryBulk>
+						<AimingAccuracy>1</AimingAccuracy>
+						<ShootingAccuracyPawn>1.4</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>0.9</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 斥候 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Scout"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.5</MoveSpeed>
+						<ArmorRating_Blunt>24</ArmorRating_Blunt>
+						<ArmorRating_Sharp>12</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.2</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>30</CarryBulk>
+						<AimingAccuracy>0.95</AimingAccuracy>
+						<ShootingAccuracyPawn>1.4</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.9</NightVisionEfficiency>
+						<AimingDelayFactor>0.85</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 萨满 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Shaman"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.7</MoveSpeed>
+						<ArmorRating_Blunt>24</ArmorRating_Blunt>
+						<ArmorRating_Sharp>12</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.2</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>20</CarryBulk>
+						<AimingAccuracy>0.95</AimingAccuracy>
+						<ShootingAccuracyPawn>1.1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>0.7</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 特种警察 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_SpecialPolice"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.5</MoveSpeed>
+						<ArmorRating_Blunt>36</ArmorRating_Blunt>
+						<ArmorRating_Sharp>16</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.4</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>20</CarryBulk>
+						<AimingAccuracy>1.2</AimingAccuracy>
+						<ShootingAccuracyPawn>1.1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>0.7</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 尘世 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Terra"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.4</MoveSpeed>
+						<ArmorRating_Blunt>8</ArmorRating_Blunt>
+						<ArmorRating_Sharp>6</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.08</ArmorRating_Heat>
+						<CarryWeight>50</CarryWeight>
+						<CarryBulk>20</CarryBulk>
+						<AimingAccuracy>0.75</AimingAccuracy>
+						<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.15</MeleeDodgeChance>
+						<MeleeCritChance>0.10</MeleeCritChance>
+						<MeleeParryChance>0.09</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.8</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+			<!-- 农业框架 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_AgriculturalFrame"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>12</ArmorRating_Blunt>
+						<ArmorRating_Sharp>7</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.08</ArmorRating_Heat>
+						<CarryWeight>80</CarryWeight>
+						<CarryBulk>50</CarryBulk>
+						<AimingAccuracy>0.8</AimingAccuracy>
+						<ShootingAccuracyPawn>0.85</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.01</MeleeDodgeChance>
+						<MeleeCritChance>0.02</MeleeCritChance>
+						<MeleeParryChance>0.05</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.25</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+						<WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">1.6</WorkSpeedGlobal>
+					</statBases>
+				</value>
+			</li>
+			<!-- 医护框架 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DoctorFrame"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>12</ArmorRating_Blunt>
+						<ArmorRating_Sharp>7</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.08</ArmorRating_Heat>
+						<CarryWeight>80</CarryWeight>
+						<CarryBulk>50</CarryBulk>
+						<AimingAccuracy>0.8</AimingAccuracy>
+						<ShootingAccuracyPawn>0.85</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.01</MeleeDodgeChance>
+						<MeleeCritChance>0.02</MeleeCritChance>
+						<MeleeParryChance>0.05</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.25</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+						<WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">1</WorkSpeedGlobal>
+					</statBases>
+				</value>
+			</li>
+			<!-- 钻井驳机 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DrillingBarge"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>12</ArmorRating_Blunt>
+						<ArmorRating_Sharp>7</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.08</ArmorRating_Heat>
+						<CarryWeight>80</CarryWeight>
+						<CarryBulk>50</CarryBulk>
+						<AimingAccuracy>0.8</AimingAccuracy>
+						<ShootingAccuracyPawn>0.85</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.01</MeleeDodgeChance>
+						<MeleeCritChance>0.02</MeleeCritChance>
+						<MeleeParryChance>0.05</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.25</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+						<WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">1.6</WorkSpeedGlobal>
+					</statBases>
+				</value>
+			</li>
+			<!-- 支援框架 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_SupportFrame"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MoveSpeed>4.2</MoveSpeed>
+						<ArmorRating_Blunt>15</ArmorRating_Blunt>
+						<ArmorRating_Sharp>9</ArmorRating_Sharp>
+						<ArmorRating_Heat>0.15</ArmorRating_Heat>
+						<CarryWeight>80</CarryWeight>
+						<CarryBulk>50</CarryBulk>
+						<AimingAccuracy>0.75</AimingAccuracy>
+						<ShootingAccuracyPawn>0.85</ShootingAccuracyPawn>
+						<MeleeDodgeChance>0.01</MeleeDodgeChance>
+						<MeleeCritChance>0.02</MeleeCritChance>
+						<MeleeParryChance>0.05</MeleeParryChance>
+						<MaxHitPoints>200</MaxHitPoints>
+						<NightVisionEfficiency>0.25</NightVisionEfficiency>
+						<AimingDelayFactor>1</AimingDelayFactor>
+						<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+						<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+					</statBases>
+				</value>
+			</li>
+
+			<!-- ========== 全部 DMSL 机械体：Suppressability 置 0，几乎不受 CE 压制 ========== -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[starts-with(defName, 'DMSL_Mech_')]/statBases</xpath>
+				<value>
+					<Suppressability>0</Suppressability>
+				</value>
+			</li>
+
+			<!-- ========== 中型/重型：CompProperties_ArmorDurability（按 MD 推算值） ========== -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_ArmoredGrenadiers"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>1420</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>116</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Arsonist"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>1100</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Commander"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>900</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Commandos"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>930</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DesignatedMarksman"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>930</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Engineer"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>930</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Guardian"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>1660</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>144</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Scout"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>810</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>3</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Shaman"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>810</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>3</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>89</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_SpecialPolice"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>1250</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>104</MaxOverHeal>
+						<MinArmorPct>0.75</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_Terra"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>750</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>10</Steel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>82</MaxOverHeal>
+						<MinArmorPct>0.65</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_AgriculturalFrame"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>950</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>10</Steel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>135</MaxOverHeal>
+						<MinArmorPct>0.6</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DoctorFrame"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>950</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>10</Steel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>135</MaxOverHeal>
+						<MinArmorPct>0.6</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_DrillingBarge"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>950</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>10</Steel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>135</MaxOverHeal>
+						<MinArmorPct>0.6</MinArmorPct>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_SupportFrame"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>1150</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>1250</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<Repairable>true</Repairable>
+						<RepairIngredients><Steel>10</Steel></RepairIngredients>
+						<RepairTime>300</RepairTime>
+						<RepairValue>200</RepairValue>
+						<CanOverHeal>true</CanOverHeal>
+						<MaxOverHeal>135</MaxOverHeal>
+						<MinArmorPct>0.6</MinArmorPct>
+					</li>
+				</value>
+			</li>
+
+			<!-- Ancient Corps Heavy Mechs：仅当 AncientCorps 加载时执行 -->
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Mech_IronFace"]</xpath>
+				<match Class="PatchOperationSequence">
+					<operations>
+						<!-- CE 支持（近战穿甲 ToolCE + RacePropertiesExtensionCE，避免属性面板报错） -->
+						<li Class="PatchOperationAddModExtension">
+							<xpath>Defs/ThingDef[
+								defName="DMSL_Mech_IronFace" or
+								defName="DMSL_Mech_leopard" or
+								defName="DMSL_Mech_panzer" or
+								defName="DMSL_Mech_STGeorge" or
+								defName="DMSL_Mech_ZBZ59D"
+								]</xpath>
+							<value>
+								<li Class="CombatExtended.RacePropertiesExtensionCE">
+									<bodyShape>Quadruped</bodyShape>
+								</li>
+							</value>
+						</li>
+
+						<!-- Ancient Corps 中“固定主炮”的重型机甲：挂载 CE 机甲弹药组件，避免 CE 弹药打光后武器永久失效
+						     仅包含主炮由 CompProperties_VehicleWeapon.defaultWeapon 提供、实际不可更换武器的机甲：
+						     DMSL_Mech_panzer / DMSL_Mech_STGeorge / DMSL_Mech_ZBZ59D。 -->
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[
+								defName="DMSL_Mech_panzer" or
+								defName="DMSL_Mech_STGeorge" or
+								defName="DMSL_Mech_ZBZ59D"
+								]/comps</xpath>
+							<value>
+								<li>
+									<compClass>CombatExtended.CompAmmoGiver</compClass>
+								</li>
+								<li Class="CombatExtended.CompProperties_MechAmmo">
+									<gizmoIconSetMagCount>UI/Buttons/SetMagCount</gizmoIconSetMagCount>
+									<gizmoIconTakeAmmoNow>UI/Buttons/TakeAmmoNow</gizmoIconTakeAmmoNow>
+								</li>
+							</value>
+						</li>
+
+						<!-- 大型机兵近战工具：为 CE 提供 ToolCE（含近战穿甲） -->
+						<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[
+					defName="DMSL_Mech_IronFace" or
+					defName="DMSL_Mech_leopard" or
+					defName="DMSL_Mech_panzer" or
+					defName="DMSL_Mech_STGeorge" or
+					defName="DMSL_Mech_ZBZ59D"
+					]/tools</xpath>
+				<match Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[
+						defName="DMSL_Mech_IronFace" or
+						defName="DMSL_Mech_leopard" or
+						defName="DMSL_Mech_panzer" or
+						defName="DMSL_Mech_STGeorge" or
+						defName="DMSL_Mech_ZBZ59D"
+						]/tools</xpath>
+					<value>
+						<tools>
+							<li Class="CombatExtended.ToolCE">
+								<label>head</label>
+								<capacities><li>Blunt</li></capacities>
+								<power>40</power>
+								<cooldownTime>2.5</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<armorPenetrationSharp>0</armorPenetrationSharp>
+								<armorPenetrationBlunt>22</armorPenetrationBlunt>
+							</li>
+						</tools>
+					</value>
+				</match>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[
+						defName="DMSL_Mech_IronFace" or
+						defName="DMSL_Mech_leopard" or
+						defName="DMSL_Mech_panzer" or
+						defName="DMSL_Mech_STGeorge" or
+						defName="DMSL_Mech_ZBZ59D"
+						]</xpath>
+					<value>
+						<tools>
+							<li Class="CombatExtended.ToolCE">
+								<label>head</label>
+								<capacities><li>Blunt</li></capacities>
+								<power>40</power>
+								<cooldownTime>2.5</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<armorPenetrationSharp>0</armorPenetrationSharp>
+								<armorPenetrationBlunt>22</armorPenetrationBlunt>
+							</li>
+						</tools>
+					</value>
+				</nomatch>
+						</li>
+
+						<!-- Ancient Corps：客制化 CE statBases（每机完整替换，含 StaggerDurationFactor、带宽废料） -->
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_IronFace"]/statBases</xpath>
+							<value>
+								<statBases>
+									<MoveSpeed>4</MoveSpeed>
+									<ArmorRating_Blunt>140</ArmorRating_Blunt>
+									<ArmorRating_Sharp>60</ArmorRating_Sharp>
+									<ArmorRating_Heat>0.6</ArmorRating_Heat>
+									<CarryWeight>180</CarryWeight>
+									<CarryBulk>140</CarryBulk>
+									<AimingAccuracy>1</AimingAccuracy>
+									<ShootingAccuracyPawn>1.2</ShootingAccuracyPawn>
+									<MeleeDodgeChance>0.04</MeleeDodgeChance>
+									<MeleeCritChance>0.46</MeleeCritChance>
+									<MeleeParryChance>0.34</MeleeParryChance>
+									<MaxHitPoints>500</MaxHitPoints>
+									<NightVisionEfficiency>0.8</NightVisionEfficiency>
+									<StaggerDurationFactor>0</StaggerDurationFactor>
+									<Suppressability>0</Suppressability>
+									<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">6</BandwidthCost>
+									<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge>
+								</statBases>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_leopard"]/statBases</xpath>
+							<value>
+								<statBases>
+									<MoveSpeed>4</MoveSpeed>
+									<ArmorRating_Blunt>100</ArmorRating_Blunt>
+									<ArmorRating_Sharp>50</ArmorRating_Sharp>
+									<ArmorRating_Heat>0.7</ArmorRating_Heat>
+									<CarryWeight>165</CarryWeight>
+									<CarryBulk>130</CarryBulk>
+									<AimingAccuracy>1.5</AimingAccuracy>
+									<ShootingAccuracyPawn>1.8</ShootingAccuracyPawn>
+									<MeleeDodgeChance>0.04</MeleeDodgeChance>
+									<MeleeCritChance>0.46</MeleeCritChance>
+									<MeleeParryChance>0.34</MeleeParryChance>
+									<MaxHitPoints>500</MaxHitPoints>
+									<NightVisionEfficiency>0.8</NightVisionEfficiency>
+									<StaggerDurationFactor>0</StaggerDurationFactor>
+									<Suppressability>0</Suppressability>
+									<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">6</BandwidthCost>
+									<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge>
+								</statBases>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_panzer"]/statBases</xpath>
+							<value>
+								<statBases>
+									<MoveSpeed>3</MoveSpeed>
+									<ArmorRating_Blunt>140</ArmorRating_Blunt>
+									<ArmorRating_Sharp>60</ArmorRating_Sharp>
+									<ArmorRating_Heat>0.6</ArmorRating_Heat>
+									<CarryWeight>180</CarryWeight>
+									<CarryBulk>140</CarryBulk>
+									<AimingAccuracy>0.9</AimingAccuracy>
+									<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+									<MeleeDodgeChance>0.04</MeleeDodgeChance>
+									<MeleeCritChance>0.46</MeleeCritChance>
+									<MeleeParryChance>0.34</MeleeParryChance>
+									<MaxHitPoints>500</MaxHitPoints>
+									<NightVisionEfficiency>0.8</NightVisionEfficiency>
+									<StaggerDurationFactor>0</StaggerDurationFactor>
+									<Suppressability>0</Suppressability>
+									<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
+									<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge>
+								</statBases>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_STGeorge"]/statBases</xpath>
+							<value>
+								<statBases>
+									<MoveSpeed>4.2</MoveSpeed>
+									<ArmorRating_Blunt>80</ArmorRating_Blunt>
+									<ArmorRating_Sharp>42</ArmorRating_Sharp>
+									<ArmorRating_Heat>0.5</ArmorRating_Heat>
+									<CarryWeight>250</CarryWeight>
+									<CarryBulk>200</CarryBulk>
+									<AimingAccuracy>1</AimingAccuracy>
+									<ShootingAccuracyPawn>1.2</ShootingAccuracyPawn>
+									<MeleeDodgeChance>0.04</MeleeDodgeChance>
+									<MeleeCritChance>0.46</MeleeCritChance>
+									<MeleeParryChance>0.34</MeleeParryChance>
+									<MaxHitPoints>500</MaxHitPoints>
+									<NightVisionEfficiency>0.8</NightVisionEfficiency>
+									<StaggerDurationFactor>0</StaggerDurationFactor>
+									<Suppressability>0</Suppressability>
+									<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">6</BandwidthCost>
+									<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge>
+								</statBases>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_ZBZ59D"]/statBases</xpath>
+							<value>
+								<statBases>
+									<MoveSpeed>3.7</MoveSpeed>
+									<ArmorRating_Blunt>65</ArmorRating_Blunt>
+									<ArmorRating_Sharp>35</ArmorRating_Sharp>
+									<ArmorRating_Heat>0.5</ArmorRating_Heat>
+									<CarryWeight>175</CarryWeight>
+									<CarryBulk>150</CarryBulk>
+									<AimingAccuracy>1.2</AimingAccuracy>
+									<ShootingAccuracyPawn>1.4</ShootingAccuracyPawn>
+									<MeleeDodgeChance>0.04</MeleeDodgeChance>
+									<MeleeCritChance>0.46</MeleeCritChance>
+									<MeleeParryChance>0.34</MeleeParryChance>
+									<MaxHitPoints>500</MaxHitPoints>
+									<NightVisionEfficiency>0.8</NightVisionEfficiency>
+									<StaggerDurationFactor>0</StaggerDurationFactor>
+									<Suppressability>0</Suppressability>
+									<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+									<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">7</WastepacksPerRecharge>
+								</statBases>
+							</value>
+						</li>
+
+						<!-- Ancient Corps：客制化 ArmorDurability（按 MD 推算值） -->
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_IronFace"]/comps</xpath>
+							<value>
+								<li Class="CombatExtended.CompProperties_ArmorDurability">
+									<Durability>4500</Durability>
+									<Regenerates>true</Regenerates>
+									<RegenInterval>1250</RegenInterval>
+									<RegenValue>25</RegenValue>
+									<Repairable>true</Repairable>
+									<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+									<RepairTime>300</RepairTime>
+									<RepairValue>200</RepairValue>
+									<CanOverHeal>true</CanOverHeal>
+									<MaxOverHeal>450</MaxOverHeal>
+									<MinArmorPct>0.85</MinArmorPct>
+								</li>
+							</value>
+						</li>
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_leopard"]/comps</xpath>
+							<value>
+								<li Class="CombatExtended.CompProperties_ArmorDurability">
+									<Durability>4100</Durability>
+									<Regenerates>true</Regenerates>
+									<RegenInterval>1250</RegenInterval>
+									<RegenValue>25</RegenValue>
+									<Repairable>true</Repairable>
+									<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+									<RepairTime>300</RepairTime>
+									<RepairValue>200</RepairValue>
+									<CanOverHeal>true</CanOverHeal>
+									<MaxOverHeal>425</MaxOverHeal>
+									<MinArmorPct>0.8</MinArmorPct>
+								</li>
+							</value>
+						</li>
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_panzer"]/comps</xpath>
+							<value>
+								<li Class="CombatExtended.CompProperties_ArmorDurability">
+									<Durability>4500</Durability>
+									<Regenerates>true</Regenerates>
+									<RegenInterval>1250</RegenInterval>
+									<RegenValue>25</RegenValue>
+									<Repairable>true</Repairable>
+									<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+									<RepairTime>300</RepairTime>
+									<RepairValue>200</RepairValue>
+									<CanOverHeal>true</CanOverHeal>
+									<MaxOverHeal>450</MaxOverHeal>
+									<MinArmorPct>0.85</MinArmorPct>
+								</li>
+							</value>
+						</li>
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_STGeorge"]/comps</xpath>
+							<value>
+								<li Class="CombatExtended.CompProperties_ArmorDurability">
+									<Durability>3800</Durability>
+									<Regenerates>true</Regenerates>
+									<RegenInterval>1250</RegenInterval>
+									<RegenValue>25</RegenValue>
+									<Repairable>true</Repairable>
+									<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+									<RepairTime>300</RepairTime>
+									<RepairValue>200</RepairValue>
+									<CanOverHeal>true</CanOverHeal>
+									<MaxOverHeal>425</MaxOverHeal>
+									<MinArmorPct>0.8</MinArmorPct>
+								</li>
+							</value>
+						</li>
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_ZBZ59D"]/comps</xpath>
+							<value>
+								<li Class="CombatExtended.CompProperties_ArmorDurability">
+									<Durability>3200</Durability>
+									<Regenerates>true</Regenerates>
+									<RegenInterval>1250</RegenInterval>
+									<RegenValue>25</RegenValue>
+									<Repairable>true</Repairable>
+									<RepairIngredients><Steel>5</Steel><Tungsteel>5</Tungsteel></RepairIngredients>
+									<RepairTime>300</RepairTime>
+									<RepairValue>200</RepairValue>
+									<CanOverHeal>true</CanOverHeal>
+									<MaxOverHeal>320</MaxOverHeal>
+									<MinArmorPct>0.75</MinArmorPct>
+								</li>
+							</value>
+						</li>
+					</operations>
+				</match>
+			</li>
+
+			<!-- PartialArmorExt：覆盖从 BaseAutomatroidRace（DMS 基础 MOD CE 补丁）继承来的版本。
+			     PostLoad_PostFix 只保留最后一个 PartialArmorExt，所以我们的会替代继承的。
+			     仅使用原版 BodyPartDef（SightSensor/HearingSensor/SmellSensor），且仅 Sharp/Blunt（ArmorRatingBase 用 StatWorker_ArmorPartial）。
+			     传感器弱点 0.25x 与 DMS 参考一致；其余 CoveredByNaturalArmor 部位自动用 pawn 完整 statBases 护甲。 -->
+			<li Class="PatchOperationAddModExtension">
+				<xpath>Defs/ThingDef[starts-with(defName, 'DMSL_Mech_')]</xpath>
+				<value>
+					<li Class="CombatExtended.PartialArmorExt">
+						<stats>
+							<li>
+								<useStatic>false</useStatic>
+								<ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+								<parts>
+									<li>SightSensor</li>
+									<li>HearingSensor</li>
+									<li>SmellSensor</li>
+								</parts>
+							</li>
+							<li>
+								<useStatic>false</useStatic>
+								<ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+								<parts>
+									<li>SightSensor</li>
+									<li>HearingSensor</li>
+									<li>SmellSensor</li>
+								</parts>
+							</li>
+						</stats>
+					</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

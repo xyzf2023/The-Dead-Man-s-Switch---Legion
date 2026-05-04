@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--尘世 -->
+  <ThingDef Name="DMSL_Mech_Terra" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_Terra</defName>
+    <label>尘世</label>
+    <description>一款曾用于执行突袭任务的机械体，特殊的仿生适配可以使其自由穿戴人类装备。</description>
+    <graphicData>
+      <texPath>Mechanoid/Terra/Head/TerraHead</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <!-- 研究选项、培育配方等 UI 中显示全身贴图，否则会使用 bodyGraphicData（身体部位） -->
+    <uiIconPath>Mechanoid/Terra/Terra_fullbody</uiIconPath>
+    <comps>
+      <li Class="DMS_Legion.CompProperties_TerraBodyType" />
+    </comps>
+    <statBases>
+      <MoveSpeed>4.4</MoveSpeed>
+      <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.3</ArmorRating_Sharp>
+      <ArmorRating_Heat>0.3</ArmorRating_Heat>
+      <ShootingAccuracyPawn>0</ShootingAccuracyPawn>
+      <AimingDelayFactor>1</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>6</mechFixedSkillLevel>
+      <body>DMSL_Body_Terra</body>
+      <renderTree>DMSL_Terra</renderTree>
+      <baseBodySize>1.0</baseBodySize>
+      <baseHealthScale>1.2</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <DMS_ChunkSlag>1</DMS_ChunkSlag>
+      <Tungsteel>40</Tungsteel>
+    </butcherProducts>
+    <!-- 测试时暂时注释：modExtensions-->
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension">
+        <EnableWeaponFilter>true</EnableWeaponFilter>
+        <UsableWeaponTags>
+          <li>Gun</li>
+          <li>SimpleGun</li>
+          <li>DMS_MechWeaponLight</li>
+          <li>A_AR_LongRifle</li>
+          <li>A_SAR_LongRifle</li>
+          <li>A_BR_LongRifle</li>
+          <li>A_MG_Light</li>
+          <li>ElephantGun</li>
+          <li>SniperRifle</li>
+          <li>AssaultRifle</li>
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter>
+        <UsableTechLevels>
+          <li>Industrial</li>
+          <li>Spacer</li>
+        </UsableTechLevels>
+      </li>
+      <li Class="Fortified.TurretMannableExtension"/>
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind">
+    <defName>DMSL_Mech_Terra</defName>
+    <label>尘世</label>
+    <race>DMSL_Mech_Terra</race>
+    <isFighter>true</isFighter>
+    <combatPower>180</combatPower>
+    <maxPerGroup>12</maxPerGroup>
+    <weaponMoney>800~1200</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+      <li>AssaultRifle</li>
+      <li>SimpleGun</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>400~800</techHediffsMoney>
+    <destroyGearOnDrop>false</destroyGearOnDrop>
+    <canStrip>true</canStrip>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/Terra/TerraBody</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mechanoid/Terra/TerraBody</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2.6</drawSize>
+          <shadowData>
+            <volume>(0.35,1,0.35)</volume>
+            <offset>(0,0,0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+</Defs>

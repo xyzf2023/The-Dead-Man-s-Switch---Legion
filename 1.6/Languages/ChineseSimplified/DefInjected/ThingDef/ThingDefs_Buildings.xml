@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Buildings/DMSL_BandwidthAmplifier.xml -->
+  <DMSL_Building_BandwidthAmplifier.label>频段增幅装置</DMSL_Building_BandwidthAmplifier.label>
+  <DMSL_Building_BandwidthAmplifier.description>用于辅助御械师控制机兵的装置，内置蓄能装置，可以在断电状态下继续提供稳定的带宽。\n\n初始提供2带宽，研究科技「集群收发器」后将获得增强，提供3带宽并提升蓄能速度与上限、降低电力需求。</DMSL_Building_BandwidthAmplifier.description>
+
+  <!-- Defs/ThingDefs_Buildings/DMSL_IntegratedDetectionArray.xml -->
+  <DMSL_Building_IntegratedDetectionArray.label>综合探测阵列</DMSL_Building_IntegratedDetectionArray.label>
+  <DMSL_Building_IntegratedDetectionArray.description>一套集电子对抗与资源侦察于一体的综合战术设施。可以自动进行本地矿脉扫描或远程矿脉探查，也可以生产诱饵坐标干扰敌方空袭目标选择。</DMSL_Building_IntegratedDetectionArray.description>
+</LanguageData>

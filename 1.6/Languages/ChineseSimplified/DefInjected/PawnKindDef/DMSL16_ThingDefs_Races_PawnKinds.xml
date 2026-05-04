@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 1.6 Defs/ThingDefs_Races - PawnKindDef labels -->
+  <DMSL_Mech_Commander.label>指挥官</DMSL_Mech_Commander.label>
+  <DMSL_Mech_Shaman.label>萨满</DMSL_Mech_Shaman.label>
+  <DMSL_Mech_Scout.label>斥候</DMSL_Mech_Scout.label>
+  <DMSL_Mech_Guardian.label>近卫</DMSL_Mech_Guardian.label>
+  <DMSL_Mech_Arsonist.label>纵火者</DMSL_Mech_Arsonist.label>
+  <DMSL_Mech_SupportFrame.label>支援框架</DMSL_Mech_SupportFrame.label>
+  <DMSL_Drone_CommandingBird.label>指挥鸟</DMSL_Drone_CommandingBird.label>
+  <DMSL_Mech_Terra.label>尘世</DMSL_Mech_Terra.label>
+  <DMSL_Mech_Engineer.label>工程师</DMSL_Mech_Engineer.label>
+  <DMSL_Mech_Commandos.label>机动射手</DMSL_Mech_Commandos.label>
+  <DMSL_Mech_SpecialPolice.label>特种警察</DMSL_Mech_SpecialPolice.label>
+  <DMSL_Mech_DesignatedMarksman.label>精确射手</DMSL_Mech_DesignatedMarksman.label>
+  <DMSL_Mech_ArmoredGrenadiers.label>装甲掷弹兵</DMSL_Mech_ArmoredGrenadiers.label>
+  <DMS_Mech_DoctorFrame.label>医护框架</DMS_Mech_DoctorFrame.label>
+  <DMS_Mech_AgriculturalFrame.label>农业框架</DMS_Mech_AgriculturalFrame.label>
+  <DMS_Mech_DrillingBarge.label>钻井驳机</DMS_Mech_DrillingBarge.label>
+</LanguageData>

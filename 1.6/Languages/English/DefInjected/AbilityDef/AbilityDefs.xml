@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/AbilityDefs -->
+  <DMSL_Ability_AerialSupport.label>Aerial Support</DMSL_Ability_AerialSupport.label>
+  <DMSL_Ability_AerialSupport.description>A test ability. Use it to summon all types of aerial support.</DMSL_Ability_AerialSupport.description>
+  <DMSL_Ability_RepairDesignate.label>Repair Designate</DMSL_Ability_RepairDesignate.label>
+  <DMSL_Ability_RepairDesignate.description>Designate a mechanoid for repair.</DMSL_Ability_RepairDesignate.description>
+  <DMSL_Ability_EmergencyRepair.label>Emergency Repair</DMSL_Ability_EmergencyRepair.label>
+  <DMSL_Ability_EmergencyRepair.description>The mechanoid gains 500% global work speed for three hours. Cooldown: two days.</DMSL_Ability_EmergencyRepair.description>
+  <DMSL_Ability_MechReconstruction.label>Mech Reconstruction</DMSL_Ability_MechReconstruction.label>
+  <DMSL_Ability_MechReconstruction.description>An Engineer will attempt to repair and restart a shut-down mechanoid. Can only be used on friendly mechanoid corpses.</DMSL_Ability_MechReconstruction.description>
+  <DMSL_Ability_OmnimindSilence.label>Omnimind Silence</DMSL_Ability_OmnimindSilence.label>
+  <DMSL_Ability_OmnimindSilence.description>Applies 1 hour of psychic camouflage to the caster and allied mechanoids within 3 tiles.</DMSL_Ability_OmnimindSilence.description>
+  <DMSL_Ability_HighVoltageShock.label>High-Voltage Shock</DMSL_Ability_HighVoltageShock.label>
+  <DMSL_Ability_HighVoltageShock.description>Consumes 25% of the mechanoid's maximum energy to shock the target, causing 12 hours of electroshock coma.</DMSL_Ability_HighVoltageShock.description>
+  <DMSL_Ability_HighVoltageShock.comps.0.disabledReason>High-Voltage Shock requires at least 26% maximum energy.</DMSL_Ability_HighVoltageShock.comps.0.disabledReason>
+</LanguageData>

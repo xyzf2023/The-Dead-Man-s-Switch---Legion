@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空中支援目标选择Job -->
+  <JobDef>
+    <defName>DMSL_AerialSupport_SelectTarget</defName>
+    <driverClass>DMS_Legion.JobDriver_AerialSupport_SelectTarget</driverClass>
+    <reportString>选择空中支援目标位置</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!-- 空中支援自定义直线选择Job -->
+  <JobDef>
+    <defName>DMSL_AerialSupport_SelectCustomLine</defName>
+    <driverClass>DMS_Legion.JobDriver_AerialSupport_SelectCustomLine</driverClass>
+    <reportString>选择空中支援自定义直线</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!-- 空袭袭击：携带者呼叫空袭的 Job -->
+  <JobDef>
+    <defName>DMSL_RaidCallAirSupport</defName>
+    <driverClass>DMS_Legion.AerialRaid.JobDrivers.JobDriver_RaidCallAirSupport</driverClass>
+    <reportString>正在呼叫空袭支援...</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+</Defs>

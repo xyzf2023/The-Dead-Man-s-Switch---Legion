@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <!-- 空袭警告信封定义 -->
+    <!-- 继承自 ThreatBig，使用相同的颜色和音效 -->
+    <LetterDef ParentName="ThreatBig">
+        <defName>DMSL_AerialRaid_Warning</defName>
+    </LetterDef>
+</Defs>

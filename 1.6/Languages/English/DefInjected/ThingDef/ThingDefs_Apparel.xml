@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Apparel -->
+  <DMSL_Apparel_MilitaryPeakCap.label>Military Peak Cap</DMSL_Apparel_MilitaryPeakCap.label>
+  <DMSL_Apparel_MilitaryPeakCap.description>Pairs with the military dress uniform to convey an officer's presence and authority.</DMSL_Apparel_MilitaryPeakCap.description>
+  <DMSL_Apparel_CBRNAssaultCombatSuit.label>CBRN Assault Combat Suit</DMSL_Apparel_CBRNAssaultCombatSuit.label>
+  <DMSL_Apparel_CBRNAssaultCombatSuit.description>A full-body assault combat suit used by chemical defense units to protect the wearer from toxin damage.</DMSL_Apparel_CBRNAssaultCombatSuit.description>
+  <DMSL_AirSupportPager.label>Air Support Pager</DMSL_AirSupportPager.label>
+  <DMSL_AirSupportPager.description>A portable pager device for calling in aerial support.\n\nBy spoofing legacy military identification signals, it sends ground strike requests to still-operative ancient aviation facilities without establishing any actual communication link.\n\nOnce the signal is accepted, the relevant airbase will dispatch bombers per standard procedure to strike the target area.\n\nInternal protocols cannot be reset, and key components degrade further after each broadcast. This pager can only maintain reliable operation for a limited number of calls before failing completely.</DMSL_AirSupportPager.description>
+  <DMSL_Apparel_CommandDroneBelt.label>Command Drone Belt</DMSL_Apparel_CommandDroneBelt.label>
+  <DMSL_Apparel_CommandDroneBelt.description>A belt that deploys drones to assist with command. You can use the command drone as a relay for remote mechanoid control.</DMSL_Apparel_CommandDroneBelt.description>
+  <DMSL_Apparel_MilitaryDressUniform.label>Military Dress Uniform</DMSL_Apparel_MilitaryDressUniform.label>
+  <DMSL_Apparel_MilitaryDressUniform.description>A highly simplified military dress uniform for maintaining the dignity of officers on the rim.</DMSL_Apparel_MilitaryDressUniform.description>
+</LanguageData>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 机体重构能力：基于原版能力系统，参考ResurrectionMech能力 -->
+  <AbilityDef>
+    <defName>DMSL_Ability_MechReconstruction</defName>
+    <label>机体重构</label>
+    <description>工程师将尝试修复已关机机械体的损伤并将其重启。仅可对友方机械体尸体使用。</description>
+    <iconPath>UI/Abilities/MechReconstruction</iconPath>
+    <cooldownTicksRange>240000~240000</cooldownTicksRange><!-- 冷却时间：4天（240000 ticks = 4 * 60000 ticks） -->
+    <warmupStartSound>MechResurrect_Warmup</warmupStartSound><!-- 预热音效：参考原版ResurrectionMech -->
+    <warmupEffecter>ApocrionAoeWarmup</warmupEffecter><!-- 预热效果器：AOE区域效果和随机火花 -->
+    <useAverageTargetPositionForWarmupEffecter>true</useAverageTargetPositionForWarmupEffecter><!-- 使用平均目标位置 -->
+    <jobDef>DMSL_Job_MechReconstruction</jobDef><!-- 工作定义：自定义机体重构工作，需要走到目标附近才能施放 -->
+    <canUseAoeToGetTargets>false</canUseAoeToGetTargets><!-- 不使用AOE选择目标 -->
+    <hostile>false</hostile><!-- 非敌对能力 -->
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence><!-- 不需要暴力能力 -->
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted><!-- 未征召时显示按钮 -->
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted><!-- 未征召时不禁用按钮 -->
+    <verbProperties><!-- 动词属性 -->
+      <verbClass>Verb_CastAbility</verbClass><!-- 动词类：施放能力 -->
+      <drawAimPie>false</drawAimPie><!-- 不绘制瞄准饼图 -->
+      <range>999</range><!-- 施放范围：15格 -->
+      <warmupTime>2</warmupTime><!-- 预热时间：2秒 -->
+      <soundCast>MechResurrect_Cast</soundCast><!-- 施放音效：参考原版ResurrectionMech -->
+      <requireLineOfSight>false</requireLineOfSight><!-- 不需要视线 -->
+      <targetParams><!-- 目标参数 -->
+        <canTargetPawns>false</canTargetPawns><!-- 不允许选择活着的Pawn -->
+        <canTargetBuildings>false</canTargetBuildings><!-- 不允许选择建筑 -->
+        <canTargetCorpses>true</canTargetCorpses><!-- 允许选择尸体 -->
+        <canTargetAnimals>false</canTargetAnimals><!-- 不允许选择动物 -->
+        <canTargetHumans>false</canTargetHumans><!-- 不允许选择人类 -->
+        <canTargetMechs>true</canTargetMechs><!-- 允许选择机械体 -->
+      </targetParams>
+    </verbProperties>
+    <comps><!-- 组件列表 -->
+      <li Class="DMS_Legion.CompProperties_AbilityMechReconstruction"><!-- 机体重构能力效果组件 -->
+        <failedMessage>只能对友方机械体尸体使用</failedMessage><!-- 验证失败时显示的错误消息 -->
+        <appliedEffecterDef>MechResurrected</appliedEffecterDef><!-- 复活时的红光特效（使用原版MechResurrected效果器） -->
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

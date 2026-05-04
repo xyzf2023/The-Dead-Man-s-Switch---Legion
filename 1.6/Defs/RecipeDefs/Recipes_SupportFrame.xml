@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 支援框架：重型复活列表，参照 DMS 重型组装配方结构 -->
+  <RecipeDef ParentName="DMS_HeavyMechanoidRecipe">
+    <defName>DMSL_Make_SupportFrame</defName>
+    <label>组装支援框架</label>
+    <description>组装一个支援框架。</description>
+    <products>
+      <DMSL_Mech_SupportFrame>1</DMSL_Mech_SupportFrame>
+    </products>
+    <researchPrerequisite>DMS_BattleFrame</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_SupportFrame</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>120</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Synthread</li>
+            <li>Polyester</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Synthread</li>
+        <li>Polyester</li>
+        <li>ComponentIndustrial</li>
+        <li>Steel</li>
+        <li>ComponentStamped</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

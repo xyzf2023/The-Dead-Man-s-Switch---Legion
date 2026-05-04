@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/RecipeDefs -->
+  <DMSL_Make_scout.label>Assemble Scout</DMSL_Make_scout.label>
+  <DMSL_Make_scout.description>Assemble a Scout automatroid.</DMSL_Make_scout.description>
+  <DMSL_Make_Terra.label>Assemble Terra</DMSL_Make_Terra.label>
+  <DMSL_Make_Terra.description>Assemble a Terra.</DMSL_Make_Terra.description>
+  <DMSL_Make_Commandos.label>Assemble Commandos</DMSL_Make_Commandos.label>
+  <DMSL_Make_Commandos.description>Assemble a Commando.</DMSL_Make_Commandos.description>
+  <DMSL_Make_Commander.label>Assemble Commander</DMSL_Make_Commander.label>
+  <DMSL_Make_Commander.description>Assemble a Commander.</DMSL_Make_Commander.description>
+  <DMSL_Make_Engineer.label>Assemble Engineer</DMSL_Make_Engineer.label>
+  <DMSL_Make_Engineer.description>Assemble an Engineer.</DMSL_Make_Engineer.description>
+  <DMSL_Make_Guardian.label>Assemble Guardian</DMSL_Make_Guardian.label>
+  <DMSL_Make_Guardian.description>Assemble a Guardian.</DMSL_Make_Guardian.description>
+  <DMSL_Make_ArmoredGrenadiers.label>Assemble Armored Grenadiers</DMSL_Make_ArmoredGrenadiers.label>
+  <DMSL_Make_ArmoredGrenadiers.description>Assemble an Armored Grenadier.</DMSL_Make_ArmoredGrenadiers.description>
+  <DMSL_Make_DesignatedMarksman.label>Assemble Designated Marksman</DMSL_Make_DesignatedMarksman.label>
+  <DMSL_Make_DesignatedMarksman.description>Assemble a Designated Marksman.</DMSL_Make_DesignatedMarksman.description>
+  <DMSL_Make_SpecialPolice.label>Assemble Special Police</DMSL_Make_SpecialPolice.label>
+  <DMSL_Make_SpecialPolice.description>Assemble a Special Police.</DMSL_Make_SpecialPolice.description>
+  <DMSL_Make_Shaman.label>Assemble Shaman</DMSL_Make_Shaman.label>
+  <DMSL_Make_Shaman.description>Assemble a Shaman.</DMSL_Make_Shaman.description>
+  <DMSL_Make_Arsonist.label>Assemble Arsonist</DMSL_Make_Arsonist.label>
+  <DMSL_Make_Arsonist.description>Assemble an Arsonist.</DMSL_Make_Arsonist.description>
+  <DMSL_Make_SupportFrame.label>Assemble Support Frame</DMSL_Make_SupportFrame.label>
+  <DMSL_Make_SupportFrame.description>Assemble a Support Frame.</DMSL_Make_SupportFrame.description>
+  <DMSL_Make_DoctorFrame.label>Assemble Doctor Frame</DMSL_Make_DoctorFrame.label>
+  <DMSL_Make_DoctorFrame.description>Assemble a Doctor Frame.</DMSL_Make_DoctorFrame.description>
+  <DMSL_Make_AgriculturalFrame.label>Assemble Agricultural Frame</DMSL_Make_AgriculturalFrame.label>
+  <DMSL_Make_AgriculturalFrame.description>Assemble an Agricultural Frame.</DMSL_Make_AgriculturalFrame.description>
+  <DMSL_Make_DrillingBarge.label>Assemble Drilling Barge</DMSL_Make_DrillingBarge.label>
+  <DMSL_Make_DrillingBarge.description>Assemble a Drilling Barge.</DMSL_Make_DrillingBarge.description>
+</LanguageData>

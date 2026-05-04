@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 爆发装填 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_RapidReload</defName><!-- Hediff定义名称 -->
+    <label>爆发装填</label><!-- 显示名称 -->
+    <description>机械体进入爆发装填状态，射击冷却大幅缩短。</description><!-- 效果描述 -->
+    <hediffClass>HediffWithComps</hediffClass><!-- Hediff类：带组件的Hediff -->
+    <stages><!-- 阶段列表 -->
+      <li><!-- 第一阶段（唯一阶段） -->
+        <statFactors><!-- 属性因子（乘法） -->
+          <RangedCooldownFactor>0.25</RangedCooldownFactor><!-- 远程武器冷却时间因子：0.25（射击冷却时间减少到25%，即减少75%） -->
+        </statFactors>
+      </li>
+    </stages>
+    <comps><!-- 组件列表 -->
+      <li Class="HediffCompProperties_Disappears"><!-- 消失组件属性 -->
+        <disappearsAfterTicks>7500~7500</disappearsAfterTicks><!-- 消失时间：7500 ticks（3游戏小时 = 3 * 2500 ticks） -->
+        <showRemainingTime>true</showRemainingTime><!-- 显示剩余时间 -->
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/><!-- 死亡时消失组件 -->
+      <!-- 占位组件：后续可添加自定义组件 -->
+      <!-- <li Class="DMS.HediffCompProperties_EmergencyRepair">
+        <compClass>DMS.HediffComp_EmergencyRepair</compClass>
+      </li> -->
+    </comps>
+  </HediffDef>
+</Defs>

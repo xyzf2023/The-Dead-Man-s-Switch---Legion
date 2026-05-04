@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Apparel -->
+  <DMSL_Apparel_MilitaryPeakCap.label>大檐帽</DMSL_Apparel_MilitaryPeakCap.label>
+  <DMSL_Apparel_MilitaryPeakCap.description>与军礼服搭配，彰显军官的气质与威严。</DMSL_Apparel_MilitaryPeakCap.description>
+  <DMSL_Apparel_CBRNAssaultCombatSuit.label>CBRB突击战斗服</DMSL_Apparel_CBRNAssaultCombatSuit.label>
+  <DMSL_Apparel_CBRNAssaultCombatSuit.description>一种被用于防化部队的、包裹全身的突击战斗服，用于保护穿戴着不受毒素伤害。</DMSL_Apparel_CBRNAssaultCombatSuit.description>
+  <DMSL_AirSupportPager.label>空中支援传呼器</DMSL_AirSupportPager.label>
+  <DMSL_AirSupportPager.description>一种用于调用空中支援的便携式传呼装置。\n\n该设备通过伪造旧式军用识别信号，向仍在运作的古代航空设施发送对地轰炸请求，而无需建立任何实际通讯链路。\n\n一旦信号被接受，相关机场将按照既定流程出动轰炸机，对目标区域实施空袭。\n\n由于内部协议无法重置，且关键部件在每次信号广播后都会进一步劣化，这种传呼器只能在有限的几次调用中保持可靠工作状态，随后将彻底失效。</DMSL_AirSupportPager.description>
+  <DMSL_Apparel_CommandDroneBelt.label>指挥无人机腰带</DMSL_Apparel_CommandDroneBelt.label>
+  <DMSL_Apparel_CommandDroneBelt.description>一种可以释放无人机辅助指挥的腰带。你可以通过指挥无人机来作为中继远程指挥机械族作战。</DMSL_Apparel_CommandDroneBelt.description>
+  <DMSL_Apparel_MilitaryDressUniform.label>军礼服</DMSL_Apparel_MilitaryDressUniform.label>
+  <DMSL_Apparel_MilitaryDressUniform.description>一种被高度简化的军礼服，用于维持在边缘世界军官们的体面。</DMSL_Apparel_MilitaryDressUniform.description>
+</LanguageData>

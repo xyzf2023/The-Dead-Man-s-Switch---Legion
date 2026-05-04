@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 传呼器携带者标记 Mote：在持有传呼器的敌人头顶显示红色三角 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_DMSL_PagerCarrierMarker</defName>
+    <label>传呼器标记</label>
+    <thingClass>DMS_Legion.AerialRaid.Mote_PagerCarrierMarker</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.25</fadeInTime>
+      <fadeOutTime>0.25</fadeOutTime>
+      <solidTime>999999</solidTime><!-- 持续很长时间，直到手动销毁 -->
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Misc/Triangle</texPath>
+      <color>1.0,0.0,0.0,0.8</color><!-- 红色，80% 透明度 -->
+      <drawSize>1.5</drawSize><!-- 两倍大小 -->
+    </graphicData>
+  </ThingDef>
+</Defs>

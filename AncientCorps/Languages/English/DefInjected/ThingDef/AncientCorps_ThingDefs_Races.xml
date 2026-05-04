@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/ThingDefs_Races -->
+  <DMSL_Mech_panzer.label>Panzer</DMSL_Mech_panzer.label>
+  <DMSL_Mech_panzer.description>An ultra-heavy combat mech equipped with multiple weapon systems.</DMSL_Mech_panzer.description>
+  <DMSL_Mech_STGeorge.label>Saint George</DMSL_Mech_STGeorge.label>
+  <DMSL_Mech_STGeorge.description>A self-propelled artillery walker platform with map-wide strike capability.\n\nThe M977A17 Saint George has served for more than 75 years with over 15 upgrade variants. Developed after the Soviet collapse as U.S. doctrine shifted from peer warfare to counter-terror operations, it was designed for strategic air deployment to global hotspots within 72 hours. Its data-link system, autoloader, and high-output powerpack support shoot-and-scoot doctrine before enemy counter-battery radar can lock it. On the Russo-Ukrainian front of World War III, Saint George units were also supplied to Ukraine against Soviet forces...</DMSL_Mech_STGeorge.description>
+  <DMSL_Mech_ZBZ59D.label>Trench</DMSL_Mech_ZBZ59D.label>
+  <DMSL_Mech_ZBZ59D.description>NATO codename "Hammer." The design was finalized in the tenth year after the end of World War II, and it was first shown publicly during a Victory Day parade.\n\nDuring development, this vehicle adopted a highly compact overall layout to reduce frontal profile and lower hit probability. Its standard armament was a 105 mm cannon, aligned with contemporary expectations of future armored warfare.\n\nThe model shown here is a later upgraded variant, fitted with explosive reactive armor and refined improvements to several local structures.</DMSL_Mech_ZBZ59D.description>
+  <DMSL_Mech_IronFace.label>RBR-2 "Iron Face"</DMSL_Mech_IronFace.label>
+  <DMSL_Mech_IronFace.description>NATO codename: "Prosthesis"\n\nRBR-1 was one of the BR-6 modernization programs intended to let legacy units compete with next-generation weapons. RBR-2 "Iron Face" is a newly developed export-oriented main battle mech with an integrated shield emitter and stronger explosive reactive armor than its predecessor.</DMSL_Mech_IronFace.description>
+  <DMSL_Mech_leopard.label>Leopard</DMSL_Mech_leopard.label>
+  <DMSL_Mech_leopard.description>An ultra-heavy walker.\n\nThe P1A2 "Leopard" originated from the failed German-American joint tank program. When first unveiled, its nickname matching a WWII tank raised concerns over symbolism, but it quickly became one of the main battle walkers fielded across Europe and parts of Southeast Asia, earning the title "European Main Battle Walker" and contributing significantly to European defense integration. However, the observation window on the right side of the hull remains a controversial potential weak point.\nTo this day, it remains in active service as one of Europe's frontline main battle walkers.</DMSL_Mech_leopard.description>
+</LanguageData>

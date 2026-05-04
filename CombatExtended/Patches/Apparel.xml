@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<!-- DMSL_Apparel_CBRNAssaultCombatSuit - CBRB突击战斗服 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_CBRNAssaultCombatSuit"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MaxHitPoints>100</MaxHitPoints>
+						<WorkToMake>20000</WorkToMake>
+						<Mass>10</Mass>
+						<Bulk>18</Bulk>
+						<WornBulk>10</WornBulk>
+						<ArmorRating_Sharp>14</ArmorRating_Sharp>
+						<ArmorRating_Blunt>36</ArmorRating_Blunt>
+						<ArmorRating_Heat>0.5</ArmorRating_Heat>
+						<Insulation_Cold>50</Insulation_Cold>
+						<Insulation_Heat>35</Insulation_Heat>
+						<EquipDelay>2.5</EquipDelay>
+					</statBases>
+				</value>
+			</li>
+
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_CBRNAssaultCombatSuit"]/equippedStatOffsets</xpath>
+				<value>
+					<AimingAccuracy>-0.1</AimingAccuracy>
+					<SmokeSensitivity>-1</SmokeSensitivity>
+				</value>
+			</li>
+
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_CBRNAssaultCombatSuit"]/apparel/bodyPartGroups</xpath>
+				<value>
+					<li>Hands</li>
+					<li>Feet</li>
+				</value>
+			</li>
+
+			<!-- MilitaryDressUniform -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_MilitaryDressUniform"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MaxHitPoints>160</MaxHitPoints>
+						<WorkToMake>7000</WorkToMake>
+						<Mass>1.5</Mass>
+						<Bulk>4</Bulk>
+						<WornBulk>0</WornBulk>
+						<StuffEffectMultiplierArmor>4</StuffEffectMultiplierArmor>
+						<StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+						<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+						<EquipDelay>1</EquipDelay>
+					</statBases>
+				</value>
+			</li>
+
+			<!-- MilitaryPeakCap -->
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_MilitaryPeakCap"]/statBases/StuffEffectMultiplierArmor</xpath>
+				<match Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="DMSL_Apparel_MilitaryPeakCap"]/statBases/StuffEffectMultiplierArmor</xpath>
+					<value>
+						<StuffEffectMultiplierArmor>1</StuffEffectMultiplierArmor>
+					</value>
+				</match>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_Apparel_MilitaryPeakCap"]/statBases</xpath>
+					<value>
+						<StuffEffectMultiplierArmor>1</StuffEffectMultiplierArmor>
+					</value>
+				</nomatch>
+			</li>
+
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_MilitaryPeakCap"]/statBases</xpath>
+				<value>
+					<Bulk>2</Bulk>
+					<WornBulk>1</WornBulk>
+				</value>
+			</li>
+
+			<!-- CommandDeploymentBelt -->
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_Apparel_CommandDroneBelt"]/statBases</xpath>
+				<match Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="DMSL_Apparel_CommandDroneBelt"]/statBases</xpath>
+					<value>
+						<statBases>
+							<Mass>3</Mass>
+							<Bulk>10</Bulk>
+							<WornBulk>2</WornBulk>
+							<MaxHitPoints>150</MaxHitPoints>
+							<WorkToMake>15000</WorkToMake>
+						</statBases>
+					</value>
+				</match>
+			</li>
+
+			<!-- SupportRequestPager -->
+			<li Class="PatchOperationConditional">
+				<xpath>Defs/ThingDef[defName="DMSL_AirSupportPager"]/statBases</xpath>
+				<match Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_AirSupportPager"]/statBases</xpath>
+					<value>
+						<Bulk>2</Bulk>
+					</value>
+				</match>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="DMSL_AirSupportPager"]</xpath>
+					<value>
+						<statBases>
+							<Bulk>2</Bulk>
+						</statBases>
+					</value>
+				</nomatch>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

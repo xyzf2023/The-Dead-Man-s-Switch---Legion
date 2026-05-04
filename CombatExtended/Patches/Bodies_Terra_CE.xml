@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 尘世体型：为 CE 装备面板护甲显示添加 CoveredByNaturalArmor 组 -->
+<Patch>
+	<!-- corePart（Torso）已有 groups，追加 CoveredByNaturalArmor -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Neck -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Neck"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Head -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Neck"]/parts/li[def="Head"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Eye（两只，xpath 匹配所有 Eye 记录） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Neck"]/parts/li[def="Head"]/parts/li[def="Eye"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Shoulder（两个） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Shoulder"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Arm（嵌套在 Shoulder 下） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Shoulder"]/parts/li[def="Arm"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Hand（嵌套在 Arm 下） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Shoulder"]/parts/li[def="Arm"]/parts/li[def="Hand"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Leg（两个） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Leg"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+
+	<!-- Foot（嵌套在 Leg 下） -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[defName="DMSL_Body_Terra"]/corePart/parts/li[def="Leg"]/parts/li[def="Foot"]/groups</xpath>
+		<value><li>CoveredByNaturalArmor</li></value>
+	</Operation>
+</Patch>

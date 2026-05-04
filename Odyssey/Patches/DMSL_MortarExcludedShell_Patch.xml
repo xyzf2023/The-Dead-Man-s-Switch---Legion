@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 默认存储设置：不允许装入该炮弹 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName='Artillery_Mortar']/building/defaultStorageSettings/filter/disallowedThingDefs</xpath>
+    <value>
+      <li>DMSL_AerialBomb</li>
+    </value>
+  </Operation>
+  <!-- 固定存储设置：在筛选器中加入禁止列表，使玩家无法将该炮弹加入允许类型 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName='Artillery_Mortar']/building/fixedStorageSettings/filter</xpath>
+    <value>
+      <disallowedThingDefs>
+        <li>DMSL_AerialBomb</li>
+      </disallowedThingDefs>
+    </value>
+  </Operation>
+</Patch>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 定义列表根节点 -->
+<Defs>
+  <!-- 指挥辅助腰带：腰带类装备，继承护盾腰带结构 -->
+  <ThingDef ParentName="ApparelBase">
+    <!-- 唯一标识符 -->
+    <defName>DMSL_Apparel_CommandDroneBelt</defName>
+    <!-- 游戏内显示名 -->
+    <label>指挥无人机腰带</label>
+    <!-- 物品描述（待补充） -->
+    <description>一种可以释放无人机辅助指挥的腰带。你可以通过指挥无人机来作为中继远程指挥机械族作战。</description>
+    <!-- 档案枢纽模式中允许持有数量 -->
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <!-- 绘制层级：物品 -->
+    <altitudeLayer>Item</altitudeLayer>
+    <!-- 可随时搬运 -->
+    <alwaysHaulable>True</alwaysHaulable>
+
+    <uiIconPath>Clothes/CommandDroneBelt/CommandDroneBelt_icon</uiIconPath>
+
+    <!-- 服装属性 -->
+    <apparel>
+      <!-- 不计入裸体判定 -->
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <!-- 尸体穿着不介意 -->
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <!-- 损坏仍可穿 -->
+      <careIfDamaged>false</careIfDamaged>
+      <!-- 每日磨损量，0 为不磨损 -->
+      <wearPerDay>0</wearPerDay>
+      <!-- 穿着部位：腰部 -->
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <!-- 服装层：腰带 -->
+      <layers>
+        <li>Belt</li>
+      </layers>
+      <!-- 标签：腰带防御类 -->
+      <tags>
+        <li>BeltDefense</li>
+      </tags>
+      <!-- 可穿着年龄段：儿童、成人 -->
+      <developmentalStageFilter>Adult</developmentalStageFilter>
+      <!-- 绘制层级：背包装默认 South=-3 会画在小人后面，改为 93 与 North 一致，使四向都画在最前 -->
+      <drawData>
+        <defaultData><layer>93</layer></defaultData>
+        <dataNorth><layer>93</layer></dataNorth>
+        <dataSouth><layer>93</layer></dataSouth>
+        <dataEast><layer>93</layer></dataEast>
+        <dataWest><layer>93</layer></dataWest>
+      </drawData>
+      <!-- 穿着时贴图路径（缺此项则身上不显示，仅落地用 graphicData） -->
+      <wornGraphicPath>Clothes/CommandDroneBelt/CommandDroneBelt</wornGraphicPath>
+      <!-- 腰带层按“背包装”绘制，数值参考桨鸟部署腰带；各向 scale 已乘 1.2 作为装备时贴图放大 -->
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+        <north>
+          <offset>(0,0)</offset>
+          <scale>0.85</scale>
+          <female><offset>(0,-0.1)</offset></female>
+          <fat><offset>(0.15,-0.1)</offset></fat>
+          <hulk><offset>(0,-0.2)</offset></hulk>
+        </north>
+        <south>
+          <offset>(-0.05,0)</offset>
+          <scale>0.96</scale>
+          <thin><offset>(-0.15,0)</offset></thin>
+          <fat><offset>(0.1,0)</offset></fat>
+          <hulk><offset>(0.1,-0.1)</offset></hulk>
+        </south>
+        <east>
+          <offset>(-0.1,-0.2)</offset>
+          <scale>0.72</scale>
+          <thin><offset>(0,0.1)</offset></thin>
+          <hulk><offset>(0,-0.1)</offset></hulk>
+          <fat><offset>(-0.1,0)</offset></fat>
+          <male><offset>(0,0.1)</offset></male>
+        </east>
+        <west>
+          <offset>(0.1,-0.2)</offset>
+          <scale>0.72</scale>
+          <thin><offset>(0,0.1)</offset></thin>
+          <hulk><offset>(0,-0.1)</offset></hulk>
+          <fat><offset>(0.1,0)</offset></fat>
+          <male><offset>(0,0.1)</offset></male>
+        </west>
+      </wornGraphicData>
+    </apparel>
+    <!-- 可被配方烧毁 -->
+    <burnableByRecipe>true</burnableByRecipe>
+    <!-- 物品分类：普通物品 -->
+    <category>Item</category>
+    <!-- 随机颜色生成：灰阶选项 -->
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.33,0.33,0.33,1)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.65,0.65,0.65,1)</only>
+        </li>
+        <li>
+          <weight>6</weight>
+          <min>(0.3,0.3,0.3,1)</min>
+          <max>(0.5,0.5,0.5,1)</max>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+    <!-- 组件列表 -->
+    <comps>
+      <!-- 可禁止使用 -->
+      <li Class="CompProperties_Forbiddable"></li>
+      <!-- 复用失能机关：AI 可用背包 + 部署/回收逻辑 -->
+      <li Class="CompProperties_AIUSablePack">
+        <compClass>Fortified.CompDronePack</compClass>
+        <checkInterval>60</checkInterval>
+      </li>
+      <!-- 充能：每发消耗 1 充能，工业组件补充，最多 2 充能 -->
+      <li Class="CompProperties_ApparelReloadable">
+        <maxCharges>2</maxCharges>
+        <ammoDef>ComponentIndustrial</ammoDef>
+        <baseReloadTicks>2400</baseReloadTicks>
+        <ammoCountPerCharge>3</ammoCountPerCharge>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>drone</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <!-- 部署指挥鸟：复用 Fortified.Verb_Deploy，spawnDef 为指挥鸟种族 -->
+    <verbs>
+      <li>
+        <verbClass>Fortified.Verb_Deploy</verbClass>
+        <commandIcon>UI/Gizmo/DeployCommandingBird</commandIcon>
+        <spawnDef>DMSL_Drone_CommandingBird</spawnDef>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+        <warmupTime>3.0</warmupTime>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <onlyManualCast>true</onlyManualCast>
+        <useableInVacuum>false</useableInVacuum>
+        <soundCast>ThrowGrenade</soundCast>
+        <targetParams>
+          <canTargetSelf>true</canTargetSelf>
+        </targetParams>
+      </li>
+    </verbs>
+    <!-- 制作成本：1 TR组件 + 30 钨钢 + 4 冲压零件（失能机关 Def） -->
+    <costList>
+      <ComponentTransmitter>1</ComponentTransmitter>
+      <Tungsteel>30</Tungsteel>
+      <ComponentStamped>4</ComponentStamped>
+    </costList>
+    <!-- 仅在地图网格绘制（不随朝向旋转） -->
+    <drawerType>MapMeshOnly</drawerType>
+    <!-- 在地图上显示 GUI 覆盖层 -->
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <!-- 贴图与图形：不受制作物品颜色影响，始终使用 def 默认颜色 -->
+    <graphicData>
+      <!-- 落地随机旋转角度 -->
+      <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+      <texPath>Clothes/CommandDroneBelt/CommandDroneBelt</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>1.0</drawSize>
+      <ignoreThingDrawColor>true</ignoreThingDrawColor>
+    </graphicData>
+    <!-- 移动经过时的路径成本 -->
+    <pathCost>14</pathCost>
+    <!-- 配方/制作相关 -->
+    <recipeMaker>
+      <!-- 未完成品 Def -->
+      <unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
+      <!-- 前置研究：护盾腰带 -->
+      <researchPrerequisite>DMS_EquipmentElite</researchPrerequisite>
+      <!-- 制作速度参考属性 -->
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <!-- 制作技能 -->
+      <workSkill>Crafting</workSkill>
+      <!-- 制作时视觉效果 -->
+      <effectWorking>Smith</effectWorking>
+      <!-- 制作时音效 -->
+      <soundWorking>Recipe_Machining</soundWorking>
+      <!-- 可用工作台：DMS 机械冲压机 -->
+      <recipeUsers>
+        <li>DMS_TableMachinePrinter</li>
+      </recipeUsers>
+      <!-- 不使用原料决定颜色 -->
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <!-- 技能要求 -->
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <!-- 配方列表显示优先级 -->
+      <displayPriority>300</displayPriority>
+    </recipeMaker>
+    <!-- 不可旋转放置 -->
+    <rotatable>false</rotatable>
+    <!-- 可被选中 -->
+    <selectable>True</selectable>
+    <!-- 可熔炼 -->
+    <smeltable>true</smeltable>
+    <!-- 穿着时为机械师提供 +8 带宽（与原版带宽背包一致，使用 equippedStatOffsets） -->
+    <equippedStatOffsets>
+      <MechBandwidth>8</MechBandwidth>
+    </equippedStatOffsets>
+    <!-- 基础属性值 -->
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.4</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Beauty>-3</Beauty>
+      <Mass>3</Mass>
+      <WorkToMake>14000</WorkToMake>
+      <EquipDelay>2</EquipDelay>
+    </statBases>
+    <!-- 科技等级：太空时代 -->
+    <techLevel>Industrial</techLevel>
+    <!-- 物品分类（存储等） -->
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <!-- 实体类：服装 -->
+    <thingClass>Apparel</thingClass>
+    <!-- 每帧 tick 类型：Normal -->
+    <tickerType>Normal</tickerType>
+    <!-- 使用耐久度 -->
+    <useHitPoints>True</useHitPoints>
+    <!-- 生成概率 -->
+    <generateAllowChance>0</generateAllowChance>
+  </ThingDef>
+</Defs>

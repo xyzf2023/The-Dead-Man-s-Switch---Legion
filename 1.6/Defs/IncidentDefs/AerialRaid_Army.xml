@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentDef>
+    <defName>DMSL_AerialRaid_Army</defName>
+    <label>袭击：空袭</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>DMS_Legion.AerialRaid.IncidentWorker_Army</workerClass>
+    <baseChance>1</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <minThreatPoints>5000</minThreatPoints>
+    <minRefireDays>5</minRefireDays>
+    <letterLabel>敌方轰炸机接近</letterLabel>
+    <letterText>防空雷达系统在远程扫描中捕获到异常信号。\n\n一支隶属于武装殖民舰队的轰炸机编队正在向本区域接近，飞行轨迹表明其任务为对地打击。\n\n敌方航空单位预计在短时间内进入有效攻击范围。若不加以干扰，其轰炸将直接落入殖民地控制区。\n\n你可以命令我方战斗机对来袭目标进行拦截，或部署电子诱饵迫使敌方改变轰炸目标区域。\n\n时间有限，务必尽快采取反制措施。</letterText>
+    <letterDef>ThreatBig</letterDef>
+    <tale>Raid</tale>
+    <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+  </IncidentDef>
+</Defs>

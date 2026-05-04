@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Odyssey Defs/ThingDefs_Buildings -->
+  <DMSL_AXF12_OffsetConfig.label>AXF-12「偏构」垂直起降战斗机</DMSL_AXF12_OffsetConfig.label>
+  <DMSL_AXF12_OffsetConfig.description>AXF-12「偏构」是一型具备快速垂直起降能力的战斗机。其结构设计经过专门优化，可适应殖民地受限的起降环境。\n「偏构」可承担标准空域拦截职责，能够压制并驱离来袭轰炸机编队；同时，该机型亦可执行前沿侦察任务，或挂载少量航弹对指定目标实施战术打击。</DMSL_AXF12_OffsetConfig.description>
+</LanguageData>

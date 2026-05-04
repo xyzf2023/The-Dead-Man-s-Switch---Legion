@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- DMSL_Weapon_Lance - 骑士长枪 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Weapon_Lance"]/statBases</xpath>
+		<value>
+			<statBases>
+				<WorkToMake>12000</WorkToMake>
+				<Mass>12</Mass>
+				<Bulk>15</Bulk>
+				<MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
+				<MaxHitPoints>800</MaxHitPoints>
+				<Flammability>0</Flammability>
+				<DeteriorationRate>0.2</DeteriorationRate>
+				<Beauty>0</Beauty>
+				<SellPriceFactor>1</SellPriceFactor>
+			</statBases>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Weapon_Lance"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>枪头</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>35</power>
+					<cooldownTime>1.8</cooldownTime>
+					<armorPenetrationSharp>24</armorPenetrationSharp>
+					<armorPenetrationBlunt>12</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- DMSL_Weapon_IED - IED -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Weapon_IED"]/statBases</xpath>
+		<value>
+			<statBases>
+				<Mass>1.5</Mass>
+				<Bulk>3.5</Bulk>
+				<MarketValue>2000</MarketValue>
+				<RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+				<WorkToMake>12000</WorkToMake>
+			</statBases>
+		</value>
+	</Operation>
+
+	<!-- We keep the vanilla verb class but adjust stats -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Weapon_IED"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li>
+					<verbClass>DMS_Legion.Verb_IEDLaunch</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<range>12</range>
+					<forcedMissRadius>0.5</forcedMissRadius>
+					<warmupTime>1.0</warmupTime>
+					<noiseRadius>4</noiseRadius>
+					<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+					<soundCast>ThrowGrenade</soundCast>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<defaultProjectile>DMSL_Projectile_IED</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+
+	<!-- Adjust projectile stats without changing class -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Projectile_IED"]/projectile</xpath>
+		<value>
+			<projectile>
+				<speed>12</speed>
+				<arcHeightFactor>2</arcHeightFactor>
+				<shadowSize>0.4</shadowSize>
+				<explosionRadius>3.5</explosionRadius>
+				<damageDef>Bomb</damageDef>
+				<damageAmountBase>180</damageAmountBase>
+				<armorPenetrationBase>0.8</armorPenetrationBase>
+				<explosionDelay>0</explosionDelay>
+			</projectile>
+		</value>
+	</Operation>
+</Patch>

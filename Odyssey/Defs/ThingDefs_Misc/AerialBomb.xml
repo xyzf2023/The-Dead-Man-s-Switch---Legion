@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  航弹物品与飞行弹体定义：用于 AXF-12 等空袭的航弹。
+  物品继承 MakeableShellBase（归类为 MortarShells），实际由补丁从迫击炮可用弹药中移除，仅供空袭系统使用。
+-->
+<Defs>
+  <!-- 航弹  -->
+  <ThingDef ParentName="MakeableShellBase">
+    <defName>DMSL_AerialBomb</defName>
+    <label>航弹</label>
+    <description>一种平平无奇的航弹，供AXF-12使用。注意别让你发疯的小人看到它。</description>
+    <!-- 携带/持有时按 1 个单位计数 -->
+    <possessionCount>1</possessionCount>
+    <!-- 单格最多堆叠数量（覆盖父类 ShellBase 的 25） -->
+    <stackLimit>3</stackLimit>
+    <!-- 物品耐久、重量、价值（覆盖父类 ShellBase：MarketValue 55） -->
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>250</Mass>
+      <MarketValue>1200</MarketValue>
+    </statBases>
+    <!-- 地图上显示的贴图：Things/AerialBomb 下 AerialBomb_a/b/c 按堆叠数 1/2/3 对应显示 -->
+    <graphicData>
+      <texPath>Things/AerialBomb</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>2</drawSize>
+    </graphicData>
+    <!-- 爆炸组件：受损时可能引爆 -->
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <!-- 物品在地图被击毁/引爆时的爆炸半径（格） -->
+        <explosiveRadius>10</explosiveRadius>
+        <!-- 爆炸伤害类型：使用航弹专用 DamageDef（见 DamageDefs/Damages_AerialBomb.xml） -->
+        <explosiveDamageType>DMSL_Damage_AerialBomb</explosiveDamageType>
+        <!-- 堆叠数量每多 1，爆炸半径增加的格数 -->
+        <explosiveExpandPerStackcount>5</explosiveExpandPerStackcount>
+        <!-- 耐久低于该比例时可能被点燃引信（0.7 = 70%） -->
+        <startWickHitPointsPercent>0.1</startWickHitPointsPercent>
+        <!-- 引信燃烧时长（tick 随机范围），烧完后引爆 -->
+        <wickTicks>180~300</wickTicks>
+      </li>
+    </comps>
+    <!-- 发射后使用的飞行弹体 defName -->
+    <projectileWhenLoaded>DMSL_Bullet_AerialBomb</projectileWhenLoaded>
+    <!-- 制造成本 -->
+    <costList>
+      <Steel>30</Steel>
+      <Chemfuel>150</Chemfuel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+      <!-- <ComponentSpacer>1</ComponentSpacer> -->
+    </costList>
+    <!-- 配方由 recipeMaker 自动生成，工作量取自 statBases.WorkToMake -->
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Mortars</li>
+        <li>DMS_Hypothesis</li>
+      </researchPrerequisites>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- 航弹飞行弹体：落地爆炸，用于空袭轰炸效果 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>DMSL_Bullet_AerialBomb</defName>
+    <label>航弹</label>
+    <graphicData>
+      <texPath>Things/AerialBomb/AerialBomb_a</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>DMSL_Damage_AerialBomb</damageDef>
+      <speed>80</speed>
+      <explosionRadius>2.9</explosionRadius>
+      <!-- 飞行时从地图上方经过（不阻挡地面） -->
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>MortarBomb_Explode</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+</Defs>

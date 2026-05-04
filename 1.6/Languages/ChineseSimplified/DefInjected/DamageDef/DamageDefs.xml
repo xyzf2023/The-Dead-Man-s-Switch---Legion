@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/DamageDefs -->
+  <DMSL_Damage_BlastWave.label>冲击波</DMSL_Damage_BlastWave.label>
+  <DMSL_Damage_BlastWave.deathMessage>{0} 因冲击波而死亡。</DMSL_Damage_BlastWave.deathMessage>
+  <DMSL_Damage_ThermalRadiation.label>热辐射</DMSL_Damage_ThermalRadiation.label>
+  <DMSL_Damage_ThermalRadiation.deathMessage>{0} 死于热辐射。</DMSL_Damage_ThermalRadiation.deathMessage>
+  <DMSL_Damage_NuclearEMP.label>核电磁脉冲</DMSL_Damage_NuclearEMP.label>
+  <DMSL_Damage_NuclearEMP.deathMessage>{0} 因核电磁脉冲而死亡。</DMSL_Damage_NuclearEMP.deathMessage>
+</LanguageData>

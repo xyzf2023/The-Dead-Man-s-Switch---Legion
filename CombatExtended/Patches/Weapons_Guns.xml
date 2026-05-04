@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<!-- Give toughness to mech weapons -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[
+					defName="DMSL_Weapon_AutomatroidAssaultRifle" or
+					defName="DMSL_Weapon_AutomatroidHeavyMachineGun" or
+					defName="DMSL_Weapon_AutomatroidHeavyShotgun" or
+					defName="DMSL_Weapon_CompetitiveRifle" or
+					defName="DMSL_Weapon_HuntingRifle"
+					]/statBases</xpath>
+				<value>
+					<ToughnessRating>6</ToughnessRating>
+				</value>
+			</li>
+
+			<!-- CE Melee tools for DMSL guns (prevents InfoCard melee stat errors) -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[
+					defName="DMSL_Weapon_AutomatroidAssaultRifle" or
+					defName="DMSL_Weapon_AutomatroidHeavyMachineGun" or
+					defName="DMSL_Weapon_AutomatroidHeavyShotgun" or
+					defName="DMSL_Weapon_CompetitiveRifle" or
+					defName="DMSL_Weapon_HuntingRifle"
+					]/tools</xpath>
+				<value>
+					<tools Inherit="False">
+						<li Class="CombatExtended.ToolCE">
+							<label>stock</label>
+							<capacities>
+								<li>Blunt</li>
+							</capacities>
+							<power>12</power>
+							<cooldownTime>1.55</cooldownTime>
+							<chanceFactor>1.5</chanceFactor>
+							<armorPenetrationBlunt>3.955</armorPenetrationBlunt>
+							<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+						</li>
+						<li Class="CombatExtended.ToolCE">
+							<label>barrel</label>
+							<capacities>
+								<li>Blunt</li>
+							</capacities>
+							<power>8</power>
+							<cooldownTime>2.02</cooldownTime>
+							<armorPenetrationBlunt>2.730</armorPenetrationBlunt>
+							<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+						</li>
+						<li Class="CombatExtended.ToolCE">
+							<label>muzzle</label>
+							<capacities>
+								<li>Poke</li>
+							</capacities>
+							<power>12</power>
+							<cooldownTime>1.55</cooldownTime>
+							<armorPenetrationBlunt>3.955</armorPenetrationBlunt>
+							<linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+						</li>
+					</tools>
+				</value>
+			</li>
+
+			<!-- DMSL_Weapon_AutomatroidAssaultRifle - 机兵突击步枪（下挂榴弹） -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Weapon_AutomatroidAssaultRifle</defName>
+				<statBases>
+					<Mass>8.15</Mass>
+					<Bulk>10.85</Bulk>
+					<SwayFactor>1.57</SwayFactor>
+					<ShotSpread>0.09</ShotSpread>
+					<SightsEfficiency>1.2</SightsEfficiency>
+					<RangedWeapon_Cooldown>0.35</RangedWeapon_Cooldown>
+				</statBases>
+				<Properties>
+					<recoilAmount>1.77</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_338Lapua_FMJ</defaultProjectile>
+					<warmupTime>1.1</warmupTime>
+					<range>55</range>
+					<burstShotCount>6</burstShotCount>
+					<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+					<soundCast>Shot_AssaultRifle</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>24</magazineSize>
+					<reloadTime>4.2</reloadTime>
+					<ammoSet>AmmoSet_338Lapua</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>AimedShot</aiAimMode>
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aimedBurstShotCount>3</aimedBurstShotCount>
+				</FireModes>
+			</li>
+
+			<!-- Replace custom mode switcher with CE Underbarrel -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Weapon_AutomatroidAssaultRifle"]/comps/li[@Class="DMS_Legion.CompProperties_SecondaryVerb_Rework"]</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_UnderBarrel">
+						<underBarrelLabel>下挂榴弹发射器</underBarrelLabel>
+						<underBarrelIconTexPath>UI/Abilities/WeaponModeSwitch</underBarrelIconTexPath>
+						<verbPropsUnderBarrel>
+							<recoilAmount>3.03</recoilAmount>
+							<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+							<hasStandardCommand>true</hasStandardCommand>
+							<defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+							<warmupTime>1.5</warmupTime>
+							<range>40</range>
+							<soundCast>Shot_SniperRifle</soundCast>
+							<soundCastTail>GunTail_Heavy</soundCastTail>
+							<muzzleFlashScale>9</muzzleFlashScale>
+							<targetParams>
+								<canTargetLocations>true</canTargetLocations>
+							</targetParams>
+						</verbPropsUnderBarrel>
+						<propsUnderBarrel>
+							<magazineSize>1</magazineSize>
+							<reloadTime>3.5</reloadTime>
+							<ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+						</propsUnderBarrel>
+						<propsFireModesUnderBarrel>
+							<aiAimMode>Snapshot</aiAimMode>
+						</propsFireModesUnderBarrel>
+					</li>
+				</value>
+			</li>
+
+			<!-- DMSL_Weapon_AutomatroidHeavyMachineGun - 机兵链锯 -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Weapon_AutomatroidHeavyMachineGun</defName>
+				<statBases>
+					<Mass>32.4</Mass>
+					<Bulk>25.6</Bulk>
+					<SwayFactor>2.2</SwayFactor>
+					<ShotSpread>0.04</ShotSpread>
+					<SightsEfficiency>1.35</SightsEfficiency>
+					<RangedWeapon_Cooldown>0.46</RangedWeapon_Cooldown>
+				</statBases>
+				<Properties>
+					<recoilAmount>1.45</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_338Lapua_FMJ</defaultProjectile>
+					<warmupTime>1.55</warmupTime>
+					<range>75</range>
+					<burstShotCount>6</burstShotCount>
+					<ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+					<soundCast>DMS_MachineGunHeavy_Shot</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>14</muzzleFlashScale>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<recoilPattern>Mounted</recoilPattern>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>60</magazineSize>
+					<reloadTime>6.8</reloadTime>
+					<ammoSet>AmmoSet_338Lapua</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>AimedShot</aiAimMode>
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aimedBurstShotCount>3</aimedBurstShotCount>
+				</FireModes>
+			</li>
+
+			<!-- DMSL_Weapon_AutomatroidHeavyShotgun - 机兵重型霰弹枪（需 CE 的 AmmoSet_12Gauge / Bullet_12Gauge_Buck） -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Weapon_AutomatroidHeavyShotgun</defName>
+				<statBases>
+					<Mass>8.95</Mass>
+					<Bulk>11.2</Bulk>
+					<SwayFactor>1.41</SwayFactor>
+					<ShotSpread>0.15</ShotSpread>
+					<SightsEfficiency>1.0</SightsEfficiency>
+					<RangedWeapon_Cooldown>0.75</RangedWeapon_Cooldown>
+				</statBases>
+				<Properties>
+					<recoilAmount>2.89</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+					<warmupTime>0.6</warmupTime>
+					<range>17</range>
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+					<soundCast>Shot_Shotgun</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>24</magazineSize>
+					<reloadTime>6</reloadTime>
+					<ammoSet>AmmoSet_12Gauge</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>Snapshot</aiAimMode>
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</FireModes>
+			</li>
+
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Weapon_AutomatroidHeavyShotgun"]/comps/li[@Class="DMS_Legion.CompProperties_SecondaryVerb_Rework"]</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_UnderBarrel">
+						<underBarrelLabel>闪光弹</underBarrelLabel>
+						<underBarrelIconTexPath>UI/Abilities/WeaponModeSwitch</underBarrelIconTexPath>
+						<verbPropsUnderBarrel>
+							<recoilAmount>2.5</recoilAmount>
+							<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+							<hasStandardCommand>true</hasStandardCommand>
+							<defaultProjectile>Bullet_12Gauge_Beanbag</defaultProjectile>
+							<warmupTime>1</warmupTime>
+							<range>16</range>
+							<soundCast>Shot_SniperRifle</soundCast>
+							<soundCastTail>GunTail_Heavy</soundCastTail>
+							<muzzleFlashScale>9</muzzleFlashScale>
+						</verbPropsUnderBarrel>
+						<propsUnderBarrel>
+							<magazineSize>1</magazineSize>
+							<reloadTime>3.5</reloadTime>
+							<ammoSet>AmmoSet_12Gauge</ammoSet>
+						</propsUnderBarrel>
+						<propsFireModesUnderBarrel>
+							<aiAimMode>Snapshot</aiAimMode>
+						</propsFireModesUnderBarrel>
+					</li>
+				</value>
+			</li>
+
+			<!-- DMSL_Weapon_CompetitiveRifle - 竞技步枪 -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Weapon_CompetitiveRifle</defName>
+				<statBases>
+					<Mass>4.3</Mass>
+					<Bulk>5.0</Bulk>
+					<SwayFactor>1.76</SwayFactor>
+					<ShotSpread>0.19</ShotSpread>
+					<SightsEfficiency>0.75</SightsEfficiency>
+					<RangedWeapon_Cooldown>0.41</RangedWeapon_Cooldown>
+				</statBases>
+				<Properties>
+					<recoilAmount>2.24</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_50AE_FMJ</defaultProjectile>
+					<warmupTime>0.35</warmupTime>
+					<range>17</range>
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+					<soundCast>DMS_Pistol_Shot</soundCast>
+					<soundCastTail>GunTail_Light</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>21</magazineSize>
+					<reloadTime>3</reloadTime>
+					<ammoSet>AmmoSet_50AE</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>Snapshot</aiAimMode>
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</FireModes>
+			</li>
+
+			<!-- DMSL_Weapon_HuntingRifle - 狩猎步枪 -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Weapon_HuntingRifle</defName>
+				<statBases>
+					<!-- 参考原版狙击步枪/栓动步枪，偏轻便一点 -->
+					<Mass>4.0</Mass>
+					<Bulk>6.0</Bulk>
+					<SwayFactor>1.4</SwayFactor>
+					<ShotSpread>0.06</ShotSpread>
+					<SightsEfficiency>1.1</SightsEfficiency>
+					<!-- CE 的射击后硬直时间，略快于原版 1.5s 冷却 -->
+					<RangedWeapon_Cooldown>0.7</RangedWeapon_Cooldown>
+				</statBases>
+				<Properties>
+					<!-- 中等后坐力的精度步枪 -->
+					<recoilAmount>1.6</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<!-- 使用 CE 中的 7.62 NATO 类步枪弹，作为 14 伤+长射程的对应 -->
+					<defaultProjectile>Bullet_762x51mmNATO_FMJ</defaultProjectile>
+					<!-- 准备时间略长，对应其较高精度 -->
+					<warmupTime>1.7</warmupTime>
+					<!-- 保持原版 41 射程略上调，契合 CE 射程体系 -->
+					<range>45</range>
+					<!-- 半自动点射 3 发 -->
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>18</ticksBetweenBurstShots>
+					<soundCast>Shot_SniperRifle</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>8</muzzleFlashScale>
+				</Properties>
+				<AmmoUser>
+					<!-- 典型 7.62 栓动/半自动猎枪弹匣容量，略低于突击步枪 -->
+					<magazineSize>10</magazineSize>
+					<reloadTime>3.8</reloadTime>
+					<ammoSet>AmmoSet_762x51mmNATO</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<!-- AI 主用精瞄射击，支持爆发模式 -->
+					<aiAimMode>AimedShot</aiAimMode>
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</FireModes>
+			</li>
+
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="DMSL_Weapon_CompetitiveRifle"]/comps/li[@Class="DMS_Legion.CompProperties_SecondaryVerb_Rework"]</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_UnderBarrel">
+						<underBarrelLabel>半自动模式</underBarrelLabel>
+						<underBarrelIconTexPath>UI/Abilities/WeaponModeSwitch</underBarrelIconTexPath>
+						<verbPropsUnderBarrel>
+							<recoilAmount>2.24</recoilAmount>
+							<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+							<hasStandardCommand>true</hasStandardCommand>
+							<defaultProjectile>Bullet_50AE_FMJ</defaultProjectile>
+							<warmupTime>0.6</warmupTime>
+							<range>25</range>
+							<soundCast>DMS_Pistol_Shot</soundCast>
+							<soundCastTail>GunTail_Light</soundCastTail>
+							<muzzleFlashScale>9</muzzleFlashScale>
+						</verbPropsUnderBarrel>
+						<propsUnderBarrel>
+							<magazineSize>21</magazineSize>
+							<reloadTime>3</reloadTime>
+							<ammoSet>AmmoSet_50AE</ammoSet>
+						</propsUnderBarrel>
+						<propsFireModesUnderBarrel>
+							<aiAimMode>AimedShot</aiAimMode>
+							<aiUseBurstMode>FALSE</aiUseBurstMode>
+						</propsFireModesUnderBarrel>
+					</li>
+				</value>
+			</li>
+
+			<!-- 上述五把枪的 MakeGunCECompatible 会覆盖 tools，故在全部补丁之后统一再次写入 CE 近战 ToolCE -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[
+					defName="DMSL_Weapon_AutomatroidAssaultRifle" or
+					defName="DMSL_Weapon_AutomatroidHeavyMachineGun" or
+					defName="DMSL_Weapon_AutomatroidHeavyShotgun" or
+					defName="DMSL_Weapon_CompetitiveRifle" or
+					defName="DMSL_Weapon_HuntingRifle"
+					]/tools</xpath>
+				<value>
+					<tools Inherit="False">
+						<li Class="CombatExtended.ToolCE">
+							<label>stock</label>
+							<capacities><li>Blunt</li></capacities>
+							<power>12</power>
+							<cooldownTime>1.55</cooldownTime>
+							<chanceFactor>1.5</chanceFactor>
+							<armorPenetrationBlunt>3.955</armorPenetrationBlunt>
+							<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+						</li>
+						<li Class="CombatExtended.ToolCE">
+							<label>barrel</label>
+							<capacities><li>Blunt</li></capacities>
+							<power>8</power>
+							<cooldownTime>2.02</cooldownTime>
+							<armorPenetrationBlunt>2.730</armorPenetrationBlunt>
+							<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+						</li>
+						<li Class="CombatExtended.ToolCE">
+							<label>muzzle</label>
+							<capacities><li>Poke</li></capacities>
+							<power>12</power>
+							<cooldownTime>1.55</cooldownTime>
+							<armorPenetrationBlunt>3.955</armorPenetrationBlunt>
+							<linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+						</li>
+					</tools>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

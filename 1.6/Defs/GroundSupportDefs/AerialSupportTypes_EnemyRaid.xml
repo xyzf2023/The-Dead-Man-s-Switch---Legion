@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 敌方空袭支援类型定义 - 武装殖民舰队空袭 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_ArmyEnemyRaid</defName>
+    <label>武装殖民舰队空袭</label>
+    <description>来自武装殖民舰队的轰炸</description>
+    <aircraftTexturePath>GroundSupport/LASB-25</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>35.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>0.05</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <startDirection>Random</startDirection>
+    <preferNorthEntry>false</preferNorthEntry>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Bombing">
+        <explosionRadius>10</explosionRadius>
+        <damageAmount>50</damageAmount>
+        <explosionCount>10</explosionCount>
+        <targetAreaRadius>10</targetAreaRadius>
+        <explosionsPerTick>1</explosionsPerTick>
+        <explosionIntervalSeconds>0.2</explosionIntervalSeconds>
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+</Defs>

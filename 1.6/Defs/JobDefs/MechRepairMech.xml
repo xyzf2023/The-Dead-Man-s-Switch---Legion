@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 机械体修理机械体的工作定义 -->
+  <JobDef>
+    <defName>DMSL_Job_MechRepairMech</defName>
+    <label>修理机械体</label>
+    <driverClass>DMS_Legion.JobDriver_MechRepairMech</driverClass>
+    <reportString>正在修理{0}。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

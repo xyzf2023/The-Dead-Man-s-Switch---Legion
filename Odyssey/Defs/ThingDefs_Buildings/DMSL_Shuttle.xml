@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML声明 -->
+<!-- 根节点：Defs -->
+<Defs>
+
+  <!-- 模板：穿梭机本体定义 -->
+  <ThingDef Name="DMSL_AXF12_OffsetConfigBase" ParentName="BuildingBase">
+    <!-- 定义名 -->
+    <defName>DMSL_AXF12_OffsetConfig</defName>
+    <!-- 显示名称 -->
+    <label>AXF-12「偏构」垂直起降战斗机</label>
+    <!-- 描述文本 -->
+    <description>AXF-12「偏构」是一型具备快速垂直起降能力的战斗机。其结构设计经过专门优化，可适应殖民地受限的起降环境。\n「偏构」可承担标准空域拦截职责，能够压制并驱离来袭轰炸机编队；同时，该机型亦可执行前沿侦察任务，或挂载少量航弹对指定目标实施战术打击。</description>
+    <!-- 实体类 -->
+    <thingClass>Building_PassengerShuttle</thingClass>
+    <!-- Def类别（决定是否为可建造建筑） -->
+    <category>Building</category>
+    <!-- 建造菜单分类（DMS：机兵科技） -->
+    <designationCategory>DMS_Category</designationCategory>
+    <!-- 建造技能需求 -->
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <!-- 建造所需材料 -->
+    <costList>
+      <Neurocomputer>1</Neurocomputer>
+      <ComponentSpacer>3</ComponentSpacer>
+      <ComponentStamped>25</ComponentStamped>
+      <Polyester>150</Polyester>
+      <Steel>300</Steel>
+      <Tungsteel>400</Tungsteel>
+      <ShuttleEngine>1</ShuttleEngine>
+    </costList>
+    <!-- 建造所需工作量/基础数值 -->
+    <statBases>
+      <!-- 制作/建造工作量 -->
+      <WorkToBuild>72000</WorkToBuild>
+      <!-- 最大耐久 -->
+      <MaxHitPoints>2000</MaxHitPoints>
+      <!-- 易燃性 -->
+      <Flammability>0</Flammability>
+      <!-- 质量 -->
+      <Mass>2500</Mass>
+      <!-- 舒适度 -->
+      <Comfort>0.8</Comfort>
+    </statBases>
+    <!-- 高度层 -->
+    <altitudeLayer>Building</altitudeLayer>
+    <!-- 防止掉落物砸在上面 -->
+    <preventDroppingThingsOn>true</preventDroppingThingsOn>
+    <!-- 路径代价 -->
+    <pathCost>50</pathCost>
+    <!-- 是否阻挡风 -->
+    <blockWind>true</blockWind>
+    <!-- 可通行性 -->
+    <passability>PassThroughOnly</passability>
+    <!-- 占格填充比例 -->
+    <fillPercent>0.5</fillPercent>
+    <!-- 尺寸 -->
+    <size>(6,10)</size>
+    <!-- 是否高亮绘制 -->
+    <drawHighlight>true</drawHighlight>
+    <!-- 高亮颜色 -->
+    <highlightColor>(0.56, 0.62, 0.9)</highlightColor>
+    <!-- 贴图数据 -->
+    <graphicData>
+      <!-- 贴图路径 -->
+      <texPath>Buildings/AXF12/AXF12</texPath>
+      <!-- 渲染类 -->
+      <graphicClass>Graphic_Multi</graphicClass>
+      <!-- 着色器类型 -->
+      <shaderType>CutoutComplex</shaderType>
+      <!-- 绘制尺寸 -->
+      <drawSize>(11,11)</drawSize>
+      <!-- 阴影数据 -->
+      <shadowData>
+        <!-- 阴影体积 -->
+        <volume>(1.8, 1.0, 4.1)</volume>
+        <!-- 阴影偏移 -->
+        <offset>(-0.1, 0, 0)</offset>
+      </shadowData>
+    </graphicData>
+    <!-- Tick类型 -->
+    <tickerType>Normal</tickerType>
+    <!-- 是否可与区域重叠 -->
+    <canOverlapZones>true</canOverlapZones>
+    <!-- 被摧毁掉落 -->
+    <killedLeavings>
+      <Steel>50</Steel>
+      <Tungsteel>50</Tungsteel>
+      <ChunkSlagSteel>4</ChunkSlagSteel>
+      <ComponentStamped>3</ComponentStamped>
+    </killedLeavings>
+    <!-- 是否可旋转 -->
+    <rotatable>true</rotatable>
+    <!-- 是否有交互格 -->
+    <hasInteractionCell>true</hasInteractionCell>
+    <!-- 交互格偏移 -->
+    <interactionCellOffset>(2, 0, 0)</interactionCellOffset>
+    <!-- 默认放置朝向 -->
+    <defaultPlacingRot>East</defaultPlacingRot>
+    <!-- 是否可选中 -->
+    <selectable>true</selectable>
+    <!-- 地形承载需求 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <!-- 默认受击音效 -->
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <!-- 是否阻止天降物落在上面 -->
+    <preventSkyfallersLandingOn>true</preventSkyfallersLandingOn>
+    <!-- 绘制类型 -->
+    <drawerType>RealtimeOnly</drawerType>
+    <!-- 修理特效 -->
+    <repairEffect>ConstructMetal</repairEffect>
+    <!-- 是否可在调试菜单生成 -->
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <!-- 图标缩放 -->
+    <uiIconScale>1</uiIconScale>
+    <!-- 建筑子节点 -->
+    <building>
+      <!-- 是否可被认领 -->
+      <claimable>false</claimable>
+      <!-- 破坏音效 -->
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+      <!-- 是否可涂色 -->
+      <paintable>true</paintable>
+      <!-- 是否为惰性建筑 -->
+      <isInert>true</isInert>
+      <!-- 强制掉落 -->
+      <forcedCostLeavings>
+        <!-- 穿梭机引擎 -->
+        <li MayRequire="Ludeon.RimWorld.Odyssey">ShuttleEngine</li>
+      </forcedCostLeavings>
+    </building>
+    <!-- 检查器标签页 -->
+    <inspectorTabs>
+      <!-- 运输载具内容页 -->
+      <li>ITab_ContentsTransporter</li>
+    </inspectorTabs>
+    <!-- 研究前置 -->
+    <researchPrerequisites>
+      <!-- 穿梭机研究 -->
+      <li>Shuttles</li>
+      <!-- DMS 简言之假说 -->
+      <li>DMS_Hypothesis</li>
+    </researchPrerequisites>
+    <!-- 组件列表 -->
+    <comps>
+      <!-- 穿梭机组件 -->
+      <li Class="CompProperties_Shuttle">
+        <!-- 运输船Def -->
+        <shipDef>DMSL_AXF12_OffsetConfig</shipDef>
+      </li>
+      <!-- AXF12 侦察发射组件 -->
+      <li Class="DMS_Legion.AXF12.CompProperties_AXF12ReconLaunch">
+        <!-- 支援类型Def -->
+        <supportTypeDefName>DMSL_AerialSupport_AXF12Recon</supportTypeDefName>
+        <!-- 运输船Def -->
+        <transportShipDefName>DMSL_AXF12_OffsetConfig</transportShipDefName>
+        <!-- 世界对象Def -->
+        <worldObjectDefName>DMSL_AXF12_OffsetConfig_Traveling</worldObjectDefName>
+        <!-- Gizmo名称（使用 Keyed 翻译，见 1.6/Languages） -->
+        <gizmoLabel>DMSL_AXF12_ReconLaunch_GizmoLabel</gizmoLabel>
+        <!-- Gizmo描述 -->
+        <gizmoDesc>DMSL_AXF12_ReconLaunch_GizmoDesc</gizmoDesc>
+        <!-- Gizmo图标路径 -->
+        <gizmoIconPath>UI/Gizmo/Recon</gizmoIconPath>
+        <!-- 拦截 Gizmo（仅空袭倒计时时可用） -->
+        <interceptGizmoLabel>DMSL_AXF12_ReconLaunch_InterceptGizmoLabel</interceptGizmoLabel>
+        <interceptGizmoDesc>DMSL_AXF12_ReconLaunch_InterceptGizmoDesc</interceptGizmoDesc>
+        <interceptGizmoIconPath>UI/Gizmo/Intercept</interceptGizmoIconPath>
+        <!-- 轰炸 Gizmo -->
+        <bombGizmoLabel>DMSL_AXF12_ReconLaunch_BombGizmoLabel</bombGizmoLabel>
+        <bombGizmoDesc>DMSL_AXF12_ReconLaunch_BombGizmoDesc</bombGizmoDesc>
+        <bombGizmoIconPath>UI/Gizmo/Bomb</bombGizmoIconPath>
+      </li>
+      <!-- 发射/航程组件 -->
+      <li Class="CompProperties_Launchable">
+        <!-- 每格燃料消耗 -->
+        <fuelPerTile>6</fuelPerTile>
+        <!-- 最低燃料消耗 -->
+        <minFuelCost>150</minFuelCost>
+        <!-- 离场天降定义 -->
+        <skyfallerLeaving>DMSL_AXF12_OffsetConfigLeaving</skyfallerLeaving>
+        <!-- 世界对象 -->
+        <worldObjectDef>DMSL_AXF12_OffsetConfig_Traveling</worldObjectDef>
+        <!-- 冷却时间（ticks） -->
+        <cooldownTicks>600</cooldownTicks>
+        <!-- 固定最大起飞距离 -->
+        <fixedLaunchDistanceMax>100</fixedLaunchDistanceMax>
+        <!-- 冷却结束提示 -->
+        <cooldownEndedMessage>{0}再起飞已就绪。</cooldownEndedMessage>
+      </li>
+      <!-- 运输载具组件 -->
+      <li Class="CompProperties_Transporter">
+        <!-- 载重上限 -->
+        <massCapacity>300</massCapacity>
+        <!-- 每组最多1个 -->
+        <max1PerGroup>true</max1PerGroup>
+        <!-- 启动后仍可调整载物 -->
+        <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
+        <!-- 装载单位音效 -->
+        <pawnLoadedSound>Shuttle_PawnLoaded</pawnLoadedSound>
+        <!-- 卸载单位音效 -->
+        <pawnExitSound>Shuttle_PawnExit</pawnExitSound>
+        <!-- 检查面板显示载重 -->
+        <showMassInInspectString>true</showMassInInspectString>
+      </li>
+      <!-- 燃料组件 -->
+      <li Class="CompProperties_Refuelable">
+        <!-- 燃料容量 -->
+        <fuelCapacity>3000</fuelCapacity>
+        <!-- 可配置目标燃料 -->
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <!-- 初始目标燃料 -->
+        <initialConfigurableTargetFuelLevel>1000</initialConfigurableTargetFuelLevel>
+        <!-- 燃料过滤 -->
+        <fuelFilter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </fuelFilter>
+        <!-- 燃料标签 -->
+        <fuelLabel>Chemfuel</fuelLabel>
+        <!-- 燃料Gizmo标签 -->
+        <fuelGizmoLabel>Chemfuel</fuelGizmoLabel>
+        <!-- 仅使用时消耗燃料 -->
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <!-- 自动补燃比例 -->
+        <autoRefuelPercent>1</autoRefuelPercent>
+        <!-- 显示燃料Gizmo -->
+        <showFuelGizmo>true</showFuelGizmo>
+        <!-- 缺油覆盖层 -->
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+        <!-- 显示自动补燃开关 -->
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <!-- 允许排出燃料 -->
+        <canEjectFuel>true</canEjectFuel>
+      </li>
+      <!-- AXF12 航弹储备：独立储备槽，上限 3，通过 Job 装填，Gizmo 显示 -->
+      <li Class="DMS_Legion.AXF12.CompProperties_AXF12AmmoReserve">
+        <reserveThingDefName>DMSL_AerialBomb</reserveThingDefName>
+        <maxCount>3</maxCount>
+      </li>
+      <!-- 环境音效组件 -->
+      <li Class="CompProperties_AmbientSound">
+        <!-- 环境音效 -->
+        <sound>ShuttleIdle_Ambience</sound>
+      </li>
+    </comps>
+    <!-- 放置规则 -->
+    <placeWorkers>
+      <!-- 不允许在屋顶下放置 -->
+      <li>PlaceWorker_NotUnderRoof</li>
+    </placeWorkers>
+    <!-- 建造菜单排序 -->
+    <uiOrder>2600</uiOrder>
+  </ThingDef>
+
+  <!-- 结束：Defs -->
+</Defs>

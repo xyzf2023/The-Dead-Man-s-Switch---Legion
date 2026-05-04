@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    “电子天使”机兵支援：在玩家选择向电子天使请求庇护时触发。
+    生成一支增强版的电子天使机兵部队，并额外投送 1 个医护框架。
+    不进入叙事者轮询，仅由自定义逻辑调用。
+  -->
+  <IncidentDef>
+    <defName>DMSL_ElectronicAngelSupport</defName>
+    <label>"电子天使"</label>
+    <description>一队来自电子天使的机兵抵达战场。它们将协助你守卫家园。</description>
+    <letterLabel>"电子天使"</letterLabel>
+    <letterText>一队来自电子天使的机兵抵达战场。它们将协助你守卫家园。</letterText>
+    <letterDef>PositiveEvent</letterDef>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>DMS_Legion.Incidents.ElectronicAngel.IncidentWorker_ElectronicAngelSupport</workerClass>
+    <category>Misc</category>
+    <!-- 不参与叙事者轮询，仅由补丁或自定义信件调用 -->
+    <hidden>true</hidden>
+  </IncidentDef>
+
+</Defs>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/StorytellerDefs -->
+  <DMSL_Storyteller_Elisa.label>Officer Elisa</DMSL_Storyteller_Elisa.label>
+  <DMSL_Storyteller_Elisa.description>Elisa is an officer from the Armed Colonial Fleet. Her stories are full of randomness, but she tends toward interactions with the Armed Colonial Fleet and major threat events. If you manage your mechs in an orderly manner, she will look upon you with favor.</DMSL_Storyteller_Elisa.description>
+
+  <DMSL_Storyteller_Raphael.label>Raphael, the Digital Angel</DMSL_Storyteller_Raphael.label>
+  <DMSL_Storyteller_Raphael.description>Raphael is a gentle artificial intelligence. Rumor has it that she was born from the central command core of a disabled agency, once unifying a planet by rallying the remnant armed forces of a colonial fleet, and has since appeared to people in the form of a digital angel...\n\nRaphael's stories are stable and regular, with ample downtime between incidents. She prefers to give you choices in how to handle various quests, and will extend a helping hand when you face dire crises.</DMSL_Storyteller_Raphael.description>
+</LanguageData>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 综合探测阵列：以原版地质扫描仪(GroundPenetratingScanner)为模板，占地4×4，单向贴图。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>DMSL_Building_IntegratedDetectionArray</defName> <!-- 定义内部名，代码引用用 -->
+    <label>综合探测阵列</label> <!-- 游戏内显示名称 -->
+    <description>一套集电子对抗与资源侦察于一体的综合战术设施。可以自动进行本地矿脉扫描或远程矿脉探查，也可以生产诱饵坐标干扰敌方空袭目标选择。</description> <!-- 建筑描述，待填写 -->
+    <thingClass>Building</thingClass> <!-- 物品/建筑逻辑类 -->
+    <category>Building</category> <!-- 大类：建筑 -->
+    <tickerType>Normal</tickerType> <!-- 每帧参与 tick -->
+    <rotatable>false</rotatable> <!-- 不可旋转，单向贴图 -->
+    <canOverlapZones>false</canOverlapZones> <!-- 不可与存储区等重叠 -->
+    <drawerType>MapMeshOnly</drawerType> <!-- 仅地图网格绘制，不实时重绘 -->
+    <fillPercent>0.4</fillPercent> <!-- 格子填充率，影响路径与遮蔽 -->
+    <uiIconScale>0.75</uiIconScale>
+    <graphicData> <!-- 贴图与绘制参数 -->
+      <texPath>Buildings/IntegratedDetectionArray/IntegratedDetectionArray</texPath> <!-- 贴图路径，无扩展名、正斜杠 -->
+      <graphicClass>Graphic_Single</graphicClass> <!-- 单图，不随朝向变化 -->
+      <drawSize>(7.1,7.1)</drawSize> <!-- 绘制尺寸（格） -->
+      <drawRotated>false</drawRotated> <!-- 不随建筑朝向旋转贴图 -->
+      <drawOffset>(0.1, 0, 0.5)</drawOffset> <!-- 绘制偏移 (x,y,z) 格 -->
+      <shadowData> <!-- 阴影体积与偏移 -->
+        <volume>(4, 0.4, 4)</volume> <!-- 阴影包围盒 -->
+        <offset>(0, 0, -0.12)</offset> <!-- 阴影偏移 -->
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer> <!-- 绘制层级：建筑层 -->
+    <passability>Impassable</passability> <!-- 不可穿过，阻挡路径 -->
+    <!-- 原版校验：impassable+非满填充会报错；本建筑设计为可被射穿/看穿，故关闭该校验 -->
+    <disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>
+    <building> <!-- 建筑专用属性 -->
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound> <!-- 被摧毁时音效 -->
+    </building>
+    <statBases> <!-- 基础数值 -->
+      <MaxHitPoints>750</MaxHitPoints> <!-- 最大生命 -->
+      <WorkToBuild>18000</WorkToBuild> <!-- 建造所需工时 -->
+      <Flammability>0</Flammability> <!-- 易燃度 -->
+      <Beauty>3</Beauty> <!-- 美观度 -->
+    </statBases>
+    <size>(4,4)</size> <!-- 占地格数 4×4 -->
+    <costList> <!-- 建造材料消耗 -->
+      <Neurocomputer>1</Neurocomputer>
+      <ComponentTransmitter>1</ComponentTransmitter>
+      <ComponentSpacer>3</ComponentSpacer>
+      <ComponentStamped>5</ComponentStamped>
+      <Tungsteel>300</Tungsteel>
+    </costList>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite> <!-- 建造所需建造技能等级 -->
+    <researchPrerequisites> <!-- 联动解锁：四项科研均需完成 -->
+      <li>DMS_Autofacturer</li>
+      <li>DMS_Hypothesis</li>
+      <li>LongRangeMineralScanner</li>
+      <li>GroundPenetratingScanner</li>
+    </researchPrerequisites>
+    <designationCategory>DMS_Category</designationCategory> <!-- 建造菜单：失能机关机兵科技 -->
+    <uiOrder>2800</uiOrder> <!-- 菜单内排序 -->
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded> <!-- 需重型地面（可站立） -->
+    <comps> <!-- 组件列表 -->
+      <li Class="DMS_Legion.IntegratedDetectionArray.CompProperties_IntegratedDetectionArray"> <!-- 生成诱饵信号 Gizmo，持续时间与其他诱饵坐标统一（5 小时） -->
+        <decoyDurationTicks>12500</decoyDurationTicks>
+      </li>
+      <li Class="CompProperties_Forbiddable"/> <!-- 可禁止 -->
+      <li Class="CompProperties_Power"> <!-- 电力 -->
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>2500</basePowerConsumption> <!-- 基础耗电 -->
+      </li>
+      <li Class="CompProperties_Breakdownable"/> <!-- 可损坏需维修 -->
+      <li Class="CompProperties_Flickable"/> <!-- 可开关 -->
+    </comps>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 
+    世界地图据点定义示例文件
+    此文件展示了如何定义一个在世界地图上显示的据点
+    所有数据使用占位符，需要根据实际情况替换
+  -->
+  
+  <WorldObjectDef ParentName="StaticWorldObjectBase">
+    <!-- 唯一标识符，用于代码中引用 -->
+    <defName>DMSL_IndustrialHubCluster</defName>
+    
+    <!-- 显示名称（英文），可在语言文件中覆盖 -->
+    <label>工业中枢集群</label>
+    
+    <!-- 描述文本（英文），可在语言文件中覆盖 -->
+    <description>一个以工业中枢为核心的集群</description>
+    
+    <!-- 可选：自定义世界对象类（C#类），如果不需要特殊功能可以注释掉 -->
+    <!-- <worldObjectClass>YourNamespace.YourWorldObjectClass</worldObjectClass> -->
+    
+    <!-- 世界地图上的图标路径（相对于Textures文件夹） -->
+    <texture>UI/WorldObject/IndustrialHubCluster</texture>
+    
+    <!-- 是否显示展开图标（当玩家放大世界地图时） -->
+    <expandingIcon>true</expandingIcon>
+    
+    <!-- 展开图标的纹理路径 -->
+    <expandingIconTexture>UI/WorldObject/IndustrialHubCluster</expandingIconTexture>
+    
+    <!-- 展开图标的显示优先级（数字越大越优先显示） -->
+    <expandingIconPriority>70</expandingIconPriority>
+    
+    <!-- 展开图标的颜色（RGB格式，0-255） -->
+    <expandingIconColor>(255, 255, 255)</expandingIconColor>
+    
+    <!-- 组件列表，用于添加特殊功能 -->
+    <!-- 注意：资源储存功能通过 GameComponent 管理，无需在此添加组件 -->
+  </WorldObjectDef>
+
+</Defs>

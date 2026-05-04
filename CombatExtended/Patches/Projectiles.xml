@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- DMSL_Bullet_PZH2000Shell - 155mm Howitzer Shell -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Bullet_PZH2000Shell"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[defName="DMSL_Bullet_PZH2000Shell"]/projectile</xpath>
+		<attribute>Class</attribute>
+		<value>CombatExtended.ProjectilePropertiesCE</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Bullet_PZH2000Shell"]/projectile</xpath>
+		<value>
+			<projectile Class="CombatExtended.ProjectilePropertiesCE">
+				<damageDef>Bomb</damageDef>
+				<damageAmountBase>546</damageAmountBase>
+				<explosionRadius>5.5</explosionRadius>
+				<soundExplode>MortarBomb_Explode</soundExplode>
+				<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+				<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+				<soundAmbient>MortarRound_Ambient</soundAmbient>
+				<flyOverhead>true</flyOverhead>
+				<applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+				<shellingProps>
+					<damage>0.33</damage>
+				</shellingProps>
+				<preExplosionSpawnSingleThingDef>CraterMedium</preExplosionSpawnSingleThingDef>
+			</projectile>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_Bullet_PZH2000Shell"]/comps</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_Fragments">
+					<fragments>
+						<Fragment_Large>40</Fragment_Large>
+						<Fragment_Small>80</Fragment_Small>
+					</fragments>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+
+	<!-- DMSL_AutocannonRounds - Autocannon Support -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_AutocannonRounds"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.ProjectileCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[defName="DMSL_AutocannonRounds"]/projectile</xpath>
+		<attribute>Class</attribute>
+		<value>CombatExtended.ProjectilePropertiesCE</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="DMSL_AutocannonRounds"]/projectile</xpath>
+		<value>
+			<projectile Class="CombatExtended.ProjectilePropertiesCE">
+				<damageDef>Bullet</damageDef>
+				<damageAmountBase>44</damageAmountBase>
+				<armorPenetrationSharp>30</armorPenetrationSharp>
+				<armorPenetrationBlunt>1029.080</armorPenetrationBlunt>
+				<speed>182</speed>
+				<dropsCasings>true</dropsCasings>
+				<casingMoteDefname>Fleck_RifleAmmoCasings_HighCal</casingMoteDefname>
+				<casingFilthDefname>Filth_RifleAmmoCasings_HighCal</casingFilthDefname>
+			</projectile>
+		</value>
+	</Operation>
+</Patch>

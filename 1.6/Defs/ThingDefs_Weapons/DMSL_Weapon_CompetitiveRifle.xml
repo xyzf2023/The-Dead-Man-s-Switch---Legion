@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 双模式武器：主模式为重型冲锋枪，次模式为狙击步枪 -->
+    <ThingDef ParentName="DMS_AutomatroidGun">
+        <!-- 定义此武器在游戏中的唯一标识符 -->
+        <defName>DMSL_Weapon_CompetitiveRifle</defName>
+        <!-- 武器显示名称 -->
+        <label>竞技步枪</label>
+        <!-- 武器描述，向玩家说明这是一把可切换模式的武器 -->
+        <description>一种可以在半自动与全自动之间切换的竞技步枪，全自动初学者的最好选择。</description>
+        
+        <!-- 武器图形相关设置 -->
+        <graphicData>
+            <!-- 武器纹理文件路径 -->
+            <texPath>Weapons/DMSL_Weapon_CompetitiveRifle/DMSL_Weapon_CompetitiveRifle</texPath>
+            <!-- 使用单一图像渲染类 -->
+            <graphicClass>Graphic_Single</graphicClass>
+            <!-- 图像绘制尺寸，1.5倍标准大小 -->
+            <drawSize>1.5</drawSize>
+        </graphicData>
+
+        <!-- 武器分类：DMS 突击步枪使用 LongShots + RangedHeavy + Ranged -->
+        <weaponClasses>
+            <li>LongShots</li>
+            <li>RangedHeavy</li>
+            <li>Ranged</li>
+        </weaponClasses>
+      
+        <!-- 制造配方相关设置 -->
+        <recipeMaker>
+            <!-- 制造该武器所需的研究项目 -->
+            <researchPrerequisites>
+                <li>GasOperation</li>    <!-- 气体操作研究 -->
+                <li>DMS_EquipmentElite</li>  <!-- 精英装备研究 -->
+            </researchPrerequisites>
+            <!-- 制造所需的技能等级要求 -->
+            <skillRequirements>
+                <Crafting>6</Crafting>
+            </skillRequirements>
+            <!-- 在制作菜单中的显示优先级 -->
+            <displayPriority>440</displayPriority>
+        </recipeMaker>
+        
+        <!-- 武器基础属性值 -->
+        <statBases>
+            <!-- 制造所需的工作量 -->
+            <WorkToMake>40000</WorkToMake>
+            <!-- 武器重量 -->
+            <Mass>3.5</Mass>
+            <!-- 近距离命中精度 -->
+            <AccuracyTouch>0.85</AccuracyTouch>
+            <!-- 短距离命中精度 -->
+            <AccuracyShort>0.95</AccuracyShort>
+            <!-- 中距离命中精度 -->
+            <AccuracyMedium>0.85</AccuracyMedium>
+            <!-- 长距离命中精度 -->
+            <AccuracyLong>0.95</AccuracyLong>
+            <!-- 射击后的冷却时间 -->
+            <RangedWeapon_Cooldown>1.65</RangedWeapon_Cooldown>
+            <!-- 市场价值 -->
+            <MarketValue>1200</MarketValue>
+        </statBases>
+        
+        <!-- 制造所需材料清单 -->
+        <costList>
+            <Tungsteel>60</Tungsteel>          <!-- 钨钢需求量 -->
+            <ComponentStamped>3</ComponentStamped> <!-- 冲压组件需求量 -->
+        </costList>
+        
+        <!-- 主攻击模式设置（重型冲锋枪模式） -->
+        <verbs>
+            <li>
+                <!-- 使用射击动作类 -->
+                <verbClass>Verb_Shoot</verbClass>
+                <!-- 是否使用标准指令 -->
+                <hasStandardCommand>true</hasStandardCommand>
+                <!-- 默认使用的弹药类型 -->
+                <defaultProjectile>Bullet_HeavySMG</defaultProjectile>
+                <!-- 射击前准备时间 -->
+                <warmupTime>0.9</warmupTime>
+                <!-- 射击有效距离 -->
+                <range>22.9</range>
+                <!-- 连发子弹数量 -->
+                <burstShotCount>3</burstShotCount>
+                <!-- 连发时每发子弹之间的时间间隔 -->
+                <ticksBetweenBurstShots>11</ticksBetweenBurstShots>
+                <!-- 射击音效 -->
+                <soundCast>Shot_HeavySMG</soundCast>
+                <!-- 射击尾音 -->
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <!-- 枪口火焰大小 -->
+                <muzzleFlashScale>9</muzzleFlashScale>
+            </li>
+        </verbs>
+        
+        <!-- 武器组件设置，Inherit="False"表示不继承父级组件 -->
+        <comps Inherit="False">
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <!-- 双模式武器组件，支持切换主副攻击模式（通过Gizmo按钮切换） -->
+            <li Class="DMS_Legion.CompProperties_SecondaryVerb_Rework">
+                <!-- 主武器模式标签 -->
+                <mainWeaponLabel>全自动</mainWeaponLabel>
+                <!-- 主模式命令图标 -->
+                <mainCommandIcon>UI/Abilities/WeaponModeSwitch</mainCommandIcon>
+                <!-- 副武器模式标签 -->
+                <secondaryWeaponLabel>半自动</secondaryWeaponLabel>
+                <!-- 副模式命令图标 -->
+                <secondaryCommandIcon>UI/Abilities/WeaponModeSwitch</secondaryCommandIcon>
+                <!-- 组件描述 -->
+                <description>切换模式</description>
+                <!-- 副攻击模式参数（狙击步枪模式） -->
+                <verbProps>
+                    <!-- 使用射击动作类 -->
+                    <verbClass>Verb_Shoot</verbClass>
+                    <!-- 是否使用标准指令 -->
+                    <hasStandardCommand>true</hasStandardCommand>
+                    <!-- 使用狙击步枪弹药 -->
+                    <defaultProjectile>Bullet_SniperRifle</defaultProjectile>
+                    <!-- 较长的准备时间，适合精确射击 -->
+                    <warmupTime>3.5</warmupTime>
+                    <!-- 更远的射击距离 -->
+                    <range>44.9</range>
+                    <!-- 狙击步枪射击音效 -->
+                    <soundCast>Shot_SniperRifle</soundCast>
+                    <!-- 射击尾音 -->
+                    <soundCastTail>GunTail_Heavy</soundCastTail>
+                    <!-- 枪口火焰大小 -->
+                    <muzzleFlashScale>9</muzzleFlashScale>
+                </verbProps>
+            </li>
+            <!-- 可禁止组件，允许标记为禁止使用 -->
+            <li Class="CompProperties_Forbiddable"/>
+            <!-- 可样式化组件，允许应用样式 -->
+            <li Class="CompProperties_Styleable"/>
+        </comps>
+        
+        <!-- 武器标签：DMS 竞技步枪（半自动/全自动切换） -->
+        <weaponTags>
+            <li>DMS_MechWeaponMedium</li>     <!-- DMS 中型机兵武器 -->
+            <li>A_AR_LongRifle</li>           <!-- AR 系列长枪管 -->
+        </weaponTags>
+        
+        <!-- 近战攻击设置 -->
+        <tools>
+            <!-- 握把攻击方式 -->
+            <li>
+                <!-- 攻击部位标签 -->
+                <label>grip</label>
+                <!-- 攻击类型 -->
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <!-- 攻击威力 -->
+                <power>9</power>
+                <!-- 攻击冷却时间 -->
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <!-- 枪管戳击方式 -->
+            <li>
+                <!-- 攻击部位标签 -->
+                <label>barrel</label>
+                <!-- 攻击类型（钝击和戳刺） -->
+                <capacities>
+                    <li>Blunt</li>
+                    <li>Poke</li>
+                </capacities>
+                <!-- 攻击威力 -->
+                <power>9</power>
+                <!-- 攻击冷却时间 -->
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+</Defs>

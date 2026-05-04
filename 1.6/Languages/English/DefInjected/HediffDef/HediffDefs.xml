@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/HediffDefs -->
+  <DMSL_Hediff_WanderingEngineer.label>Wandering</DMSL_Hediff_WanderingEngineer.label>
+  <DMSL_Hediff_WanderingEngineer.description>This mech has received a signal from the mechanitor link and wandered near the colony. It is uncontrolled and will attempt to leave the map after a period of time.</DMSL_Hediff_WanderingEngineer.description>
+  <DMSL_Hediff_PsychicCamouflage.label>Psychic Camouflage</DMSL_Hediff_PsychicCamouflage.label>
+  <DMSL_Hediff_PsychicCamouflage.description>An invisible state granted by Omnimind Silence that masks psychic signals and makes units unseen by enemies.</DMSL_Hediff_PsychicCamouflage.description>
+  <DMSL_Hediff_ElectroshockStun.label>Electroshock Coma</DMSL_Hediff_ElectroshockStun.label>
+  <DMSL_Hediff_ElectroshockStun.description>A coma state caused by High-Voltage Shock.</DMSL_Hediff_ElectroshockStun.description>
+  <DMSL_Hediff_RadiationCorrosion.label>Radiation Corrosion</DMSL_Hediff_RadiationCorrosion.label>
+  <DMSL_Hediff_RadiationCorrosion.description>Massive radiation pierces flesh and armor alike, damaging cellular structures and electronics. Neither organics nor mechanoids can long survive such intense exposure.</DMSL_Hediff_RadiationCorrosion.description>
+  <DMSL_Hediff_BandwidthAmplification.label>Bandwidth amplification</DMSL_Hediff_BandwidthAmplification.label>
+  <DMSL_Hediff_BandwidthAmplification.description>The bandwidth amplifier is providing bandwidth to this unit.</DMSL_Hediff_BandwidthAmplification.description>
+</LanguageData>

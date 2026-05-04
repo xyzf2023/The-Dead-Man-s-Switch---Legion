@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/ThingDefs_Weapons - 武器与子弹 -->
+  <DMSL_Bullet_AutomatroidHeavyMachineGun.label>Automatroid Heavy MachineGun</DMSL_Bullet_AutomatroidHeavyMachineGun.label>
+  <DMSL_Weapon_AutomatroidHeavyMachineGun.label>机兵链锯</DMSL_Weapon_AutomatroidHeavyMachineGun.label>
+  <DMSL_Weapon_AutomatroidHeavyMachineGun.description>被安装上提把的车载重机枪，大口径子弹有着很强的穿透力。</DMSL_Weapon_AutomatroidHeavyMachineGun.description>
+  <DMSL_Bullet_AutomatroidHeavyShotgun.label>Automatroid Heavy MachineGun</DMSL_Bullet_AutomatroidHeavyShotgun.label>
+  <DMSL_Bullet_2AutomatroidHeavyShotgun.label>Automatroid Heavy MachineGun</DMSL_Bullet_2AutomatroidHeavyShotgun.label>
+  <DMSL_Weapon_AutomatroidHeavyShotgun.label>机兵重型霰弹枪</DMSL_Weapon_AutomatroidHeavyShotgun.label>
+  <DMSL_Weapon_AutomatroidHeavyShotgun.description>只能由机械体或者装备外骨骼的战斗人员所装备的大口径霰弹枪，可以发射震撼弹。</DMSL_Weapon_AutomatroidHeavyShotgun.description>
+  <DMSL_Weapon_CompetitiveRifle.label>竞技步枪</DMSL_Weapon_CompetitiveRifle.label>
+  <DMSL_Weapon_CompetitiveRifle.description>一种可以在半自动与全自动之间切换的竞技步枪，全自动初学者的最好选择。</DMSL_Weapon_CompetitiveRifle.description>
+  <DMSL_Bullet_2AutomatroidAssaultRifle.label>Automatroid Heavy MachineGun</DMSL_Bullet_2AutomatroidAssaultRifle.label>
+  <DMSL_Bullet_40mm.label>81mm high-explosive shell</DMSL_Bullet_40mm.label>
+  <DMSL_Weapon_AutomatroidAssaultRifle.label>机兵突击步枪（下挂榴弹）</DMSL_Weapon_AutomatroidAssaultRifle.label>
+  <DMSL_Weapon_AutomatroidAssaultRifle.description>一种增加了下挂榴弹发射器的机兵突击步枪。</DMSL_Weapon_AutomatroidAssaultRifle.description>
+  <DMSL_Weapon_Lance.label>骑士长枪</DMSL_Weapon_Lance.label>
+  <DMSL_Weapon_Lance.description>一款专为斥候设计的骑兵长枪，伤害会随着移动速度增加。\n\n&lt;i&gt;“当移速达到一定阈值后，骑枪会变得势不可挡。”&lt;/i&gt;</DMSL_Weapon_Lance.description>
+  <DMSL_Weapon_IED.label>IED</DMSL_Weapon_IED.label>
+  <DMSL_Weapon_IED.description>如你所见，这是一个遥控炸弹。最多同时丢出四个。</DMSL_Weapon_IED.description>
+  <DMSL_Bullet_2HuntingRifle.label>狩猎步枪弹</DMSL_Bullet_2HuntingRifle.label>
+  <DMSL_Weapon_HuntingRifle.label>狩猎步枪</DMSL_Weapon_HuntingRifle.label>
+  <DMSL_Weapon_HuntingRifle.description>一款老旧的军用射手步枪。虽已不再活跃于战场，但流入民间后逐渐成为备受认可的狩猎武器。</DMSL_Weapon_HuntingRifle.description>
+</LanguageData>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/ThingsDefs_Weapons -->
+  <DMSL_Gun_RH120L55A.label>「自由右手」</DMSL_Gun_RH120L55A.label>
+  <DMSL_Gun_RH120L55A.description>西方诸国的标准坦克滑膛炮。</DMSL_Gun_RH120L55A.description>
+  <DMSL_Bullet_RH120L55A.label>脱壳穿甲弹</DMSL_Bullet_RH120L55A.label>
+  <DMSL_Gun_NorthRedFlag.label>「新十月」</DMSL_Gun_NorthRedFlag.label>
+  <DMSL_Gun_NorthRedFlag.description>一款100毫米坦克线膛炮。</DMSL_Gun_NorthRedFlag.description>
+  <DMSL_Bullet_NorthRedFlag.label>脱壳穿甲弹</DMSL_Bullet_NorthRedFlag.label>
+  <DMSL_Gun_M777A.label>M777「第二修正案」</DMSL_Gun_M777A.label>
+  <DMSL_Gun_M777A.description>一种被研发用于被直升机吊运部署的超轻型155mm火炮。</DMSL_Gun_M777A.description>
+  <DMSL_Gun_57MM.label>57MM</DMSL_Gun_57MM.label>
+  <DMSL_Gun_57MM.description>由超重型机械体携带的半自动反坦克炮，结构简单可靠，广泛用于各类装甲平台，用于打击坦克与重型机甲等重装甲目标。</DMSL_Gun_57MM.description>
+  <DMSL_Bullet_57mm.label>脱壳穿甲弹</DMSL_Bullet_57mm.label>
+</LanguageData>

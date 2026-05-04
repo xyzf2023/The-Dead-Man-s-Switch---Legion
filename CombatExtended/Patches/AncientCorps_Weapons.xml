@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch MayRequire="Aoba.DeadManSwitch.AncientCorps">
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="DMSL_Gun_57MM"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+			<!-- Give toughness to heavy weapons -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[
+					defName="DMSL_Gun_57MM" or
+					defName="DMSL_Gun_M777A" or
+					defName="DMSL_Gun_RH120L55A" or
+					defName="DMSL_Gun_NorthRedFlag"
+					]/statBases</xpath>
+				<value>
+					<ToughnessRating>10</ToughnessRating>
+				</value>
+			</li>
+
+			<!-- DMSL_Gun_57MM - 57mm Autocannon -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Gun_57MM</defName>
+				<statBases>
+					<Mass>265</Mass>
+					<RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+					<SightsEfficiency>1.5</SightsEfficiency>
+					<ShotSpread>0.02</ShotSpread>
+					<SwayFactor>2.5</SwayFactor>
+					<Bulk>25.00</Bulk>
+				</statBases>
+				<Properties>
+					<recoilAmount>3.5</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_57x438mmBofors_HE</defaultProjectile>
+					<warmupTime>2.5</warmupTime>
+					<range>86</range>
+					<burstShotCount>2</burstShotCount>
+					<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+					<soundCast>DMS_AC_Shot_MBTCannonSound</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>20</muzzleFlashScale>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<recoilPattern>Mounted</recoilPattern>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>10</magazineSize>
+					<reloadTime>6.5</reloadTime>
+					<ammoSet>AmmoSet_57x438mmBofors</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>AimedShot</aiAimMode>
+				</FireModes>
+			</li>
+
+			<!-- DMSL_Gun_M777A - 155mm Howitzer
+			     曲射：Verb_ShootMortarCE + minRange/requireLineOfSight 避免平射炸膛；
+			     后坐力 1.21：过大会导致炮管仰角异常、弹道触地即炸，CE 榴弹炮多用低后坐（架座吸收）；
+			     CompCharges：必须有装药组件，否则使用弹丸固定速度（极高）导致发射角接近90°、炮弹垂直升空后落回原地。 -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Gun_M777A</defName>
+				<statBases>
+					<Mass>265</Mass>
+					<RangedWeapon_Cooldown>4.5</RangedWeapon_Cooldown>
+					<SightsEfficiency>2.5</SightsEfficiency>
+					<ShotSpread>0.01</ShotSpread>
+					<SwayFactor>3.5</SwayFactor>
+					<Bulk>45.00</Bulk>
+				</statBases>
+				<Properties>
+					<recoilAmount>1.21</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootMortarCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_155mmHowitzerShell_HE</defaultProjectile>
+					<warmupTime>4.5</warmupTime>
+					<minRange>33</minRange>
+					<range>500</range>
+					<requireLineOfSight>false</requireLineOfSight>
+					<burstShotCount>1</burstShotCount>
+					<soundCast>DMS_AC_Shot_MBTCannonSound</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>40</muzzleFlashScale>
+					<circularError>7</circularError>
+					<indirectFirePenalty>0.2</indirectFirePenalty>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<recoilPattern>Mounted</recoilPattern>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>1</magazineSize>
+					<reloadTime>12</reloadTime>
+					<ammoSet>AmmoSet_155mmHowitzerShell</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>AimedShot</aiAimMode>
+				</FireModes>
+			</li>
+
+			<!-- DMSL_Gun_M777A 装药组件：CE 曲射武器必须有 CompCharges，
+			     否则使用弹丸默认速度做弹道计算会导致发射角异常。
+			     装药速度 30/50/70/90 与 CE 标准迫击炮/榴弹炮一致。 -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="DMSL_Gun_M777A"]/comps</xpath>
+				<value>
+					<li Class="CombatExtended.CompProperties_Charges">
+						<chargeSpeeds>
+							<li>30</li>
+							<li>50</li>
+							<li>70</li>
+							<li>90</li>
+						</chargeSpeeds>
+					</li>
+				</value>
+			</li>
+
+			<!-- DMSL_Gun_RH120L55A - 120mm Tank Cannon -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Gun_RH120L55A</defName>
+				<statBases>
+					<Mass>265</Mass>
+					<RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+					<SightsEfficiency>2.5</SightsEfficiency>
+					<ShotSpread>0.01</ShotSpread>
+					<SwayFactor>2.5</SwayFactor>
+					<Bulk>35.00</Bulk>
+				</statBases>
+				<Properties>
+					<recoilAmount>6.5</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_120mmCannonShell_HEAT</defaultProjectile>
+					<warmupTime>2.5</warmupTime>
+					<range>100</range>
+					<burstShotCount>1</burstShotCount>
+					<soundCast>DMS_AC_Shot_MBTCannonSound</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>30</muzzleFlashScale>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<recoilPattern>Mounted</recoilPattern>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>1</magazineSize>
+					<reloadTime>8.5</reloadTime>
+					<ammoSet>AmmoSet_120mmCannonShell</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>AimedShot</aiAimMode>
+				</FireModes>
+			</li>
+
+			<!-- DMSL_Gun_NorthRedFlag - 100mm Tank Cannon -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMSL_Gun_NorthRedFlag</defName>
+				<statBases>
+					<Mass>265</Mass>
+					<RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+					<SightsEfficiency>2.0</SightsEfficiency>
+					<ShotSpread>0.01</ShotSpread>
+					<SwayFactor>2.5</SwayFactor>
+					<Bulk>30.00</Bulk>
+				</statBases>
+				<Properties>
+					<recoilAmount>5.5</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_100x695mmRCannonShell_HEAT</defaultProjectile>
+					<warmupTime>2.5</warmupTime>
+					<range>80</range>
+					<burstShotCount>1</burstShotCount>
+					<soundCast>DMS_AC_Shot_MBTCannonSound</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>25</muzzleFlashScale>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<recoilPattern>Mounted</recoilPattern>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>1</magazineSize>
+					<reloadTime>7.5</reloadTime>
+					<ammoSet>AmmoSet_100x695mmRCannonShell</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<aiAimMode>AimedShot</aiAimMode>
+				</FireModes>
+			</li>
+		</operations>
+		</match>
+	</Operation>
+</Patch>

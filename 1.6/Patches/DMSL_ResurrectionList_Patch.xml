@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    DMSL机械体复活列表补丁
+    此补丁将DMSL的机械体添加到DMS本体的复活列表中
+-->
+<Patch>
+    <!-- 添加DMSL机械体到轻型复活列表 -->
+    <!-- <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="DMS_ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+            <li>Corpse_DMSL_Drone_CommandingBird</li>
+        </value>
+    </Operation> -->
+    <!-- 指挥鸟无需制造、复活 -->
+
+    <!-- 添加DMSL机械体到中型复活列表 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="DMS_ResurrectMediumMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+            <li>Corpse_DMSL_Mech_Arsonist</li>
+            <li>Corpse_DMSL_Mech_ArmoredGrenadiers</li>
+            <li>Corpse_DMSL_Mech_Commander</li>
+            <li>Corpse_DMSL_Mech_Commandos</li>
+            <li>Corpse_DMSL_Mech_DesignatedMarksman</li>
+            <li>Corpse_DMSL_Mech_Engineer</li>
+            <li>Corpse_DMSL_Mech_Guardian</li>
+            <li>Corpse_DMSL_Mech_Scout</li>
+            <li>Corpse_DMSL_Mech_Shaman</li>
+            <li>Corpse_DMSL_Mech_SpecialPolice</li>
+            <li>Corpse_DMSL_Mech_Terra</li>
+        </value>
+    </Operation>
+    
+    <!-- 添加DMSL机械体到重型复活列表 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="DMS_ResurrectHeavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+            <li>Corpse_DMSL_Mech_SupportFrame</li>
+            <li>Corpse_DMSL_Mech_AgriculturalFrame</li>
+            <li>Corpse_DMSL_Mech_DoctorFrame</li>
+            <li>Corpse_DMSL_Mech_DrillingBarge</li>
+
+        </value>
+    </Operation>
+</Patch>

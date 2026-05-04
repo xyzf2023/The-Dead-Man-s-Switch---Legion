@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML 声明，指定版本为 1.0，编码格式为 UTF-8 -->
+
+<Defs>
+  <!-- 根节点，所有定义内容都包含在此标签内 -->
+
+  <!-- 注释：支援框架：重型复活列表，参照 DMS 重型培育配方结构 -->
+  <!-- 这是一个配方定义，用于制造支援框架（Support Frame）机械体 -->
+
+  <RecipeDef ParentName="DMS_HeavyMechanoidRecipe">
+    <!-- RecipeDef 是游戏中的配方定义标签，继承自 "DMS_HeavyMechanoidRecipe" 模板 -->
+
+    <defName>DMSL_Make_DoctorFrame</defName>
+    <!-- 配方的唯一标识符，用于在代码中引用此配方 -->
+
+    <label>组装医护框架</label>
+    <!-- 配方的显示名称，玩家在游戏中会看到这个名称 -->
+
+    <description>组装一个医护框架。</description>
+    <!-- 配方的描述信息，解释该配方的作用 -->
+
+    <products>
+      <!-- 定义该配方生产的产品 -->
+      <DMSL_Mech_DoctorFrame>1</DMSL_Mech_DoctorFrame>
+    </products>
+
+    <researchPrerequisite>DMS_BattleFrame</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Mech_DoctorFrame</ThingDef>
+    </descriptionHyperlinks>
+
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Tungsteel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Synthread</li>
+            <li>Polyester</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentStamped</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+       <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Tungsteel</li>
+        <li>Synthread</li>
+        <li>Polyester</li>
+        <li>ComponentIndustrial</li>
+        <li>Steel</li>
+        <li>ComponentStamped</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+</Defs>

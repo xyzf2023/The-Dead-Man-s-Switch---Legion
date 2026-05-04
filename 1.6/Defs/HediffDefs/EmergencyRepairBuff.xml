@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 应急维修 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_EmergencyRepairBuff</defName><!-- Hediff定义名称 -->
+    <label>应急维修模式</label><!-- 显示名称 -->
+    <description>机械体进入应急维修模式，修理速度提升500%，持续三小时。</description><!-- 效果描述 -->
+    <hediffClass>HediffWithComps</hediffClass><!-- Hediff类：带组件的Hediff -->
+    <comps><!-- 组件列表 -->
+      <li Class="HediffCompProperties_Disappears"><!-- 消失组件属性 -->
+        <disappearsAfterTicks>7500~7500</disappearsAfterTicks><!-- 消失时间：7500 ticks（3游戏小时 = 3 * 2500 ticks） -->
+        <showRemainingTime>true</showRemainingTime><!-- 显示剩余时间 -->
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/><!-- 死亡时消失组件 -->
+      <li Class="DMS_Legion.HediffCompProperties_RepairSpeedBoost"><!-- 修理速度提升组件 -->
+        <speedMultiplier>5.0</speedMultiplier><!-- 修理速度修正倍数：5.0（5倍速度） -->
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

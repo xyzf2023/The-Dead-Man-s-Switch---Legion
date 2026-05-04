@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 敌对空袭：由携带空中支援传呼器的袭击者引导，后续流程由自定义 IncidentWorker 处理 -->
+  <IncidentDef>
+    <defName>DMSL_AerialRaid_Pager</defName>
+    <label>袭击：空袭先导</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <!-- 自定义Worker：后续实现携带者、Job、倒计时等逻辑 -->
+    <workerClass>DMS_Legion.AerialRaid.IncidentWorker_PagerRaid</workerClass>
+    <baseChance>1</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <minThreatPoints>5000</minThreatPoints>
+    <minRefireDays>15</minRefireDays>
+    <letterLabel>袭击：空袭先导</letterLabel>
+    <letterText>一支海盗劫掠者小队已进入殖民地周边区域，已确认小队人员中存在携带空中支援传呼装置的个体。\n情报分析表明，该装置可呼叫来自古代主战师的对地轰炸支援。海盗极可能在正式进攻前，先行发起空对地打击以削弱防御力量。\n若呼叫信号成功建立，航空单位将在短时间内进入打击航线。建议在传呼完成前消灭或干扰信号源；若敌机已起飞，可出动战斗机实施拦截，或部署电子诱饵引导轰炸偏离殖民地坐标。\n时间窗口有限，请立即采取反制行动。</letterText>
+    <letterDef>ThreatBig</letterDef>
+    <tale>Raid</tale>
+    <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+  </IncidentDef>
+</Defs>

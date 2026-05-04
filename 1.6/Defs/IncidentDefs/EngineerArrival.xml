@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 游荡机兵到达：由机控中枢植入触发，非叙事者事件 -->
+  <IncidentDef>
+    <defName>DMSL_EngineerArrival</defName>
+    <label>游荡机兵到达</label>
+    <letterLabel>游荡机兵到达</letterLabel>
+    <letterText>一个游荡的机兵接收到了机控中枢的信号，并游荡到殖民地附近。你可以去获取它的控制权。\n\n注意：它一直处于未受控状态，它可能会离开殖民地。</letterText>
+    <letterDef>PositiveEvent</letterDef>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>DMS_Legion.Incidents.EngineerArrival.IncidentWorker_EngineerArrival</workerClass>
+    <category>Misc</category>
+    <modExtensions>
+      <li Class="DMS_Legion.Incidents.EngineerArrival.CompProperties_EngineerArrivalIncident">
+        <mechKindDefNames>
+          <li>DMSL_Mech_Engineer</li>
+        </mechKindDefNames>
+      </li>
+    </modExtensions>
+  </IncidentDef>
+</Defs>

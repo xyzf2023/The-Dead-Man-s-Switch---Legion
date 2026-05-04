@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/RecipeDefs -->
+  <DMSL_Make_scout.label>组装斥候</DMSL_Make_scout.label>
+  <DMSL_Make_scout.description>组装一个斥候。</DMSL_Make_scout.description>
+  <DMSL_Make_Terra.label>组装尘世</DMSL_Make_Terra.label>
+  <DMSL_Make_Terra.description>组装一个尘世。</DMSL_Make_Terra.description>
+  <DMSL_Make_Commandos.label>组装机动射手</DMSL_Make_Commandos.label>
+  <DMSL_Make_Commandos.description>组装一个机动射手。</DMSL_Make_Commandos.description>
+  <DMSL_Make_Commander.label>组装指挥官</DMSL_Make_Commander.label>
+  <DMSL_Make_Commander.description>组装一个指挥官。</DMSL_Make_Commander.description>
+  <DMSL_Make_Engineer.label>组装工程师</DMSL_Make_Engineer.label>
+  <DMSL_Make_Engineer.description>组装一个工程师。</DMSL_Make_Engineer.description>
+  <DMSL_Make_Guardian.label>组装近卫</DMSL_Make_Guardian.label>
+  <DMSL_Make_Guardian.description>组装一个近卫。</DMSL_Make_Guardian.description>
+  <DMSL_Make_ArmoredGrenadiers.label>组装装甲掷弹兵</DMSL_Make_ArmoredGrenadiers.label>
+  <DMSL_Make_ArmoredGrenadiers.description>组装一个装甲掷弹兵。</DMSL_Make_ArmoredGrenadiers.description>
+  <DMSL_Make_DesignatedMarksman.label>组装精确射手</DMSL_Make_DesignatedMarksman.label>
+  <DMSL_Make_DesignatedMarksman.description>组装一个精确射手。</DMSL_Make_DesignatedMarksman.description>
+  <DMSL_Make_SpecialPolice.label>组装特种警察</DMSL_Make_SpecialPolice.label>
+  <DMSL_Make_SpecialPolice.description>组装一个特种警察。</DMSL_Make_SpecialPolice.description>
+  <DMSL_Make_Shaman.label>组装萨满</DMSL_Make_Shaman.label>
+  <DMSL_Make_Shaman.description>组装一个萨满。</DMSL_Make_Shaman.description>
+  <DMSL_Make_Arsonist.label>组装纵火者</DMSL_Make_Arsonist.label>
+  <DMSL_Make_Arsonist.description>组装一个纵火者。</DMSL_Make_Arsonist.description>
+  <DMSL_Make_SupportFrame.label>组装支援框架</DMSL_Make_SupportFrame.label>
+  <DMSL_Make_SupportFrame.description>组装一个支援框架。</DMSL_Make_SupportFrame.description>
+  <DMSL_Make_DoctorFrame.label>组装医护框架</DMSL_Make_DoctorFrame.label>
+  <DMSL_Make_DoctorFrame.description>组装一个医护框架。</DMSL_Make_DoctorFrame.description>
+  <DMSL_Make_AgriculturalFrame.label>组装农业框架</DMSL_Make_AgriculturalFrame.label>
+  <DMSL_Make_AgriculturalFrame.description>组装一个农业框架。</DMSL_Make_AgriculturalFrame.description>
+  <DMSL_Make_DrillingBarge.label>组装钻井驳机</DMSL_Make_DrillingBarge.label>
+  <DMSL_Make_DrillingBarge.description>组装一个钻井驳机。</DMSL_Make_DrillingBarge.description>
+</LanguageData>

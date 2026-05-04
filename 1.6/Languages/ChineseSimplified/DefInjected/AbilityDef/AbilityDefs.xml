@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/AbilityDefs -->
+  <DMSL_Ability_AerialSupport.label>空中支援</DMSL_Ability_AerialSupport.label>
+  <DMSL_Ability_AerialSupport.description>这是一个用于测试的技能。你可以用它召唤所有类型的空中支援。</DMSL_Ability_AerialSupport.description>
+  <DMSL_Ability_RepairDesignate.label>维修指定</DMSL_Ability_RepairDesignate.label>
+  <DMSL_Ability_RepairDesignate.description>指定一个机械体进行维修。</DMSL_Ability_RepairDesignate.description>
+  <DMSL_Ability_EmergencyRepair.label>应急维修</DMSL_Ability_EmergencyRepair.label>
+  <DMSL_Ability_EmergencyRepair.description>机械体获得500%的全局工作速度加成，持续三小时，冷却两天。</DMSL_Ability_EmergencyRepair.description>
+  <DMSL_Ability_MechReconstruction.label>机体重构</DMSL_Ability_MechReconstruction.label>
+  <DMSL_Ability_MechReconstruction.description>工程师将尝试修复已关机机械体的损伤并将其重启。仅可对友方机械体尸体使用。</DMSL_Ability_MechReconstruction.description>
+  <DMSL_Ability_OmnimindSilence.label>万心失聪</DMSL_Ability_OmnimindSilence.label>
+  <DMSL_Ability_OmnimindSilence.description>使机械体单位自身和半径3格内的友方机械体施加1小时的心灵隐身状态。</DMSL_Ability_OmnimindSilence.description>
+  <DMSL_Ability_HighVoltageShock.label>高压电击</DMSL_Ability_HighVoltageShock.label>
+  <DMSL_Ability_HighVoltageShock.description>消耗机械体最大电量的25%，对目标释放高压电击，使其陷入12小时的电击昏迷。</DMSL_Ability_HighVoltageShock.description>
+  <DMSL_Ability_HighVoltageShock.comps.0.disabledReason>释放高压电击需要至少26%最大能量</DMSL_Ability_HighVoltageShock.comps.0.disabledReason>
+</LanguageData>

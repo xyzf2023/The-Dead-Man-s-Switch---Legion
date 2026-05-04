@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空特效，用于频段增幅装置：不显示原版频带节点的闪烁，由 Def 绑定而非每 tick 补丁 -->
+  <EffecterDef>
+    <defName>DMSL_BandNode_NoEffect</defName>
+    <children />
+  </EffecterDef>
+</Defs>

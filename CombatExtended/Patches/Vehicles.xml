@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CE 载具炮塔补丁：使用 Conditional 避免 xpath 未匹配时报错（载具 def 可能因加载顺序尚未就绪） -->
+<Patch>
+	<!-- Gray Knights MBT -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/statBases</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/statBases</xpath>
+			<value>
+				<statBases>
+					<ArmorRating_Blunt>60</ArmorRating_Blunt>
+					<ArmorRating_Sharp>25</ArmorRating_Sharp>
+					<Flammability>0</Flammability>
+					<MarketValue>2240</MarketValue>
+				</statBases>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- Adjust components armor -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="FrontArmorPlating"]/armor</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="FrontArmorPlating"]/armor</xpath>
+			<value>
+				<armor>
+					<ArmorRating_Blunt>80</ArmorRating_Blunt>
+					<ArmorRating_Sharp>35</ArmorRating_Sharp>
+				</armor>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ========== 灰骑士组件装甲 CE 适配 ========== -->
+	<!-- 原版装甲值在 CE 环境下如同纸糊，需提升至 CE 标准 -->
+	<!-- 参考 Leman Russ (基础 44/22, 前装甲 68/34) 按灰骑士更重定位上浮 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="LeftArmorPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>55</ArmorRating_Blunt>
+							<ArmorRating_Sharp>20</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="RightArmorPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>55</ArmorRating_Blunt>
+							<ArmorRating_Sharp>20</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="LeftERAPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>60</ArmorRating_Blunt>
+							<ArmorRating_Sharp>28</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="RightERAPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>60</ArmorRating_Blunt>
+							<ArmorRating_Sharp>28</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="FrontERAPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>80</ArmorRating_Blunt>
+							<ArmorRating_Sharp>35</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="TurretERAPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>80</ArmorRating_Blunt>
+							<ArmorRating_Sharp>35</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="MainTurret"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>75</ArmorRating_Blunt>
+							<ArmorRating_Sharp>32</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="RoofArmorPlating"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>36</ArmorRating_Blunt>
+							<ArmorRating_Sharp>15</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="BackArmorPlating"]</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>35</ArmorRating_Blunt>
+							<ArmorRating_Sharp>12</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="FuelTank"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>25</ArmorRating_Blunt>
+							<ArmorRating_Sharp>10</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="LeftTrack"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>20</ArmorRating_Blunt>
+							<ArmorRating_Sharp>8</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="RightTrack"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>20</ArmorRating_Blunt>
+							<ArmorRating_Sharp>8</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="LeftRoadWheels"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>20</ArmorRating_Blunt>
+							<ArmorRating_Sharp>8</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleDef[defName="DMS_GrayKnights_MainBattleTank"]/components/li[key="RightRoadWheels"]/armor</xpath>
+					<value>
+						<armor>
+							<ArmorRating_Blunt>20</ArmorRating_Blunt>
+							<ArmorRating_Sharp>8</ArmorRating_Sharp>
+						</armor>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- Vehicle Turrets -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret" or defName="GrayKnights_Tank_Turret_ArmorPack"]/maxRange</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret" or defName="GrayKnights_Tank_Turret_ArmorPack"]/maxRange</xpath>
+			<value>
+				<maxRange>100</maxRange>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret" or defName="GrayKnights_Tank_Turret_ArmorPack"]/warmUpTimer</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret" or defName="GrayKnights_Tank_Turret_ArmorPack"]/warmUpTimer</xpath>
+			<value>
+				<warmUpTimer>2.5</warmUpTimer>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ========== CE 载具炮塔开火适配 ==========
+		 未加 CETurretDataDefModExtension 且弹药非 CE AmmoDef 时，VF 走 FireTurretCE 会因 loadedAmmo 强转失败报 InvalidCastException。
+		 为以下炮塔添加 CE 扩展并替换为 CE 弹药，使 FireTurretCE 与 LaunchProjectileCE 收到正确类型。 -->
+
+	<!-- DMSL_AAcannon：.50 BMG -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_AAcannon"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_AAcannon"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_AAcannon"]/projectile</xpath>
+					<value><projectile>Bullet_50BMG_FMJ</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_AAcannon"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_50BMG_FMJ</li>
+							<li>Ammo_50BMG_AP</li>
+							<li>Ammo_50BMG_HE</li>
+							<li>Ammo_50BMG_Incendiary</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_AAcannon"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_50BMG</ammoSet>
+							<shotHeight>1</shotHeight>
+							<speed>900</speed>
+							<sway>0.5</sway>
+							<spread>0.1</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- DMSL_Double_barrel_machine_gun（同轴）：.50 BMG -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_Double_barrel_machine_gun"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_Double_barrel_machine_gun"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_Double_barrel_machine_gun"]/projectile</xpath>
+					<value><projectile>Bullet_50BMG_FMJ</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_Double_barrel_machine_gun"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_50BMG_FMJ</li>
+							<li>Ammo_50BMG_AP</li>
+							<li>Ammo_50BMG_HE</li>
+							<li>Ammo_50BMG_Incendiary</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_Double_barrel_machine_gun"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_50BMG</ammoSet>
+							<shotHeight>1</shotHeight>
+							<speed>900</speed>
+							<sway>0.5</sway>
+							<spread>0.1</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- DMSL_81mmMortar：81mm 迫击炮弹 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_81mmMortar"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_81mmMortar"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_81mmMortar"]/projectile</xpath>
+					<value><projectile>Bullet_81mmMortarShell_HE</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_81mmMortar"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Shell_HighExplosive</li>
+							<li>Shell_HighExplosive_HFuzed</li>
+							<li>Shell_Incendiary</li>
+							<li>Shell_EMP</li>
+							<li>Shell_Smoke</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMSL_81mmMortar"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_81mmMortarShell</ammoSet>
+							<shotHeight>2</shotHeight>
+							<speed>90</speed>
+							<sway>0.82</sway>
+							<spread>0.01</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- PZH2000_Tank_Turret：155mm 榴弹炮（直射） -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="PZH2000_Tank_Turret"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="PZH2000_Tank_Turret"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="PZH2000_Tank_Turret"]/projectile</xpath>
+					<value><projectile>Bullet_155mmHowitzerShell_HE_directfire</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="PZH2000_Tank_Turret"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_155mmHowitzerShell_HE</li>
+							<li>Ammo_155mmHowitzerShell_HE_HFuzed</li>
+							<li>Ammo_155mmHowitzerShell_Incendiary</li>
+							<li>Ammo_155mmHowitzerShell_EMP</li>
+							<li>Ammo_155mmHowitzerShell_Smoke</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="PZH2000_Tank_Turret"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_155mmHowitzerShell_directfire</ammoSet>
+							<shotHeight>2</shotHeight>
+							<speed>400</speed>
+							<sway>0.5</sway>
+							<spread>0.05</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- GrayKnights 主炮塔：120mm 坦克炮 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret"]/projectile</xpath>
+					<value><projectile>Bullet_120mmCannonShell_HE</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_120mmCannonShell_HEAT</li>
+							<li>Ammo_120mmCannonShell_HE</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_120mmCannonShell</ammoSet>
+							<shotHeight>1.5</shotHeight>
+							<speed>800</speed>
+							<sway>0.5</sway>
+							<spread>0.05</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- GrayKnights_Tank_Turret_ArmorPack -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret_ArmorPack"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret_ArmorPack"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret_ArmorPack"]/projectile</xpath>
+					<value><projectile>Bullet_120mmCannonShell_HE</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret_ArmorPack"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_120mmCannonShell_HEAT</li>
+							<li>Ammo_120mmCannonShell_HE</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="GrayKnights_Tank_Turret_ArmorPack"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_120mmCannonShell</ammoSet>
+							<shotHeight>1.5</shotHeight>
+							<speed>800</speed>
+							<sway>0.5</sway>
+							<spread>0.05</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- ========== 基础 DMS 共用炮塔 CE 适配 ========== -->
+	<!-- 以下炮塔定义在基础失能机关模组的 CommonTurret.xml 中，基础模组未提供 CE 适配 -->
+
+	<!-- DMS_GAU4_Turret：M61 Vulcan 20mm 多管机炮 → 20x102mm NATO -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GAU4_Turret"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GAU4_Turret"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GAU4_Turret"]/projectile</xpath>
+					<value><projectile>Bullet_20x102mmNATO_AP</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GAU4_Turret"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_20x102mmNATO_AP</li>
+							<li>Ammo_20x102mmNATO_HE</li>
+							<li>Ammo_20x102mmNATO_Incendiary</li>
+							<li>Ammo_20x102mmNATO_Sabot</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GAU4_Turret"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_20x102mmNATO</ammoSet>
+							<shotHeight>1.5</shotHeight>
+							<speed>182</speed>
+							<sway>1.0</sway>
+							<spread>0.1</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- DMS_LMG_Coaxial：.338 Lapua Magnum 同轴轻机枪 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_LMG_Coaxial"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_LMG_Coaxial"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_LMG_Coaxial"]/projectile</xpath>
+					<value><projectile>Bullet_338Lapua_FMJ</projectile></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_LMG_Coaxial"]/ammunition/thingDefs</xpath>
+					<value>
+						<thingDefs>
+							<li>Ammo_338Lapua_FMJ</li>
+							<li>Ammo_338Lapua_AP</li>
+							<li>Ammo_338Lapua_Incendiary</li>
+						</thingDefs>
+					</value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_LMG_Coaxial"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_338Lapua</ammoSet>
+							<shotHeight>1</shotHeight>
+							<speed>700</speed>
+							<sway>0.5</sway>
+							<spread>0.05</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- DMS_GrenadeLauncher：40x46mm 烟雾弹发射器 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GrenadeLauncher"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GrenadeLauncher"]/genericAmmo</xpath>
+					<value><genericAmmo>false</genericAmmo></value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GrenadeLauncher"]/projectile</xpath>
+					<value><projectile>Bullet_40x46mmGrenade_Smoke</projectile></value>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>Defs/Vehicles.VehicleTurretDef[defName="DMS_GrenadeLauncher"]</xpath>
+					<value>
+						<li Class="Vehicles.CETurretDataDefModExtension">
+							<ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+							<shotHeight>1</shotHeight>
+							<speed>75</speed>
+							<sway>1.0</sway>
+							<spread>0.5</spread>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

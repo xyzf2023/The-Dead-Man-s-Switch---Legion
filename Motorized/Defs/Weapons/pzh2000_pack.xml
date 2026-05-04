@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- PZH2000榴弹炮Def -->
+<Vehicles.VehicleTurretDef ParentName="DMS_BaseTurret"> <!-- 继承基础炮塔定义 -->
+  <defName>PZH2000_Tank_Turret</defName> <!-- 炮塔定义名称 -->
+  <label>PZH2000 howitzer</label> <!-- 显示名称 -->
+  <gizmoIconTexPath>Vehicles/GrayKnights/pzh2000pack/pzh2000_gizmo</gizmoIconTexPath> <!-- 操作图标路径 -->
+  <gizmoDescription>Select Target.
+  
+Fire high-explosive shells at long range.
+
+&lt;color=#b0e0e6&gt;Ammo:&lt;/color&gt; 155mm HE Shell&lt;/color&gt;</gizmoDescription> <!-- 操作描述 -->
+  <!-- 炮塔的渲染显示 -->
+  <graphicData> <!-- 图像数据 -->
+    <texPath>Vehicles/GrayKnights/pzh2000pack/pzh2000_turret</texPath> <!-- 纹理路径 -->
+    <drawSize>6</drawSize> <!-- 绘制尺寸 -->
+  </graphicData>
+  <graphics> <!-- 多层图形 -->
+    <li>
+      <graphicData> <!-- 图像数据 -->
+        <texPath>Vehicles/GrayKnights/pzh2000pack/pzh2000_barrel</texPath> <!-- 炮管纹理路径 -->
+        <drawSize>5.5</drawSize> <!-- 绘制尺寸 -->
+        <drawOffset>(0.15,0,3,5)</drawOffset> <!-- 绘制偏移 -->
+        <graphicClass>Vehicles.Graphic_Turret</graphicClass> <!-- 图形类 -->
+        <shaderType>CutoutComplexPattern</shaderType> <!-- 着色器类型 -->
+      </graphicData>
+      <recoil> <!-- 后坐力 -->
+        <distanceTotal>0.4</distanceTotal> <!-- 总后坐距离 -->
+        <distancePerTick>0.035</distancePerTick> <!-- 每刻度后坐距离 -->
+        <speedMultiplierPostRecoil>0.1</speedMultiplierPostRecoil> <!-- 后坐力后速度倍数 -->
+      </recoil>
+    </li>
+  </graphics>
+
+  <!-- 弹药与装填容量相关 -->
+  <reloadTimer>2</reloadTimer> <!-- 装填计时器 -->
+  <magazineCapacity>1</magazineCapacity> <!-- 弹匣容量 - 修正为合理值 -->
+  <chargePerAmmoCount>50</chargePerAmmoCount> <!-- 每发弹药充能 -->
+  <projectile>DMSL_Bullet_PZH2000Shell</projectile> <!-- 发射物定义 -->
+  <genericAmmo>true</genericAmmo> <!-- 启用通用弹药系统 -->
+  
+  <!-- 统一弹药定义，移除冲突的重复定义 -->
+  <ammunition>
+    <thingDefs>
+      <li>Steel</li> <!-- 155mm高爆弹 -->
+    </thingDefs>
+  </ammunition>
+  
+  <!-- 射程与射界相关 -->
+  <minRange>10</minRange> <!-- 最小射程 -->
+  <maxRange>500</maxRange> <!-- 最大射程 -->
+  <rotationSpeed>5</rotationSpeed> <!-- 旋转速度 -->
+  
+  <!-- 射击相关 -->
+  <warmUpTimer>2</warmUpTimer> <!-- 预热计时器 -->
+  <shotSound>Artillery_ShellLoaded</shotSound> <!-- 射击音效 -->
+  <reloadSound>Artillery_ShellLoaded</reloadSound> <!-- 装填音效 -->
+  <projectileOffset>7</projectileOffset> <!-- 发射物偏移 - 保留唯一正确值 -->
+  
+  <!-- 出膛前后偏移，主要是能让子弹能从炮口飞出去 -->
+  <projectileShifting> <!-- 发射物偏移 -->
+    <li>0</li> <!-- 偏移值 -->
+  </projectileShifting>
+  
+  <!-- 射击模式 -->
+  <fireModes> <!-- 射击模式 -->
+    <li>
+      <shotsPerBurst>1</shotsPerBurst> <!-- 点射发数 -->
+      <forcedMissRadius>10</forcedMissRadius> <!-- 强制脱靶半径 -->
+      <ticksBetweenBursts>60</ticksBetweenBursts> <!-- 连射间隔 -->
+      <label>Salvo Fire</label> <!-- 模式标签 -->
+      <texPath>UI/Gizmos/FireRate_Single</texPath> <!-- 图标路径 -->
+    </li>
+  </fireModes>
+  
+  <motes> <!-- 粒子效果 -->
+    <li>
+      <cycles>1</cycles> <!-- 循环次数 -->
+      <moteDef>Mote_CannonPlume</moteDef> <!-- 粒子定义 -->
+      <animationType>Reset</animationType> <!-- 动画类型 -->
+      <offset>(0,0,7)</offset> <!-- 偏移 -->
+    </li>
+  </motes>
+</Vehicles.VehicleTurretDef>
+
+</Defs>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Motorized Defs/Vehicles 升级树 -->
+  <DMS_GrayKnights_UpgradeTree.label>A6炮塔装甲包</DMS_GrayKnights_UpgradeTree.label>
+  <DMS_GrayKnights_UpgradeTree.description>使用复合材料重构装甲炮塔，可以抵挡高性能破甲弹与穿甲弹</DMS_GrayKnights_UpgradeTree.description>
+  <!-- 升级节点 -->
+  <DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.label>A6炮塔装甲包</DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.description>使用复合材料重构装甲炮塔，可以抵挡高性能破甲弹与穿甲弹</DMS_GrayKnights_UpgradeTree.nodes.ArmorPack.description>
+  <DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.label>PZH2000自行火炮系统</DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.description>装备了155毫米独立炮塔系统的自行火炮</DMS_GrayKnights_UpgradeTree.nodes.PZH2000HowitzerWithGAU4.description>
+  <DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.label>A7装甲标准</DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.description>新型复合材料装甲包使坦克防御力大幅度提升</DMS_GrayKnights_UpgradeTree.nodes.AdvancedArmorPack.description>
+  <DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.label>自行高炮系统</DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.label>
+  <DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.description>高射火炮系统</DMS_GrayKnights_UpgradeTree.nodes.AAcannonUpgrade.description>
+</LanguageData>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 游荡机兵：在地图边缘游荡 -->
+  <DutyDef>
+    <defName>DMSL_WanderMapEdge</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_WanderMapEdge">
+          <locomotionUrgency>Amble</locomotionUrgency>
+          <ticksBetweenWandersRange>120~300</ticksBetweenWandersRange>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+</Defs>

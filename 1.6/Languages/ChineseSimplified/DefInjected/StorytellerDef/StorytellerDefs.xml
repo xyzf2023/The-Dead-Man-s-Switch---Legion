@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/StorytellerDefs -->
+  <DMSL_Storyteller_Elisa.label>「军官」艾丽萨</DMSL_Storyteller_Elisa.label>
+  <DMSL_Storyteller_Elisa.description>艾丽萨是一名来自武装殖民舰队的军官。她的故事充满随机性，但是更倾向于与武装殖民舰队的互动以及大型威胁事件。倘若你能有序管理机兵，她也会对你青睐有加。</DMSL_Storyteller_Elisa.description>
+
+  <DMSL_Storyteller_Raphael.label>「电子天使」拉斐尔</DMSL_Storyteller_Raphael.label>
+  <DMSL_Storyteller_Raphael.description>拉斐尔是一名温柔的人工智能。有传闻称她诞生于失能机关的中央司令核心，曾整合一支殖民舰队的遗留武装力量统一了某颗星球，并开始以电子天使的形象示人......\n\n拉斐尔的故事稳定而规律，两个事件间将有充裕的休整时间。她更乐于让你有选择的处理各种任务，并在危难关头伸出援手。</DMSL_Storyteller_Raphael.description>
+</LanguageData>

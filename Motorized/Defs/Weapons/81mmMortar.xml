@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 81mm迫击炮定义 -->
+  <Vehicles.VehicleTurretDef ParentName="DMS_BaseTurret">
+    <!-- 炮塔定义名称，用于其他地方引用此炮塔 -->
+    <defName>DMSL_81mmMortar</defName>
+    <!-- 在游戏中显示的炮塔名称 -->
+    <label>81mmMortar</label>
+    <!-- 在UI操作按钮上显示的描述文本 -->
+    <gizmoDescription>81mm Mortar.
+
+Fire high-explosive shells at medium range
+
+&lt;color=#b0e0e6&gt;Ammo:&lt;/color&gt; 81mm HE Shell</gizmoDescription>
+    <!-- UI操作按钮上显示的图标路径 -->
+    <gizmoIconTexPath>Vehicles/Common/81mmMortar</gizmoIconTexPath>
+    
+    <!-- 炮塔外观图形数据 -->
+    <graphicData>
+      <!-- 炮塔贴图路径 -->
+      <texPath>Vehicles/Common/81mmMortar</texPath>
+      <!-- 炮塔绘制尺寸 -->
+      <drawSize>0.5</drawSize>
+    </graphicData>
+    
+    <!-- 弹药与装填容量相关 -->
+    <!-- 重新装填所需的时间（单位：游戏刻度） -->
+    <reloadTimer>3</reloadTimer>
+    <!-- 弹匣容量，一次装填可发射的弹药数量 -->
+    <magazineCapacity>1</magazineCapacity>
+    <!-- 每发弹药消耗的资源量 -->
+    <chargePerAmmoCount>30</chargePerAmmoCount>
+    <!-- 启用通用弹药系统，允许使用多种兼容弹药 -->
+    <genericAmmo>true</genericAmmo>
+    <!-- 发射的弹药类型定义 -->
+    <projectile>DMSL_Bullet_81mm</projectile>
+    
+    <!-- 射程与射界相关 -->
+    <!-- 炮塔旋转速度 -->
+    <rotationSpeed>0.9</rotationSpeed>
+    <!-- 最大射程，单位：格 -->
+    <maxRange>50</maxRange>
+    <!-- 最小射程，单位：格 -->
+    <minRange>5</minRange>
+    
+    <!-- 射击相关 -->
+    <!-- 预热时间，在正式开火前的准备时间（单位：游戏刻度） -->
+    <warmUpTimer>2</warmUpTimer>
+    <!-- 弹药发射时的偏移量，调整弹药出膛位置 -->
+    <projectileOffset>1.5</projectileOffset>
+    <!-- 开火时播放的声音效果 -->
+    <shotSound>DMS_MachineGunLight_Shot</shotSound>
+    <!-- 装填弹药时播放的声音效果 -->
+    <reloadSound>DMS_Reload_MachineGunSound</reloadSound>
+    <!-- 出膛前后偏移，主要是能让子弹能从炮口飞出去 -->
+    <projectileShifting>
+      <!-- 单发武器的偏移量设为0 -->
+      <li>0</li>
+    </projectileShifting>
+    <!-- 自动瞄准目标 -->
+    <autoSnapTargeting>true</autoSnapTargeting>
+    
+    <!-- 弹药类型定义 -->
+    <ammunition Inherit="false">
+      <thingDefs>
+        <!-- 可使用的弹药类型列表 -->
+        <li>Steel</li> <!-- 使用81mm高爆炮弹 -->
+      </thingDefs>
+    </ammunition>
+    
+    <!-- 后坐力参数 -->
+    <recoil>
+      <!-- 炮管总后坐距离 -->
+      <distanceTotal>0.1</distanceTotal>
+      <!-- 每个游戏刻度的后坐距离 -->
+      <distancePerTick>0.05</distancePerTick>
+      <!-- 后坐恢复速度倍数 -->
+      <speedMultiplierPostRecoil>0.5</speedMultiplierPostRecoil>
+    </recoil>
+    
+    <!-- 射击模式定义 -->
+    <fireModes>
+      <!-- 单发模式定义 -->
+      <li>
+        <!-- 每次射击发射的弹药数量 -->
+        <shotsPerBurst>1</shotsPerBurst>
+        <!-- 连续射击间的间隔时间 -->
+        <ticksBetweenShots>4</ticksBetweenShots>
+        <!-- 点射之间的间隔时间范围 -->
+        <ticksBetweenBursts>40~60</ticksBetweenBursts>
+        <!-- 不同距离上的命中精度 -->
+        <accuracyTouch>0.55</accuracyTouch> <!-- 近距离精度 -->
+        <accuracyShort>0.75</accuracyShort> <!-- 短距离精度 -->
+        <accuracyMedium>0.85</accuracyMedium> <!-- 中距离精度 -->
+        <accuracyLong>0.9</accuracyLong> <!-- 远距离精度 -->
+        <!-- 射击模式显示标签 -->
+        <label>Single Shot</label>
+        <!-- 射击模式图标路径 -->
+        <texPath>UI/Gizmos/FireRate_Single</texPath>
+      </li>
+    </fireModes>
+  </Vehicles.VehicleTurretDef>
+</Defs>

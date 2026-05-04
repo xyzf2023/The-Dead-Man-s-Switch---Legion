@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/IncidentDefs -->
+  <DMSL_AerialRaid_Pager.label>袭击：空袭先导</DMSL_AerialRaid_Pager.label>
+  <DMSL_AerialRaid_Pager.letterLabel>袭击：空袭先导</DMSL_AerialRaid_Pager.letterLabel>
+  <DMSL_AerialRaid_Pager.letterText>一支海盗劫掠者小队已进入殖民地周边区域，已确认小队人员中存在携带空中支援传呼装置的个体。\n情报分析表明，该装置可呼叫来自古代主战师的对地轰炸支援。海盗极可能在正式进攻前，先行发起空对地打击以削弱防御力量。\n若呼叫信号成功建立，航空单位将在短时间内进入打击航线。建议在传呼完成前消灭或干扰信号源；若敌机已起飞，可出动战斗机实施拦截，或部署电子诱饵引导轰炸偏离殖民地坐标。\n时间窗口有限，请立即采取反制行动。</DMSL_AerialRaid_Pager.letterText>
+  <DMSL_AerialRaid_Army.label>袭击：空袭</DMSL_AerialRaid_Army.label>
+  <DMSL_AerialRaid_Army.letterLabel>敌方轰炸机接近</DMSL_AerialRaid_Army.letterLabel>
+  <DMSL_AerialRaid_Army.letterText>防空雷达系统在远程扫描中捕获到异常信号。\n\n一支隶属于武装殖民舰队的轰炸机编队正在向本区域接近，飞行轨迹表明其任务为对地打击。\n\n敌方航空单位预计在短时间内进入有效攻击范围。若不加以干扰，其轰炸将直接落入殖民地控制区。\n\n你可以命令我方战斗机对来袭目标进行拦截，或部署电子诱饵迫使敌方改变轰炸目标区域。\n\n时间有限，务必尽快采取反制措施。</DMSL_AerialRaid_Army.letterText>
+  <DMSL_EngineerArrival.label>游荡机兵到达</DMSL_EngineerArrival.label>
+  <DMSL_EngineerArrival.letterLabel>游荡机兵到达</DMSL_EngineerArrival.letterLabel>
+  <DMSL_EngineerArrival.letterText>一个游荡的机兵接收到了机控中枢的信号，并游荡到殖民地附近。你可以去获取它的控制权。\n\n注意：它一直处于未受控状态，它可能会离开殖民地。</DMSL_EngineerArrival.letterText>
+
+  <!-- 未知机兵支援（半数倒地信回应） -->
+  <DMSL_UnknownMechSupport.label>未知机兵支援</DMSL_UnknownMechSupport.label>
+  <DMSL_UnknownMechSupport.description>一支来源不明的机兵部队进入战区。其敌我识别信号未匹配任何已知势力，但似乎未对殖民地抱有敌意。该部队行动轨迹显示其将协助你清除来犯目标。</DMSL_UnknownMechSupport.description>
+  <DMSL_UnknownMechSupport.letterLabel>未知机兵支援</DMSL_UnknownMechSupport.letterLabel>
+  <DMSL_UnknownMechSupport.letterText>一支来源不明的机兵部队进入战区。其敌我识别信号未匹配任何已知势力，但似乎未对殖民地抱有敌意。该部队行动轨迹显示其将协助你清除来犯目标。</DMSL_UnknownMechSupport.letterText>
+
+  <!-- “电子天使”机兵支援 -->
+  <DMSL_ElectronicAngelSupport.label>"电子天使"</DMSL_ElectronicAngelSupport.label>
+  <DMSL_ElectronicAngelSupport.description>一队来自电子天使的机兵抵达战场。它们将协助你守卫家园。</DMSL_ElectronicAngelSupport.description>
+  <DMSL_ElectronicAngelSupport.letterLabel>"电子天使"</DMSL_ElectronicAngelSupport.letterLabel>
+  <DMSL_ElectronicAngelSupport.letterText>一队来自电子天使的机兵抵达战场。它们将协助你守卫家园。</DMSL_ElectronicAngelSupport.letterText>
+</LanguageData>

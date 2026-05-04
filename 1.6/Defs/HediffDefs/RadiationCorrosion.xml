@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 辐射侵蚀：可累加严重程度，参考低温症结构；严重度达1时致命。使用 HediffCompProperties_SeverityPerDay 正数使严重度自然上升 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_RadiationCorrosion</defName>
+    <label>辐射侵蚀</label>
+    <description>巨量辐射穿透血肉与装甲，破坏细胞结构与电子元件。无论是有机体还是机械族，都难以在如此巨量的辐射中生还。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.5, 0.1, 0.1)</defaultLabelColor>
+    <lethalSeverity>1</lethalSeverity>
+    <stages>
+      <!-- 0-1 严重度单一阶段：意识上限 10% -->
+      <li>
+        <label>辐射侵蚀</label>
+        <capMods>
+          <li><capacity>Consciousness</capacity><setMax>0.1</setMax></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>25.0</severityPerDay>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

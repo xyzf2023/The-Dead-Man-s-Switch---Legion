@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 高压电击能力 -->
+  <AbilityDef>
+    <defName>DMSL_Ability_HighVoltageShock</defName><!-- 能力定义名称 -->
+    <label>高压电击</label><!-- 显示名称 -->
+    <description>消耗机械体最大电量的25%，对目标释放高压电击，使其陷入12小时的电击昏迷。</description><!-- 能力描述 -->
+    <iconPath>UI/Abilities/HighVoltageShock</iconPath><!-- 图标路径（需要创建对应图标） -->
+    <cooldownTicksRange>600~600</cooldownTicksRange><!-- 冷却时间：3天（180000 ticks = 3 * 60000 ticks） -->
+    <jobDef>DMSL_Job_HighVoltageShockStrike</jobDef><!-- 接触一击 Job，由自定义 Verb 启动 -->
+    <targetRequired>True</targetRequired><!-- 需要目标 -->
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets><!-- 不使用AOE选择目标 -->
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted><!-- 未征召时显示按钮 -->
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted><!-- 未征召时不禁用按钮 -->
+    <verbProperties><!-- 动词属性 -->
+      <verbClass>DMS_Legion.Verb_HighVoltageShockStrike</verbClass><!-- 自定义：走到目标旁接触一击后应用效果 -->
+      <warmupTime>0</warmupTime><!-- 无读条，接触动作在 Job 内 -->
+      <range>1.5</range><!-- 施放范围：1.5格（选目标用；实际需贴脸 Touch） -->
+      <onlyManualCast>True</onlyManualCast><!-- 仅手动施放 -->
+      <requireLineOfSight>true</requireLineOfSight><!-- 需要视线 -->
+      <targetParams><!-- 目标参数 -->
+        <canTargetSelf>false</canTargetSelf><!-- 不能对自己使用 -->
+        <canTargetPawns>true</canTargetPawns><!-- 可以对单位使用（C#代码会过滤仅允许血肉生物） -->
+        <canTargetBuildings>false</canTargetBuildings><!-- 不能对建筑使用 -->
+        <canTargetLocations>false</canTargetLocations><!-- 不能对位置使用 -->
+      </targetParams>
+    </verbProperties>
+    <comps><!-- 组件列表 -->
+      <li Class="DMS_Legion.CompProperties_AbilityCheckEnergy"><!-- 检查能量组件（用于禁用能力） -->
+        <minEnergyPercentage>0.26</minEnergyPercentage><!-- 最低能量百分比：26%（25%时也禁用，避免边界 NRE） -->
+        <disabledReason>释放高压电击需要至少26%最大能量</disabledReason><!-- 禁用原因文本 -->
+      </li>
+      <li Class="DMS_Legion.CompProperties_AbilityHighVoltageShock"><!-- 高压电击能力效果组件 -->
+        <energyConsumePercentage>0.25</energyConsumePercentage><!-- 消耗能量百分比：25% -->
+        <hediffDef>DMSL_Hediff_ElectroshockStun</hediffDef><!-- Hediff定义：电击昏迷 -->
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

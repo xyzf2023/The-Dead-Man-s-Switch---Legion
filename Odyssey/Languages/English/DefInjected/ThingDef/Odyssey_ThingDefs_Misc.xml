@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Odyssey Defs/ThingDefs_Misc -->
+  <DMSL_AerialBomb.label>Aerial Bomb</DMSL_AerialBomb.label>
+  <DMSL_AerialBomb.description>A fairly ordinary aerial bomb for AXF-12 use. Just do not let your mental-break colonists see it.</DMSL_AerialBomb.description>
+  <DMSL_Bullet_AerialBomb.label>Aerial Bomb</DMSL_Bullet_AerialBomb.label>
+  <DMSL_AXF12_OffsetConfigIncoming.label>AXF-12 "Offset-Config" VTOL Fighter (Incoming)</DMSL_AXF12_OffsetConfigIncoming.label>
+  <DMSL_AXF12_OffsetConfigLeaving.label>AXF-12 "Offset-Config" VTOL Fighter (Leaving)</DMSL_AXF12_OffsetConfigLeaving.label>
+</LanguageData>

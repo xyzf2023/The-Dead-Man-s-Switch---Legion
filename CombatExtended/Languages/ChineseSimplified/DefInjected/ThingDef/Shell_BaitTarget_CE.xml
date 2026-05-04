@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- CE Defs/Ammo/Shell_BaitTarget_CE.xml -->
+  <DMSL_Shell_BaitTarget.label>81mm电子诱饵弹</DMSL_Shell_BaitTarget.label>
+  <DMSL_Shell_BaitTarget.description>一种特殊的迫击炮弹药，在落地时会生成电子诱饵信号，改变空袭轰炸机的目标，可以用于将空袭引导到指定位置，常常作为应对空袭的手段。使用81mm迫击炮发射。\n\n&lt;i&gt;"最好的使用方式是把它丢到来袭击的家伙堆里，这样他们就会被自己呼叫的'支援'炸上天！"\n      ————来自某位不愿意透露姓名的士兵&lt;/i&gt;</DMSL_Shell_BaitTarget.description>
+  <DMSL_Bullet_81mmMortarShell_BaitTarget.label>81mm电子诱饵弹</DMSL_Bullet_81mmMortarShell_BaitTarget.label>
+</LanguageData>

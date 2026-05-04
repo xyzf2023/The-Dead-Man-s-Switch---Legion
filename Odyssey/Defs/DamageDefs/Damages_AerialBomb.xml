@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <DamageDef ParentName="Bomb">
+    <defName>DMSL_Damage_AerialBomb</defName>
+    <label>航弹爆炸</label>
+    <!-- 爆炸每格默认伤害 -->
+    <defaultDamage>800</defaultDamage>
+    <!-- 默认停止力（影响击退等） -->
+    <defaultStoppingPower>10</defaultStoppingPower>
+    <!-- 默认穿甲值 -->
+    <defaultArmorPenetration>2.0</defaultArmorPenetration>
+  </DamageDef>
+</Defs>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 万心失聪能力 -->
+  <AbilityDef>
+    <defName>DMSL_Ability_OmnimindSilence</defName><!-- 能力定义名称 -->
+    <label>万心失聪</label><!-- 显示名称 -->
+    <description>使机械体单位自身和半径3格内的友方机械体施加1小时的心灵隐身状态。</description><!-- 能力描述 -->
+    <iconPath>UI/Abilities/OmnimindSilence</iconPath><!-- 图标路径（需要创建对应图标） -->
+    <cooldownTicksRange>15000~15000</cooldownTicksRange><!-- 冷却时间：15000 ticks = 6小时（150 ticks = 6 * 2500 ticks） -->
+    <jobDef>CastAbilityOnThing</jobDef><!-- 工作定义：对物体施放能力 -->
+    <targetRequired>False</targetRequired><!-- 不需要目标（以自身为中心生效） -->
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets><!-- 不使用AOE选择目标 -->
+    <aiCanUse>true</aiCanUse><!-- 允许AI使用 -->
+    <ai_IsOffensive>false</ai_IsOffensive><!-- 非进攻能力（自/友方buff） -->
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted><!-- 未征召时显示按钮 -->
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted><!-- 未征召时不禁用按钮 -->
+    <statBases><!-- 基础属性 -->
+      <Ability_EffectRadius>3</Ability_EffectRadius><!-- 效果半径：3格（用于显示效果范围） -->
+    </statBases>
+    <verbProperties><!-- 动词属性 -->
+      <verbClass>Verb_CastAbility</verbClass><!-- 动词类：施放能力 -->
+      <warmupTime>1.0</warmupTime><!-- 预热时间：1秒（快速响应） -->
+      <range>3</range><!-- 施放范围：3格（用于显示范围和读条） -->
+      <drawAimPie>true</drawAimPie><!-- 绘制瞄准扇形和读条 -->
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast><!-- 防止自我施法时被打断 -->
+      <onlyManualCast>True</onlyManualCast><!-- 仅手动施放 -->
+      <targetParams><!-- 目标参数 -->
+        <canTargetSelf>True</canTargetSelf><!-- 可以对自己使用 -->
+        <canTargetPawns>false</canTargetPawns><!-- 不能对单位使用 -->
+        <canTargetBuildings>false</canTargetBuildings><!-- 不能对建筑使用 -->
+        <canTargetLocations>false</canTargetLocations><!-- 不能对位置使用 -->
+      </targetParams>
+    </verbProperties>
+    <comps><!-- 组件列表 -->
+      <li Class="DMS_Legion.CompProperties_AbilityOmnimindSilence"><!-- 万心失聪能力效果组件 -->
+        <radius>3</radius><!-- 效果范围：3格 -->
+        <hediffDef>DMSL_Hediff_PsychicCamouflage</hediffDef><!-- Hediff定义：心灵迷彩 -->
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

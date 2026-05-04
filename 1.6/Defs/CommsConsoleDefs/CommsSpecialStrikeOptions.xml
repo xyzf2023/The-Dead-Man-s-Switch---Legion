@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 通讯台特殊打击选项：CM-4巡航导弹打击 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_CM4</defName>
+    <label>CM-4巡航导弹打击</label>
+    <goodwillCostBase>30</goodwillCostBase>
+    <cooldownTicks>180000</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_CM4</aerialSupportDefName>
+    <category>SpecialStrike</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
+  <!-- 通讯台特殊打击选项：ASM-2「白鲨」导弹群打击 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_AMS2</defName>
+    <label>ASM-2「白鲨」导弹群打击</label>
+    <goodwillCostBase>30</goodwillCostBase>
+    <cooldownTicks>180000</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_AMS2</aerialSupportDefName>
+    <category>SpecialStrike</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
+</Defs>

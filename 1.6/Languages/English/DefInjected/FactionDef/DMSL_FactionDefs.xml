@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/FactionDefs: Digital Angel (unknown mech support faction) -->
+  <DMSL_Faction_DigitalAngel.label>Digital Angel</DMSL_Faction_DigitalAngel.label>
+  <DMSL_Faction_DigitalAngel.description>A mysterious mech collective not under the jurisdiction of the Armed Colonial Fleet, seemingly tied to a certain presence.</DMSL_Faction_DigitalAngel.description>
+  <DMSL_Faction_DigitalAngel.fixedName>Digital Angel</DMSL_Faction_DigitalAngel.fixedName>
+</LanguageData>

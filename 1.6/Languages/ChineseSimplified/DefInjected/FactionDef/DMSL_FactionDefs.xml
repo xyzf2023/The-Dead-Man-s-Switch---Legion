@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Defs/FactionDefs：电子天使（未知机兵支援派系） -->
+  <DMSL_Faction_DigitalAngel.label>电子天使</DMSL_Faction_DigitalAngel.label>
+  <DMSL_Faction_DigitalAngel.description>一个神秘的、不属于武装殖民舰队管辖的机兵集团，似乎与某个存在有着千丝万缕的关系。</DMSL_Faction_DigitalAngel.description>
+  <DMSL_Faction_DigitalAngel.fixedName>电子天使</DMSL_Faction_DigitalAngel.fixedName>
+</LanguageData>

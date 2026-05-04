@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?><!-- XML文件声明，指定版本1.0和UTF-8编码 -->
+<Defs><!-- 定义根元素，包含所有游戏定义 -->
+
+  <!-- Guardian 守卫（直接继承 BaseAutomatroidHumanRace，已合并原抽象父类） -->
+  <ThingDef Name="DMSL_Mech_Guardian" ParentName="BaseAutomatroidHumanRace">
+    <defName>DMSL_Mech_Guardian</defName>
+    <label>近卫</label>
+    <description>为高烈度战区准备的装备厚重装甲与高集成度观瞄设备的机兵。</description>
+    <statBases>
+      <MoveSpeed>4.2</MoveSpeed>
+      <ArmorRating_Blunt>1.4</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.4</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.5</ArmorRating_Heat>
+      <ShootingAccuracyPawn>3</ShootingAccuracyPawn>
+      <AimingDelayFactor>0.9</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">4</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <mechFixedSkillLevel>9</mechFixedSkillLevel>
+      <body>DMS_Humanoid_TypeA</body>
+      <baseBodySize>1.7</baseBodySize>
+      <baseHealthScale>1.3</baseHealthScale>
+      <mechWeightClass>Medium</mechWeightClass>
+      <mechEnabledWorkTypes>
+        <li>Hunting</li>
+      </mechEnabledWorkTypes>
+    </race>
+    <butcherProducts>
+      <DMS_ChunkSlag>2</DMS_ChunkSlag>
+      <Tungsteel>70</Tungsteel>
+    </butcherProducts>
+    <modExtensions>
+      <li Class="Fortified.MechWeaponExtension"><!-- 机械武器扩展 -->
+        <EnableWeaponFilter>true</EnableWeaponFilter><!-- 启用武器过滤器：是 -->
+        <UsableWeaponTags><!-- 可使用的武器标签列表 -->
+          <li>SimpleGun</li><!-- 简单枪械标签 -->
+          <li>DMS_MechWeaponLight</li><!-- DMS轻型机械武器标签 -->
+          <li>A_AR_LongRifle</li><!-- 突击步枪长步枪标签 -->
+          <li>A_SAR_LongRifle</li><!-- 半自动步枪长步枪标签 -->
+          <li>A_BR_LongRifle</li><!-- 战斗步枪长步枪标签 -->
+          <li>A_MG_Light</li><!-- 轻型机枪标签 -->
+          <li>ElephantGun</li><!-- 象枪标签 -->
+          <li>SniperRifle</li><!-- 狙击步枪标签 -->
+          <li>AssaultRifle</li>
+          <li>DMS_Gun_Recoilless</li>
+          <!-- 近战武器支持 -->
+          <li>MedievalMeleeBasic</li>
+          <li>MedievalMeleeAdvanced</li>
+          <li>DMS_MeleeWeapon</li>
+          <li>UltratechMelee</li>
+        </UsableWeaponTags>
+        <EnableTechLevelFilter>true</EnableTechLevelFilter><!-- 启用科技等级过滤器：是 -->
+        <UsableTechLevels><!-- 可使用的科技等级列表 -->
+          <li>Medieval</li>
+          <li>Industrial</li><!-- 工业时代科技等级 -->
+        </UsableTechLevels>
+        <BypassUsableWeapons><!-- 绕过过滤器的可用武器列表 -->
+          <!--<li MayRequire="ceteam.combatextended">Gun_BinocularsRadio</li>--><!-- 战斗扩展模组的双筒望远镜无线电（已注释） -->
+          <li MayRequire="vanillaexpanded.vwehw">VWE_Gun_UraniumSlugRifle</li><!-- 重武器拓展鈾彈槍 --><!-- 重武器扩展模组的铀弹步枪（需要该模组） -->
+          <li MayRequire="oskarpotocki.vfe.pirates">VFEP_WarcasketGun_UraniumSlugRifle</li><!-- 戰棺拓展鈾彈槍 --><!-- 战棺扩展模组的铀弹步枪（需要该模组） -->
+        </BypassUsableWeapons>
+      </li>
+      <li Class="Fortified.TurretMannableExtension"/><!-- 可操作炮塔扩展 -->
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseAutomatroidKind"><!-- 定义机械体种类，继承自基础机械体种类 -->
+    <defName>DMSL_Mech_Guardian</defName><!-- 定义名称：DMS_Mech_Arquebusier -->
+    <label>近卫</label><!-- 显示标签：arquebusier -->
+    <race>DMSL_Mech_Guardian</race><!-- 关联的种族：DMSL_Mech_Guardian -->
+    <isFighter>true</isFighter><!-- 是否为战斗单位：是 -->
+    <combatPower>250</combatPower><!-- 战斗力量：250 -->
+    <maxPerGroup>12</maxPerGroup><!-- 每组最大数量：12 -->
+    <lifeStages><!-- 生命阶段列表（用于定义不同阶段的贴图） -->
+      <li><!-- 第一个生命阶段 -->
+        <bodyGraphicData><!-- 身体图形数据 -->
+          <texPath>Mechanoid/Guardian/Guardian</texPath><!-- 贴图路径：Mechanoid/Guardian/Guardian（相对于Textures目录） -->
+          <shaderType>CutoutComplex</shaderType><!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass><!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize><!-- 绘制大小：1.4 -->
+          <shadowData><!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume><!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset><!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li><!-- 第二个生命阶段（旧贴图） -->
+        <bodyGraphicData><!-- 身体图形数据 -->
+          <texPath>Mechanoid/Guardian/Guardian</texPath><!-- 贴图路径：Things/Automatroid/OldTexture/arquebusier（旧纹理） -->
+          <shaderType>CutoutComplex</shaderType><!-- 着色器类型：复杂裁剪 -->
+          <graphicClass>Graphic_Multi</graphicClass><!-- 图形类：多帧图形 -->
+          <drawSize>1.5</drawSize><!-- 绘制大小：1.4 -->
+          <shadowData><!-- 阴影数据 -->
+            <volume>(0.35,1,0.35)</volume><!-- 阴影体积：(0.35,1,0.35) -->
+            <offset>(0,0,0)</offset><!-- 阴影偏移：(0,0,0) -->
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags><!-- 武器标签列表（生成时可能携带的武器类型） -->
+      <li>A_MG_Light</li><!-- 轻型机枪标签 -->
+      <li>A_DMR_LongRifle</li><!-- 精确射手步枪长步枪标签 -->
+      <li>A_Cut_Melee</li><!-- 格斗士同款近战武器标签 -->
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs><!-- 定义根元素结束 -->

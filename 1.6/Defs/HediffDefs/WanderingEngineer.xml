@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 游荡机兵标记 Hediff：用于计时、防野化、离图销毁 -->
+  <HediffDef>
+    <defName>DMSL_Hediff_WanderingEngineer</defName>
+    <label>游荡中</label>
+    <description>该机兵接收到了机控中枢的信号并游荡到殖民地附近，处于未受控状态。一段时间后会尝试离开地图。</description>
+    <hediffClass>DMS_Legion.Incidents.EngineerArrival.Hediff_WanderingEngineer</hediffClass>
+    <defaultLabelColor>(1, 1, 1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="DMS_Legion.Incidents.EngineerArrival.HediffCompProperties_WanderingEngineer" />
+    </comps>
+  </HediffDef>
+</Defs>

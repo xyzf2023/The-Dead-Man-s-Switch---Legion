@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 定义危险防护服的物品类型，继承自ApparelBase基础服装类型 -->
+<ThingDef ParentName="ApparelBase">
+	<!-- 定义此物品的唯一标识符，在整个模组中必须是唯一的 -->
+	<defName>DMSL_Apparel_CBRNAssaultCombatSuit</defName>
+	<!-- 物品在游戏中的显示名称 -->
+	<label>CBRB突击战斗服</label>
+	<!-- 物品的详细描述，会在游戏中向玩家展示 -->
+	<description>一种被用于防化部队的、包裹全身的突击战斗服，用于保护穿戴着不受毒素伤害。</description>
+	<!-- 此物品的技术等级，影响其制作条件和可用性 -->
+	<techLevel>Industrial</techLevel>
+	<!-- 配方制作相关的设置，定义如何制作这件装备 -->
+	<recipeMaker>
+		<!-- 制作速度参考的技能统计 -->
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<!-- 制作所需的技能类型 -->
+		<workSkill>Crafting</workSkill>
+		<!-- 制作过程中播放的动画效果 -->
+		<effectWorking>Tailor</effectWorking>
+		<!-- 制作过程中播放的声音 -->
+		<soundWorking>Recipe_Tailor</soundWorking>
+		<!-- 可以使用此配方的工作台列表 -->
+		<recipeUsers>
+			<li>ElectricTailoringBench</li>
+			<li>HandTailoringBench</li>
+		</recipeUsers>
+		<!-- 解锁此配方所需的研究项目 -->
+		<researchPrerequisites>
+			<li>FlakArmor</li>
+			<li>DMS_EquipmentElite</li>
+			<li>DMS_Plasfiber</li>
+		</researchPrerequisites>
+		<!-- 制作过程中未完成状态的物品定义 -->
+		<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+	</recipeMaker>
+	<!-- 制作此物品所需的原材料清单 -->
+	<costList>
+		<Plasfiber>40</Plasfiber> <!-- 需要80单位的等离子纤维 -->
+		<Tungsteel>120</Tungsteel>           <!-- 需要20单位的钢铁 -->
+		<Chemfuel>50</Chemfuel>     <!-- 需要20单位的化学燃料 -->
+		<ComponentStamped>10</ComponentStamped> <!-- 需要1个已冲压的组件 -->
+        <Polyester>100</Polyester>
+	</costList>
+	<!-- 此物品所属的交易标签，影响商店分类和交易逻辑 -->
+	<tradeTags>
+		<li>Clothing</li>      <!-- 标记为服装类别 -->
+		<li>DMS_Clothing</li>  <!-- 标记为DMS模组的服装类别 -->
+	</tradeTags>
+	<!-- 物品图标显示设置 -->
+	<graphicData>
+		<!-- 图标纹理路径 -->
+		<texPath>Clothes/CBRNAssaultCombatSuit/Apparel_Hulk_south</texPath>
+		<!-- 图形渲染类型，Graphic_Single表示单张图片 -->
+		<graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<!-- 物品在库存中的分类 -->
+	<thingCategories>
+		<li>ApparelMisc</li>   <!-- 归类为杂项服装 -->
+	</thingCategories>
+	<!-- 物品的基础统计数据 -->
+	<statBases>
+		<MaxHitPoints>100</MaxHitPoints>       <!-- 最大耐久度 -->
+		<WorkToMake>20000</WorkToMake>          <!-- 制作所需工作量 -->
+		<Mass>10</Mass>                        <!-- 物品重量（kg）-->
+		<ArmorRating_Sharp>1.4</ArmorRating_Sharp>   <!-- 对尖锐伤害的护甲值 -->
+		<ArmorRating_Blunt>1.4</ArmorRating_Blunt>   <!-- 对钝击伤害的护甲值 -->
+		<ArmorRating_Heat>2</ArmorRating_Heat>     <!-- 对火焰/热能伤害的护甲值 -->
+		<Insulation_Cold>50</Insulation_Cold>         <!-- 保暖能力 -->
+		<Insulation_Heat>35</Insulation_Heat>          <!-- 隔热能力 -->
+		<EquipDelay>2</EquipDelay>                 <!-- 装备此物品所需时间（秒）-->
+	</statBases>
+	<!-- 当角色穿戴此物品时对其属性的影响 -->
+	<equippedStatOffsets>
+		<MoveSpeed>-0.5</MoveSpeed>                   <!-- 移动速度降低0.5倍 -->
+		<ToxicEnvironmentResistance>1</ToxicEnvironmentResistance> <!-- 完全抵抗有毒环境影响 -->
+	</equippedStatOffsets>
+	<!-- 服装特有的属性设置 -->
+	<apparel>
+		<!-- 此服装可以覆盖的身体部位组列表 -->
+		<bodyPartGroups>
+			<li>FullHead</li>    <!-- 整个头部 -->
+			<li>UpperHead</li>   <!-- 头部上半部分 -->
+			<li>Neck</li>        <!-- 脖子 -->
+			<li>Torso</li>       <!-- 躯干 -->
+			<li>Shoulders</li>   <!-- 肩膀 -->
+			<li>Arms</li>        <!-- 手臂 -->
+			<li>Hands</li>       <!-- 手 -->
+			<li>Waist</li>       <!-- 腰部 -->
+			<li>Legs</li>        <!-- 腿 -->
+			<li>Feet</li>        <!-- 脚 -->
+		</bodyPartGroups>
+		<!-- 穿戴状态下显示的图形路径 -->
+		<wornGraphicPath>Clothes/CBRNAssaultCombatSuit/Apparel</wornGraphicPath>
+		<!-- 是否阻止被覆盖身体部位的伤口图形显示 -->
+		<blocksAddedPartWoundGraphics>true</blocksAddedPartWoundGraphics>
+			<!-- 渲染时跳过的身体特征 -->
+			<renderSkipFlags>
+			  <li>Hair</li> <!-- 不显示头发 -->
+			  <li>Beard</li> <!-- 不显示胡须 -->
+			  <li>Eyes</li> <!-- 不显示眼睛 -->
+			</renderSkipFlags>
+			<drawData>
+			  <defaultData>
+				<layer>75</layer> <!-- 绘制层级 -->
+			  </defaultData>
+			</drawData>
+			<!-- 免疫毒性气体暴露伤害 -->
+			<immuneToToxGasExposure>true</immuneToToxGasExposure>
+			<!-- 装备层级 -->
+			<layers>
+				<li>Shell</li> <!-- 外壳层 -->
+			</layers>
+			<!-- 默认搭配标签 -->
+			<defaultOutfitTags>
+				<li>Worker</li> <!-- 工人 -->
+			</defaultOutfitTags>
+			<!-- 是否可用于满足保暖需求 -->
+			<canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+			<!-- 是否可用于满足毒素环境抗性需求 -->
+			<canBeGeneratedToSatisfyToxicEnvironmentResistance>true</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+		</apparel>
+		<!-- 模组扩展：生化保护功能 -->
+		<modExtensions>
+			<li Class="Fortified.BiochemicalProtectionExtension"/>
+		</modExtensions>
+	</ThingDef>
+</Defs>

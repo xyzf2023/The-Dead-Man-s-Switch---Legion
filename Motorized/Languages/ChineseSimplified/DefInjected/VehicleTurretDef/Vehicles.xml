@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Motorized Defs/Vehicles 灰骑士炮塔 -->
+  <GrayKnights_Tank_Turret.label>主炮塔</GrayKnights_Tank_Turret.label>
+  <GrayKnights_Tank_Turret.gizmoDescription>选择目标。\n\n效力射\n\n&lt;color=#b0e0e6&gt;CE弹药：&lt;/color&gt;120mm炮弹&lt;/color&gt;</GrayKnights_Tank_Turret.gizmoDescription>
+  <GrayKnights_Tank_Turret.fireModes.0.label>单发</GrayKnights_Tank_Turret.fireModes.0.label>
+  <GrayKnights_Tank_Turret_ArmorPack.label>主炮塔</GrayKnights_Tank_Turret_ArmorPack.label>
+  <GrayKnights_Tank_Turret_ArmorPack.gizmoDescription>选择目标。\n\n效力射\n\n&lt;color=#b0e0e6&gt;CE弹药：&lt;/color&gt;120mm炮弹&lt;/color&gt;</GrayKnights_Tank_Turret_ArmorPack.gizmoDescription>
+  <GrayKnights_Tank_Turret_ArmorPack.fireModes.0.label>单发</GrayKnights_Tank_Turret_ArmorPack.fireModes.0.label>
+  <!-- Motorized Defs/Weapons 炮塔 -->
+  <PZH2000_Tank_Turret.label>PZH2000自行火炮系统</PZH2000_Tank_Turret.label>
+  <PZH2000_Tank_Turret.gizmoDescription>选择目标。\n\n远距离发射高爆弹。\n\n&lt;color=#b0e0e6&gt;弹药：&lt;/color&gt;155mm高爆弹&lt;/color&gt;</PZH2000_Tank_Turret.gizmoDescription>
+  <PZH2000_Tank_Turret.fireModes.0.label>齐射</PZH2000_Tank_Turret.fireModes.0.label>
+  <DMSL_AAcannon.label>双管机枪</DMSL_AAcannon.label>
+  <DMSL_AAcannon.gizmoDescription>选择目标。\n\n效力射\n\n&lt;color=#b0e0e6&gt;CE弹药：&lt;/color&gt;.50 BMG&lt;/color&gt;</DMSL_AAcannon.gizmoDescription>
+  <DMSL_AAcannon.fireModes.0.label>全自动</DMSL_AAcannon.fireModes.0.label>
+  <DMSL_AAcannon.fireModes.1.label>点射</DMSL_AAcannon.fireModes.1.label>
+  <DMSL_81mmMortar.label>81mm迫击炮</DMSL_81mmMortar.label>
+  <DMSL_81mmMortar.gizmoDescription>81mm迫击炮。\n\n中距离发射高爆弹。\n\n&lt;color=#b0e0e6&gt;弹药：&lt;/color&gt;81mm高爆弹&lt;/color&gt;</DMSL_81mmMortar.gizmoDescription>
+  <DMSL_81mmMortar.fireModes.0.label>单发</DMSL_81mmMortar.fireModes.0.label>
+  <DMSL_Double_barrel_machine_gun.label>双管机枪</DMSL_Double_barrel_machine_gun.label>
+  <DMSL_Double_barrel_machine_gun.gizmoDescription>选择目标。\n\n效力射\n\n&lt;color=#b0e0e6&gt;CE弹药：&lt;/color&gt;.50 BMG&lt;/color&gt;</DMSL_Double_barrel_machine_gun.gizmoDescription>
+  <DMSL_Double_barrel_machine_gun.fireModes.0.label>全自动</DMSL_Double_barrel_machine_gun.fireModes.0.label>
+  <DMSL_Double_barrel_machine_gun.fireModes.1.label>点射</DMSL_Double_barrel_machine_gun.fireModes.1.label>
+</LanguageData>

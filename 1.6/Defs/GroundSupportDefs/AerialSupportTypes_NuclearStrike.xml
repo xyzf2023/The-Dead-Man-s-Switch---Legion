@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 空中支援-核打击 -->
+<DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_NuclearStrike</defName>
+    <label>核打击</label>
+    <description>进行一次战略核打击</description>
+    <aircraftTexturePath>GroundSupport/CM-4</aircraftTexturePath>
+    <flightSpeed>0.015</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>6</drawSize>
+    <appearSoundDef>AerialSupport_Missile</appearSoundDef>
+    <enableExhaust>true</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <exhaustSpawnRate>1.0</exhaustSpawnRate> <!-- 每tick尾气生成概率(0-1) -->
+    <exhaustParticlesPerTick>3</exhaustParticlesPerTick> <!-- 平均每tick生成的尾气Fleck数量 -->
+    <exhaustBaseScale>3</exhaustBaseScale> <!-- 尾气基础缩放系数 -->
+    <exhaustMinSpeed>8</exhaustMinSpeed> <!-- 尾气扩散最小速度 -->
+    <exhaustMaxSpeed>15</exhaustMaxSpeed> <!-- 尾气扩散最大速度 -->
+    <exhaustAngleVariance>4</exhaustAngleVariance> <!-- 尾气角度扰动范围(±度数) -->
+    <exhaustRotationRange>10</exhaustRotationRange> <!-- 尾气旋转范围(±度/秒) -->
+    <continueDrawingAfterArrival>false</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <!-- 可选：指定支援起始方向（North/South/East/West/Random） -->
+    <startDirection>North</startDirection>
+    <!-- 南/北进入时：true=起点X与选点相同（垂直路线）；东/西进入时：true=优先从目标北侧进入 -->
+    <preferNorthEntry>true</preferNorthEntry>
+    <!-- 延迟配置：绘制先开始，声音后播放 -->
+    <renderDelayTicks>60</renderDelayTicks>
+    <soundDelayTicks>60</soundDelayTicks>
+    <!-- 飞机出现时：贴图出现即开始“静音除耳鸣外”，持续 durationTicks，仅允许耳鸣音效播放 -->
+    <spawnEffects>
+      <li>DMSL_SpawnEffect_Mute</li>
+    </spawnEffects>
+    <effectComps>
+
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_DestroyArea">
+        <!-- 销毁半径（格），范围内所有实体被移除，等同控制台 Destroy -->
+        <radius>10</radius>
+      </li>
+
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_NuclearShockwave">
+        <!-- 最大扩散半径（格），与 EMP 波纹相同接口 -->
+        <maxRadius>150</maxRadius>
+        <!-- 环带宽度（格） -->
+        <ringThicknessCells>8</ringThicknessCells>
+        <!-- 扩散速度（格/tick） -->
+        <expandSpeedCellsPerTick>2</expandSpeedCellsPerTick>
+        <!-- 冲击波伤害量（单次命中时传入 DamageInfo 的 amount） -->
+        <damageAmount>8000</damageAmount>
+        <!-- 伤害类型 defName，用于伤害与每格爆炸 Fleck -->
+        <damageDefDefName>DMSL_Damage_BlastWave</damageDefDefName>
+        <!-- 伤害冷却（tick）：同一实体在此时间内只受一次伤害，超过后再次被波扫到可再受一次；0=整次序列内仅一次 -->
+        <damageCooldownTicks>120</damageCooldownTicks>
+      </li>
+
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_NuclearShockwave">
+        <!-- 最大扩散半径（格），与 EMP 波纹相同接口 -->
+        <maxRadius>150</maxRadius>
+        <!-- 环带宽度（格） -->
+        <ringThicknessCells>5</ringThicknessCells>
+        <!-- 扩散速度（格/tick） -->
+        <expandSpeedCellsPerTick>1.5</expandSpeedCellsPerTick>
+        <!-- 冲击波伤害量（单次命中时传入 DamageInfo 的 amount） -->
+        <damageAmount>3000</damageAmount>
+        <!-- 伤害类型 defName，用于伤害与每格爆炸 Fleck -->
+        <damageDefDefName>DMSL_Damage_ThermalRadiation</damageDefDefName>
+        <!-- 伤害冷却（tick）：同一实体在此时间内只受一次伤害，超过后再次被波扫到可再受一次；0=整次序列内仅一次 -->
+        <damageCooldownTicks>120</damageCooldownTicks>
+      </li>
+
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_EmpRipple">
+        <!-- 最大扩散半径（格） -->
+        <maxRadius>500</maxRadius>
+        <!-- 环带宽度（格） -->
+        <ringThicknessCells>3</ringThicknessCells>
+        <!-- 扩散速度（格/tick） -->
+        <expandSpeedCellsPerTick>3</expandSpeedCellsPerTick>
+        <!-- 机械体/炮台/建筑禁用时长（tick），1800 = 30 秒 -->
+        <disableTicks>7200</disableTicks>
+        <!-- 是否对无 CompStunnable 的用电建筑造成临时断电：true 触发，false 不触发 -->
+        <disablePowerBuildings>true</disablePowerBuildings>
+        <!-- 效果冷却（tick）：同一实体在此时间内只受一次 EMP 效果，超过后再次被波扫到可再受一次；0=整次序列内仅一次 -->
+        <effectCooldownTicks>120</effectCooldownTicks>
+        <!-- 是否对被波扫到的机械体的意识处理部位（ConsciousnessSource）造成 DMSL_Damage_NuclearEMP 伤害：true=造成，false=不造成 -->
+        <damageConsciousnessPart>true</damageConsciousnessPart>
+        <!-- 意识处理部位受到的伤害量（仅当 damageConsciousnessPart 为 true 时生效） -->
+        <consciousnessPartDamageAmount>1000</consciousnessPartDamageAmount>
+        <!-- 机械体眩晕延迟（tick）：先造成伤害，经此 tick 后再尝试施加眩晕；被伤害击杀的机械体不再被眩晕。0=立即眩晕 -->
+        <mechanoidStunDelayTicks>1</mechanoidStunDelayTicks>
+      </li>
+
+      <!-- 地面污染区域：因性能占用太高砍掉了，如果你对你的电脑有自信可以取消注释挑战一下（笑） -->
+      <!-- <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_PolluteArea">
+        <maxRadius>150</maxRadius>
+        <pollutionAmountPerCell>1</pollutionAmountPerCell>
+      </li> -->
+
+      <!-- 全图没有辐射侵蚀的 pawn 添加 0.9 严重度的辐射侵蚀，已有则跳过，60 tick 内分批执行 -->
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_AddHediff">
+        <hediffDefName>DMSL_Hediff_RadiationCorrosion</hediffDefName>
+        <severityToAdd>0.9</severityToAdd>
+        <spreadOverTicks>60</spreadOverTicks>
+      </li>
+
+      <!-- 白屏+耳鸣 -->
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_WhiteScreenTinnitus">
+        <whiteScreenFadeInTicks>10</whiteScreenFadeInTicks>
+        <whiteScreenHoldTicks>20</whiteScreenHoldTicks>
+        <whiteScreenFadeOutTicks>150</whiteScreenFadeOutTicks>
+        <soundDefDefName>DMSL_AerialRaid_NuclearTinnitus</soundDefDefName>
+      </li>
+      
+
+      <!-- 触发事件效果示例：可填写多个 IncidentDef defName，支持延迟 tick -->
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_TriggerEvent">
+        <incidentDefNames>
+          <li>ToxicFallout</li>
+        </incidentDefNames>
+        <delayTicks>750</delayTicks>
+      </li>
+    </effectComps>
+</DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+</Defs>

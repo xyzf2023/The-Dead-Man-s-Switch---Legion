@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- AncientCorps Defs/ThingDefs_Races -->
+  <DMSL_Mech_panzer.label>陆龟</DMSL_Mech_panzer.label>
+  <DMSL_Mech_panzer.description>一台超重型战斗机械体，配备了多种武器系统。</DMSL_Mech_panzer.description>
+  <DMSL_Mech_STGeorge.label>圣乔治</DMSL_Mech_STGeorge.label>
+  <DMSL_Mech_STGeorge.description>一款由步行机地盘为主的自行火炮，打击范围可以覆盖全图。\n\nM977A17圣乔治是一款服役了超过75年的自行火炮系统，有着超过15种的改进型号，它是源于苏联解体后，美国陆军由两级对抗逐渐转变成反恐战争所研制的装备，其设计的核心目的就是在72小时之内由战略运输机部署至全球任意热点地区。其所搭载的数据链系统与自动装弹机配合强劲的动力包系统能做到在被反炮兵雷达侦测之前，执行炮击任务并撤离的需求。在第三次世界大战的俄乌前线，圣乔治也被作为援助派往乌克兰与苏联军队对抗……</DMSL_Mech_STGeorge.description>
+  <DMSL_Mech_ZBZ59D.label>堑壕</DMSL_Mech_ZBZ59D.label>
+  <DMSL_Mech_ZBZ59D.description>北约代号 “铁锤”，于第二次世界大战结束后的第十年完成设计，并在一次胜利日阅兵式上首次对外展示。\n\n该车在研发过程中采用了高度紧凑的总体布局，旨在压缩正面投影、降低被命中概率；其标配武器为一门 105 毫米火炮，以适应当时对未来装甲战争环境的判断。\n\n当前所展示的型号为后期改进版本，在原有基础上加装了爆炸式反应装甲，并针对若干局部结构进行了细化改良。</DMSL_Mech_ZBZ59D.description>
+  <DMSL_Mech_IronFace.label>RBR-2「铁面」</DMSL_Mech_IronFace.label>
+  <DMSL_Mech_IronFace.description>北约代号「假肢」\n\nRBR-1是为BR-6提供的升级改进方案之一，目的是让这些老东西有和次时代兵器一决高下的能力\n而RBR-2「铁面」是一款重新研制用于外贸的主战机械体，相较于前辈内置了护盾发射器与更强的爆炸反应装甲。</DMSL_Mech_IronFace.description>
+  <DMSL_Mech_leopard.label>豹</DMSL_Mech_leopard.label>
+  <DMSL_Mech_leopard.description>一款超重型步行机\n\nP1A2「豹」诞生于美德联合坦克研制计划失败时的产物，刚刚被展出时其与二战坦克同名的外号被质疑是否寓意着纳粹主义的死灰复燃，但它很快成为了欧洲诸国乃至东南亚部分国家所装备的主战步行机之一，被誉为「欧洲主战步行机」，为欧洲防务一体化贡献了卓越的力量，但是安装在主体右侧的观察窗作为可能的弱点之一饱受诟病。\n时至今日，他仍旧作为欧洲诸国的主战步行机之一列装于欧洲各国军队。</DMSL_Mech_leopard.description>
+</LanguageData>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 钻井驳机直接深钻：以格为目标，读条后按原版规则产出深矿（无深钻井建筑） -->
+  <JobDef>
+    <defName>DMSL_Job_DrillingBargeDeepDrill</defName>
+    <label>开采深层矿脉</label>
+    <driverClass>DMS_Legion.JobDriver_DrillingBargeDeepDrill</driverClass>
+    <reportString>在目标格开采深层矿脉。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

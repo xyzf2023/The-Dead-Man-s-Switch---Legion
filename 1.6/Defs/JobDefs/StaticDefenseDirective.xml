@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 固守指令 吟唱Job -->
+  <JobDef>
+    <defName>DMSL_StaticDefenseDirectiveChant</defName>
+    <driverClass>DMS_Legion.JobDriver_StaticDefenseDirectiveChant</driverClass>
+    <reportString>正在执行固守指令。</reportString>
+    <playerInterruptible>false</playerInterruptible>
+  </JobDef>
+</Defs>

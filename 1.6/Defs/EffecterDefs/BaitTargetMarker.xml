@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 诱饵目标持续标记效果器：持续显示灰白色脉冲效果 -->
+  <EffecterDef>
+    <defName>DMSL_Effecter_BaitTargetMarker</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>Mote_DMSL_BaitTargetMarker</moteDef>
+        <burstCount>1</burstCount>
+        <ticksBetweenMotes>1</ticksBetweenMotes><!-- 每tick生成一次 -->
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 遥控 IED 抛射体：落地不爆炸，由武器 Gizmo 引爆后 600 tick 倒计时再爆炸 -->
+    <ThingDef ParentName="BaseGrenadeProjectile">
+        <defName>DMSL_Projectile_IED</defName>
+        <label>IED</label>
+        <thingClass>DMS_Legion.Projectile_IED</thingClass>
+        <graphicData>
+            <shaderType>Transparent</shaderType>
+            <texPath>Things/IED/IED</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile>
+            <speed>12</speed>
+            <arcHeightFactor>2</arcHeightFactor>
+            <shadowSize>0.4</shadowSize>
+            <explosionRadius>3</explosionRadius>
+            <damageDef>Bomb</damageDef>
+            <damageAmountBase>150</damageAmountBase>
+            <armorPenetrationBase>0.75</armorPenetrationBase>
+            <explosionDelay>0</explosionDelay>
+        </projectile>
+    </ThingDef>
+</Defs>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 空中支援类型定义 - 主战师轰炸支援（供空中支援传呼器使用） -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_AncientCorps</defName>
+    <label>主战师轰炸支援</label>
+    <description>来自古代主战师的轰炸支援</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>0.05</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <startDirection>Random</startDirection>
+    <preferNorthEntry>false</preferNorthEntry>
+    <!-- 延迟配置：延迟600 tick 再开始渲染/音效 -->
+    <renderDelayTicks>600</renderDelayTicks>
+    <soundDelayTicks>600</soundDelayTicks>
+    <!-- 飞机出现时的状态影响效果 -->
+    <!-- <spawnEffects>
+      <li>DMS_SpawnEffect_EMP</li>
+      <li>DMS_SpawnEffect_ElectronicJamming</li>
+    </spawnEffects> -->
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Bombing">
+        <!-- 单枚爆炸的半径（以格为单位） -->
+        <explosionRadius>15</explosionRadius>
+        <!-- 每次爆炸造成的伤害数值 -->
+        <damageAmount>25</damageAmount>
+        <!-- 整次支援总共投放的爆炸次数 -->
+        <explosionCount>8</explosionCount>
+        <!-- 轰炸区域的目标半径（在此范围内随机落点） -->
+        <targetAreaRadius>5</targetAreaRadius>
+        <!-- 每个 Tick 执行多少次爆炸（这里为1，逐个依次引爆） -->
+        <explosionsPerTick>1</explosionsPerTick>
+        <explosionIntervalSeconds>0.2</explosionIntervalSeconds>
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_AncientCorpsRaid</defName>
+    <label>主战师轰炸</label>
+    <description>来自古代主战师的轰炸</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>0.05</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <startDirection>Random</startDirection>
+    <preferNorthEntry>false</preferNorthEntry>
+    <!-- 延迟配置：延迟600 tick 再开始渲染/音效 -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <!-- 飞机出现时的状态影响效果 -->
+    <!-- <spawnEffects>
+      <li>DMS_SpawnEffect_EMP</li>
+      <li>DMS_SpawnEffect_ElectronicJamming</li>
+    </spawnEffects> -->
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Bombing">
+        <!-- 单枚爆炸的半径（以格为单位） -->
+        <explosionRadius>15</explosionRadius>
+        <!-- 每次爆炸造成的伤害数值 -->
+        <damageAmount>25</damageAmount>
+        <!-- 整次支援总共投放的爆炸次数 -->
+        <explosionCount>8</explosionCount>
+        <!-- 轰炸区域的目标半径（在此范围内随机落点） -->
+        <targetAreaRadius>5</targetAreaRadius>
+        <!-- 每个 Tick 执行多少次爆炸（这里为1，逐个依次引爆） -->
+        <explosionsPerTick>1</explosionsPerTick>
+        <explosionIntervalSeconds>0.2</explosionIntervalSeconds>
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+</Defs>
