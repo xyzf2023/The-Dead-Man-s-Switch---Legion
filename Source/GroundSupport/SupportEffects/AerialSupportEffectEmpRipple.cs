@@ -80,6 +80,9 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         private List<EmpRippleSequence> activeEmpRippleSequences = new List<EmpRippleSequence>();
         /// <summary>EMP 波纹对无 CompStunnable 的用电建筑的临时停摆：thingID -> 恢复 tick（不篡改电网，仅在此表内记录）</summary>
         private Dictionary<int, int> powerSuppressedUntilTick = new Dictionary<int, int>();
+        private int lastPowerSuppressionCleanupTick = -1;
+        private const int PowerSuppressionCleanupIntervalTicks = 60;
+        public static bool AnyPowerSuppressionActive { get; private set; }
 
         public EmpRippleController(Map map) : base(map) { }
 
@@ -93,6 +96,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                 activeEmpRippleSequences?.RemoveAll(seq => seq == null);
                 if (powerSuppressedUntilTick == null)
                     powerSuppressedUntilTick = new Dictionary<int, int>();
+                RecalculateGlobalPowerSuppressionFlag();
             }
         }
 
@@ -104,12 +108,12 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             int now = Find.TickManager.TicksGame;
             if (powerSuppressedUntilTick != null && powerSuppressedUntilTick.Count > 0)
             {
-                List<int>? toRemove = null;
-                foreach (var kv in powerSuppressedUntilTick)
+                if (lastPowerSuppressionCleanupTick < 0 ||
+                    now - lastPowerSuppressionCleanupTick >= PowerSuppressionCleanupIntervalTicks)
                 {
-                    if (kv.Value <= now) { toRemove = toRemove ?? new List<int>(); toRemove.Add(kv.Key); }
+                    lastPowerSuppressionCleanupTick = now;
+                    CleanupExpiredPowerSuppressions(now);
                 }
-                if (toRemove != null) { foreach (int k in toRemove) powerSuppressedUntilTick.Remove(k); }
             }
         }
 
@@ -138,6 +142,49 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         {
             if (thing == null || powerSuppressedUntilTick == null) return;
             powerSuppressedUntilTick[thing.thingIDNumber] = untilTick;
+            AnyPowerSuppressionActive = true;
+        }
+
+        public static void RecalculateGlobalPowerSuppressionFlag()
+        {
+            AnyPowerSuppressionActive = false;
+            if (Find.Maps == null)
+                return;
+
+            foreach (Map currentMap in Find.Maps)
+            {
+                EmpRippleController controller = currentMap.GetComponent<EmpRippleController>();
+                if (controller != null && controller.HasAnyPowerSuppression)
+                {
+                    AnyPowerSuppressionActive = true;
+                    return;
+                }
+            }
+        }
+
+        private void CleanupExpiredPowerSuppressions(int now)
+        {
+            if (powerSuppressedUntilTick == null || powerSuppressedUntilTick.Count == 0)
+                return;
+
+            List<int>? toRemove = null;
+            foreach (KeyValuePair<int, int> kv in powerSuppressedUntilTick)
+            {
+                if (kv.Value <= now)
+                {
+                    toRemove ??= new List<int>();
+                    toRemove.Add(kv.Key);
+                }
+            }
+
+            if (toRemove == null)
+                return;
+
+            foreach (int key in toRemove)
+                powerSuppressedUntilTick.Remove(key);
+
+            if (powerSuppressedUntilTick.Count == 0)
+                RecalculateGlobalPowerSuppressionFlag();
         }
     }
 
