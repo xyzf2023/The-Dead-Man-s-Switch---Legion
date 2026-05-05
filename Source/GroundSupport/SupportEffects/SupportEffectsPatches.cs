@@ -13,41 +13,17 @@ namespace DMS_Legion
     [HarmonyPatch(typeof(CompPowerTrader), "get_StunnedByEMP")]
     public static class EmpRipplePowerSuppressionPatch
     {
-        private static Map? _cachedMap;
-        private static EmpRippleController? _cachedController;
-
         [HarmonyPostfix]
         public static void Postfix(CompPowerTrader __instance, ref bool __result)
         {
             if (__result) return;
+            if (!EmpRippleController.AnyPowerSuppressionActive) return;
+
             Thing? parent = __instance?.parent;
             if (parent == null || !parent.Spawned || parent.Map == null) return;
 
-            Map map = parent.Map;
-
-            // 缓存失效：若缓存的 Map 已不在当前游戏地图列表中，清空缓存，避免持有已卸载地图引用
-            if (_cachedMap != null && (Find.Maps == null || !Find.Maps.Contains(_cachedMap)))
-            {
-                _cachedMap = null;
-                _cachedController = null;
-            }
-
-            // 按 Map 复用 Controller，同一 tick 内同地图只做一次 GetComponent
-            EmpRippleController? controller;
-            if (_cachedMap == map && _cachedController != null)
-            {
-                controller = _cachedController;
-            }
-            else
-            {
-                controller = map.GetComponent<EmpRippleController>();
-                _cachedMap = map;
-                _cachedController = controller;
-            }
-
+            EmpRippleController? controller = parent.Map.GetComponent<EmpRippleController>();
             if (controller == null) return;
-
-            // 快速路径：当前没有任何用电停摆时直接返回，避免对每个电器做字典查询
             if (!controller.HasAnyPowerSuppression) return;
 
             if (controller.IsPowerSuppressed(parent))
