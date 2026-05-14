@@ -58,6 +58,25 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         public float decorativeFleckMinScale = 0.35f;
         public float decorativeFleckMaxScale = 0.65f;
 
+        /// <summary>主体圆环使用的 FleckDef defName；空则使用 damageDef.explosionCellFleck。</summary>
+        public string ringFleckDefName = "";
+
+        /// <summary>装饰爆点 FleckDef defName；空则使用 damageDef.explosionCellFleck。</summary>
+        public string decorativeFleckDefName = "";
+
+        /// <summary>是否优先使用 FleckDef 的 Graphic 材质作为主体圆环共享底材。</summary>
+        public bool useFleckMaterialForDirectRing = true;
+
+        public bool ringCellRandomRotation = true;
+        public float ringCellMinScale = 0.75f;
+        public float ringCellMaxScale = 1.15f;
+        public float ringCellMinAlphaFactor = 0.65f;
+        public float ringCellMaxAlphaFactor = 1f;
+        public float ringCellMinBrightnessFactor = 0.85f;
+        public float ringCellMaxBrightnessFactor = 1.15f;
+        public bool ringCellSubtlePulse = true;
+        public float ringCellPulseAmplitude = 0.12f;
+
         public CompProperties_AerialSupportEffect_NuclearShockwave()
         {
             compClass = typeof(CompAerialSupportEffect_NuclearShockwave);
@@ -147,7 +166,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// 核冲击波扩散序列：真实波前推进与伤害由 <see cref="ApplyShockwaveDamageForSweptCells"/> 处理；主体视觉由 <see cref="DrawVisualRing"/> 每帧绘制，装饰 Fleck 稀疏生成。
+    /// 核冲击波扩散序列：伤害由 <see cref="ApplyShockwaveDamageForSweptCells"/> 处理；主体环为 Draw 中 Graphics.DrawMesh + FleckDef.Graphic 共享材质与 MaterialPropertyBlock 逐格着色；装饰 Fleck 稀疏生成。
     /// </summary>
     public class NuclearShockwaveSequence : IExposable
     {
@@ -166,13 +185,22 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
         private static readonly List<Thing> toDamageBuffer = new List<Thing>();
 
-        /// <summary>非存档：主体圆环材质缓存（不修改 MaterialPool 共享材质颜色）。</summary>
-        private Material? cachedRingMaterial;
-        private string cachedRingTexturePath = "\0";
-        private float cachedRingAlpha = -1f;
-        private float cachedRingColorR = -1f;
-        private float cachedRingColorG = -1f;
-        private float cachedRingColorB = -1f;
+        private static readonly MaterialPropertyBlock RingCellMatPropertyBlock = new MaterialPropertyBlock();
+
+        private enum RingDrawMatKind
+        {
+            None,
+            FleckGraphic,
+            TexturePath,
+            SolidColor
+        }
+
+        /// <summary>非存档：主体圆环共享底材（Fleck Graphic.MatSingle / 贴图池 / 纯色），每格用 MaterialPropertyBlock 改色，不修改共享 Material 本体。</summary>
+        private Material? ringDrawSharedMaterial;
+        private string ringDrawCacheKey = "";
+        private RingDrawMatKind ringDrawMatKind;
+        private Color ringDrawFleckGraphicColor = Color.white;
+        private float ringDrawFleckSizeAvg = 1f;
 
         public NuclearShockwaveSequence() { }
 
@@ -302,40 +330,93 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             }
         }
 
-        private Material? GetOrCreateRingMaterial(CompProperties_AerialSupportEffect_NuclearShockwave p)
+        private float StableRandom01(IntVec3 cell, int salt)
         {
-            string path = p.ringTexturePath ?? "";
-            float a = p.ringAlpha;
-            float r = p.ringColorR;
-            float g = p.ringColorG;
-            float b = p.ringColorB;
-
-            if (cachedRingMaterial != null &&
-                cachedRingTexturePath == path &&
-                Mathf.Approximately(cachedRingAlpha, a) &&
-                Mathf.Approximately(cachedRingColorR, r) &&
-                Mathf.Approximately(cachedRingColorG, g) &&
-                Mathf.Approximately(cachedRingColorB, b))
+            unchecked
             {
-                return cachedRingMaterial;
+                int h = cell.x * 73856093 ^ cell.z * 19349663 ^ center.x * 83492791 ^ center.z * 297121507 ^ salt * 1376312589;
+                h = (h << 13) ^ h;
+                h = h * (h * h * 15731 + 789221) + 961748927;
+                uint u = (uint)h;
+                return Mathf.Clamp01(u / (float)uint.MaxValue);
             }
+        }
 
-            cachedRingMaterial = null;
-            cachedRingTexturePath = path;
-            cachedRingAlpha = a;
-            cachedRingColorR = r;
-            cachedRingColorG = g;
-            cachedRingColorB = b;
+        private FleckDef? ResolveRingFleckDef(DamageDef damageDef)
+        {
+            if (props == null)
+                return null;
+            if (!string.IsNullOrEmpty(props.ringFleckDefName))
+            {
+                FleckDef? named = DefDatabase<FleckDef>.GetNamedSilentFail(props.ringFleckDefName);
+                if (named != null)
+                    return named;
+            }
+            return damageDef.explosionCellFleck;
+        }
 
-            if (!string.IsNullOrEmpty(path))
+        private FleckDef? ResolveDecorativeFleckDef(DamageDef damageDef)
+        {
+            if (props == null)
+                return damageDef.explosionCellFleck;
+            if (!string.IsNullOrEmpty(props.decorativeFleckDefName))
+            {
+                FleckDef? named = DefDatabase<FleckDef>.GetNamedSilentFail(props.decorativeFleckDefName);
+                if (named != null)
+                    return named;
+            }
+            return damageDef.explosionCellFleck;
+        }
+
+        private void RefreshRingDrawCacheIfNeeded(CompProperties_AerialSupportEffect_NuclearShockwave p, FleckDef? ringFleckDef)
+        {
+            string fleckName = ringFleckDef?.defName ?? "";
+            string texPath = p.ringTexturePath ?? "";
+            string key = $"{p.useFleckMaterialForDirectRing}|{fleckName}|{texPath}|{p.ringColorR}|{p.ringColorG}|{p.ringColorB}|{p.ringAlpha}";
+            if (ringDrawSharedMaterial != null && ringDrawCacheKey == key)
+                return;
+
+            ringDrawCacheKey = key;
+            ringDrawSharedMaterial = null;
+            ringDrawMatKind = RingDrawMatKind.None;
+            ringDrawFleckGraphicColor = Color.white;
+            ringDrawFleckSizeAvg = 1f;
+
+            if (p.useFleckMaterialForDirectRing && ringFleckDef != null)
             {
                 try
                 {
-                    Material? texMat = MaterialPool.MatFrom(path, ShaderDatabase.Transparent);
+                    GraphicData? gd = ringFleckDef.GetGraphicData(0);
+                    Graphic? graphic = gd?.Graphic;
+                    Material? m = graphic?.MatSingle;
+                    if (m != null && m != BaseContent.BadMat)
+                    {
+                        ringDrawSharedMaterial = m;
+                        ringDrawFleckGraphicColor = graphic!.Color;
+                        Vector2 ds = gd!.drawSize;
+                        ringDrawFleckSizeAvg = (ds.x + ds.y) * 0.5f;
+                        if (ringDrawFleckSizeAvg < 0.01f)
+                            ringDrawFleckSizeAvg = 1f;
+                        ringDrawMatKind = RingDrawMatKind.FleckGraphic;
+                        return;
+                    }
+                }
+                catch
+                {
+                    // 回退
+                }
+            }
+
+            if (!string.IsNullOrEmpty(texPath))
+            {
+                try
+                {
+                    Material? texMat = MaterialPool.MatFrom(texPath, ShaderDatabase.Transparent);
                     if (texMat != null && texMat.mainTexture != null)
                     {
-                        cachedRingMaterial = texMat;
-                        return cachedRingMaterial;
+                        ringDrawSharedMaterial = texMat;
+                        ringDrawMatKind = RingDrawMatKind.TexturePath;
+                        return;
                     }
                 }
                 catch
@@ -344,9 +425,9 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                 }
             }
 
-            Color solid = new Color(r, g, b, a);
-            cachedRingMaterial = SolidColorMaterials.SimpleSolidColorMaterial(solid);
-            return cachedRingMaterial;
+            Color solid = new Color(p.ringColorR, p.ringColorG, p.ringColorB, p.ringAlpha);
+            ringDrawSharedMaterial = SolidColorMaterials.SimpleSolidColorMaterial(solid);
+            ringDrawMatKind = RingDrawMatKind.SolidColor;
         }
 
         /// <summary>每帧由 <see cref="NuclearShockwaveController.MapComponentDraw"/> 调用；仅绘制紧凑主体圆环，不推进逻辑、不造成伤害、不使用 Fleck。</summary>
@@ -366,13 +447,30 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             float visualRadius = currentRadius;
             float inner = Mathf.Max(0f, visualRadius - ringThickness);
 
-            Material? mat = GetOrCreateRingMaterial(props);
-            if (mat == null)
+            DamageDef? damageDef = DefDatabase<DamageDef>.GetNamedSilentFail(props.damageDefDefName);
+            if (damageDef == null)
+                damageDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_BlastWave");
+            if (damageDef == null)
+                damageDef = DamageDefOf.Bomb;
+
+            FleckDef? ringFleckDef = ResolveRingFleckDef(damageDef);
+            RefreshRingDrawCacheIfNeeded(props, ringFleckDef);
+
+            if (ringDrawSharedMaterial == null || ringDrawMatKind == RingDrawMatKind.None)
                 return;
 
             float drawY = AltitudeLayer.MoteOverhead.AltitudeFor();
             int rCeil = Mathf.CeilToInt(visualRadius);
-            float scale = props.ringDrawScale > 0f ? props.ringDrawScale : 1f;
+            float baseDrawScale = props.ringDrawScale > 0f ? props.ringDrawScale : 1f;
+
+            float minSc = props.ringCellMinScale;
+            float maxSc = props.ringCellMaxScale > minSc ? props.ringCellMaxScale : minSc;
+            float minAf = props.ringCellMinAlphaFactor;
+            float maxAf = props.ringCellMaxAlphaFactor > minAf ? props.ringCellMaxAlphaFactor : minAf;
+            float minBf = props.ringCellMinBrightnessFactor;
+            float maxBf = props.ringCellMaxBrightnessFactor > minBf ? props.ringCellMaxBrightnessFactor : minBf;
+            float pulseAmp = props.ringCellPulseAmplitude > 0f ? props.ringCellPulseAmplitude : 0.12f;
+            int ticksGame = Find.TickManager?.TicksGame ?? 0;
 
             for (int dx = -rCeil; dx <= rCeil; dx++)
             {
@@ -386,15 +484,61 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                     if (dist < inner || dist > visualRadius)
                         continue;
 
+                    float scaleFactor = Mathf.Lerp(minSc, maxSc, StableRandom01(cell, 71001));
+                    float sizeMul = ringDrawMatKind == RingDrawMatKind.FleckGraphic ? ringDrawFleckSizeAvg : 1f;
+                    float finalScale = baseDrawScale * scaleFactor * sizeMul;
+
+                    float alphaFactor = Mathf.Lerp(minAf, maxAf, StableRandom01(cell, 71003));
+                    float brightFactor = Mathf.Lerp(minBf, maxBf, StableRandom01(cell, 71004));
+
+                    float pulse = 1f;
+                    if (props.ringCellSubtlePulse)
+                    {
+                        float phase = StableRandom01(cell, 71002) * 100f;
+                        pulse = 1f + Mathf.Sin((ticksGame + phase) * 0.15f) * pulseAmp;
+                        pulse = Mathf.Clamp(pulse, 1f - pulseAmp, 1f + pulseAmp);
+                    }
+
+                    Quaternion rot = Quaternion.identity;
+                    if (props.ringCellRandomRotation)
+                    {
+                        float ang = StableRandom01(cell, 71000) * 360f;
+                        rot = Quaternion.AngleAxis(ang, Vector3.up);
+                    }
+
                     Vector3 drawPos = cell.ToVector3Shifted();
                     drawPos.y = drawY;
 
-                    Matrix4x4 matrix = Matrix4x4.TRS(
-                        drawPos,
-                        Quaternion.identity,
-                        new Vector3(scale, 1f, scale));
+                    Matrix4x4 matrix = Matrix4x4.TRS(drawPos, rot, new Vector3(finalScale, 1f, finalScale));
 
-                    Graphics.DrawMesh(MeshPool.plane10, matrix, mat, 0);
+                    Color c;
+                    switch (ringDrawMatKind)
+                    {
+                        case RingDrawMatKind.FleckGraphic:
+                            c = ringDrawFleckGraphicColor;
+                            c.r = Mathf.Clamp01(c.r * brightFactor);
+                            c.g = Mathf.Clamp01(c.g * brightFactor);
+                            c.b = Mathf.Clamp01(c.b * brightFactor);
+                            c.a = Mathf.Clamp01(c.a * props.ringAlpha * alphaFactor * pulse);
+                            break;
+                        case RingDrawMatKind.TexturePath:
+                            c = new Color(props.ringColorR, props.ringColorG, props.ringColorB, props.ringAlpha);
+                            c.r = Mathf.Clamp01(c.r * brightFactor);
+                            c.g = Mathf.Clamp01(c.g * brightFactor);
+                            c.b = Mathf.Clamp01(c.b * brightFactor);
+                            c.a = Mathf.Clamp01(c.a * alphaFactor * pulse);
+                            break;
+                        default:
+                            c = ringDrawSharedMaterial.color;
+                            c.r = Mathf.Clamp01(c.r * brightFactor);
+                            c.g = Mathf.Clamp01(c.g * brightFactor);
+                            c.b = Mathf.Clamp01(c.b * brightFactor);
+                            c.a = Mathf.Clamp01(c.a * alphaFactor * pulse);
+                            break;
+                    }
+
+                    RingCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
+                    Graphics.DrawMesh(MeshPool.plane10, matrix, ringDrawSharedMaterial, 0, null, 0, RingCellMatPropertyBlock);
                 }
             }
         }
@@ -469,14 +613,15 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                 damageDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_BlastWave");
             if (damageDef == null)
                 damageDef = DamageDefOf.Bomb;
-            FleckDef? cellFleck = damageDef.explosionCellFleck;
             int now = Find.TickManager.TicksGame;
 
             previousRadius = currentRadius;
             currentRadius = Mathf.Min(currentRadius + speed, maxR);
 
             ApplyShockwaveDamageForSweptCells(mapVal, previousRadius, currentRadius, props, now, damageDef, damageAmountVal);
-            SpawnDecorativeShockwaveFlecks(mapVal, currentRadius, cellFleck, now);
+
+            FleckDef? decorativeFleck = ResolveDecorativeFleckDef(damageDef);
+            SpawnDecorativeShockwaveFlecks(mapVal, currentRadius, decorativeFleck, now);
 
             if (currentRadius >= maxR)
                 return true;
