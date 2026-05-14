@@ -224,7 +224,10 @@ namespace DMS_Legion.Incidents.ElectronicAngel
                     continue;
                 Hediff hediff = HediffMaker.MakeHediff(hediffDef, p);
                 if (hediff != null)
-                    p.health.AddHediff(hediff);
+                {
+                    hediff.Part = null;
+                    p.health.AddHediff(hediff, null);
+                }
             }
         }
 

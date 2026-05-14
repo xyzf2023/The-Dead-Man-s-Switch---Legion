@@ -168,12 +168,12 @@ namespace DMS_Legion.Incidents.UnknownMechSupport
                 Pawn p = pawns[i];
                 if (p?.health?.hediffSet == null)
                     continue;
-                BodyPartRecord? part = p.health.hediffSet.GetNotMissingParts().FirstOrFallback();
-                if (part == null)
-                    continue;
-                Hediff hediff = HediffMaker.MakeHediff(hediffDef, p, part);
+                Hediff hediff = HediffMaker.MakeHediff(hediffDef, p);
                 if (hediff != null)
-                    p.health.AddHediff(hediff);
+                {
+                    hediff.Part = null;
+                    p.health.AddHediff(hediff, null);
+                }
             }
         }
 
