@@ -284,7 +284,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         /// <summary>遍历每格物品时先复制到此列表，避免 TakeDamage/ApplyDamage 修改原集合导致 InvalidOperationException。</summary>
         private static readonly List<Thing> thingsAtCellBuffer = new List<Thing>();
 
-        private static readonly MaterialPropertyBlock EmpRingCellMatPropertyBlock = new MaterialPropertyBlock();
+        private readonly MaterialPropertyBlock empRingCellMatPropertyBlock = new MaterialPropertyBlock();
 
         private enum EmpRingDrawMatKind
         {
@@ -699,8 +699,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
                     c.a = Mathf.Clamp01(c.a * fadeAlpha);
 
-                    EmpRingCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
-                    Graphics.DrawMesh(MeshPool.plane10, matrix, empRingDrawSharedMaterial, 0, null, 0, EmpRingCellMatPropertyBlock);
+                    empRingCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
+                    Graphics.DrawMesh(MeshPool.plane10, matrix, empRingDrawSharedMaterial, 0, null, 0, empRingCellMatPropertyBlock);
                 }
             }
         }

@@ -188,7 +188,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
         private static readonly List<Thing> toDamageBuffer = new List<Thing>();
 
-        private static readonly MaterialPropertyBlock RingCellMatPropertyBlock = new MaterialPropertyBlock();
+        private readonly MaterialPropertyBlock ringCellMatPropertyBlock = new MaterialPropertyBlock();
 
         private enum RingDrawMatKind
         {
@@ -562,8 +562,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
                     c.a = Mathf.Clamp01(c.a * fadeAlpha);
 
-                    RingCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
-                    Graphics.DrawMesh(MeshPool.plane10, matrix, ringDrawSharedMaterial, 0, null, 0, RingCellMatPropertyBlock);
+                    ringCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
+                    Graphics.DrawMesh(MeshPool.plane10, matrix, ringDrawSharedMaterial, 0, null, 0, ringCellMatPropertyBlock);
                 }
             }
         }
