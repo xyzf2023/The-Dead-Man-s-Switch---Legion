@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- Leopard secondary turrets follow the DMS CE pattern:
+	     ballistic CE behavior, but no independent ammo user. -->
+	<ThingDef ParentName="BaseAutoTurretGun" MayRequire="Aoba.DeadManSwitch.AncientCorps">
+		<defName>DMSL_CE_Leopard_KordMG</defName>
+		<label>Leopard Kord support turret</label>
+		<description>A CE-specific mounted Kord support gun for Leopard secondary fire.</description>
+		<graphicData>
+			<texPath>Things/Turrets/DMS_Gun_Kord</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.2</drawSize>
+		</graphicData>
+		<statBases>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.06</ShotSpread>
+			<SwayFactor>1.46</SwayFactor>
+			<RangedWeapon_Cooldown>0</RangedWeapon_Cooldown>
+			<Mass>10</Mass>
+		</statBases>
+		<verbs>
+			<li Class="CombatExtended.VerbPropertiesCE">
+				<recoilAmount>1.25</recoilAmount>
+				<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_127x108mm_FMJ</defaultProjectile>
+				<warmupTime>2.4</warmupTime>
+				<range>75</range>
+				<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+				<burstShotCount>12</burstShotCount>
+				<soundCast>Shot_Autocannon</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<recoilPattern>Mounted</recoilPattern>
+			</li>
+		</verbs>
+		<modExtensions>
+			<li Class="Fortified.HeavyEquippableExtension">
+				<EquippableDef>MountedWeapon</EquippableDef>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseAutoTurretGun" MayRequire="Aoba.DeadManSwitch.AncientCorps">
+		<defName>DMSL_CE_Leopard_ShotgunGun</defName>
+		<label>Leopard close-in defense system</label>
+		<description>A CE-specific close-in defense shotgun turret for Leopard.</description>
+		<graphicData>
+			<texPath>Things/Turrets/DMS_Gun_CIDS</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<SightsEfficiency>0.7</SightsEfficiency>
+			<ShotSpread>0.15</ShotSpread>
+			<SwayFactor>1.36</SwayFactor>
+			<RangedWeapon_Cooldown>0</RangedWeapon_Cooldown>
+			<Mass>10</Mass>
+		</statBases>
+		<verbs>
+			<li Class="CombatExtended.VerbPropertiesCE">
+				<recoilAmount>2.60</recoilAmount>
+				<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+				<warmupTime>1.2</warmupTime>
+				<range>12</range>
+				<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+				<burstShotCount>3</burstShotCount>
+				<soundCast>Shot_Shotgun_NoRack</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>9</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+			</li>
+		</verbs>
+		<modExtensions>
+			<li Class="Fortified.HeavyEquippableExtension">
+				<EquippableDef>MountedWeapon</EquippableDef>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

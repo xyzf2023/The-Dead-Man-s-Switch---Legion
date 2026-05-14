@@ -17,6 +17,51 @@
 				</value>
 			</li>
 
+			<!-- DMS_Gun_KordTurret - Leopard primary weapon -->
+			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+				<defName>DMS_Gun_KordTurret</defName>
+				<statBases>
+					<Mass>85</Mass>
+					<Bulk>39</Bulk>
+					<SwayFactor>1.66</SwayFactor>
+					<ShotSpread>0.06</ShotSpread>
+					<SightsEfficiency>1</SightsEfficiency>
+					<RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+				</statBases>
+				<Properties>
+					<recoilAmount>1.53</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_127x108mm_AP</defaultProjectile>
+					<burstShotCount>12</burstShotCount>
+					<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+					<warmupTime>1.4</warmupTime>
+					<range>75</range>
+					<soundCast>Shot_Autocannon</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>12</muzzleFlashScale>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<recoilPattern>Mounted</recoilPattern>
+				</Properties>
+				<AmmoUser>
+					<magazineSize>50</magazineSize>
+					<reloadTime>4.8</reloadTime>
+					<ammoSet>AmmoSet_127x108mm</ammoSet>
+				</AmmoUser>
+				<FireModes>
+					<noSingleShot>true</noSingleShot>
+					<aiUseBurstMode>false</aiUseBurstMode>
+					<aiAimMode>SuppressFire</aiAimMode>
+					<aimedBurstShotCount>6</aimedBurstShotCount>
+				</FireModes>
+				<weaponTags>
+					<li>CE_AI_Suppressive</li>
+					<li>NoSwitch</li>
+				</weaponTags>
+			</li>
+
 			<!-- DMSL_Gun_57MM - 57mm Autocannon -->
 			<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
 				<defName>DMSL_Gun_57MM</defName>
