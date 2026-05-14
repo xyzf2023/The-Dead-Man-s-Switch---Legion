@@ -93,17 +93,25 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// 核冲击波扩散序列：每 tick 向外推进一环带，环带内每格绘制爆炸 Fleck，对环带内实体造成指定伤害类型伤害；同一实体在 damageCooldownTicks 内只受一次伤害，超过后若再次被波扫到可再次造成伤害；冲击波不因建筑阻挡而停止。
+    /// 核冲击波扩散序列：真实波前半径 <see cref="currentRadius"/> 每 tick 推进；伤害层按扫过径向带处理格子（与视觉厚环解耦），视觉层单独绘制 explosionCellFleck；
+    /// damageCooldownTicks ≤ 0 时同一实体整次序列仅受伤一次，大于 0 时按冷却可再次受伤；冲击波不因建筑阻挡而停止。
     /// </summary>
     public class NuclearShockwaveSequence : IExposable
     {
+        private const float CellHitPadding = 0.75f;
+
         private IntVec3 center;
         private float currentRadius;
-        /// <summary>实体 thingIDNumber -> 上次受到本序列伤害的 tick。用于冷却：仅在超过 damageCooldownTicks 后再次被波扫到才可再次造成伤害。</summary>
+        /// <summary>本 tick 推进前保存的真实波前半径，与推进后的 currentRadius 共同定义伤害层扫过区间。</summary>
+        private float previousRadius;
+        /// <summary>本次序列中已对格子施加过实际伤害的地图格索引（padding 与厚环视觉可能造成重复覆盖，用于避免重复处理）。</summary>
+        private HashSet<int> processedCellIndices = new HashSet<int>();
+        /// <summary>实体 thingIDNumber -> 上次受到本序列伤害的 tick。仅记录实际可受伤且已纳入伤害的实体。</summary>
         private Dictionary<int, int> thingIdToLastHitTick = new Dictionary<int, int>();
         private CompProperties_AerialSupportEffect_NuclearShockwave? props = null;
         private Map? map = null;
 
+        /// <summary>仅用于视觉层枚举厚环带临时格子，勿与伤害层混用。</summary>
         private static readonly List<IntVec3> ringCellsBuffer = new List<IntVec3>();
         private static readonly List<Thing> toDamageBuffer = new List<Thing>();
 
@@ -115,12 +123,23 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             this.props = props;
             this.map = map;
             this.currentRadius = 0f;
+            this.previousRadius = 0f;
+            this.processedCellIndices = new HashSet<int>();
         }
 
         public void ExposeData()
         {
             Scribe_Values.Look(ref center, "center");
             Scribe_Values.Look(ref currentRadius, "currentRadius", 0f);
+            Scribe_Values.Look(ref previousRadius, "previousRadius", 0f);
+            List<int>? processedCellIndicesList = null;
+            if (Scribe.mode == LoadSaveMode.Saving && processedCellIndices != null)
+                processedCellIndicesList = new List<int>(processedCellIndices);
+            Scribe_Collections.Look(ref processedCellIndicesList, "processedCellIndices", LookMode.Value);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+                processedCellIndices = processedCellIndicesList != null
+                    ? new HashSet<int>(processedCellIndicesList)
+                    : new HashSet<int>();
             List<int>? keysList = null;
             List<int>? valuesList = null;
             if (Scribe.mode == LoadSaveMode.Saving && thingIdToLastHitTick != null)
@@ -139,10 +158,126 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             }
             Scribe_Deep.Look(ref props, "props");
             Scribe_References.Look(ref map, "map");
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (thingIdToLastHitTick == null)
+                    thingIdToLastHitTick = new Dictionary<int, int>();
+                if (processedCellIndices == null)
+                    processedCellIndices = new HashSet<int>();
+            }
+        }
+
+        private void ApplyShockwaveDamageForSweptCells(
+            Map mapVal,
+            float fromRadius,
+            float toRadius,
+            CompProperties_AerialSupportEffect_NuclearShockwave props,
+            int now,
+            DamageDef damageDef,
+            int damageAmountVal)
+        {
+            int cooldownTicks = props.damageCooldownTicks;
+            int rCeil = Mathf.CeilToInt(toRadius + CellHitPadding);
+
+            for (int dx = -rCeil; dx <= rCeil; dx++)
+            {
+                for (int dz = -rCeil; dz <= rCeil; dz++)
+                {
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal)) continue;
+                    float dist = (cell - center).LengthHorizontal;
+                    if (!(fromRadius - CellHitPadding < dist && dist <= toRadius + CellHitPadding))
+                        continue;
+                    int cellIndex = mapVal.cellIndices.CellToIndex(cell);
+                    if (processedCellIndices.Contains(cellIndex))
+                        continue;
+                    processedCellIndices.Add(cellIndex);
+
+                    toDamageBuffer.Clear();
+                    foreach (Thing thing in mapVal.thingGrid.ThingsListAt(cell))
+                    {
+                        if (thing == null || thing.Destroyed)
+                            continue;
+                        if (!(thing is Pawn || thing.def?.useHitPoints == true))
+                            continue;
+
+                        int id = thing.thingIDNumber;
+                        if (thingIdToLastHitTick.TryGetValue(id, out int lastTick))
+                        {
+                            if (cooldownTicks <= 0)
+                                continue;
+                            if ((now - lastTick) < cooldownTicks)
+                                continue;
+                        }
+
+                        thingIdToLastHitTick[id] = now;
+                        toDamageBuffer.Add(thing);
+                    }
+
+                    DamageInfo dinfo = new DamageInfo(
+                        damageDef,
+                        damageAmountVal,
+                        -1f,
+                        -1f,
+                        null,
+                        null,
+                        null,
+                        DamageInfo.SourceCategory.ThingOrUnknown,
+                        null,
+                        true,
+                        true,
+                        QualityCategory.Normal,
+                        true,
+                        false);
+
+                    for (int j = 0; j < toDamageBuffer.Count; j++)
+                    {
+                        Thing thing = toDamageBuffer[j];
+                        if (thing != null && !thing.Destroyed && thing.Spawned)
+                        {
+                            try { thing.TakeDamage(dinfo); }
+                            catch { }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SpawnShockwaveVisuals(Map mapVal, float visualRadius, int ringThickness, FleckDef? cellFleck)
+        {
+            float inner = Mathf.Max(0f, visualRadius - ringThickness);
+            ringCellsBuffer.Clear();
+            int rCeil = Mathf.CeilToInt(visualRadius + ringThickness);
+            for (int dx = -rCeil; dx <= rCeil; dx++)
+            {
+                for (int dz = -rCeil; dz <= rCeil; dz++)
+                {
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal)) continue;
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < inner - 0.01f || dist > visualRadius + 0.01f)
+                        continue;
+                    ringCellsBuffer.Add(cell);
+                }
+            }
+
+            int visualCounter = 0;
+            for (int i = 0; i < ringCellsBuffer.Count; i++)
+            {
+                IntVec3 cell = ringCellsBuffer[i];
+                if ((visualCounter++ % 4 == 0) && cellFleck != null)
+                {
+                    try
+                    {
+                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, cellFleck, Rand.Range(0.8f, 1.4f));
+                    }
+                    catch { }
+                }
+            }
         }
 
         /// <summary>
-        /// 每 tick 推进半径、计算环带、施加伤害并绘制每格爆炸 Fleck。返回 true 表示序列结束。
+        /// 每 tick 推进波前、施加伤害并绘制视觉。返回 true 表示序列结束（波前已达 maxRadius）。
         /// </summary>
         public bool Tick(NuclearShockwaveController controller)
         {
@@ -163,74 +298,17 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                 damageDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_BlastWave");
             if (damageDef == null)
                 damageDef = DamageDefOf.Bomb;
-            FleckDef? cellFleck = damageDef?.explosionCellFleck;
-
-            currentRadius += speed;
-            if (currentRadius > maxR)
-                return true;
-
-            float inner = Mathf.Max(0f, currentRadius - thickness);
-            ringCellsBuffer.Clear();
-            int rCeil = Mathf.CeilToInt(currentRadius + thickness);
-            for (int dx = -rCeil; dx <= rCeil; dx++)
-            {
-                for (int dz = -rCeil; dz <= rCeil; dz++)
-                {
-                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
-                    if (!cell.InBounds(mapVal)) continue;
-                    float dist = (cell - center).LengthHorizontal;
-                    if (dist >= inner - 0.01f && dist <= currentRadius + 0.01f)
-                        ringCellsBuffer.Add(cell);
-                }
-            }
-
+            FleckDef? cellFleck = damageDef.explosionCellFleck;
             int now = Find.TickManager.TicksGame;
-            int cooldownTicks = props.damageCooldownTicks;
-            int visualCounter = 0;
-            for (int i = 0; i < ringCellsBuffer.Count; i++)
-            {
-                IntVec3 cell = ringCellsBuffer[i];
 
-                // 每格绘制爆炸格特效（来自伤害类型的 explosionCellFleck），采样以控制性能
-                if ((visualCounter++ % 4 == 0) && cellFleck != null)
-                {
-                    try
-                    {
-                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, cellFleck, Rand.Range(0.8f, 1.4f));
-                    }
-                    catch { }
-                }
+            previousRadius = currentRadius;
+            currentRadius = Mathf.Min(currentRadius + speed, maxR);
 
-                // 先收集本格需造成伤害的实体，避免 TakeDamage 修改 ThingsListAt 导致枚举异常
-                toDamageBuffer.Clear();
-                foreach (Thing thing in mapVal.thingGrid.ThingsListAt(cell))
-                {
-                    if (thing == null || thing.Destroyed) continue;
-                    int id = thing.thingIDNumber;
-                    if (thingIdToLastHitTick.TryGetValue(id, out int lastTick))
-                    {
-                        if (cooldownTicks > 0 && (now - lastTick) < cooldownTicks)
-                            continue;
-                    }
-                    // Pawn 使用身体部位生命值（useHitPoints 通常为 false），需显式包含；其余有 useHitPoints 的实体（建筑、物品等）一并伤害
-                    if (damageDef != null && (thing is Pawn || (thing.def?.useHitPoints == true)))
-                        toDamageBuffer.Add(thing);
-                    thingIdToLastHitTick[id] = now;
-                }
-                if (damageDef != null)
-                {
-                    DamageInfo dinfo = new DamageInfo(damageDef, damageAmountVal, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-                    for (int j = 0; j < toDamageBuffer.Count; j++)
-                    {
-                        Thing thing = toDamageBuffer[j];
-                        if (thing != null && !thing.Destroyed && thing.Spawned)
-                        {
-                            try { thing.TakeDamage(dinfo); }
-                            catch { }
-                        }
-                    }
-                }
-            }
+            ApplyShockwaveDamageForSweptCells(mapVal, previousRadius, currentRadius, props, now, damageDef, damageAmountVal);
+            SpawnShockwaveVisuals(mapVal, currentRadius, thickness, cellFleck);
+
+            if (currentRadius >= maxR)
+                return true;
 
             return false;
         }
