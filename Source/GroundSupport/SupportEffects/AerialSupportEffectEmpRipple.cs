@@ -212,19 +212,19 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// EMP 波纹扩散序列：真实波前半径每 tick 推进；效果层按上一半径到当前半径扫过的径向带处理格子（与视觉厚环解耦），视觉层单独播 BlastEMP fleck。
-    /// 同一实体在 effectCooldownTicks 内只受一次效果，超过后若再次被波扫到可再次施加。
-    /// 机械体先受伤害，经 mechanoidStunDelayTicks 后再尝试眩晕，避免“边枚举边修改”且被击杀者不再被眩晕。
+    /// EMP 波纹扩散序列：真实波前半径 <see cref="currentRadius"/> 每 tick 推进（与视觉厚环解耦）；效果层按扫过区间处理格子并去重；
+    /// effectCooldownTicks ≤ 0 时同一实体整次序列仅命中一次，大于 0 时按冷却可再次命中。
+    /// 机械体先受伤害，经 mechanoidStunDelayTicks 后再尝试眩晕。
     /// </summary>
     public class EmpRippleSequence : IExposable
     {
-        private const float RadiusEpsilon = 0.01f;
+        private const float CellHitPadding = 0.75f;
 
         private IntVec3 center;
         private float currentRadius;
-        /// <summary>上一 tick 结束时的真实波前半径，与 currentRadius 共同定义本 tick 效果层扫过的径向区间。</summary>
+        /// <summary>本 tick 推进前保存的真实波前半径，与推进后的 currentRadius 共同定义效果层扫过区间。</summary>
         private float previousRadius;
-        /// <summary>效果层已处理过的地图格索引，防止边界浮点误差导致漏格/重复扫格。</summary>
+        /// <summary>本次序列中已对格子施加过实际 EMP 效果的地图格索引（padding 与厚环视觉可能造成重复覆盖，用于避免重复处理）。</summary>
         private HashSet<int> processedCellIndices = new HashSet<int>();
         private Dictionary<int, int> thingIdToLastHitTick = new Dictionary<int, int>();
         private CompProperties_AerialSupportEffect_EmpRipple? props = null;
@@ -232,6 +232,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         /// <summary>机械体眩晕延迟队列：到 applyAtTick 时对仍存活的 pawn 施加眩晕。</summary>
         private List<PendingMechanoidStun> pendingMechanoidStuns = new List<PendingMechanoidStun>();
 
+        /// <summary>仅用于视觉层枚举厚环带临时格子，勿与效果层混用。</summary>
         private static readonly List<IntVec3> ringCellsBuffer = new List<IntVec3>();
         /// <summary>遍历每格物品时先复制到此列表，避免 TakeDamage/ApplyDamage 修改原集合导致 InvalidOperationException。</summary>
         private static readonly List<Thing> thingsAtCellBuffer = new List<Thing>();
@@ -252,13 +253,15 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         {
             Scribe_Values.Look(ref center, "center");
             Scribe_Values.Look(ref currentRadius, "currentRadius", 0f);
-            Scribe_Values.Look(ref previousRadius, "previousRadius", -1f);
-            List<int>? processedCellList = null;
+            Scribe_Values.Look(ref previousRadius, "previousRadius", 0f);
+            List<int>? processedCellIndicesList = null;
             if (Scribe.mode == LoadSaveMode.Saving && processedCellIndices != null)
-                processedCellList = new List<int>(processedCellIndices);
-            Scribe_Collections.Look(ref processedCellList, "processedCellIndices", LookMode.Value);
+                processedCellIndicesList = new List<int>(processedCellIndices);
+            Scribe_Collections.Look(ref processedCellIndicesList, "processedCellIndices", LookMode.Value);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
-                processedCellIndices = processedCellList != null ? new HashSet<int>(processedCellList) : new HashSet<int>();
+                processedCellIndices = processedCellIndicesList != null
+                    ? new HashSet<int>(processedCellIndicesList)
+                    : new HashSet<int>();
             List<int>? keysList = null;
             List<int>? valuesList = null;
             if (Scribe.mode == LoadSaveMode.Saving && thingIdToLastHitTick != null)
@@ -278,88 +281,174 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             Scribe_Deep.Look(ref props, "props");
             Scribe_References.Look(ref map, "map");
             Scribe_Collections.Look(ref pendingMechanoidStuns, "pendingMechanoidStuns", LookMode.Deep);
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && pendingMechanoidStuns == null)
-                pendingMechanoidStuns = new List<PendingMechanoidStun>();
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && processedCellIndices == null)
-                processedCellIndices = new HashSet<int>();
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && previousRadius < 0f)
-                previousRadius = currentRadius;
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (thingIdToLastHitTick == null)
+                    thingIdToLastHitTick = new Dictionary<int, int>();
+                if (pendingMechanoidStuns == null)
+                    pendingMechanoidStuns = new List<PendingMechanoidStun>();
+                if (processedCellIndices == null)
+                    processedCellIndices = new HashSet<int>();
+            }
         }
 
-        /// <summary>效果层径向带：距离落在 (sweepInner, sweepOuter]（sweepInner≤ε 时视为 [0, sweepOuter]），含少量 ε 容差。</summary>
-        private bool CellInEffectSweepBand(float dist, float sweepInner, float sweepOuter)
+        private void ProcessPendingMechanoidStuns(int tickGame, int disableTicks)
         {
-            if (dist > sweepOuter + RadiusEpsilon)
-                return false;
-            if (sweepInner <= RadiusEpsilon)
-                return dist >= 0f;
-            return dist > sweepInner + RadiusEpsilon;
+            if (pendingMechanoidStuns == null || pendingMechanoidStuns.Count == 0)
+                return;
+            DamageInfo empDinfoForStun = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
+            pendingMechanoidStuns.RemoveAll(entry =>
+            {
+                if (entry.applyAtTick > tickGame) return false;
+                if (entry.pawn == null || entry.pawn.Destroyed || !entry.pawn.Spawned) return true;
+                try
+                {
+                    entry.pawn.stances?.stunner?.Notify_DamageApplied(empDinfoForStun);
+                }
+                catch { }
+                return true;
+            });
         }
 
-        private void ApplyEmpEffectsAtCell(IntVec3 cell, EmpRippleController controller, Map mapVal, int tickGame, DamageInfo empDinfo, int untilTick)
+        private void FlushPendingMechanoidStuns(int disableTicks)
         {
-            if (props == null) return;
+            if (pendingMechanoidStuns == null || pendingMechanoidStuns.Count == 0)
+                return;
+            DamageInfo empDinfoEnd = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
+            foreach (PendingMechanoidStun entry in pendingMechanoidStuns)
+            {
+                if (entry.pawn == null || entry.pawn.Destroyed || !entry.pawn.Spawned) continue;
+                try { entry.pawn.stances?.stunner?.Notify_DamageApplied(empDinfoEnd); }
+                catch { }
+            }
+            pendingMechanoidStuns.Clear();
+        }
+
+        private void ApplyRippleEffectsForSweptCells(
+            EmpRippleController controller,
+            Map mapVal,
+            float fromRadius,
+            float toRadius,
+            CompProperties_AerialSupportEffect_EmpRipple props,
+            int tickGame,
+            int disableTicks)
+        {
+            DamageInfo empDinfo = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
+            int untilTick = tickGame + disableTicks;
             int cooldownTicks = props.effectCooldownTicks;
 
-            thingsAtCellBuffer.Clear();
-            thingsAtCellBuffer.AddRange(mapVal.thingGrid.ThingsListAt(cell));
-            foreach (Thing thing in thingsAtCellBuffer)
+            int rCeil = Mathf.CeilToInt(toRadius + CellHitPadding);
+            for (int dx = -rCeil; dx <= rCeil; dx++)
             {
-                if (thing == null || thing.Destroyed) continue;
-                int id = thing.thingIDNumber;
-                if (thingIdToLastHitTick.TryGetValue(id, out int lastTick))
+                for (int dz = -rCeil; dz <= rCeil; dz++)
                 {
-                    if (cooldownTicks > 0 && (tickGame - lastTick) < cooldownTicks)
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal)) continue;
+                    float dist = (cell - center).LengthHorizontal;
+                    if (!(fromRadius - CellHitPadding < dist && dist <= toRadius + CellHitPadding))
                         continue;
-                }
-                thingIdToLastHitTick[id] = tickGame;
+                    int cellIndex = mapVal.cellIndices.CellToIndex(cell);
+                    if (processedCellIndices.Contains(cellIndex))
+                        continue;
+                    processedCellIndices.Add(cellIndex);
 
-                if (thing is Pawn pawn && pawn.RaceProps != null && pawn.RaceProps.IsMechanoid)
-                {
-                    if (props.damageConsciousnessPart && pawn.health?.hediffSet != null)
+                    thingsAtCellBuffer.Clear();
+                    thingsAtCellBuffer.AddRange(mapVal.thingGrid.ThingsListAt(cell));
+                    foreach (Thing thing in thingsAtCellBuffer)
                     {
-                        BodyPartRecord? consciousnessPart = pawn.health.hediffSet.GetBrain();
-                        if (consciousnessPart != null)
+                        if (thing == null || thing.Destroyed) continue;
+                        int id = thing.thingIDNumber;
+                        if (thingIdToLastHitTick.TryGetValue(id, out int lastTick))
                         {
-                            DamageDef? nuclearEmpDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_NuclearEMP") ?? DamageDefOf.EMP;
-                            int amount = props.consciousnessPartDamageAmount > 0 ? props.consciousnessPartDamageAmount : 1000;
-                            if (nuclearEmpDef != null)
+                            if (cooldownTicks <= 0)
+                                continue;
+                            if ((tickGame - lastTick) < cooldownTicks)
+                                continue;
+                        }
+                        thingIdToLastHitTick[id] = tickGame;
+
+                        if (thing is Pawn pawn && pawn.RaceProps != null && pawn.RaceProps.IsMechanoid)
+                        {
+                            if (props.damageConsciousnessPart && pawn.health?.hediffSet != null)
                             {
-                                DamageInfo dinfo = new DamageInfo(nuclearEmpDef, amount, -1f, -1f, null, consciousnessPart, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-                                try { pawn.TakeDamage(dinfo); }
-                                catch { }
+                                BodyPartRecord? consciousnessPart = pawn.health.hediffSet.GetBrain();
+                                if (consciousnessPart != null)
+                                {
+                                    DamageDef? nuclearEmpDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_NuclearEMP") ?? DamageDefOf.EMP;
+                                    int amount = props.consciousnessPartDamageAmount > 0 ? props.consciousnessPartDamageAmount : 1000;
+                                    if (nuclearEmpDef != null)
+                                    {
+                                        DamageInfo dinfo = new DamageInfo(nuclearEmpDef, amount, -1f, -1f, null, consciousnessPart, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
+                                        try { pawn.TakeDamage(dinfo); }
+                                        catch { }
+                                    }
+                                }
                             }
+                            int delay = props.mechanoidStunDelayTicks > 0 ? props.mechanoidStunDelayTicks : 0;
+                            if (delay > 0)
+                            {
+                                if (pendingMechanoidStuns == null) pendingMechanoidStuns = new List<PendingMechanoidStun>();
+                                pendingMechanoidStuns.Add(new PendingMechanoidStun(pawn, tickGame + delay));
+                            }
+                            else if (pawn.stances?.stunner != null)
+                            {
+                                pawn.stances.stunner.Notify_DamageApplied(empDinfo);
+                            }
+                            continue;
+                        }
+
+                        if (thing is Building)
+                        {
+                            CompStunnable? stun = thing.TryGetComp<CompStunnable>();
+                            if (stun != null && stun.CanBeStunnedByDamage(DamageDefOf.EMP))
+                            {
+                                stun.ApplyDamage(empDinfo);
+                                continue;
+                            }
+                            if (props.disablePowerBuildings && thing.TryGetComp<CompPowerTrader>() != null && controller != null)
+                                controller.RegisterPowerSuppressed(thing, untilTick);
                         }
                     }
-                    int delay = props.mechanoidStunDelayTicks > 0 ? props.mechanoidStunDelayTicks : 0;
-                    if (delay > 0)
-                    {
-                        if (pendingMechanoidStuns == null) pendingMechanoidStuns = new List<PendingMechanoidStun>();
-                        pendingMechanoidStuns.Add(new PendingMechanoidStun(pawn, tickGame + delay));
-                    }
-                    else if (pawn.stances?.stunner != null)
-                    {
-                        pawn.stances.stunner.Notify_DamageApplied(empDinfo);
-                    }
-                    continue;
                 }
+            }
+        }
 
-                if (thing is Building)
+        private void SpawnRippleVisuals(Map mapVal, float visualRadius, int ringThickness)
+        {
+            float inner = Mathf.Max(0f, visualRadius - ringThickness);
+            ringCellsBuffer.Clear();
+            int rCeil = Mathf.CeilToInt(visualRadius + ringThickness);
+            for (int dx = -rCeil; dx <= rCeil; dx++)
+            {
+                for (int dz = -rCeil; dz <= rCeil; dz++)
                 {
-                    CompStunnable? stun = thing.TryGetComp<CompStunnable>();
-                    if (stun != null && stun.CanBeStunnedByDamage(DamageDefOf.EMP))
-                    {
-                        stun.ApplyDamage(empDinfo);
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal)) continue;
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < inner - 0.01f || dist > visualRadius + 0.01f)
                         continue;
+                    ringCellsBuffer.Add(cell);
+                }
+            }
+
+            FleckDef? blastEmpFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
+            int visualCounter = 0;
+            for (int i = 0; i < ringCellsBuffer.Count; i++)
+            {
+                IntVec3 cell = ringCellsBuffer[i];
+                if ((visualCounter++ % 4 == 0) && blastEmpFleck != null)
+                {
+                    try
+                    {
+                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, blastEmpFleck, Rand.Range(0.6f, 1f));
                     }
-                    if (props.disablePowerBuildings && thing.TryGetComp<CompPowerTrader>() != null && controller != null)
-                        controller.RegisterPowerSuppressed(thing, untilTick);
+                    catch { }
                 }
             }
         }
 
         /// <summary>
-        /// 每 tick 推进半径、计算环带、施加效果并播放采样特效。返回 true 表示序列结束（半径已超过 maxRadius）
+        /// 每 tick 推进波前、施加效果并播放视觉。返回 true 表示序列结束（波前已达 maxRadius）。
         /// </summary>
         public bool Tick(EmpRippleController controller)
         {
@@ -377,94 +466,17 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             int disableTicks = props.disableTicks > 0 ? props.disableTicks : 1800;
             int tickGame = Find.TickManager.TicksGame;
 
-            // 先处理到期的延迟眩晕：仅对仍存活的机械体施加，被伤害击杀的已不在列表中或已 Destroyed
-            if (pendingMechanoidStuns != null && pendingMechanoidStuns.Count > 0)
-            {
-                DamageInfo empDinfoForStun = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-                pendingMechanoidStuns.RemoveAll(entry =>
-                {
-                    if (entry.applyAtTick > tickGame) return false;
-                    if (entry.pawn == null || entry.pawn.Destroyed || !entry.pawn.Spawned) return true;
-                    try
-                    {
-                        entry.pawn.stances?.stunner?.Notify_DamageApplied(empDinfoForStun);
-                    }
-                    catch { }
-                    return true;
-                });
-            }
-
-            float sweepInner = previousRadius;
-            currentRadius += speed;
-            float sweepOuter = Mathf.Min(currentRadius, maxR);
-
-            // 效果层：本 tick 波前扫过的径向带 (sweepInner, sweepOuter]，与视觉环带宽度解耦，避免漏格
-            ringCellsBuffer.Clear();
-            int rCeilEffect = Mathf.CeilToInt(sweepOuter);
-            for (int dx = -rCeilEffect; dx <= rCeilEffect; dx++)
-            {
-                for (int dz = -rCeilEffect; dz <= rCeilEffect; dz++)
-                {
-                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
-                    if (!cell.InBounds(mapVal)) continue;
-                    float dist = (cell - center).LengthHorizontal;
-                    if (!CellInEffectSweepBand(dist, sweepInner, sweepOuter)) continue;
-                    ringCellsBuffer.Add(cell);
-                }
-            }
-
-            DamageInfo empDinfo = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-            int untilTick = tickGame + disableTicks;
-
-            for (int i = 0; i < ringCellsBuffer.Count; i++)
-            {
-                IntVec3 cell = ringCellsBuffer[i];
-                int cellIndex = mapVal.cellIndices.CellToIndex(cell);
-                if (!processedCellIndices.Add(cellIndex))
-                    continue;
-                ApplyEmpEffectsAtCell(cell, controller, mapVal, tickGame, empDinfo, untilTick);
-            }
-
-            // 视觉层：沿用厚环带，仅播 fleck，不参与命中判定
-            float visualInner = Mathf.Max(0f, currentRadius - thickness);
-            int visualCounter = 0;
-            FleckDef? blastEmpFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
-            int rCeilVisual = Mathf.CeilToInt(currentRadius + thickness);
-            for (int dx = -rCeilVisual; dx <= rCeilVisual; dx++)
-            {
-                for (int dz = -rCeilVisual; dz <= rCeilVisual; dz++)
-                {
-                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
-                    if (!cell.InBounds(mapVal)) continue;
-                    float dist = (cell - center).LengthHorizontal;
-                    if (dist < visualInner - RadiusEpsilon || dist > currentRadius + RadiusEpsilon)
-                        continue;
-                    if ((visualCounter++ % 4 == 0) && blastEmpFleck != null)
-                    {
-                        try
-                        {
-                            FleckMaker.Static(cell.ToVector3Shifted(), mapVal, blastEmpFleck, Rand.Range(0.6f, 1f));
-                        }
-                        catch { }
-                    }
-                }
-            }
+            ProcessPendingMechanoidStuns(tickGame, disableTicks);
 
             previousRadius = currentRadius;
+            currentRadius = Mathf.Min(currentRadius + speed, maxR);
 
-            if (currentRadius > maxR)
+            ApplyRippleEffectsForSweptCells(controller, mapVal, previousRadius, currentRadius, props, tickGame, disableTicks);
+            SpawnRippleVisuals(mapVal, currentRadius, thickness);
+
+            if (currentRadius >= maxR)
             {
-                if (pendingMechanoidStuns != null && pendingMechanoidStuns.Count > 0)
-                {
-                    DamageInfo empDinfoEnd = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-                    foreach (var entry in pendingMechanoidStuns)
-                    {
-                        if (entry.pawn == null || entry.pawn.Destroyed || !entry.pawn.Spawned) continue;
-                        try { entry.pawn.stances?.stunner?.Notify_DamageApplied(empDinfoEnd); }
-                        catch { }
-                    }
-                    pendingMechanoidStuns.Clear();
-                }
+                FlushPendingMechanoidStuns(disableTicks);
                 return true;
             }
 
