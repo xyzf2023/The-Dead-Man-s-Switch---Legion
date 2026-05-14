@@ -92,8 +92,8 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             if (candidates == null || candidates.Count == 0)
                 return;
 
-            Thing target = TryFindNearestCandidate(candidates, center, map);
-            if (!IsValidCandidateThing(target, map))
+            Thing? target = TryFindNearestCandidate(candidates, center, map);
+            if (target == null || !IsValidCandidateThing(target, map))
                 return;
 
             TryAssignAttackJobToAvailablePawns(target);
@@ -134,7 +134,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             var candidates = new List<Thing>();
             var added = new HashSet<Thing>();
 
-            HashSet<IAttackTarget> hostileTargets = map.attackTargetsCache?.TargetsHostileToColony;
+            HashSet<IAttackTarget>? hostileTargets = map.attackTargetsCache?.TargetsHostileToColony;
             if (hostileTargets != null)
             {
                 foreach (IAttackTarget t in hostileTargets)
@@ -160,7 +160,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
                 }
             }
 
-            List<Pawn> spawned = map.mapPawns?.AllPawnsSpawned;
+            IReadOnlyList<Pawn>? spawned = map.mapPawns?.AllPawnsSpawned;
             if (spawned != null)
             {
                 for (int i = 0; i < spawned.Count; i++)
@@ -200,9 +200,9 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
                    defName.Contains("Manhunter");
         }
 
-        private static Thing TryFindNearestCandidate(List<Thing> candidates, IntVec3 center, Map map)
+        private static Thing? TryFindNearestCandidate(List<Thing> candidates, IntVec3 center, Map map)
         {
-            Thing best = null;
+            Thing? best = null;
             float bestDistSq = float.MaxValue;
 
             for (int i = 0; i < candidates.Count; i++)
@@ -222,7 +222,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return best;
         }
 
-        private static bool IsValidCandidateThing(Thing thing, Map map)
+        private static bool IsValidCandidateThing(Thing? thing, Map map)
         {
             if (thing == null || thing.Destroyed || !thing.Spawned || thing.Map != map)
                 return false;
