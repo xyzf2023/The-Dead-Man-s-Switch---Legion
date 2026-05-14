@@ -891,9 +891,10 @@
 
 						<!-- Ancient Corps 中“固定主炮”的重型机甲：挂载 CE 机甲弹药组件，避免 CE 弹药打光后武器永久失效
 						     仅包含主炮由 CompProperties_VehicleWeapon.defaultWeapon 提供、实际不可更换武器的机甲：
-						     DMSL_Mech_panzer / DMSL_Mech_STGeorge / DMSL_Mech_ZBZ59D。 -->
+						     DMSL_Mech_leopard / DMSL_Mech_panzer / DMSL_Mech_STGeorge / DMSL_Mech_ZBZ59D。 -->
 						<li Class="PatchOperationAdd">
 							<xpath>Defs/ThingDef[
+								defName="DMSL_Mech_leopard" or
 								defName="DMSL_Mech_panzer" or
 								defName="DMSL_Mech_STGeorge" or
 								defName="DMSL_Mech_ZBZ59D"
@@ -906,6 +907,45 @@
 									<gizmoIconSetMagCount>UI/Buttons/SetMagCount</gizmoIconSetMagCount>
 									<gizmoIconTakeAmmoNow>UI/Buttons/TakeAmmoNow</gizmoIconTakeAmmoNow>
 								</li>
+							</value>
+						</li>
+
+						<!-- Leopard：将 KordTurret 提升为真正主武器，交给 CE 主武器装填逻辑管理 -->
+						<li Class="PatchOperationAdd">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_leopard"]/comps/li[@Class="Fortified.CompProperties_VehicleWeapon"]</xpath>
+							<value>
+								<defaultWeapon>DMS_Gun_KordTurret</defaultWeapon>
+							</value>
+						</li>
+
+						<!-- Leopard：子炮塔改为 CE 专用副炮，主武器位不再重复保留原 KordTurret 子炮塔 -->
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_leopard"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="ShotgunGunMounted"]/turret</xpath>
+							<value>
+								<turret>DMSL_CE_Leopard_ShotgunGun</turret>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_leopard"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="General-purpose machine gun"]/turret</xpath>
+							<value>
+								<turret>DMSL_CE_Leopard_KordMG</turret>
+							</value>
+						</li>
+						<li Class="PatchOperationRemove">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_leopard"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="close inbound system"]</xpath>
+						</li>
+
+						<!-- IronFace：仅将会卡 CE 弹药的机枪与霰弹副炮替换为无弹药 CE 副炮 -->
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_IronFace"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="ShotgunGunMounted"]/turret</xpath>
+							<value>
+								<turret>DMSL_CE_IronFace_ShotgunGun</turret>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_IronFace"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="General-purpose machine gun"]/turret</xpath>
+							<value>
+								<turret>DMSL_CE_IronFace_KordTurret</turret>
 							</value>
 						</li>
 
