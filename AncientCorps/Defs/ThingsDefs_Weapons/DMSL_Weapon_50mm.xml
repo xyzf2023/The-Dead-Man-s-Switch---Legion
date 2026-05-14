@@ -53,7 +53,8 @@
             <AccuracyLong>0.77</AccuracyLong>
             <!-- 射程武器冷却时间：4 -->
             <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
-            <MarketValue>0</MarketValue>
+
+            <MarketValue>1200</MarketValue>
         </statBases>
         
         <!-- 组件列表，定义武器可装备性和样式等特性 -->
