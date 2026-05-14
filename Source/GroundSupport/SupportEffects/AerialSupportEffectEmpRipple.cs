@@ -39,6 +39,32 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         /// <summary>机械体眩晕延迟（tick）：先造成伤害，经此 tick 后再尝试施加眩晕；被伤害击杀的机械体届时已不存在，不会重复处理。0 表示立即施加眩晕。</summary>
         public int mechanoidStunDelayTicks = 10;
 
+        public bool drawDirectRing = true;
+        public int ringFadeOutTicks = 18;
+        public float ringAlpha = 0.55f;
+        public float ringDrawScale = 1f;
+        public float ringColorR = 0.65f;
+        public float ringColorG = 0.85f;
+        public float ringColorB = 1f;
+        public string ringTexturePath = "";
+        public string ringFleckDefName = "";
+        public bool useFleckMaterialForDirectRing = true;
+        public bool drawDecorativeFlecks = true;
+        public string decorativeFleckDefName = "";
+        public int decorativeFleckIntervalTicks = 6;
+        public int decorativeFleckSampleEveryCells = 32;
+        public float decorativeFleckMinScale = 0.35f;
+        public float decorativeFleckMaxScale = 0.65f;
+        public bool ringCellRandomRotation = true;
+        public float ringCellMinScale = 0.75f;
+        public float ringCellMaxScale = 1.15f;
+        public float ringCellMinAlphaFactor = 0.65f;
+        public float ringCellMaxAlphaFactor = 1f;
+        public float ringCellMinBrightnessFactor = 0.85f;
+        public float ringCellMaxBrightnessFactor = 1.15f;
+        public bool ringCellSubtlePulse = true;
+        public float ringCellPulseAmplitude = 0.12f;
+
         public CompProperties_AerialSupportEffect_EmpRipple()
         {
             compClass = typeof(CompAerialSupportEffect_EmpRipple);
@@ -72,8 +98,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// EMP 波纹专用 MapComponent：持有活跃波纹序列与临时停摆表，每 tick 推进序列并供 Harmony 查询停摆状态。
-    /// 与渲染器解耦，保持 AerialSupportRenderer 只负责飞行与轰炸序列。
+    /// EMP 波纹专用 MapComponent：每 tick 推进序列；主体圆环在 MapComponentDraw 中绘制。
     /// </summary>
     public class EmpRippleController : MapComponent
     {
@@ -97,6 +122,32 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                 if (powerSuppressedUntilTick == null)
                     powerSuppressedUntilTick = new Dictionary<int, int>();
                 RecalculateGlobalPowerSuppressionFlag();
+            }
+        }
+
+        public override void MapComponentDraw()
+        {
+            base.MapComponentDraw();
+
+            if (map == null || map != Find.CurrentMap)
+                return;
+
+            if (activeEmpRippleSequences == null || activeEmpRippleSequences.Count == 0)
+                return;
+
+            try
+            {
+                for (int i = 0; i < activeEmpRippleSequences.Count; i++)
+                {
+                    EmpRippleSequence? seq = activeEmpRippleSequences[i];
+                    if (seq == null)
+                        continue;
+                    seq.DrawVisualRing();
+                }
+            }
+            catch
+            {
+                // 绘制失败不应影响游戏运行
             }
         }
 
@@ -212,9 +263,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// EMP 波纹扩散序列：真实波前半径 <see cref="currentRadius"/> 每 tick 推进（与视觉厚环解耦）；效果层按扫过区间处理格子并去重；
-    /// effectCooldownTicks ≤ 0 时同一实体整次序列仅命中一次，大于 0 时按冷却可再次命中。
-    /// 机械体先受伤害，经 mechanoidStunDelayTicks 后再尝试眩晕。
+    /// EMP 波纹扩散序列：效果层由 <see cref="ApplyRippleEffectsForSweptCells"/> 按波前扫过处理；主体视觉为 Draw 中直接绘制圆环；装饰 BlastEMP 稀疏外缘生成；可选淡出阶段仅视觉。
     /// </summary>
     public class EmpRippleSequence : IExposable
     {
@@ -232,10 +281,27 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         /// <summary>机械体眩晕延迟队列：到 applyAtTick 时对仍存活的 pawn 施加眩晕。</summary>
         private List<PendingMechanoidStun> pendingMechanoidStuns = new List<PendingMechanoidStun>();
 
-        /// <summary>仅用于视觉层枚举厚环带临时格子，勿与效果层混用。</summary>
-        private static readonly List<IntVec3> ringCellsBuffer = new List<IntVec3>();
         /// <summary>遍历每格物品时先复制到此列表，避免 TakeDamage/ApplyDamage 修改原集合导致 InvalidOperationException。</summary>
         private static readonly List<Thing> thingsAtCellBuffer = new List<Thing>();
+
+        private static readonly MaterialPropertyBlock EmpRingCellMatPropertyBlock = new MaterialPropertyBlock();
+
+        private enum EmpRingDrawMatKind
+        {
+            None,
+            FleckGraphic,
+            TexturePath,
+            SolidColor
+        }
+
+        private Material? empRingDrawSharedMaterial;
+        private string empRingDrawCacheKey = "";
+        private EmpRingDrawMatKind empRingDrawMatKind;
+        private Color empRingDrawFleckGraphicColor = Color.white;
+        private float empRingDrawFleckSizeAvg = 1f;
+
+        private bool isFadingOut;
+        private int fadeOutElapsedTicks;
 
         public EmpRippleSequence() { }
 
@@ -247,6 +313,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             this.currentRadius = 0f;
             this.previousRadius = 0f;
             this.processedCellIndices = new HashSet<int>();
+            this.isFadingOut = false;
+            this.fadeOutElapsedTicks = 0;
         }
 
         public void ExposeData()
@@ -281,6 +349,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             Scribe_Deep.Look(ref props, "props");
             Scribe_References.Look(ref map, "map");
             Scribe_Collections.Look(ref pendingMechanoidStuns, "pendingMechanoidStuns", LookMode.Deep);
+            Scribe_Values.Look(ref isFadingOut, "isFadingOut", false);
+            Scribe_Values.Look(ref fadeOutElapsedTicks, "fadeOutElapsedTicks", 0);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (thingIdToLastHitTick == null)
@@ -413,34 +483,271 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             }
         }
 
-        private void SpawnRippleVisuals(Map mapVal, float visualRadius, int ringThickness)
+        private float StableRandom01(IntVec3 cell, int salt)
         {
+            unchecked
+            {
+                int h = cell.x * 73856093 ^ cell.z * 19349663 ^ center.x * 83492791 ^ center.z * 297121507 ^ salt * 1396312589;
+                h = (h << 13) ^ h;
+                h = h * (h * h * 15731 + 789221) + 961748927;
+                uint u = (uint)h;
+                return Mathf.Clamp01(u / (float)uint.MaxValue);
+            }
+        }
+
+        private FleckDef? ResolveRingFleckDef()
+        {
+            if (props == null)
+                return null;
+            if (!string.IsNullOrEmpty(props.ringFleckDefName))
+            {
+                FleckDef? named = DefDatabase<FleckDef>.GetNamedSilentFail(props.ringFleckDefName);
+                if (named != null)
+                    return named;
+            }
+            return DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
+        }
+
+        private FleckDef? ResolveDecorativeEmpFleckDef()
+        {
+            if (props == null)
+                return DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
+            if (!string.IsNullOrEmpty(props.decorativeFleckDefName))
+            {
+                FleckDef? named = DefDatabase<FleckDef>.GetNamedSilentFail(props.decorativeFleckDefName);
+                if (named != null)
+                    return named;
+            }
+            return DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
+        }
+
+        private void RefreshRingDrawCacheIfNeeded(CompProperties_AerialSupportEffect_EmpRipple p, FleckDef? ringFleckDef)
+        {
+            string fleckName = ringFleckDef?.defName ?? "";
+            string texPath = p.ringTexturePath ?? "";
+            string key = $"{p.useFleckMaterialForDirectRing}|{fleckName}|{texPath}|{p.ringColorR}|{p.ringColorG}|{p.ringColorB}|{p.ringAlpha}";
+            if (empRingDrawSharedMaterial != null && empRingDrawCacheKey == key)
+                return;
+
+            empRingDrawCacheKey = key;
+            empRingDrawSharedMaterial = null;
+            empRingDrawMatKind = EmpRingDrawMatKind.None;
+            empRingDrawFleckGraphicColor = Color.white;
+            empRingDrawFleckSizeAvg = 1f;
+
+            if (p.useFleckMaterialForDirectRing && ringFleckDef != null)
+            {
+                try
+                {
+                    GraphicData? gd = ringFleckDef.GetGraphicData(0);
+                    Graphic? graphic = gd?.Graphic;
+                    Material? m = graphic?.MatSingle;
+                    if (m != null && m != BaseContent.BadMat)
+                    {
+                        empRingDrawSharedMaterial = m;
+                        empRingDrawFleckGraphicColor = graphic!.Color;
+                        Vector2 ds = gd!.drawSize;
+                        empRingDrawFleckSizeAvg = (ds.x + ds.y) * 0.5f;
+                        if (empRingDrawFleckSizeAvg < 0.01f)
+                            empRingDrawFleckSizeAvg = 1f;
+                        empRingDrawMatKind = EmpRingDrawMatKind.FleckGraphic;
+                        return;
+                    }
+                }
+                catch
+                {
+                    // 回退
+                }
+            }
+
+            if (!string.IsNullOrEmpty(texPath))
+            {
+                try
+                {
+                    Material? texMat = MaterialPool.MatFrom(texPath, ShaderDatabase.Transparent);
+                    if (texMat != null && texMat.mainTexture != null)
+                    {
+                        empRingDrawSharedMaterial = texMat;
+                        empRingDrawMatKind = EmpRingDrawMatKind.TexturePath;
+                        return;
+                    }
+                }
+                catch
+                {
+                    // 回退纯色
+                }
+            }
+
+            Color solid = new Color(p.ringColorR, p.ringColorG, p.ringColorB, p.ringAlpha);
+            empRingDrawSharedMaterial = SolidColorMaterials.SimpleSolidColorMaterial(solid);
+            empRingDrawMatKind = EmpRingDrawMatKind.SolidColor;
+        }
+
+        private float GetFadeAlphaMultiplier()
+        {
+            if (!isFadingOut || props == null)
+                return 1f;
+            int fadeTicks = props.ringFadeOutTicks;
+            if (fadeTicks <= 0)
+                return 0f;
+            float t = Mathf.Clamp01(fadeOutElapsedTicks / (float)fadeTicks);
+            float eased = t * t * (3f - 2f * t);
+            return 1f - eased;
+        }
+
+        /// <summary>每帧由 <see cref="EmpRippleController.MapComponentDraw"/> 调用；仅绘制主体圆环，不施加 EMP、不生成主体 Fleck。</summary>
+        public void DrawVisualRing()
+        {
+            if (map == null || props == null)
+                return;
+
+            if (!props.drawDirectRing)
+                return;
+
+            if (currentRadius <= 0f)
+                return;
+
+            Map mapVal = map!;
+            int ringThickness = props.ringThicknessCells > 0 ? props.ringThicknessCells : 3;
+            float visualRadius = currentRadius;
             float inner = Mathf.Max(0f, visualRadius - ringThickness);
-            ringCellsBuffer.Clear();
-            int rCeil = Mathf.CeilToInt(visualRadius + ringThickness);
+
+            FleckDef? ringFleckDef = ResolveRingFleckDef();
+            RefreshRingDrawCacheIfNeeded(props, ringFleckDef);
+
+            if (empRingDrawSharedMaterial == null || empRingDrawMatKind == EmpRingDrawMatKind.None)
+                return;
+
+            float drawY = AltitudeLayer.MoteOverhead.AltitudeFor();
+            int rCeil = Mathf.CeilToInt(visualRadius);
+            float baseDrawScale = props.ringDrawScale > 0f ? props.ringDrawScale : 1f;
+
+            float minSc = props.ringCellMinScale;
+            float maxSc = props.ringCellMaxScale > minSc ? props.ringCellMaxScale : minSc;
+            float minAf = props.ringCellMinAlphaFactor;
+            float maxAf = props.ringCellMaxAlphaFactor > minAf ? props.ringCellMaxAlphaFactor : minAf;
+            float minBf = props.ringCellMinBrightnessFactor;
+            float maxBf = props.ringCellMaxBrightnessFactor > minBf ? props.ringCellMaxBrightnessFactor : minBf;
+            float pulseAmp = props.ringCellPulseAmplitude > 0f ? props.ringCellPulseAmplitude : 0.12f;
+            int ticksGame = Find.TickManager?.TicksGame ?? 0;
+            float fadeAlpha = GetFadeAlphaMultiplier();
+
             for (int dx = -rCeil; dx <= rCeil; dx++)
             {
                 for (int dz = -rCeil; dz <= rCeil; dz++)
                 {
                     IntVec3 cell = center + new IntVec3(dx, 0, dz);
-                    if (!cell.InBounds(mapVal)) continue;
-                    float dist = (cell - center).LengthHorizontal;
-                    if (dist < inner - 0.01f || dist > visualRadius + 0.01f)
+                    if (!cell.InBounds(mapVal))
                         continue;
-                    ringCellsBuffer.Add(cell);
+
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < inner || dist > visualRadius)
+                        continue;
+
+                    float scaleFactor = Mathf.Lerp(minSc, maxSc, StableRandom01(cell, 92001));
+                    float sizeMul = empRingDrawMatKind == EmpRingDrawMatKind.FleckGraphic ? empRingDrawFleckSizeAvg : 1f;
+                    float finalScale = baseDrawScale * scaleFactor * sizeMul;
+
+                    float alphaFactor = Mathf.Lerp(minAf, maxAf, StableRandom01(cell, 92003));
+                    float brightFactor = Mathf.Lerp(minBf, maxBf, StableRandom01(cell, 92004));
+
+                    float pulse = 1f;
+                    if (props.ringCellSubtlePulse)
+                    {
+                        float phase = StableRandom01(cell, 92002) * 100f;
+                        pulse = 1f + Mathf.Sin((ticksGame + phase) * 0.15f) * pulseAmp;
+                        pulse = Mathf.Clamp(pulse, 1f - pulseAmp, 1f + pulseAmp);
+                    }
+
+                    Quaternion rot = Quaternion.identity;
+                    if (props.ringCellRandomRotation)
+                    {
+                        float ang = StableRandom01(cell, 92000) * 360f;
+                        rot = Quaternion.AngleAxis(ang, Vector3.up);
+                    }
+
+                    Vector3 drawPos = cell.ToVector3Shifted();
+                    drawPos.y = drawY;
+
+                    Matrix4x4 matrix = Matrix4x4.TRS(drawPos, rot, new Vector3(finalScale, 1f, finalScale));
+
+                    Color c;
+                    switch (empRingDrawMatKind)
+                    {
+                        case EmpRingDrawMatKind.FleckGraphic:
+                            c = empRingDrawFleckGraphicColor;
+                            c.r = Mathf.Clamp01(c.r * brightFactor);
+                            c.g = Mathf.Clamp01(c.g * brightFactor);
+                            c.b = Mathf.Clamp01(c.b * brightFactor);
+                            c.a = Mathf.Clamp01(c.a * props.ringAlpha * alphaFactor * pulse);
+                            break;
+                        case EmpRingDrawMatKind.TexturePath:
+                            c = new Color(props.ringColorR, props.ringColorG, props.ringColorB, props.ringAlpha);
+                            c.r = Mathf.Clamp01(c.r * brightFactor);
+                            c.g = Mathf.Clamp01(c.g * brightFactor);
+                            c.b = Mathf.Clamp01(c.b * brightFactor);
+                            c.a = Mathf.Clamp01(c.a * alphaFactor * pulse);
+                            break;
+                        default:
+                            c = empRingDrawSharedMaterial.color;
+                            c.r = Mathf.Clamp01(c.r * brightFactor);
+                            c.g = Mathf.Clamp01(c.g * brightFactor);
+                            c.b = Mathf.Clamp01(c.b * brightFactor);
+                            c.a = Mathf.Clamp01(c.a * alphaFactor * pulse);
+                            break;
+                    }
+
+                    c.a = Mathf.Clamp01(c.a * fadeAlpha);
+
+                    EmpRingCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
+                    Graphics.DrawMesh(MeshPool.plane10, matrix, empRingDrawSharedMaterial, 0, null, 0, EmpRingCellMatPropertyBlock);
                 }
             }
+        }
 
-            FleckDef? blastEmpFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
-            int visualCounter = 0;
-            for (int i = 0; i < ringCellsBuffer.Count; i++)
+        private void SpawnDecorativeEmpFlecks(Map mapVal, float visualRadius, FleckDef? fleckDef, int now)
+        {
+            if (props == null)
+                return;
+
+            if (!props.drawDecorativeFlecks)
+                return;
+
+            if (fleckDef == null)
+                return;
+
+            int interval = props.decorativeFleckIntervalTicks > 0 ? props.decorativeFleckIntervalTicks : 6;
+            if (interval > 1 && now % interval != 0)
+                return;
+
+            int sampleEvery = props.decorativeFleckSampleEveryCells > 0 ? props.decorativeFleckSampleEveryCells : 32;
+            float minScale = props.decorativeFleckMinScale > 0f ? props.decorativeFleckMinScale : 0.35f;
+            float maxScale = props.decorativeFleckMaxScale > minScale ? props.decorativeFleckMaxScale : minScale;
+
+            float outerMin = Mathf.Max(0f, visualRadius - 0.75f);
+            float outerMax = visualRadius + 0.25f;
+
+            int rCeil = Mathf.CeilToInt(outerMax);
+            int candidateCounter = 0;
+
+            for (int dx = -rCeil; dx <= rCeil; dx++)
             {
-                IntVec3 cell = ringCellsBuffer[i];
-                if ((visualCounter++ % 4 == 0) && blastEmpFleck != null)
+                for (int dz = -rCeil; dz <= rCeil; dz++)
                 {
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal))
+                        continue;
+
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < outerMin || dist > outerMax)
+                        continue;
+
+                    if ((candidateCounter++ % sampleEvery) != 0)
+                        continue;
+
                     try
                     {
-                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, blastEmpFleck, Rand.Range(0.6f, 1f));
+                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, fleckDef, Rand.Range(minScale, maxScale));
                     }
                     catch { }
                 }
@@ -448,7 +755,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         }
 
         /// <summary>
-        /// 每 tick 推进波前、施加效果并播放视觉。返回 true 表示序列结束（波前已达 maxRadius）。
+        /// 每 tick 推进波前、施加效果；装饰 Fleck 稀疏生成；主体圆环由 MapComponentDraw 绘制。返回 true 表示序列结束。
         /// </summary>
         public bool Tick(EmpRippleController controller)
         {
@@ -461,22 +768,40 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
             Map mapVal = map!;
             float maxR = props.maxRadius > 0f ? props.maxRadius : 15f;
-            int thickness = props.ringThicknessCells > 0 ? props.ringThicknessCells : 3;
-            float speed = props.expandSpeedCellsPerTick > 0f ? props.expandSpeedCellsPerTick : 0.5f;
             int disableTicks = props.disableTicks > 0 ? props.disableTicks : 1800;
             int tickGame = Find.TickManager.TicksGame;
 
+            if (isFadingOut)
+            {
+                fadeOutElapsedTicks++;
+                if (props.ringFadeOutTicks <= 0)
+                    return true;
+                if (fadeOutElapsedTicks >= props.ringFadeOutTicks)
+                    return true;
+                return false;
+            }
+
             ProcessPendingMechanoidStuns(tickGame, disableTicks);
+
+            float speed = props.expandSpeedCellsPerTick > 0f ? props.expandSpeedCellsPerTick : 0.5f;
 
             previousRadius = currentRadius;
             currentRadius = Mathf.Min(currentRadius + speed, maxR);
 
             ApplyRippleEffectsForSweptCells(controller, mapVal, previousRadius, currentRadius, props, tickGame, disableTicks);
-            SpawnRippleVisuals(mapVal, currentRadius, thickness);
+
+            FleckDef? decorativeFleck = ResolveDecorativeEmpFleckDef();
+            SpawnDecorativeEmpFlecks(mapVal, currentRadius, decorativeFleck, tickGame);
 
             if (currentRadius >= maxR)
             {
                 FlushPendingMechanoidStuns(disableTicks);
+                if (props.ringFadeOutTicks > 0)
+                {
+                    isFadingOut = true;
+                    fadeOutElapsedTicks = 0;
+                    return false;
+                }
                 return true;
             }
 

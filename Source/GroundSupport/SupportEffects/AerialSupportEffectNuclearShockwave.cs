@@ -77,6 +77,9 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         public bool ringCellSubtlePulse = true;
         public float ringCellPulseAmplitude = 0.12f;
 
+        /// <summary>主体圆环到达最大半径后的淡出持续 tick；≤0 表示到达 max 后立即结束序列。</summary>
+        public int ringFadeOutTicks = 18;
+
         public CompProperties_AerialSupportEffect_NuclearShockwave()
         {
             compClass = typeof(CompAerialSupportEffect_NuclearShockwave);
@@ -202,6 +205,9 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         private Color ringDrawFleckGraphicColor = Color.white;
         private float ringDrawFleckSizeAvg = 1f;
 
+        private bool isFadingOut;
+        private int fadeOutElapsedTicks;
+
         public NuclearShockwaveSequence() { }
 
         public NuclearShockwaveSequence(IntVec3 center, CompProperties_AerialSupportEffect_NuclearShockwave props, Map map)
@@ -212,6 +218,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             this.currentRadius = 0f;
             this.previousRadius = 0f;
             this.processedCellIndices = new HashSet<int>();
+            this.isFadingOut = false;
+            this.fadeOutElapsedTicks = 0;
         }
 
         public void ExposeData()
@@ -245,6 +253,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             }
             Scribe_Deep.Look(ref props, "props");
             Scribe_References.Look(ref map, "map");
+            Scribe_Values.Look(ref isFadingOut, "isFadingOut", false);
+            Scribe_Values.Look(ref fadeOutElapsedTicks, "fadeOutElapsedTicks", 0);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (thingIdToLastHitTick == null)
@@ -430,6 +440,18 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             ringDrawMatKind = RingDrawMatKind.SolidColor;
         }
 
+        private float GetFadeAlphaMultiplier()
+        {
+            if (!isFadingOut || props == null)
+                return 1f;
+            int fadeTicks = props.ringFadeOutTicks;
+            if (fadeTicks <= 0)
+                return 0f;
+            float t = Mathf.Clamp01(fadeOutElapsedTicks / (float)fadeTicks);
+            float eased = t * t * (3f - 2f * t);
+            return 1f - eased;
+        }
+
         /// <summary>每帧由 <see cref="NuclearShockwaveController.MapComponentDraw"/> 调用；仅绘制紧凑主体圆环，不推进逻辑、不造成伤害、不使用 Fleck。</summary>
         public void DrawVisualRing()
         {
@@ -471,6 +493,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             float maxBf = props.ringCellMaxBrightnessFactor > minBf ? props.ringCellMaxBrightnessFactor : minBf;
             float pulseAmp = props.ringCellPulseAmplitude > 0f ? props.ringCellPulseAmplitude : 0.12f;
             int ticksGame = Find.TickManager?.TicksGame ?? 0;
+            float fadeAlpha = GetFadeAlphaMultiplier();
 
             for (int dx = -rCeil; dx <= rCeil; dx++)
             {
@@ -536,6 +559,8 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                             c.a = Mathf.Clamp01(c.a * alphaFactor * pulse);
                             break;
                     }
+
+                    c.a = Mathf.Clamp01(c.a * fadeAlpha);
 
                     RingCellMatPropertyBlock.SetColor(ShaderPropertyIDs.Color, c);
                     Graphics.DrawMesh(MeshPool.plane10, matrix, ringDrawSharedMaterial, 0, null, 0, RingCellMatPropertyBlock);
@@ -606,6 +631,17 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
             Map mapVal = map!;
             float maxR = props.maxRadius > 0f ? props.maxRadius : 15f;
+
+            if (isFadingOut)
+            {
+                fadeOutElapsedTicks++;
+                if (props.ringFadeOutTicks <= 0)
+                    return true;
+                if (fadeOutElapsedTicks >= props.ringFadeOutTicks)
+                    return true;
+                return false;
+            }
+
             float speed = props.expandSpeedCellsPerTick > 0f ? props.expandSpeedCellsPerTick : 0.5f;
             int damageAmountVal = props.damageAmount > 0 ? props.damageAmount : 1000;
             DamageDef? damageDef = DefDatabase<DamageDef>.GetNamedSilentFail(props.damageDefDefName);
@@ -624,7 +660,15 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             SpawnDecorativeShockwaveFlecks(mapVal, currentRadius, decorativeFleck, now);
 
             if (currentRadius >= maxR)
+            {
+                if (props.ringFadeOutTicks > 0)
+                {
+                    isFadingOut = true;
+                    fadeOutElapsedTicks = 0;
+                    return false;
+                }
                 return true;
+            }
 
             return false;
         }
