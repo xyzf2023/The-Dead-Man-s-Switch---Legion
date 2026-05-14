@@ -70,7 +70,7 @@
 
       <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_EmpRipple">
         <!-- 最大扩散半径（格） -->
-        <maxRadius>500</maxRadius>
+        <maxRadius>150</maxRadius>
         <!-- 环带宽度（格） -->
         <ringThicknessCells>1</ringThicknessCells>
         <!-- 扩散速度（格/tick） -->
