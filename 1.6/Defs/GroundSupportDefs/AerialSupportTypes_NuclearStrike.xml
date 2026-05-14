@@ -39,10 +39,10 @@
       </li>
 
       <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_NuclearShockwave">
-        <!-- 最大扩散半径（格），与 EMP 波纹相同接口 -->
+        <!-- 最大扩散半径（格） -->
         <maxRadius>150</maxRadius>
         <!-- 环带宽度（格） -->
-        <ringThicknessCells>8</ringThicknessCells>
+        <ringThicknessCells>2</ringThicknessCells>
         <!-- 扩散速度（格/tick） -->
         <expandSpeedCellsPerTick>2</expandSpeedCellsPerTick>
         <!-- 冲击波伤害量（单次命中时传入 DamageInfo 的 amount） -->
@@ -54,10 +54,10 @@
       </li>
 
       <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_NuclearShockwave">
-        <!-- 最大扩散半径（格），与 EMP 波纹相同接口 -->
+        <!-- 最大扩散半径（格） -->
         <maxRadius>150</maxRadius>
         <!-- 环带宽度（格） -->
-        <ringThicknessCells>5</ringThicknessCells>
+        <ringThicknessCells>2</ringThicknessCells>
         <!-- 扩散速度（格/tick） -->
         <expandSpeedCellsPerTick>1.5</expandSpeedCellsPerTick>
         <!-- 冲击波伤害量（单次命中时传入 DamageInfo 的 amount） -->
@@ -72,7 +72,7 @@
         <!-- 最大扩散半径（格） -->
         <maxRadius>500</maxRadius>
         <!-- 环带宽度（格） -->
-        <ringThicknessCells>3</ringThicknessCells>
+        <ringThicknessCells>1</ringThicknessCells>
         <!-- 扩散速度（格/tick） -->
         <expandSpeedCellsPerTick>3</expandSpeedCellsPerTick>
         <!-- 机械体/炮台/建筑禁用时长（tick），1800 = 30 秒 -->
