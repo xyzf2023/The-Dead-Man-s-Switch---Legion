@@ -8,7 +8,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 {
     /// <summary>
     /// 空中支援效果：核冲击波环状扩散（NuclearShockwave）
-    /// 以中心格为起点绘制向外扩散的环状冲击波，与 EMP 波纹相同的 XML 接口；接触冲击波的实体受到指定伤害类型伤害，每格使用该伤害类型的爆炸格 Fleck；冲击波不被建筑阻挡，经过建筑时对建筑造成伤害并绘制爆炸特效。
+    /// 以中心格为起点向外扩散；伤害由波前扫过区间结算；主体视觉为 MapComponent 每帧绘制的紧凑圆环，可选少量 explosionCellFleck 作装饰。
     /// </summary>
     public class CompProperties_AerialSupportEffect_NuclearShockwave : CompProperties
     {
@@ -24,11 +24,39 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         /// <summary>冲击波造成的伤害量（单次命中时传入 DamageInfo 的 amount）</summary>
         public int damageAmount = 1000;
 
-        /// <summary>伤害类型 defName，默认 DMSL_Damage_BlastWave；用于伤害与每格爆炸 Fleck</summary>
+        /// <summary>伤害类型 defName，默认 DMSL_Damage_BlastWave；用于伤害与装饰 Fleck</summary>
         public string damageDefDefName = "DMSL_Damage_BlastWave";
 
         /// <summary>伤害冷却时间（tick）：同一实体在此时间内只受一次伤害，超过后若再次被波扫到可再次造成伤害；0 表示整次序列内仅受一次。</summary>
         public int damageCooldownTicks = 120;
+
+        /// <summary>是否使用直接绘制的紧凑主体圆环（不产生 Fleck 残留）。</summary>
+        public bool drawDirectRing = true;
+
+        /// <summary>主体圆环透明度。</summary>
+        public float ringAlpha = 0.45f;
+
+        /// <summary>主体圆环每格方片缩放。</summary>
+        public float ringDrawScale = 1f;
+
+        public float ringColorR = 1f;
+        public float ringColorG = 0.55f;
+        public float ringColorB = 0.15f;
+
+        /// <summary>非空时尝试用该贴图路径作为主体材质；失败则回退纯色。</summary>
+        public string ringTexturePath = "";
+
+        /// <summary>是否在波前外缘稀疏生成装饰用 explosionCellFleck。</summary>
+        public bool drawDecorativeFlecks = true;
+
+        /// <summary>每隔多少 tick 才尝试生成一批装饰 Fleck。</summary>
+        public int decorativeFleckIntervalTicks = 6;
+
+        /// <summary>外缘候选格每隔多少格采样一次装饰 Fleck。</summary>
+        public int decorativeFleckSampleEveryCells = 32;
+
+        public float decorativeFleckMinScale = 0.35f;
+        public float decorativeFleckMaxScale = 0.65f;
 
         public CompProperties_AerialSupportEffect_NuclearShockwave()
         {
@@ -62,7 +90,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// 核冲击波专用 MapComponent：持有活跃冲击波序列，每 tick 推进环带并施加伤害与特效。
+    /// 核冲击波专用 MapComponent：持有活跃冲击波序列，每 tick 推进波前并结算伤害；主体圆环在 MapComponentDraw 中每帧绘制。
     /// </summary>
     public class NuclearShockwaveController : MapComponent
     {
@@ -76,6 +104,32 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             Scribe_Collections.Look(ref activeSequences, "activeNuclearShockwaveSequences", LookMode.Deep, Array.Empty<object>());
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 activeSequences?.RemoveAll(seq => seq == null);
+        }
+
+        public override void MapComponentDraw()
+        {
+            base.MapComponentDraw();
+
+            if (map == null || map != Find.CurrentMap)
+                return;
+
+            if (activeSequences == null || activeSequences.Count == 0)
+                return;
+
+            try
+            {
+                for (int i = 0; i < activeSequences.Count; i++)
+                {
+                    NuclearShockwaveSequence? seq = activeSequences[i];
+                    if (seq == null)
+                        continue;
+                    seq.DrawVisualRing();
+                }
+            }
+            catch
+            {
+                // 绘制失败不应影响游戏运行
+            }
         }
 
         public override void MapComponentTick()
@@ -93,8 +147,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// 核冲击波扩散序列：真实波前半径 <see cref="currentRadius"/> 每 tick 推进；伤害层按扫过径向带处理格子（与视觉厚环解耦），视觉层单独绘制 explosionCellFleck；
-    /// damageCooldownTicks ≤ 0 时同一实体整次序列仅受伤一次，大于 0 时按冷却可再次受伤；冲击波不因建筑阻挡而停止。
+    /// 核冲击波扩散序列：真实波前推进与伤害由 <see cref="ApplyShockwaveDamageForSweptCells"/> 处理；主体视觉由 <see cref="DrawVisualRing"/> 每帧绘制，装饰 Fleck 稀疏生成。
     /// </summary>
     public class NuclearShockwaveSequence : IExposable
     {
@@ -111,9 +164,15 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         private CompProperties_AerialSupportEffect_NuclearShockwave? props = null;
         private Map? map = null;
 
-        /// <summary>仅用于视觉层枚举厚环带临时格子，勿与伤害层混用。</summary>
-        private static readonly List<IntVec3> ringCellsBuffer = new List<IntVec3>();
         private static readonly List<Thing> toDamageBuffer = new List<Thing>();
+
+        /// <summary>非存档：主体圆环材质缓存（不修改 MaterialPool 共享材质颜色）。</summary>
+        private Material? cachedRingMaterial;
+        private string cachedRingTexturePath = "\0";
+        private float cachedRingAlpha = -1f;
+        private float cachedRingColorR = -1f;
+        private float cachedRingColorG = -1f;
+        private float cachedRingColorB = -1f;
 
         public NuclearShockwaveSequence() { }
 
@@ -243,33 +302,146 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             }
         }
 
-        private void SpawnShockwaveVisuals(Map mapVal, float visualRadius, int ringThickness, FleckDef? cellFleck)
+        private Material? GetOrCreateRingMaterial(CompProperties_AerialSupportEffect_NuclearShockwave p)
         {
+            string path = p.ringTexturePath ?? "";
+            float a = p.ringAlpha;
+            float r = p.ringColorR;
+            float g = p.ringColorG;
+            float b = p.ringColorB;
+
+            if (cachedRingMaterial != null &&
+                cachedRingTexturePath == path &&
+                Mathf.Approximately(cachedRingAlpha, a) &&
+                Mathf.Approximately(cachedRingColorR, r) &&
+                Mathf.Approximately(cachedRingColorG, g) &&
+                Mathf.Approximately(cachedRingColorB, b))
+            {
+                return cachedRingMaterial;
+            }
+
+            cachedRingMaterial = null;
+            cachedRingTexturePath = path;
+            cachedRingAlpha = a;
+            cachedRingColorR = r;
+            cachedRingColorG = g;
+            cachedRingColorB = b;
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                try
+                {
+                    Material? texMat = MaterialPool.MatFrom(path, ShaderDatabase.Transparent);
+                    if (texMat != null && texMat.mainTexture != null)
+                    {
+                        cachedRingMaterial = texMat;
+                        return cachedRingMaterial;
+                    }
+                }
+                catch
+                {
+                    // 回退纯色
+                }
+            }
+
+            Color solid = new Color(r, g, b, a);
+            cachedRingMaterial = SolidColorMaterials.SimpleSolidColorMaterial(solid);
+            return cachedRingMaterial;
+        }
+
+        /// <summary>每帧由 <see cref="NuclearShockwaveController.MapComponentDraw"/> 调用；仅绘制紧凑主体圆环，不推进逻辑、不造成伤害、不使用 Fleck。</summary>
+        public void DrawVisualRing()
+        {
+            if (map == null || props == null)
+                return;
+
+            if (!props.drawDirectRing)
+                return;
+
+            if (currentRadius <= 0f)
+                return;
+
+            Map mapVal = map!;
+            int ringThickness = props.ringThicknessCells > 0 ? props.ringThicknessCells : 3;
+            float visualRadius = currentRadius;
             float inner = Mathf.Max(0f, visualRadius - ringThickness);
-            ringCellsBuffer.Clear();
-            int rCeil = Mathf.CeilToInt(visualRadius + ringThickness);
+
+            Material? mat = GetOrCreateRingMaterial(props);
+            if (mat == null)
+                return;
+
+            float drawY = AltitudeLayer.MoteOverhead.AltitudeFor();
+            int rCeil = Mathf.CeilToInt(visualRadius);
+            float scale = props.ringDrawScale > 0f ? props.ringDrawScale : 1f;
+
             for (int dx = -rCeil; dx <= rCeil; dx++)
             {
                 for (int dz = -rCeil; dz <= rCeil; dz++)
                 {
                     IntVec3 cell = center + new IntVec3(dx, 0, dz);
-                    if (!cell.InBounds(mapVal)) continue;
-                    float dist = (cell - center).LengthHorizontal;
-                    if (dist < inner - 0.01f || dist > visualRadius + 0.01f)
+                    if (!cell.InBounds(mapVal))
                         continue;
-                    ringCellsBuffer.Add(cell);
+
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < inner || dist > visualRadius)
+                        continue;
+
+                    Vector3 drawPos = cell.ToVector3Shifted();
+                    drawPos.y = drawY;
+
+                    Matrix4x4 matrix = Matrix4x4.TRS(
+                        drawPos,
+                        Quaternion.identity,
+                        new Vector3(scale, 1f, scale));
+
+                    Graphics.DrawMesh(MeshPool.plane10, matrix, mat, 0);
                 }
             }
+        }
 
-            int visualCounter = 0;
-            for (int i = 0; i < ringCellsBuffer.Count; i++)
+        private void SpawnDecorativeShockwaveFlecks(Map mapVal, float visualRadius, FleckDef? cellFleck, int now)
+        {
+            if (props == null)
+                return;
+
+            if (!props.drawDecorativeFlecks)
+                return;
+
+            if (cellFleck == null)
+                return;
+
+            int interval = props.decorativeFleckIntervalTicks > 0 ? props.decorativeFleckIntervalTicks : 6;
+            if (interval > 1 && now % interval != 0)
+                return;
+
+            int sampleEvery = props.decorativeFleckSampleEveryCells > 0 ? props.decorativeFleckSampleEveryCells : 32;
+            float minScale = props.decorativeFleckMinScale > 0f ? props.decorativeFleckMinScale : 0.35f;
+            float maxScale = props.decorativeFleckMaxScale > minScale ? props.decorativeFleckMaxScale : minScale;
+
+            float outerMin = Mathf.Max(0f, visualRadius - 0.75f);
+            float outerMax = visualRadius + 0.25f;
+
+            int rCeil = Mathf.CeilToInt(outerMax);
+            int candidateCounter = 0;
+
+            for (int dx = -rCeil; dx <= rCeil; dx++)
             {
-                IntVec3 cell = ringCellsBuffer[i];
-                if ((visualCounter++ % 4 == 0) && cellFleck != null)
+                for (int dz = -rCeil; dz <= rCeil; dz++)
                 {
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal))
+                        continue;
+
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < outerMin || dist > outerMax)
+                        continue;
+
+                    if ((candidateCounter++ % sampleEvery) != 0)
+                        continue;
+
                     try
                     {
-                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, cellFleck, Rand.Range(0.8f, 1.4f));
+                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, cellFleck, Rand.Range(minScale, maxScale));
                     }
                     catch { }
                 }
@@ -277,7 +449,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         }
 
         /// <summary>
-        /// 每 tick 推进波前、施加伤害并绘制视觉。返回 true 表示序列结束（波前已达 maxRadius）。
+        /// 每 tick 推进波前并结算伤害；装饰 Fleck 稀疏生成。主体圆环由 Draw 每帧绘制。
         /// </summary>
         public bool Tick(NuclearShockwaveController controller)
         {
@@ -290,7 +462,6 @@ namespace DMS_Legion.GroundSupport.SupportEffects
 
             Map mapVal = map!;
             float maxR = props.maxRadius > 0f ? props.maxRadius : 15f;
-            int thickness = props.ringThicknessCells > 0 ? props.ringThicknessCells : 3;
             float speed = props.expandSpeedCellsPerTick > 0f ? props.expandSpeedCellsPerTick : 0.5f;
             int damageAmountVal = props.damageAmount > 0 ? props.damageAmount : 1000;
             DamageDef? damageDef = DefDatabase<DamageDef>.GetNamedSilentFail(props.damageDefDefName);
@@ -305,7 +476,7 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             currentRadius = Mathf.Min(currentRadius + speed, maxR);
 
             ApplyShockwaveDamageForSweptCells(mapVal, previousRadius, currentRadius, props, now, damageDef, damageAmountVal);
-            SpawnShockwaveVisuals(mapVal, currentRadius, thickness, cellFleck);
+            SpawnDecorativeShockwaveFlecks(mapVal, currentRadius, cellFleck, now);
 
             if (currentRadius >= maxR)
                 return true;
