@@ -255,16 +255,24 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
                 if (!pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly))
                     continue;
 
-                Job job = MakeAttackJob(pawn, target);
+                Job? job = MakeAttackJob(pawn, target);
+                if (job == null)
+                    continue;
+
                 pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             }
         }
 
-        private static Job MakeAttackJob(Pawn pawn, Thing target)
+        private static Job? MakeAttackJob(Pawn pawn, Thing target)
         {
-            bool hasRangedWeapon = pawn.equipment?.Primary != null && pawn.equipment.Primary.def.IsRangedWeapon;
+            Verb verb = pawn.TryGetAttackVerb(target, !pawn.IsColonist);
+            if (verb == null || verb.verbProps == null)
+                return null;
 
-            JobDef jobDef = hasRangedWeapon ? JobDefOf.AttackStatic : JobDefOf.AttackMelee;
+            JobDef jobDef = verb.verbProps.IsMeleeAttack
+                ? JobDefOf.AttackMelee
+                : JobDefOf.AttackStatic;
+
             Job job = JobMaker.MakeJob(jobDef, target);
             job.expiryInterval = 600;
             job.checkOverrideOnExpire = true;
