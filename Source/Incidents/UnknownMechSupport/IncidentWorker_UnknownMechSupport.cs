@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DMS_Legion;
+using DMS_Legion.Incidents.DigitalAngelSupport;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -62,7 +63,7 @@ namespace DMS_Legion.Incidents.UnknownMechSupport
             // 援军逻辑：与原版友军援军一致，自动搜寻并攻击地图上的敌人（LordJob_AssistColony + LordToil_HuntEnemies）
             IntVec3 fallbackSpot = dropSpot;
             RCellFinder.TryFindRandomSpotJustOutsideColony(dropSpot, map, out fallbackSpot);
-            LordMaker.MakeNewLord(faction, new LordJob_AssistColony(faction, fallbackSpot), map, pawns);
+            LordMaker.MakeNewLord(faction, new LordJob_DigitalAngelAssistColony(faction, fallbackSpot), map, pawns);
 
             DropPodUtility.DropThingsNear(
                 dropSpot,

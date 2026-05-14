@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DMS_Legion;
+using DMS_Legion.Incidents.DigitalAngelSupport;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -76,7 +77,7 @@ namespace DMS_Legion.Incidents.ElectronicAngel
             // 战斗部队 Lord：沿用原版友军援军逻辑
             IntVec3 fallbackSpot = combatDropSpot;
             RCellFinder.TryFindRandomSpotJustOutsideColony(combatDropSpot, map, out fallbackSpot);
-            LordMaker.MakeNewLord(faction, new LordJob_AssistColony(faction, fallbackSpot), map, combatPawns);
+            LordMaker.MakeNewLord(faction, new LordJob_DigitalAngelAssistColony(faction, fallbackSpot), map, combatPawns);
 
             DropPodUtility.DropThingsNear(
                 combatDropSpot,
