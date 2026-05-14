@@ -212,13 +212,20 @@ namespace DMS_Legion.GroundSupport.SupportEffects
     }
 
     /// <summary>
-    /// EMP 波纹扩散序列：每 tick 向外推进一环带，对环带内单位施加 EMP 眩晕/停摆；同一实体在 effectCooldownTicks 内只受一次效果，超过后若再次被波扫到可再次施加。
+    /// EMP 波纹扩散序列：真实波前半径每 tick 推进；效果层按上一半径到当前半径扫过的径向带处理格子（与视觉厚环解耦），视觉层单独播 BlastEMP fleck。
+    /// 同一实体在 effectCooldownTicks 内只受一次效果，超过后若再次被波扫到可再次施加。
     /// 机械体先受伤害，经 mechanoidStunDelayTicks 后再尝试眩晕，避免“边枚举边修改”且被击杀者不再被眩晕。
     /// </summary>
     public class EmpRippleSequence : IExposable
     {
+        private const float RadiusEpsilon = 0.01f;
+
         private IntVec3 center;
         private float currentRadius;
+        /// <summary>上一 tick 结束时的真实波前半径，与 currentRadius 共同定义本 tick 效果层扫过的径向区间。</summary>
+        private float previousRadius;
+        /// <summary>效果层已处理过的地图格索引，防止边界浮点误差导致漏格/重复扫格。</summary>
+        private HashSet<int> processedCellIndices = new HashSet<int>();
         private Dictionary<int, int> thingIdToLastHitTick = new Dictionary<int, int>();
         private CompProperties_AerialSupportEffect_EmpRipple? props = null;
         private Map? map = null;
@@ -237,12 +244,21 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             this.props = props;
             this.map = map;
             this.currentRadius = 0f;
+            this.previousRadius = 0f;
+            this.processedCellIndices = new HashSet<int>();
         }
 
         public void ExposeData()
         {
             Scribe_Values.Look(ref center, "center");
             Scribe_Values.Look(ref currentRadius, "currentRadius", 0f);
+            Scribe_Values.Look(ref previousRadius, "previousRadius", -1f);
+            List<int>? processedCellList = null;
+            if (Scribe.mode == LoadSaveMode.Saving && processedCellIndices != null)
+                processedCellList = new List<int>(processedCellIndices);
+            Scribe_Collections.Look(ref processedCellList, "processedCellIndices", LookMode.Value);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+                processedCellIndices = processedCellList != null ? new HashSet<int>(processedCellList) : new HashSet<int>();
             List<int>? keysList = null;
             List<int>? valuesList = null;
             if (Scribe.mode == LoadSaveMode.Saving && thingIdToLastHitTick != null)
@@ -264,6 +280,82 @@ namespace DMS_Legion.GroundSupport.SupportEffects
             Scribe_Collections.Look(ref pendingMechanoidStuns, "pendingMechanoidStuns", LookMode.Deep);
             if (Scribe.mode == LoadSaveMode.PostLoadInit && pendingMechanoidStuns == null)
                 pendingMechanoidStuns = new List<PendingMechanoidStun>();
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && processedCellIndices == null)
+                processedCellIndices = new HashSet<int>();
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && previousRadius < 0f)
+                previousRadius = currentRadius;
+        }
+
+        /// <summary>效果层径向带：距离落在 (sweepInner, sweepOuter]（sweepInner≤ε 时视为 [0, sweepOuter]），含少量 ε 容差。</summary>
+        private bool CellInEffectSweepBand(float dist, float sweepInner, float sweepOuter)
+        {
+            if (dist > sweepOuter + RadiusEpsilon)
+                return false;
+            if (sweepInner <= RadiusEpsilon)
+                return dist >= 0f;
+            return dist > sweepInner + RadiusEpsilon;
+        }
+
+        private void ApplyEmpEffectsAtCell(IntVec3 cell, EmpRippleController controller, Map mapVal, int tickGame, DamageInfo empDinfo, int untilTick)
+        {
+            if (props == null) return;
+            int cooldownTicks = props.effectCooldownTicks;
+
+            thingsAtCellBuffer.Clear();
+            thingsAtCellBuffer.AddRange(mapVal.thingGrid.ThingsListAt(cell));
+            foreach (Thing thing in thingsAtCellBuffer)
+            {
+                if (thing == null || thing.Destroyed) continue;
+                int id = thing.thingIDNumber;
+                if (thingIdToLastHitTick.TryGetValue(id, out int lastTick))
+                {
+                    if (cooldownTicks > 0 && (tickGame - lastTick) < cooldownTicks)
+                        continue;
+                }
+                thingIdToLastHitTick[id] = tickGame;
+
+                if (thing is Pawn pawn && pawn.RaceProps != null && pawn.RaceProps.IsMechanoid)
+                {
+                    if (props.damageConsciousnessPart && pawn.health?.hediffSet != null)
+                    {
+                        BodyPartRecord? consciousnessPart = pawn.health.hediffSet.GetBrain();
+                        if (consciousnessPart != null)
+                        {
+                            DamageDef? nuclearEmpDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_NuclearEMP") ?? DamageDefOf.EMP;
+                            int amount = props.consciousnessPartDamageAmount > 0 ? props.consciousnessPartDamageAmount : 1000;
+                            if (nuclearEmpDef != null)
+                            {
+                                DamageInfo dinfo = new DamageInfo(nuclearEmpDef, amount, -1f, -1f, null, consciousnessPart, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
+                                try { pawn.TakeDamage(dinfo); }
+                                catch { }
+                            }
+                        }
+                    }
+                    int delay = props.mechanoidStunDelayTicks > 0 ? props.mechanoidStunDelayTicks : 0;
+                    if (delay > 0)
+                    {
+                        if (pendingMechanoidStuns == null) pendingMechanoidStuns = new List<PendingMechanoidStun>();
+                        pendingMechanoidStuns.Add(new PendingMechanoidStun(pawn, tickGame + delay));
+                    }
+                    else if (pawn.stances?.stunner != null)
+                    {
+                        pawn.stances.stunner.Notify_DamageApplied(empDinfo);
+                    }
+                    continue;
+                }
+
+                if (thing is Building)
+                {
+                    CompStunnable? stun = thing.TryGetComp<CompStunnable>();
+                    if (stun != null && stun.CanBeStunnedByDamage(DamageDefOf.EMP))
+                    {
+                        stun.ApplyDamage(empDinfo);
+                        continue;
+                    }
+                    if (props.disablePowerBuildings && thing.TryGetComp<CompPowerTrader>() != null && controller != null)
+                        controller.RegisterPowerSuppressed(thing, untilTick);
+                }
+            }
         }
 
         /// <summary>
@@ -302,10 +394,66 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                 });
             }
 
+            float sweepInner = previousRadius;
             currentRadius += speed;
+            float sweepOuter = Mathf.Min(currentRadius, maxR);
+
+            // 效果层：本 tick 波前扫过的径向带 (sweepInner, sweepOuter]，与视觉环带宽度解耦，避免漏格
+            ringCellsBuffer.Clear();
+            int rCeilEffect = Mathf.CeilToInt(sweepOuter);
+            for (int dx = -rCeilEffect; dx <= rCeilEffect; dx++)
+            {
+                for (int dz = -rCeilEffect; dz <= rCeilEffect; dz++)
+                {
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal)) continue;
+                    float dist = (cell - center).LengthHorizontal;
+                    if (!CellInEffectSweepBand(dist, sweepInner, sweepOuter)) continue;
+                    ringCellsBuffer.Add(cell);
+                }
+            }
+
+            DamageInfo empDinfo = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
+            int untilTick = tickGame + disableTicks;
+
+            for (int i = 0; i < ringCellsBuffer.Count; i++)
+            {
+                IntVec3 cell = ringCellsBuffer[i];
+                int cellIndex = mapVal.cellIndices.CellToIndex(cell);
+                if (!processedCellIndices.Add(cellIndex))
+                    continue;
+                ApplyEmpEffectsAtCell(cell, controller, mapVal, tickGame, empDinfo, untilTick);
+            }
+
+            // 视觉层：沿用厚环带，仅播 fleck，不参与命中判定
+            float visualInner = Mathf.Max(0f, currentRadius - thickness);
+            int visualCounter = 0;
+            FleckDef? blastEmpFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
+            int rCeilVisual = Mathf.CeilToInt(currentRadius + thickness);
+            for (int dx = -rCeilVisual; dx <= rCeilVisual; dx++)
+            {
+                for (int dz = -rCeilVisual; dz <= rCeilVisual; dz++)
+                {
+                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
+                    if (!cell.InBounds(mapVal)) continue;
+                    float dist = (cell - center).LengthHorizontal;
+                    if (dist < visualInner - RadiusEpsilon || dist > currentRadius + RadiusEpsilon)
+                        continue;
+                    if ((visualCounter++ % 4 == 0) && blastEmpFleck != null)
+                    {
+                        try
+                        {
+                            FleckMaker.Static(cell.ToVector3Shifted(), mapVal, blastEmpFleck, Rand.Range(0.6f, 1f));
+                        }
+                        catch { }
+                    }
+                }
+            }
+
+            previousRadius = currentRadius;
+
             if (currentRadius > maxR)
             {
-                // 序列结束前把尚未到期的延迟眩晕全部施加，避免遗漏
                 if (pendingMechanoidStuns != null && pendingMechanoidStuns.Count > 0)
                 {
                     DamageInfo empDinfoEnd = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
@@ -318,99 +466,6 @@ namespace DMS_Legion.GroundSupport.SupportEffects
                     pendingMechanoidStuns.Clear();
                 }
                 return true;
-            }
-
-            float inner = Mathf.Max(0f, currentRadius - thickness);
-            ringCellsBuffer.Clear();
-            int rCeil = Mathf.CeilToInt(currentRadius + thickness);
-            for (int dx = -rCeil; dx <= rCeil; dx++)
-            {
-                for (int dz = -rCeil; dz <= rCeil; dz++)
-                {
-                    IntVec3 cell = center + new IntVec3(dx, 0, dz);
-                    if (!cell.InBounds(mapVal)) continue;
-                    float dist = (cell - center).LengthHorizontal;
-                    if (dist >= inner - 0.01f && dist <= currentRadius + 0.01f)
-                        ringCellsBuffer.Add(cell);
-                }
-            }
-
-            DamageInfo empDinfo = new DamageInfo(DamageDefOf.EMP, (float)disableTicks / 30f, -1f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-            int untilTick = tickGame + disableTicks;
-            int cooldownTicks = props.effectCooldownTicks;
-            int visualCounter = 0;
-            // 原版 EMP 手雷爆炸时每格绘制的是 DamageDef.EMP 的 explosionCellFleck，即 Fleck BlastEMP（FleckDefOf 可能无此成员，故用 DefDatabase 按 defName 查找）
-            FleckDef? blastEmpFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BlastEMP");
-
-            for (int i = 0; i < ringCellsBuffer.Count; i++)
-            {
-                IntVec3 cell = ringCellsBuffer[i];
-                thingsAtCellBuffer.Clear();
-                thingsAtCellBuffer.AddRange(mapVal.thingGrid.ThingsListAt(cell));
-                foreach (Thing thing in thingsAtCellBuffer)
-                {
-                    if (thing == null || thing.Destroyed) continue;
-                    int id = thing.thingIDNumber;
-                    if (thingIdToLastHitTick.TryGetValue(id, out int lastTick))
-                    {
-                        if (cooldownTicks > 0 && (tickGame - lastTick) < cooldownTicks)
-                            continue;
-                    }
-                    thingIdToLastHitTick[id] = tickGame;
-
-                    if (thing is Pawn pawn && pawn.RaceProps != null && pawn.RaceProps.IsMechanoid)
-                    {
-                        // 先造成伤害（意识部位等），可能直接击杀机械体
-                        if (props.damageConsciousnessPart && pawn.health?.hediffSet != null)
-                        {
-                            BodyPartRecord? consciousnessPart = pawn.health.hediffSet.GetBrain();
-                            if (consciousnessPart != null)
-                            {
-                                DamageDef? nuclearEmpDef = DefDatabase<DamageDef>.GetNamedSilentFail("DMSL_Damage_NuclearEMP") ?? DamageDefOf.EMP;
-                                int amount = props.consciousnessPartDamageAmount > 0 ? props.consciousnessPartDamageAmount : 1000;
-                                if (nuclearEmpDef != null)
-                                {
-                                    DamageInfo dinfo = new DamageInfo(nuclearEmpDef, amount, -1f, -1f, null, consciousnessPart, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true, QualityCategory.Normal, true, false);
-                                    try { pawn.TakeDamage(dinfo); }
-                                    catch { }
-                                }
-                            }
-                        }
-                        // 眩晕延后施加：经 mechanoidStunDelayTicks 后再尝试，被伤害击杀的机械体届时已不存在
-                        int delay = props.mechanoidStunDelayTicks > 0 ? props.mechanoidStunDelayTicks : 0;
-                        if (delay > 0)
-                        {
-                            if (pendingMechanoidStuns == null) pendingMechanoidStuns = new List<PendingMechanoidStun>();
-                            pendingMechanoidStuns.Add(new PendingMechanoidStun(pawn, tickGame + delay));
-                        }
-                        else if (pawn.stances?.stunner != null)
-                        {
-                            pawn.stances.stunner.Notify_DamageApplied(empDinfo);
-                        }
-                        continue;
-                    }
-
-                    if (thing is Building)
-                    {
-                        CompStunnable? stun = thing.TryGetComp<CompStunnable>();
-                        if (stun != null && stun.CanBeStunnedByDamage(DamageDefOf.EMP))
-                        {
-                            stun.ApplyDamage(empDinfo);
-                            continue;
-                        }
-                        if (props.disablePowerBuildings && thing.TryGetComp<CompPowerTrader>() != null && controller != null)
-                            controller.RegisterPowerSuppressed(thing, untilTick);
-                    }
-                }
-
-                if ((visualCounter++ % 4 == 0) && blastEmpFleck != null)
-                {
-                    try
-                    {
-                        FleckMaker.Static(cell.ToVector3Shifted(), mapVal, blastEmpFleck, Rand.Range(0.6f, 1f));
-                    }
-                    catch { }
-                }
             }
 
             return false;
