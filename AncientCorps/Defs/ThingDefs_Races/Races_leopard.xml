@@ -117,7 +117,7 @@
           <!-- 通用机枪子炮塔 -->
           <li>
             <ID>General-purpose machine gun</ID> <!-- ID标识 -->
-            <turret>DMS_Gun_Kord</turret> <!-- 使用的炮塔 -->
+            <turret>DMS_Gun_Kord_Vehicle</turret> <!-- 使用的炮塔 -->
             <autoAttack>true</autoAttack> <!-- 自动攻击 -->
             <warmingTime>5</warmingTime> <!-- 预热时间 -->
             <angleOffset>-90</angleOffset> <!-- 角度偏移 -->
