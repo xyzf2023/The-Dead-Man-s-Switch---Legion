@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-<!-- 空中支援-核打击 -->
+<!-- 核打击 -->
 <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_NuclearStrike</defName>
     <label>核打击</label>

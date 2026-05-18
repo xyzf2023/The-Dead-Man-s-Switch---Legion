@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 空CM-4巡航导弹打击 -->
+  <!-- CM-4巡航导弹打击 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_CM4</defName>
     <label>CM-4巡航导弹打击</label>
@@ -61,7 +61,7 @@
     </effectComps>
   </DMS_Legion.GroundSupport.AerialSupportTypeDef>
 
-  <!-- 空中支援类型定义 - 导弹群打击 -->
+  <!-- ASM-2「白鲨」导弹群打击 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_AMS2</defName>
     <label>ASM-2「白鲨」导弹群打击</label>

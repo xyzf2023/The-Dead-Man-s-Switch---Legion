@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 空中支援类型定义 - 主战师轰炸支援（供空中支援传呼器使用） -->
+  <!-- 主战师轰炸支援 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_AncientCorps</defName>
     <label>主战师轰炸支援</label>

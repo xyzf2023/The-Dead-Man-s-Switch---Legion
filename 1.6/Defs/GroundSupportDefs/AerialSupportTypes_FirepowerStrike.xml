@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 空中支援类型定义 - 自定义直线测试 -->
+  <!-- 攻击机轰炸 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_AttackAircraftBombing</defName>
     <label>攻击机轰炸</label>
