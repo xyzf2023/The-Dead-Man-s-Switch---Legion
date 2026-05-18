@@ -42,10 +42,10 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         /// </summary>
         public static void ExecuteEffect(IntVec3 targetPos, AerialSupportTypeDef supportType, Map map, CompProperties_AerialSupportEffect_FirefoamRipple props)
         {
-            if (map == null || props == null)
+            if (props == null)
                 return;
 
-            FirefoamRippleController? controller = map.GetComponent<FirefoamRippleController>();
+            FirefoamRippleController? controller = FirefoamRippleController.GetOrCreate(map);
             if (controller == null)
             {
                 Log.Error("[DMS_Legion] FirefoamRipple: FirefoamRippleController not found on map.");
@@ -64,6 +64,24 @@ namespace DMS_Legion.GroundSupport.SupportEffects
         private List<FirefoamRippleSequence> activeFirefoamRippleSequences = new List<FirefoamRippleSequence>();
 
         public FirefoamRippleController(Map map) : base(map) { }
+
+        /// <summary>
+        /// 获取或创建该 Map 上的消防泡沫波纹控制器（若不存在则添加）。
+        /// </summary>
+        public static FirefoamRippleController? GetOrCreate(Map map)
+        {
+            if (map == null)
+                return null;
+
+            FirefoamRippleController? controller = map.GetComponent<FirefoamRippleController>();
+            if (controller == null)
+            {
+                controller = new FirefoamRippleController(map);
+                map.components.Add(controller);
+            }
+
+            return controller;
+        }
 
         public override void ExposeData()
         {
