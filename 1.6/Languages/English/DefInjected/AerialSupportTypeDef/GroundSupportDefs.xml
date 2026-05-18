@@ -13,4 +13,6 @@
   <DMSL_AerialSupport_StrafingRun.description>Order Sparrow to execute a strafing run. Provide two coordinates; Sparrow will strafe the path between them with autocannon fire.\n\n(If you have CE loaded, this support will be replaced with attack aircraft bombing.)</DMSL_AerialSupport_StrafingRun.description>
   <DMSL_AerialSupport_ToxGas.label>Drop Tox Gas</DMSL_AerialSupport_ToxGas.label>
   <DMSL_AerialSupport_ToxGas.description>Drop a large tox gas bomb on the target location, creating a tox gas cloud within a 30-tile radius.</DMSL_AerialSupport_ToxGas.description>
+  <DMSL_AerialSupport_FirefoamRipple.label>Drop Firefoam</DMSL_AerialSupport_FirefoamRipple.label>
+  <DMSL_AerialSupport_FirefoamRipple.description>Spray firefoam at the target location, extinguishing fires within a 30-tile radius.</DMSL_AerialSupport_FirefoamRipple.description>
 </LanguageData>

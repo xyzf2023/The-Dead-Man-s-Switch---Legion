@@ -13,4 +13,6 @@
   <DMSL_AerialSupport_StrafingRun.description>命令麻雀执行一次机炮扫射任务。你需要传入两个坐标，随后麻雀将沿此路径在区间内使用机炮扫射。\n\n（如果你加载了CE，此支援会被替换为攻击机轰炸）</DMSL_AerialSupport_StrafingRun.description>
   <DMSL_AerialSupport_ToxGas.label>投放毒气弹</DMSL_AerialSupport_ToxGas.label>
   <DMSL_AerialSupport_ToxGas.description>向目标地点投放一颗大型毒气弹，在30格内生成毒气云。</DMSL_AerialSupport_ToxGas.description>
+  <DMSL_AerialSupport_FirefoamRipple.label>投放消防泡沫</DMSL_AerialSupport_FirefoamRipple.label>
+  <DMSL_AerialSupport_FirefoamRipple.description>向目标地点喷洒消防泡沫，扑灭30格范围内的火焰。</DMSL_AerialSupport_FirefoamRipple.description>
 </LanguageData>

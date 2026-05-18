@@ -19,4 +19,16 @@
     <aerialSupportDefName>DMSL_AerialSupport_Emp</aerialSupportDefName>
     <category>BattlefieldSupport</category>
   </DMS_Legion.CommsAirSupportOptionDef>
+
+
+  <!-- 通讯台战场支援选项：投放消防泡沫 -->
+  <DMS_Legion.CommsAirSupportOptionDef>
+    <defName>DMSL_Comms_FirefoamRipple</defName>
+    <label>投放消防泡沫</label>
+    <goodwillCostBase>5</goodwillCostBase>
+    <cooldownTicks>300</cooldownTicks>
+    <aerialSupportDefName>DMSL_AerialSupport_FirefoamRipple</aerialSupportDefName>
+    <category>BattlefieldSupport</category>
+  </DMS_Legion.CommsAirSupportOptionDef>
+
 </Defs>
