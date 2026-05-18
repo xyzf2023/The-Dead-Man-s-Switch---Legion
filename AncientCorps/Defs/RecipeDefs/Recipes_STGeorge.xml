@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 圣乔治型机械体制造配方：参照 DMS 超重型培育配方结构 -->
+  <!-- 圣乔治型机械体制造配方：参照 DMS 超重型组装配方结构 -->
   <RecipeDef ParentName="DMS_SuperHeavyMechanoidRecipe">
     <defName>DMSL_Make_STGeorge</defName>
-    <label>培育圣乔治</label>
-    <description>Gestate a Saint George automatroid.</description>
+    <label>组装圣乔治</label>
+    <description>组装一个圣乔治。</description>
     <products>
       <DMSL_Mech_STGeorge>1</DMSL_Mech_STGeorge>
     </products>

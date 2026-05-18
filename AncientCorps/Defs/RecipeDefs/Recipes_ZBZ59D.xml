@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- ZBZ59D 型机械体制造配方：参照 DMS 重型培育配方结构 -->
+  <!-- 堑壕机械体制造配方 -->
   <RecipeDef ParentName="DMS_HeavyMechanoidRecipe">
     <defName>DMSL_Make_ZBZ59D</defName>
-    <label>培育 ZBZ59D</label>
-    <description>Gestate a ZBZ59D automatroid.</description>
+    <label>组装堑壕</label>
+    <description>组装一个堑壕。</description>
     <products>
       <DMSL_Mech_ZBZ59D>1</DMSL_Mech_ZBZ59D>
     </products>

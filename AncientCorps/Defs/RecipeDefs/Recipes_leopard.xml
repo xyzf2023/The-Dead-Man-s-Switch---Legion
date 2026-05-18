@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 豹式指挥官机械体制造配方：参照 DMS 超重型培育配方结构 -->
+  <!-- 豹式机械体制造配方 -->
   <RecipeDef ParentName="DMS_SuperHeavyMechanoidRecipe">
     <defName>DMSL_Make_leopard</defName>
-    <label>培育豹</label>
-    <description>Gestate a Leopard command automatroid.</description>
+    <label>组装豹</label>
+    <description>组装一个豹。</description>
     <products>
       <DMSL_Mech_leopard>1</DMSL_Mech_leopard>
     </products>

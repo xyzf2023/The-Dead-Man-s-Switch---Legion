@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 铁面机械体制造配方：参照 DMS 超重型培育配方结构 -->
+  <!-- 铁面机械体制造配方 -->
   <RecipeDef ParentName="DMS_SuperHeavyMechanoidRecipe">
     <defName>DMSL_Make_IronFace</defName>
-    <label>培育铁面</label>
-    <description>Gestate an IronFace.</description>
+    <label>组装铁面</label>
+    <description>组装一个铁面。</description>
     <products>
       <DMSL_Mech_IronFace>1</DMSL_Mech_IronFace>
     </products>
