@@ -6,7 +6,7 @@
   <DMSL_Ability_RepairDesignate.label>维修指定</DMSL_Ability_RepairDesignate.label>
   <DMSL_Ability_RepairDesignate.description>指定一个机械体进行维修。</DMSL_Ability_RepairDesignate.description>
   <DMSL_Ability_EmergencyRepair.label>应急维修</DMSL_Ability_EmergencyRepair.label>
-  <DMSL_Ability_EmergencyRepair.description>机械体获得500%的全局工作速度加成，持续三小时，冷却两天。</DMSL_Ability_EmergencyRepair.description>
+  <DMSL_Ability_EmergencyRepair.description>机械体获得500%的修理速度加成，持续三小时，冷却两天。</DMSL_Ability_EmergencyRepair.description>
   <DMSL_Ability_MechReconstruction.label>机体重构</DMSL_Ability_MechReconstruction.label>
   <DMSL_Ability_MechReconstruction.description>工程师将尝试修复已关机机械体的损伤并将其重启。仅可对友方机械体尸体使用。</DMSL_Ability_MechReconstruction.description>
   <DMSL_Ability_OmnimindSilence.label>万心失聪</DMSL_Ability_OmnimindSilence.label>
