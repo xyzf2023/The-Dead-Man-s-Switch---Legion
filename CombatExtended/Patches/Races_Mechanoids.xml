@@ -949,6 +949,22 @@
 							</value>
 						</li>
 
+						<!-- ZBZ59D：将会卡 CE 弹药的机枪副炮替换为无弹药 CE 副炮 -->
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_ZBZ59D"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="General-purpose machine gun"]/turret</xpath>
+							<value>
+								<turret>DMSL_CE_ZBZ59D_KordTurret</turret>
+							</value>
+						</li>
+
+						<!-- STGeorge：将会卡 CE 弹药的机枪副炮替换为无弹药 CE 副炮 -->
+						<li Class="PatchOperationReplace">
+							<xpath>Defs/ThingDef[defName="DMSL_Mech_STGeorge"]/comps/li[@Class="Fortified.CompPropertiesMultipleTurretGun"]/subTurrets/li[ID="General-purpose machine gun"]/turret</xpath>
+							<value>
+								<turret>DMSL_CE_STGeorge_KordTurret</turret>
+							</value>
+						</li>
+
 						<!-- 大型机兵近战工具：为 CE 提供 ToolCE（含近战穿甲） -->
 						<li Class="PatchOperationConditional">
 				<xpath>Defs/ThingDef[
