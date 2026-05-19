@@ -5,6 +5,7 @@
 // ============================================================================
 
 using System.Collections.Generic;
+using DMS_Legion;
 using RimWorld;
 using Verse;
 
@@ -13,6 +14,7 @@ namespace DMS_Legion.Incidents.ElectronicAngel
     public class ChoiceLetter_ElectronicAngelSignal : ChoiceLetter
     {
         private const int TimeoutTicks = 2500; // 1h
+        private const string FactionDefName = "DMSL_Faction_DigitalAngel";
 
         /// <summary>本次事件关联的地图；用于触发后续事件。</summary>
         public Map? triggerMap;
@@ -103,8 +105,22 @@ namespace DMS_Legion.Incidents.ElectronicAngel
 
         public void Send()
         {
+            TryAlignDigitalAngelRelations();
             StartTimeout(TimeoutTicks);
             Find.LetterStack.ReceiveLetter(this);
+        }
+
+        private static void TryAlignDigitalAngelRelations()
+        {
+            FactionDef? factionDef = DefDatabase<FactionDef>.GetNamedSilentFail(FactionDefName);
+            if (factionDef == null)
+                return;
+
+            Faction? faction = Find.FactionManager.FirstFactionOfDef(factionDef);
+            if (faction == null)
+                return;
+
+            DigitalAngelRelationAligner.AlignRelations(faction, sendLetters: false);
         }
     }
 }

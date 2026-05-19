@@ -6,6 +6,7 @@ using LudeonTK;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using DMS_Legion;
 using DMS_Legion.AerialRaid.AerialRaidComponents;
 using DMS_Legion.GroundSupport;
 
@@ -175,6 +176,43 @@ namespace DMS_Legion.Console
             }
             comp.ClearCooldown();
             Messages.Message("核打击冷却已归零", MessageTypeDefOf.PositiveEvent);
+        }
+
+        /// <summary>
+        /// 立即将电子天使派系关系与玩家及世界其它派系对齐（不发送关系变化信件，不生成新派系）。
+        /// </summary>
+        [DebugAction("DMS 军团", name = "立即修正电子天使派系关系", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AlignDigitalAngelFactionRelationsNow()
+        {
+            if (Find.FactionManager == null)
+            {
+                Messages.Message("派系管理器不可用", MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            if (Faction.OfPlayer == null)
+            {
+                Messages.Message("玩家派系不存在", MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            const string factionDefName = "DMSL_Faction_DigitalAngel";
+            FactionDef factionDef = DefDatabase<FactionDef>.GetNamedSilentFail(factionDefName);
+            if (factionDef == null)
+            {
+                Messages.Message("未找到电子天使派系", MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            Faction faction = Find.FactionManager.FirstFactionOfDef(factionDef);
+            if (faction == null)
+            {
+                Messages.Message("当前世界中不存在电子天使派系", MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            DigitalAngelRelationAligner.AlignRelations(faction, sendLetters: false);
+            Messages.Message("已执行电子天使派系关系修正", MessageTypeDefOf.PositiveEvent);
         }
 
         /// <summary>

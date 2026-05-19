@@ -3,6 +3,7 @@
 // ============================================================================
 
 using System.Collections.Generic;
+using DMS_Legion;
 using RimWorld;
 using Verse;
 
@@ -14,6 +15,7 @@ namespace DMS_Legion.Incidents.UnknownMechSupport
     public class ChoiceLetter_UnknownSignal : ChoiceLetter
     {
         private const int TimeoutTicks = 2500; // 1h
+        private const string FactionDefName = "DMSL_Faction_DigitalAngel";
 
         /// <summary>触发该信的地图；选「尝试回应」时对该地图执行 DMSL_UnknownMechSupport。</summary>
         public Map? triggerMap;
@@ -88,8 +90,22 @@ namespace DMS_Legion.Incidents.UnknownMechSupport
         /// <summary>发信时调用：设置倒计时并投递。</summary>
         public void Send()
         {
+            TryAlignDigitalAngelRelations();
             StartTimeout(TimeoutTicks);
             Find.LetterStack.ReceiveLetter(this);
+        }
+
+        private static void TryAlignDigitalAngelRelations()
+        {
+            FactionDef? factionDef = DefDatabase<FactionDef>.GetNamedSilentFail(FactionDefName);
+            if (factionDef == null)
+                return;
+
+            Faction? faction = Find.FactionManager.FirstFactionOfDef(factionDef);
+            if (faction == null)
+                return;
+
+            DigitalAngelRelationAligner.AlignRelations(faction, sendLetters: false);
         }
     }
 }
