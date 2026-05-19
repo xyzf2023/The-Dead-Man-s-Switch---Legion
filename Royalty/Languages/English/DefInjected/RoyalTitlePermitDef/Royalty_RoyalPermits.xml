@@ -3,6 +3,8 @@
   <!-- Royalty Defs/DMSL_RoyalPermits.xml -->
   <DMSL_RoyalAid_Smoke.label>Call Smoke Strike</DMSL_RoyalAid_Smoke.label>
   <DMSL_RoyalAid_Smoke.description>Request a smoke strike deployment from the Colonial Fleet.</DMSL_RoyalAid_Smoke.description>
+  <DMSL_RoyalAid_FirefoamRipple.label>Call Firefoam Bomb</DMSL_RoyalAid_FirefoamRipple.label>
+  <DMSL_RoyalAid_FirefoamRipple.description>Request a firefoam bomb deployment from the Colonial Fleet. A firefoam bomb will be dropped at the target location, extinguishing fires within a 30-tile radius.</DMSL_RoyalAid_FirefoamRipple.description>
   <DMSL_RoyalAid_StrafingRun.label>Call Strafing Run</DMSL_RoyalAid_StrafingRun.label>
   <DMSL_RoyalAid_StrafingRun.description>Request a strafing run from the Colonial Fleet.</DMSL_RoyalAid_StrafingRun.description>
   <DMSL_RoyalAid_Emp.label>Call EMP Pulse Bomb</DMSL_RoyalAid_Emp.label>

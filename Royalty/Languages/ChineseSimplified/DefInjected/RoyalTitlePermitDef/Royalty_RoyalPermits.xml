@@ -3,6 +3,8 @@
   <!-- Royalty Defs/DMSL_RoyalPermits.xml -->
   <DMSL_RoyalAid_Smoke.label>呼叫烟雾弹</DMSL_RoyalAid_Smoke.label>
   <DMSL_RoyalAid_Smoke.description>向殖民舰队呼叫一次烟雾弹投放。</DMSL_RoyalAid_Smoke.description>
+  <DMSL_RoyalAid_FirefoamRipple.label>呼叫消防泡沫弹</DMSL_RoyalAid_FirefoamRipple.label>
+  <DMSL_RoyalAid_FirefoamRipple.description>向殖民舰队呼叫投放一颗消防泡沫弹，熄灭目标30格内的火焰。</DMSL_RoyalAid_FirefoamRipple.description>
   <DMSL_RoyalAid_StrafingRun.label>呼叫机炮扫射</DMSL_RoyalAid_StrafingRun.label>
   <DMSL_RoyalAid_StrafingRun.description>向殖民舰队呼叫一次机炮扫射。</DMSL_RoyalAid_StrafingRun.description>
   <DMSL_RoyalAid_Emp.label>呼叫EMP脉冲弹</DMSL_RoyalAid_Emp.label>
