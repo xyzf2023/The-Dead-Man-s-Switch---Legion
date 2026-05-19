@@ -1,6 +1,6 @@
 // ============================================================================
 // 文件：LordJob_DigitalAngelAssistColony.cs
-// 说明：继承原版 LordJob_AssistColony，在未交战时低频扫描并将
+// 说明：继承原版 LordJob_AssistColony，低频扫描并将
 //       「对殖民地活跃威胁」与「非玩家猎杀人类动物」视为同级，
 //       按距支援队伍中心的水平距离优先分配攻击任务（可达性由 CanReach 校验）。
 // ============================================================================
@@ -46,36 +46,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
 
             lastThreatScanTick = now;
 
-            if (SupportPawnsAreInCombat())
-                return;
-
             TryAssignNearestThreatTarget();
-        }
-
-        private bool SupportPawnsAreInCombat()
-        {
-            if (lord == null || lord.ownedPawns == null)
-                return false;
-
-            for (int i = 0; i < lord.ownedPawns.Count; i++)
-            {
-                Pawn pawn = lord.ownedPawns[i];
-                if (pawn == null || pawn.Dead || !pawn.Spawned)
-                    continue;
-
-                Job job = pawn.CurJob;
-                if (job == null)
-                    continue;
-
-                if (job.def == JobDefOf.AttackStatic ||
-                    job.def == JobDefOf.AttackMelee ||
-                    job.ability != null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void TryAssignNearestThreatTarget()
@@ -300,6 +271,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return curJob.def == JobDefOf.Wait ||
                    curJob.def == JobDefOf.Wait_Wander ||
                    curJob.def == JobDefOf.Wait_MaintainPosture ||
+                   curJob.def == JobDefOf.Wait_Combat ||
                    curJob.def == JobDefOf.Goto ||
                    curJob.def == JobDefOf.GotoWander;
         }
