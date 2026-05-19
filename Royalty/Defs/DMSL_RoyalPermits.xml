@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 失能机关皇权支援扩展，需皇权 DLC 与 DMS_Army 派系 -->
 <Defs>
-  <!-- 空中支援类：在 Def 中直接填写 aerialSupportTypeDefName 关联，仅成功召唤后进 CD / 扣好感 -->
+  <!-- 空中支援类 -->
   <RoyalTitlePermitDef>
     <defName>DMSL_RoyalAid_Smoke</defName>
     <label>呼叫烟雾弹</label>
@@ -22,6 +22,27 @@
     </modExtensions>
   </RoyalTitlePermitDef>
 
+  
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_FirefoamRipple</defName>
+    <label>呼叫消防泡沫弹</label>
+    <description>向殖民舰队呼叫投放一颗消防泡沫弹，熄灭目标30格内的火焰。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Private</minTitle>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(0,4)</uiPosition>
+    <cooldownDays>2</cooldownDays>
+    <royalAid>
+      <favorCost>1</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_FirefoamRipple</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
   <RoyalTitlePermitDef>
     <defName>DMSL_RoyalAid_StrafingRun</defName>
     <label>呼叫机炮扫射</label>
@@ -30,10 +51,10 @@
     <faction>DMS_Army</faction>
     <minTitle>DMS_Corporal</minTitle>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(1,0)</uiPosition>
+    <uiPosition>(2,8)</uiPosition>
     <cooldownDays>3</cooldownDays>
     <royalAid>
-      <favorCost>2</favorCost>
+      <favorCost>1</favorCost>
     </royalAid>
     <modExtensions>
       <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
@@ -153,7 +174,7 @@
     <faction>DMS_Army</faction>
     <minTitle>DMS_Captain</minTitle>
     <permitPointCost>3</permitPointCost>
-    <uiPosition>(2,8)</uiPosition>
+    <uiPosition>(3,8)</uiPosition>
     <cooldownDays>12</cooldownDays>
     <royalAid>
       <favorCost>10</favorCost>
@@ -174,7 +195,7 @@
     <faction>DMS_Army</faction>
     <minTitle>DMS_Captain</minTitle>
     <permitPointCost>3</permitPointCost>
-    <uiPosition>(3,8)</uiPosition>
+    <uiPosition>(4,8)</uiPosition>
     <cooldownDays>12</cooldownDays>
     <royalAid>
       <favorCost>10</favorCost>
