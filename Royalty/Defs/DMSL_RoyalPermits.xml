@@ -31,7 +31,7 @@
     <faction>DMS_Army</faction>
     <minTitle>DMS_Private</minTitle>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(0,4)</uiPosition>
+    <uiPosition>(0,3)</uiPosition>
     <cooldownDays>2</cooldownDays>
     <royalAid>
       <favorCost>1</favorCost>
