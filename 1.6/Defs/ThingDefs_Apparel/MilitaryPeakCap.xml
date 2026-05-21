@@ -43,10 +43,16 @@
 			<layers>
 				<li>Overhead</li>
 			</layers>
+			<renderSkipFlags>
+				<li>None</li>
+			</renderSkipFlags>
 			<wornGraphicPath>Clothes/MilitaryPeakCap/headgear</wornGraphicPath>
 			<tags>
 				<li>DMS_Tactical</li>
 			</tags>
+			<!-- <drawData>
+				<scale>0.9</scale>
+			</drawData> -->
 		</apparel>
 	</ThingDef>
 
