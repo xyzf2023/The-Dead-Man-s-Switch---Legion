@@ -20,6 +20,8 @@ namespace DMS_Legion.IntegratedDetectionArray
         private const string GizmoIconLocalTargetedScan = "UI/Commands/LaunchReport";
         /// <summary>12 小时 = 30000 tick</summary>
         private const float ProgressTicksPerCycle = 30000f;
+        /// <summary>耗电校正兜底间隔（tick），用于禁止/允许、电网重连等无法直接监听的场景。</summary>
+        private const int PowerConsumptionRefreshIntervalTicks = 600;
 
         private float scanProgress;
         private bool isLocalMode = true;
@@ -81,7 +83,8 @@ namespace DMS_Legion.IntegratedDetectionArray
         {
             base.CompTick();
 
-            RefreshPowerConsumptionIfNeeded();
+            if (parent.IsHashIntervalTick(PowerConsumptionRefreshIntervalTicks))
+                RefreshPowerConsumptionIfNeeded();
 
             if (powerComp == null || !powerComp.PowerOn)
                 return;
