@@ -26,6 +26,8 @@ namespace DMS_Legion.IntegratedDetectionArray
         private bool useSelectedMineralForLocalScan;
         private ThingDef? targetMineable;
         private CompPowerTrader? powerComp;
+        private CompForbiddable? forbiddableComp;
+        private float lastAppliedPowerConsumption = -1f;
 
         public CompProperties_IntegratedDetectionArray Props => (CompProperties_IntegratedDetectionArray)props;
 
@@ -33,7 +35,9 @@ namespace DMS_Legion.IntegratedDetectionArray
         {
             base.PostSpawnSetup(respawningAfterLoad);
             powerComp = parent.GetComp<CompPowerTrader>();
+            forbiddableComp = parent.GetComp<CompForbiddable>();
             SetDefaultTargetMineralIfNeeded();
+            RefreshPowerConsumptionIfNeeded();
         }
 
         public override void PostExposeData()
@@ -76,11 +80,12 @@ namespace DMS_Legion.IntegratedDetectionArray
         public override void CompTick()
         {
             base.CompTick();
+
+            RefreshPowerConsumptionIfNeeded();
+
             if (powerComp == null || !powerComp.PowerOn)
                 return;
-            // 被禁止时（玩家点了「禁止」）不增加扫描进度
-            var forbiddable = parent.GetComp<CompForbiddable>();
-            if (forbiddable != null && forbiddable.Forbidden)
+            if (IsForbidden())
                 return;
             scanProgress += 1f / ProgressTicksPerCycle;
             if (scanProgress >= 1f)
@@ -88,6 +93,38 @@ namespace DMS_Legion.IntegratedDetectionArray
                 ExecuteScanComplete();
                 scanProgress = 0f;
             }
+        }
+
+        private bool IsForbidden()
+        {
+            return forbiddableComp != null && forbiddableComp.Forbidden;
+        }
+
+        private float GetDesiredPowerConsumption()
+        {
+            if (IsForbidden())
+                return Props?.disabledPowerConsumption ?? 50f;
+
+            if (isLocalMode && useSelectedMineralForLocalScan)
+                return Props?.localTargetedScanPowerConsumption ?? 8000f;
+
+            return powerComp?.Props.PowerConsumption ?? 2500f;
+        }
+
+        private void RefreshPowerConsumptionIfNeeded()
+        {
+            if (powerComp == null)
+                return;
+
+            float desiredPowerConsumption = GetDesiredPowerConsumption();
+            float desiredPowerOutput = -desiredPowerConsumption;
+
+            if (Mathf.Approximately(lastAppliedPowerConsumption, desiredPowerConsumption)
+                && Mathf.Approximately(powerComp.PowerOutput, desiredPowerOutput))
+                return;
+
+            powerComp.PowerOutput = desiredPowerOutput;
+            lastAppliedPowerConsumption = desiredPowerConsumption;
         }
 
         private void SetDefaultTargetMineralIfNeeded()
@@ -215,7 +252,11 @@ namespace DMS_Legion.IntegratedDetectionArray
                     ? "DMSL_IntegratedDetectionArray_ModeLocalDesc".Translate()
                     : "DMSL_IntegratedDetectionArray_ModeLongRangeDesc".Translate(),
                 icon = ContentFinder<Texture2D>.Get(isLocalMode ? GizmoIconLocalScan : GizmoIconLongRangeScan, true),
-                action = () => { isLocalMode = !isLocalMode; }
+                action = () =>
+                {
+                    isLocalMode = !isLocalMode;
+                    RefreshPowerConsumptionIfNeeded();
+                }
             };
             if (!powered)
                 modeCmd.Disable("DMSL_IntegratedDetectionArray_Disable_NoPower".Translate());
@@ -230,7 +271,11 @@ namespace DMS_Legion.IntegratedDetectionArray
                     defaultDesc = "DMSL_IntegratedDetectionArray_LocalTargetedScanDesc".Translate(),
                     icon = ContentFinder<Texture2D>.Get(GizmoIconLocalTargetedScan, true),
                     isActive = () => useSelectedMineralForLocalScan,
-                    toggleAction = () => { useSelectedMineralForLocalScan = !useSelectedMineralForLocalScan; }
+                    toggleAction = () =>
+                    {
+                        useSelectedMineralForLocalScan = !useSelectedMineralForLocalScan;
+                        RefreshPowerConsumptionIfNeeded();
+                    }
                 };
                 yield return localTargetCmd;
             }

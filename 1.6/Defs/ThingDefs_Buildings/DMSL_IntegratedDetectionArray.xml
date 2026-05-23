@@ -58,6 +58,8 @@
     <comps> <!-- 组件列表 -->
       <li Class="DMS_Legion.IntegratedDetectionArray.CompProperties_IntegratedDetectionArray"> <!-- 生成诱饵信号 Gizmo，持续时间与其他诱饵坐标统一（5 小时） -->
         <decoyDurationTicks>12500</decoyDurationTicks>
+        <disabledPowerConsumption>50</disabledPowerConsumption>
+        <localTargetedScanPowerConsumption>8000</localTargetedScanPowerConsumption>
       </li>
       <li Class="CompProperties_Forbiddable"/> <!-- 可禁止 -->
       <li Class="CompProperties_Power"> <!-- 电力 -->
