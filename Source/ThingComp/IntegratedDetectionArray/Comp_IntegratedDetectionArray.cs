@@ -150,9 +150,14 @@ namespace DMS_Legion.IntegratedDetectionArray
         {
             if (useSelectedMineralForLocalScan)
             {
-                if (CanUseAsLocalDeepResource(targetMineable))
-                    return targetMineable!;
-                Log.Warning("[DMS_Legion] IntegratedDetectionArray: Selected mineral \"" + (targetMineable?.defName ?? "null") + "\" is not suitable for local deep resource generation; falling back to random selection.");
+                ThingDef? selectedResource = targetMineable?.building?.mineableThing;
+                if (CanUseAsLocalDeepResource(selectedResource))
+                    return selectedResource!;
+                Log.Warning("[DMS_Legion] IntegratedDetectionArray: Selected mineable \""
+                    + (targetMineable?.defName ?? "null")
+                    + "\" / resource \""
+                    + (selectedResource?.defName ?? "null")
+                    + "\" is not suitable for local deep resource generation; falling back to random selection.");
             }
             return ChooseDeepLumpThingDef();
         }
@@ -160,10 +165,6 @@ namespace DMS_Legion.IntegratedDetectionArray
         private static bool CanUseAsLocalDeepResource(ThingDef? def)
         {
             if (def == null)
-                return false;
-            if (def.building == null)
-                return false;
-            if (def.building.mineableThing == null)
                 return false;
             if (def.deepLumpSizeRange == IntRange.Zero)
                 return false;
@@ -297,6 +298,8 @@ namespace DMS_Legion.IntegratedDetectionArray
                     var list = new List<FloatMenuOption>();
                     foreach (ThingDef d in mineables)
                     {
+                        if (d.building?.mineableThing == null)
+                            continue;
                         ThingDef localD = d;
                         list.Add(new FloatMenuOption(localD.building.mineableThing.LabelCap, () =>
                         {
