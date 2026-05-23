@@ -111,7 +111,7 @@
     <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
     <faction>DMS_Army</faction>
     <minTitle>DMS_WarrantOfficer</minTitle>
-    <permitPointCost>2</permitPointCost>
+    <permitPointCost>1</permitPointCost>
     <uiPosition>(0,9)</uiPosition>
     <cooldownDays>12</cooldownDays>
     <royalAid>
@@ -130,17 +130,59 @@
     <description>向殖民舰队呼叫一次战斗轰炸机轰炸。将命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十枚大型炸弹。</description>
     <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
     <faction>DMS_Army</faction>
-    <minTitle>DMS_Captain</minTitle>
+    <minTitle>DMS_Lieutenant</minTitle>
     <prerequisite>DMSL_RoyalAid_AttackAircraftBombing</prerequisite>
-    <permitPointCost>3</permitPointCost>
+    <permitPointCost>1</permitPointCost>
     <uiPosition>(1,9)</uiPosition>
     <cooldownDays>10</cooldownDays>
     <royalAid>
-      <favorCost>10</favorCost>
+      <favorCost>9</favorCost>
     </royalAid>
     <modExtensions>
       <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
         <aerialSupportTypeDefName>DMSL_AerialSupport_FighterBomberBombing</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_TacticalBombing</defName>
+    <label>呼叫战术轰炸</label>
+    <description>向殖民舰队呼叫一次战术轰炸。将命令狂风执行一次战术轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十八枚重型炸弹。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Captain</minTitle>
+    <prerequisite>DMSL_RoyalAid_FighterBomberBombing</prerequisite>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(2,9)</uiPosition>
+    <cooldownDays>8</cooldownDays>
+    <royalAid>
+      <favorCost>8</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_TacticalBombing</aerialSupportTypeDefName>
+      </li>
+    </modExtensions>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>DMSL_RoyalAid_AreaSuppressionBombing</defName>
+    <label>呼叫区域压制轰炸</label>
+    <description>向殖民舰队呼叫一次区域压制轰炸。将命令长弓手执行一次区域压制轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计二十四枚高爆弹。</description>
+    <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
+    <faction>DMS_Army</faction>
+    <minTitle>DMS_Major</minTitle>
+    <prerequisite>DMSL_RoyalAid_TacticalBombing</prerequisite>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(3,9)</uiPosition>
+    <cooldownDays>8</cooldownDays>
+    <royalAid>
+      <favorCost>7</favorCost>
+    </royalAid>
+    <modExtensions>
+      <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
+        <aerialSupportTypeDefName>DMSL_AerialSupport_AreaSuppressionBombing</aerialSupportTypeDefName>
       </li>
     </modExtensions>
   </RoyalTitlePermitDef>
@@ -153,11 +195,11 @@
     <faction>DMS_Army</faction>
     <minTitle>DMS_Colonel</minTitle>
     <prerequisite>DMSL_RoyalAid_FighterBomberBombing</prerequisite>
-    <permitPointCost>4</permitPointCost>
-    <uiPosition>(2,9)</uiPosition>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(4,9)</uiPosition>
     <cooldownDays>8</cooldownDays>
     <royalAid>
-      <favorCost>10</favorCost>
+      <favorCost>6</favorCost>
     </royalAid>
     <modExtensions>
       <li Class="DMS_Legion.RoyalPermits.RoyalTitlePermitExtension_AerialSupport">
@@ -173,7 +215,7 @@
     <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
     <faction>DMS_Army</faction>
     <minTitle>DMS_Captain</minTitle>
-    <permitPointCost>3</permitPointCost>
+    <permitPointCost>2</permitPointCost>
     <uiPosition>(3,8)</uiPosition>
     <cooldownDays>12</cooldownDays>
     <royalAid>
@@ -194,7 +236,7 @@
     <workerClass>DMS_Legion.RoyalPermits.RoyalTitlePermitWorker_AerialSupport</workerClass>
     <faction>DMS_Army</faction>
     <minTitle>DMS_Captain</minTitle>
-    <permitPointCost>3</permitPointCost>
+    <permitPointCost>2</permitPointCost>
     <uiPosition>(4,8)</uiPosition>
     <cooldownDays>12</cooldownDays>
     <royalAid>
@@ -216,7 +258,7 @@
     <faction>DMS_Army</faction> 
     <minTitle>DMS_Brigadier</minTitle> <!-- 最低头衔，准将及以上可解锁 -->
     <!--<prerequisite>DMS_Join_Shuttle</prerequisite>  前置 -->
-    <permitPointCost>5</permitPointCost> <!-- 解锁消耗的许可点数 -->
+    <permitPointCost>3</permitPointCost> <!-- 解锁消耗的许可点数 -->
     <uiPosition>(6,6)</uiPosition> <!-- 扩编轨道运输机正右方，其坐标为 (6,5) -->
     <cooldownDays>150</cooldownDays>
     <royalAid>
