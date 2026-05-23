@@ -300,8 +300,6 @@
   <DMSL_IntegratedDetectionArray_ModeLocalDesc>Focus on scanning for vein signals within the colony. Discovers local mineral deposits at regular intervals.</DMSL_IntegratedDetectionArray_ModeLocalDesc>
   <DMSL_IntegratedDetectionArray_ModeLongRange>Long-range vein scan</DMSL_IntegratedDetectionArray_ModeLongRange>
   <DMSL_IntegratedDetectionArray_ModeLongRangeDesc>Focus on scanning for vein signals at a distance. Discovers mineral deposits at other locations at regular intervals.</DMSL_IntegratedDetectionArray_ModeLongRangeDesc>
-  <DMSL_IntegratedDetectionArray_LocalTargetedScan_On>Local targeted scan: On</DMSL_IntegratedDetectionArray_LocalTargetedScan_On>
-  <DMSL_IntegratedDetectionArray_LocalTargetedScan_Off>Local targeted scan: Off</DMSL_IntegratedDetectionArray_LocalTargetedScan_Off>
-  <DMSL_IntegratedDetectionArray_LocalTargetedScan_OnDesc>When local vein scanning completes, it will generate the currently selected mineral. Click to disable.</DMSL_IntegratedDetectionArray_LocalTargetedScan_OnDesc>
-  <DMSL_IntegratedDetectionArray_LocalTargetedScan_OffDesc>When local vein scanning completes, it will generate deep resources using the normal weighted random selection. Click to generate the selected mineral instead.</DMSL_IntegratedDetectionArray_LocalTargetedScan_OffDesc>
+  <DMSL_IntegratedDetectionArray_LocalTargetedScan>Vein targeted scan</DMSL_IntegratedDetectionArray_LocalTargetedScan>
+  <DMSL_IntegratedDetectionArray_LocalTargetedScanDesc>When enabled, local vein scans will only search for the selected vein type, significantly increasing power consumption. \n\nIf the selected vein type does not generate veins, the scanned veins will still be random types.</DMSL_IntegratedDetectionArray_LocalTargetedScanDesc>
 </LanguageData>

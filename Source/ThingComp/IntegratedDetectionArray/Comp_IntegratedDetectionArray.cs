@@ -119,7 +119,7 @@ namespace DMS_Legion.IntegratedDetectionArray
             }
             if (!CellFinderLoose.TryFindRandomNotEdgeCellWith(10, (IntVec3 x) => CanScatterDeepAt(x, map), map, out IntVec3 result))
             {
-                Log.Error("[DMS_Legion] IntegratedDetectionArray: Could not find a center cell for deep scanning lump generation!");
+                Log.Error("[DMS_Legion] 综合探测阵列：无法找到用于生成深层矿脉的中心格。");
                 return;
             }
             ThingDef thingDef = ChooseLocalDeepLumpThingDef();
@@ -153,11 +153,6 @@ namespace DMS_Legion.IntegratedDetectionArray
                 ThingDef? selectedResource = targetMineable?.building?.mineableThing;
                 if (CanUseAsLocalDeepResource(selectedResource))
                     return selectedResource!;
-                Log.Warning("[DMS_Legion] IntegratedDetectionArray: Selected mineable \""
-                    + (targetMineable?.defName ?? "null")
-                    + "\" / resource \""
-                    + (selectedResource?.defName ?? "null")
-                    + "\" is not suitable for local deep resource generation; falling back to random selection.");
             }
             return ChooseDeepLumpThingDef();
         }
@@ -229,17 +224,15 @@ namespace DMS_Legion.IntegratedDetectionArray
             // 本地定向扫描开关（仅本地模式显示）
             if (isLocalMode)
             {
-                yield return new Command_Action
+                var localTargetCmd = new Command_Toggle
                 {
-                    defaultLabel = useSelectedMineralForLocalScan
-                        ? "DMSL_IntegratedDetectionArray_LocalTargetedScan_On".Translate()
-                        : "DMSL_IntegratedDetectionArray_LocalTargetedScan_Off".Translate(),
-                    defaultDesc = useSelectedMineralForLocalScan
-                        ? "DMSL_IntegratedDetectionArray_LocalTargetedScan_OnDesc".Translate()
-                        : "DMSL_IntegratedDetectionArray_LocalTargetedScan_OffDesc".Translate(),
+                    defaultLabel = "DMSL_IntegratedDetectionArray_LocalTargetedScan".Translate(),
+                    defaultDesc = "DMSL_IntegratedDetectionArray_LocalTargetedScanDesc".Translate(),
                     icon = ContentFinder<Texture2D>.Get(GizmoIconLocalTargetedScan, true),
-                    action = () => { useSelectedMineralForLocalScan = !useSelectedMineralForLocalScan; }
+                    isActive = () => useSelectedMineralForLocalScan,
+                    toggleAction = () => { useSelectedMineralForLocalScan = !useSelectedMineralForLocalScan; }
                 };
+                yield return localTargetCmd;
             }
 
             // 选择目标矿物（远程模式始终显示；本地模式仅在定向扫描开启时显示）
