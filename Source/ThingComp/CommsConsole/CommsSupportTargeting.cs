@@ -46,6 +46,9 @@ namespace DMS_Legion
                 return "DMSL_Comms_ExecuteSupportInArea".Translate(aerialSupportType.label);
             }
 
+            if (Current.ProgramState == ProgramState.Playing)
+                Find.TickManager.Pause();
+
             CameraJumper.TryJump(CameraJumper.GetWorldTarget(new GlobalTargetInfo(Find.AnyPlayerHomeMap?.Parent ?? Find.CurrentMap?.Parent)));
             Find.WorldSelector.ClearSelection();
             Find.WorldTargeter.BeginTargeting(
