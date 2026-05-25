@@ -531,16 +531,33 @@ namespace DMS_Legion.AXF12
                 return;
             }
 
+            bool selectedThisRound = false;
+            LocalTargetInfo selectedTarget = LocalTargetInfo.Invalid;
+
             Find.Targeter.BeginTargeting(
                 targetingParams,
-                OnMultiPointBombCellSelected,
+                (LocalTargetInfo target) =>
+                {
+                    selectedThisRound = true;
+                    selectedTarget = target;
+                },
                 null,
-                OnMultiPointBombingCancelled,
+                () =>
+                {
+                    if (!selectedThisRound)
+                    {
+                        OnMultiPointBombingCancelled();
+                    }
+                    else
+                    {
+                        HandleMultiPointBombCellSelected(selectedTarget);
+                    }
+                },
                 null,
                 false);
         }
 
-        private void OnMultiPointBombCellSelected(LocalTargetInfo target)
+        private void HandleMultiPointBombCellSelected(LocalTargetInfo target)
         {
             if (pendingMultiBombCells == null)
             {
@@ -552,7 +569,7 @@ namespace DMS_Legion.AXF12
 
             if (pendingMultiBombIndex < pendingMultiBombCount)
             {
-                LongEventHandler.ExecuteWhenFinished(BeginNextMultiPointBombTargeter);
+                BeginNextMultiPointBombTargeter();
                 return;
             }
 
@@ -697,14 +714,6 @@ namespace DMS_Legion.AXF12
                 return;
             }
 
-            var ammoReserve = parent.GetComp<CompAXF12AmmoReserve>();
-            int consumed = ammoReserve?.ConsumeAmmo(bombCount) ?? 0;
-            if (consumed < bombCount)
-            {
-                Messages.Message("DMSL_AXF12_BombNoAmmo".Translate(), MessageTypeDefOf.RejectInput);
-                return;
-            }
-
             var launchable = LaunchableComp;
             if (launchable == null || parent.Map?.Parent == null)
             {
@@ -734,6 +743,14 @@ namespace DMS_Legion.AXF12
             if (refuelable != null && refuelable.Fuel < fuelCost)
             {
                 Messages.Message("DMSL_AXF12_Message_NoFuelNeed".Translate(fuelCost.ToString("F0")), MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            var ammoReserve = parent.GetComp<CompAXF12AmmoReserve>();
+            int consumed = ammoReserve?.ConsumeAmmo(bombCount) ?? 0;
+            if (consumed < bombCount)
+            {
+                Messages.Message("DMSL_AXF12_BombNoAmmo".Translate(), MessageTypeDefOf.RejectInput);
                 return;
             }
 
