@@ -234,10 +234,10 @@
         <!-- 允许排出燃料 -->
         <canEjectFuel>true</canEjectFuel>
       </li>
-      <!-- AXF12 航弹储备：独立储备槽，上限 3，通过 Job 装填，Gizmo 显示 -->
+      <!-- AXF12 航弹储备：独立储备槽，上限 5，通过 Job 装填，Gizmo 显示 -->
       <li Class="DMS_Legion.AXF12.CompProperties_AXF12AmmoReserve">
         <reserveThingDefName>DMSL_AerialBomb</reserveThingDefName>
-        <maxCount>3</maxCount>
+        <maxCount>5</maxCount>
       </li>
       <!-- 环境音效组件 -->
       <li Class="CompProperties_AmbientSound">

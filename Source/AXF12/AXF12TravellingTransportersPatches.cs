@@ -39,7 +39,7 @@ namespace DMS_Legion.AXF12
                     bombingAction.OriginTile,
                     bombingAction.OriginCell,
                     bombingAction.TransportShipDefName,
-                    600);
+                    bombingAction.RequiredLoiterTicks);
                 return false;
             }
 

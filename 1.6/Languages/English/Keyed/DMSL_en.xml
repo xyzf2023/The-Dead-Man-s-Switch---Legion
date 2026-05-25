@@ -147,7 +147,7 @@
 
   <!-- AXF12 bomb reserve -->
   <DMSL_AXF12_AmmoReserve_GizmoLabel>Bomb Reserve</DMSL_AXF12_AmmoReserve_GizmoLabel>
-  <DMSL_AXF12_AmmoReserve_Tooltip>Aerial bombs required for bombing runs. Maximum reserve: 3.</DMSL_AXF12_AmmoReserve_Tooltip>
+  <DMSL_AXF12_AmmoReserve_Tooltip>Aerial bombs required for bombing runs. Maximum reserve: 5.</DMSL_AXF12_AmmoReserve_Tooltip>
   <DMSL_AXF12_AmmoReserve_Inspect>Bombs: {0} {1} / {2}</DMSL_AXF12_AmmoReserve_Inspect>
 
   <!-- AXF12 prioritized reload -->
@@ -158,6 +158,14 @@
   <DMSL_AXF12_BombOption_One>Drop one bomb</DMSL_AXF12_BombOption_One>
   <DMSL_AXF12_BombOption_Two>Drop two bombs</DMSL_AXF12_BombOption_Two>
   <DMSL_AXF12_BombOption_Three>Drop three bombs</DMSL_AXF12_BombOption_Three>
+  <DMSL_AXF12_BombOption_Four>Drop four bombs</DMSL_AXF12_BombOption_Four>
+  <DMSL_AXF12_BombOption_Five>Drop five bombs</DMSL_AXF12_BombOption_Five>
+  <DMSL_AXF12_BombingMode_Concentrated_Label>Concentrated Bombing</DMSL_AXF12_BombingMode_Concentrated_Label>
+  <DMSL_AXF12_BombingMode_Concentrated_Desc>During bombing missions, drop bombs near the same target point.</DMSL_AXF12_BombingMode_Concentrated_Desc>
+  <DMSL_AXF12_BombingMode_MultiPoint_Label>Multi-point Bombing</DMSL_AXF12_BombingMode_MultiPoint_Label>
+  <DMSL_AXF12_BombingMode_MultiPoint_Desc>During bombing missions, drop bombs near multiple selected target points in sequence.</DMSL_AXF12_BombingMode_MultiPoint_Desc>
+  <DMSL_AXF12_MultiBomb_SelectPoint>Select bombing point {0}/{1}.</DMSL_AXF12_MultiBomb_SelectPoint>
+  <DMSL_AXF12_MultiBomb_Cancelled>Multi-point bombing target selection canceled.</DMSL_AXF12_MultiBomb_Cancelled>
   <DMSL_AXF12_BombNoAmmo>Insufficient bombs</DMSL_AXF12_BombNoAmmo>
 
   <!-- AXF12 bombing target and observe -->

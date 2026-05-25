@@ -150,7 +150,7 @@
 
   <!-- AXF12 航弹储备 Gizmo / Job / 检查栏 -->
   <DMSL_AXF12_AmmoReserve_GizmoLabel>航弹储备</DMSL_AXF12_AmmoReserve_GizmoLabel>
-  <DMSL_AXF12_AmmoReserve_Tooltip>进行轰炸所需的航弹。最多储备三颗。</DMSL_AXF12_AmmoReserve_Tooltip>
+  <DMSL_AXF12_AmmoReserve_Tooltip>进行轰炸所需的航弹。最多储备五颗。</DMSL_AXF12_AmmoReserve_Tooltip>
   <DMSL_AXF12_AmmoReserve_Inspect>航弹：{0} {1} / {2}</DMSL_AXF12_AmmoReserve_Inspect>
 
   <!-- AXF12 右键优先装填（与战争女皇装填一致） -->
@@ -161,6 +161,14 @@
   <DMSL_AXF12_BombOption_One>投放一枚航弹</DMSL_AXF12_BombOption_One>
   <DMSL_AXF12_BombOption_Two>投放两枚航弹</DMSL_AXF12_BombOption_Two>
   <DMSL_AXF12_BombOption_Three>投放三枚航弹</DMSL_AXF12_BombOption_Three>
+  <DMSL_AXF12_BombOption_Four>投放四枚航弹</DMSL_AXF12_BombOption_Four>
+  <DMSL_AXF12_BombOption_Five>投放五枚航弹</DMSL_AXF12_BombOption_Five>
+  <DMSL_AXF12_BombingMode_Concentrated_Label>集束轰炸</DMSL_AXF12_BombingMode_Concentrated_Label>
+  <DMSL_AXF12_BombingMode_Concentrated_Desc>执行轰炸任务时，在同一个目标点附近投放航弹。</DMSL_AXF12_BombingMode_Concentrated_Desc>
+  <DMSL_AXF12_BombingMode_MultiPoint_Label>多点轰炸</DMSL_AXF12_BombingMode_MultiPoint_Label>
+  <DMSL_AXF12_BombingMode_MultiPoint_Desc>执行轰炸任务时，依次在多个选择的目标点附近投放航弹。</DMSL_AXF12_BombingMode_MultiPoint_Desc>
+  <DMSL_AXF12_MultiBomb_SelectPoint>选择第 {0}/{1} 个轰炸落点。</DMSL_AXF12_MultiBomb_SelectPoint>
+  <DMSL_AXF12_MultiBomb_Cancelled>多点轰炸选点已取消。</DMSL_AXF12_MultiBomb_Cancelled>
   <DMSL_AXF12_BombNoAmmo>航弹数量不足</DMSL_AXF12_BombNoAmmo>
 
   <!-- AXF12 轰炸选点按钮 / 关注区域 Gizmo -->
