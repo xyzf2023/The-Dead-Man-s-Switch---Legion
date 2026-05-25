@@ -9,12 +9,12 @@ using Verse;
 namespace DMS_Legion.Incidents.UnknownMechSupport
 {
     /// <summary>
-    /// 仅当叙事者为拉斐尔时，根据「负面信件」触发未知机兵支援请求；每张地图 30000 tick 冷却一次。
+    /// 仅当叙事者为拉斐尔时，根据「负面信件」触发未知机兵支援请求；每张地图 7500 tick 冷却一次。
     /// </summary>
     public class DMSL_GameComponent_HalfDownedLetter : GameComponent
     {
         private const int CheckIntervalTicks = 600;
-        internal const int LetterCooldownTicks = 30000;
+        internal const int LetterCooldownTicks = 7500;
         internal const string StorytellerDefName = "DMSL_Storyteller_Raphael";
 
         /// <summary>
