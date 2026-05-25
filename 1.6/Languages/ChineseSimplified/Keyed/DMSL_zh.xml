@@ -69,6 +69,10 @@
   <DMSL_Commander_CannotBeControlledByMech>指挥官不能被机械体控制。</DMSL_Commander_CannotBeControlledByMech>
   <!-- 指挥官不能培育指挥官（账单配置 / 培育限制） -->
   <DMSL_Commander_CannotGestateCommander>指挥官不能培育指挥官。</DMSL_Commander_CannotGestateCommander>
+
+  <!-- 指挥鸟待命模式 Gizmo -->
+  <DMSL_CommandingBirdStandbyMode_Label>待命模式</DMSL_CommandingBirdStandbyMode_Label>
+  <DMSL_CommandingBirdStandbyMode_Desc>开启后，阻止指挥鸟在非征召状态下的移动。\n\n注意，此开关可能导致指挥鸟无法在电量耗尽前返回。</DMSL_CommandingBirdStandbyMode_Desc>
   
   <!-- 武器模式切换相关翻译 -->
   <DMSL_WeaponMode_Label>模式：{0}</DMSL_WeaponMode_Label>

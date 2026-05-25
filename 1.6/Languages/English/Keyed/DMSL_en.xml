@@ -68,6 +68,10 @@
   <!-- Commander restrictions -->
   <DMSL_Commander_CannotBeControlledByMech>Commander cannot be controlled by mechanoids.</DMSL_Commander_CannotBeControlledByMech>
   <DMSL_Commander_CannotGestateCommander>Commander cannot gestate another Commander.</DMSL_Commander_CannotGestateCommander>
+
+  <!-- Commanding Bird standby mode gizmo -->
+  <DMSL_CommandingBirdStandbyMode_Label>Standby mode</DMSL_CommandingBirdStandbyMode_Label>
+  <DMSL_CommandingBirdStandbyMode_Desc>When enabled, prevents the commanding bird from moving while it is not drafted.\n\nNote, this toggle may prevent the commanding bird from returning before its power is depleted.</DMSL_CommandingBirdStandbyMode_Desc>
   
   <!-- Weapon mode -->
   <DMSL_WeaponMode_Label>Mode: {0}</DMSL_WeaponMode_Label>

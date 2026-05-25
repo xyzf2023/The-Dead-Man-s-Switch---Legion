@@ -13,9 +13,8 @@ namespace DMS_Legion
     {
         private const string CommandingBirdDefName = "DMSL_Drone_CommandingBird";
         private const string GizmoIconPath = "UI/Commands/LaunchReport";
-        private const string GizmoLabel = "待命模式";
-        private const string GizmoDesc =
-            "开启后，阻止指挥鸟在非征召状态下的移动。\n\n注意：此开关可能导致指挥鸟无法在电量耗尽前返回。";
+        private const string GizmoLabelKey = "DMSL_CommandingBirdStandbyMode_Label";
+        private const string GizmoDescKey = "DMSL_CommandingBirdStandbyMode_Desc";
 
         private bool standbyModeEnabled;
 
@@ -39,8 +38,8 @@ namespace DMS_Legion
 
             yield return new Command_Toggle
             {
-                defaultLabel = GizmoLabel,
-                defaultDesc = GizmoDesc,
+                defaultLabel = GizmoLabelKey.Translate(),
+                defaultDesc = GizmoDescKey.Translate(),
                 icon = ContentFinder<Texture2D>.Get(GizmoIconPath, true),
                 isActive = () => standbyModeEnabled,
                 toggleAction = () => standbyModeEnabled = !standbyModeEnabled
