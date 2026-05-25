@@ -202,8 +202,8 @@ namespace DMS_Legion.AXF12
 
             yield return bombCommand;
 
-            // 轰炸模式切换：显示当前模式（集束 / 多点）
-            var bombingModeToggle = new Command_Toggle
+            // 轰炸模式切换：普通按钮显示当前模式，点击后切换（非勾选开关样式）
+            var bombingModeCommand = new Command_Action
             {
                 defaultLabel = useMultiPointBombing
                     ? "DMSL_AXF12_BombingMode_MultiPoint_Label".Translate()
@@ -214,11 +214,10 @@ namespace DMS_Legion.AXF12
                 icon = ContentFinder<Texture2D>.Get(
                     useMultiPointBombing ? "UI/Gizmo/MultiPointBombing" : "UI/Gizmo/ConcentratedBombing",
                     false),
-                isActive = () => useMultiPointBombing,
-                toggleAction = () => useMultiPointBombing = !useMultiPointBombing
+                action = () => useMultiPointBombing = !useMultiPointBombing
             };
 
-            yield return bombingModeToggle;
+            yield return bombingModeCommand;
 
             // 自定义返航降落点开关（电力开关式 Gizmo）。开启后，在点击侦察/拦截/轰炸时会先在本图选返航落点再进入世界选点。
             var customLandingToggle = new Command_Toggle
@@ -569,7 +568,7 @@ namespace DMS_Legion.AXF12
 
             if (pendingMultiBombIndex < pendingMultiBombCount)
             {
-                BeginNextMultiPointBombTargeter();
+                ScheduleNextMultiPointBombTargeter();
                 return;
             }
 
@@ -586,6 +585,14 @@ namespace DMS_Legion.AXF12
                 count,
                 "DMSL_AerialSupport_AXF12Bombing_Once",
                 multiPointBombing: true);
+        }
+
+        /// <summary>
+        /// 在当前 Targeter 完全结束后再启动下一轮选点（经 GameComponent 延迟队列，暂停时亦可通过 OnGUI 排空）。
+        /// </summary>
+        private void ScheduleNextMultiPointBombTargeter()
+        {
+            AXF12DeferredActionComponent.Enqueue(BeginNextMultiPointBombTargeter);
         }
 
         private void OnMultiPointBombingCancelled()
