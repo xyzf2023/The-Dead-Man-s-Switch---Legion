@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_scout" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Scout</defName>
     <label>斥候</label>
-    <description>一种配备了机械马的先锋，由人工肌肉提供无与伦比的速度使得它在侦查方面有不可替代的优势。</description>
+    <description>一款搭载了先进仿生技术与移动演算系统的高机动机兵。其搭载的动态机动模组会在移动时持续收集当前地形与动作数据，并即时修正行进方案，以将人工肌肉束的输出潜能压榨到极致。保持移动时斥候将逐步提高移动速度，甚至能够在持续移动一段距离后无视复杂地形对行动的影响。\n\n&lt;i&gt;"通常人们提到骑兵冲锋，往往会想起中世纪那些披挂重甲的骑士；而如今这个场景却再度在战场上演——荒诞，但依旧威力十足。"——某位御械师的战斗记录。&lt;/i&gt;</description>
     <statBases>
       <MoveSpeed>4.5</MoveSpeed>
       <ArmorRating_Blunt>0.8</ArmorRating_Blunt>

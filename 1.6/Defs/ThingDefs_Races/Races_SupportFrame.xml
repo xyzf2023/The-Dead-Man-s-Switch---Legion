@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_SupportFrame" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_SupportFrame</defName>
     <label>支援框架</label>
-    <description>战斗框架的改进型号之一，用于测试重武器在步行机上的效果</description>
+    <description>战斗框架的泛生改进型号之一，用于测试重武器在步行机平台上的实战适应性。其机体针对承载能力与武器后坐控制进行了专门强化，能够稳定操作一般步行机难以负担的重型武装，因此常被用作步兵推进时的伴随火力支援单位。</description>
     <statBases>
       <MoveSpeed>4.2</MoveSpeed>
       <ArmorRating_Blunt>0.8</ArmorRating_Blunt>

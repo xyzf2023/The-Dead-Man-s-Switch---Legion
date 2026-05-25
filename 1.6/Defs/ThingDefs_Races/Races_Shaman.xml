@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_Shaman" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Shaman</defName>
     <label>萨满</label>
-    <description>一种搭载了起灵装置的、拥有提供群体隐身能力的机械体。</description>
+    <description>一款搭载了灵能装置的实验性机兵。其机体内部安装的灵能系统能够以特定方式激发灵能场，使自身与周边盟友在感知层面上“消失”，从而达到心灵隐身与干扰侦测的目的。\n\n由于其高昂的制造成本，只有极少数萨满会出现在正面战场。大多数情况下，它们只会被投入于高风险渗透、斩首与清除行动，而这些任务往往意味着局势已经失去常规控制……亦或者说，只是这次行动本身值得被如此重视？</description>
     <statBases>
       <MoveSpeed>4.7</MoveSpeed>
       <ArmorRating_Blunt>0.8</ArmorRating_Blunt>

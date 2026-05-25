@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_Terra" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Terra</defName>
     <label>尘世</label>
-    <description>一款曾用于执行突袭任务的机械体，特殊的仿生适配可以使其自由穿戴人类装备。</description>
+    <description>一款曾被用于执行突袭与空降任务的特种机兵。其机体采用了特殊的仿生结构，能够自由穿戴大部分人类装备，在任务执行与装备利用方面都具备较高灵活性。即使在合成机兵技术已经成熟的当下，尘世也依旧凭借相对低廉的造价与尚可的作战能力在军团序列中保有一席之地。</description>
     <graphicData>
       <texPath>Mechanoid/Terra/Head/TerraHead</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

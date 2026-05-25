@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_DesignatedMarksman" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_DesignatedMarksman</defName>
     <label>精确射手</label>
-    <description>狙击手昂贵的价格使他难以承担班组狙击手的任务，而精确射手应运而生。</description>
+    <description>狙击手的泛生改进型号之一。该型号在尽可能保留远程射击精度的同时，进一步压缩了组装与带宽成本，并对机体的整体性能进行了改良。作为代价，精确射手的技能等级较原型有所下降。</description>
     <statBases>
       <MoveSpeed>4.5</MoveSpeed>
       <ArmorRating_Blunt>0.9</ArmorRating_Blunt>

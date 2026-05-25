@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_Arsonist" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Arsonist</defName>
     <label>纵火者</label>
-    <description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</description>
+    <description>一款专为高温环境设计的特种机兵。机体配备有特制的耐高温结构与火焰喷射装置，能够在狭窄空间、地下设施等环境中持续进行火力清剿。其手部额外搭载近距离喷火模块，使其在格斗过程中有概率直接点燃目标。\n\n为了避免误伤与结构性火灾，纵火者的部署通常需要经过额外审批。不过在大多数需要它的场合，审批流程往往会比火势蔓延得更慢。</description>
     <statBases>
       <MoveSpeed>4.2</MoveSpeed>
       <ArmorRating_Blunt>1.25</ArmorRating_Blunt>

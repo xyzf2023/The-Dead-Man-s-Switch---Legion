@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_Commandos" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Commandos</defName>
     <label>机动射手</label>
-    <description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</description>
+    <description>一款为机动部队设计的泛用型机兵。该型号搭载的综合作战系统使其能够使用几乎所有人类武器，同时具备较高机动性，以满足野战环境下的作战需求。</description>
     <statBases>
       <MoveSpeed>5.2</MoveSpeed>
       <ArmorRating_Blunt>0.9</ArmorRating_Blunt>

@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_Commander" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Commander</defName>
     <label>指挥官</label>
-    <description>用于承担军团内信息指挥链的指挥机机兵，用于带宽分流能力，可以协助机械师控制机械体。拥有带领远征队的能力。</description>
+    <description>一款专为无人化战场设计的重型指挥机兵，搭载大功率通讯阵列与精密战术协同系统，能够对大规模机械体单位进行实时带宽分流与指令调度，并精确传达御械师的控制信号。\n\n其特殊之处在于，指挥官并非单纯的中继节点。内建的独立战术演算系统使其拥有独立带宽并能自行控制机械体，且其控制单位不会受到常规指挥距离限制。因此许多舰队会将其部署于边境据点与远距离开拓任务中，作为能够独立率领机兵部队行动的前线指挥核心。</description>
     <statBases>
       <MoveSpeed>4.6</MoveSpeed>
       <ArmorRating_Blunt>1.1</ArmorRating_Blunt>
