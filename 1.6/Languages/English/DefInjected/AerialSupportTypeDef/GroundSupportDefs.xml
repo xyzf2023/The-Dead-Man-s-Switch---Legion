@@ -4,13 +4,19 @@
   <DMSL_AerialSupport_NuclearStrike.label>Nuclear Strike</DMSL_AerialSupport_NuclearStrike.label>
   <DMSL_AerialSupport_NuclearStrike.description>Conduct a strategic nuclear strike.</DMSL_AerialSupport_NuclearStrike.description>
   <DMSL_AerialSupport_AttackAircraftBombing.label>Attack Aircraft Bombing</DMSL_AerialSupport_AttackAircraftBombing.label>
-  <DMSL_AerialSupport_AttackAircraftBombing.description>Order Sparrow to execute a bombing run. Provide two coordinates; Sparrow will drop five small bombs along the line between them.</DMSL_AerialSupport_AttackAircraftBombing.description>
+  <DMSL_AerialSupport_AttackAircraftBombing.description>Order Sparrow to execute a bombing run. Provide two coordinates; Sparrow will drop six small bombs along the line between them.</DMSL_AerialSupport_AttackAircraftBombing.description>
   <DMSL_AerialSupport_FighterBomberBombing.label>Fighter Bomber Bombing</DMSL_AerialSupport_FighterBomberBombing.label>
-  <DMSL_AerialSupport_FighterBomberBombing.description>Order Tempest to execute a bombing run. Provide two coordinates; Tempest will drop ten large bombs along the line between them.</DMSL_AerialSupport_FighterBomberBombing.description>
+  <DMSL_AerialSupport_FighterBomberBombing.description>Order Tempest to execute a bombing run. Provide two coordinates; Tempest will drop twelve large bombs along the line between them.</DMSL_AerialSupport_FighterBomberBombing.description>
+  <DMSL_AerialSupport_TacticalBombing.label>Tactical Bombing</DMSL_AerialSupport_TacticalBombing.label>
+  <DMSL_AerialSupport_TacticalBombing.description>Order Tempest to execute a tactical bombing run. Provide two coordinates; Tempest will drop eighteen heavy bombs along the line between them.</DMSL_AerialSupport_TacticalBombing.description>
+  <DMSL_AerialSupport_AreaSuppressionBombing.label>Area Suppression Bombing</DMSL_AerialSupport_AreaSuppressionBombing.label>
+  <DMSL_AerialSupport_AreaSuppressionBombing.description>Order Longbow to execute an area suppression bombing run. Provide two coordinates; Longbow will drop twenty-four high-explosive bombs along the line between them.</DMSL_AerialSupport_AreaSuppressionBombing.description>
   <DMSL_AerialSupport_CarpetBombing.label>Carpet Bombing</DMSL_AerialSupport_CarpetBombing.label>
-  <DMSL_AerialSupport_CarpetBombing.description>Order Longbow to execute a carpet bombing run. Provide two coordinates; Longbow will drop thirty high-explosive bombs along the line between them.</DMSL_AerialSupport_CarpetBombing.description>
+  <DMSL_AerialSupport_CarpetBombing.description>Order Longbow to execute a carpet bombing run. Provide two coordinates; Longbow will drop thirty-six heavy high-explosive bombs along the line between them.</DMSL_AerialSupport_CarpetBombing.description>
   <DMSL_AerialSupport_StrafingRun.label>Strafing Run</DMSL_AerialSupport_StrafingRun.label>
   <DMSL_AerialSupport_StrafingRun.description>Order Sparrow to execute a strafing run. Provide two coordinates; Sparrow will strafe the path between them with autocannon fire.\n\n(If you have CE loaded, this support will be replaced with attack aircraft bombing.)</DMSL_AerialSupport_StrafingRun.description>
   <DMSL_AerialSupport_ToxGas.label>Drop Tox Gas</DMSL_AerialSupport_ToxGas.label>
   <DMSL_AerialSupport_ToxGas.description>Drop a large tox gas bomb on the target location, creating a tox gas cloud within a 30-tile radius.</DMSL_AerialSupport_ToxGas.description>
+  <DMSL_AerialSupport_FirefoamRipple.label>Drop Firefoam</DMSL_AerialSupport_FirefoamRipple.label>
+  <DMSL_AerialSupport_FirefoamRipple.description>Spray firefoam at the target location, extinguishing fires within a 30-tile radius.</DMSL_AerialSupport_FirefoamRipple.description>
 </LanguageData>

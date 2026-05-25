@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 空中支援类型定义 -->
-
   <!-- 投放烟雾弹 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_Smoke</defName>
@@ -78,6 +76,31 @@
         <consciousnessPartDamageAmount>50</consciousnessPartDamageAmount>
         <!-- 机械体眩晕延迟（tick）：先造成伤害，经此 tick 后再尝试施加眩晕；被伤害击杀的机械体不再被眩晕。0=立即眩晕 -->
         <mechanoidStunDelayTicks>1</mechanoidStunDelayTicks>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <!-- 消防泡沫波纹 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_FirefoamRipple</defName>
+    <label>投放消防泡沫</label>
+    <description>向目标地点喷洒消防泡沫，扑灭30格范围内的火焰。</description>
+    <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_FirefoamRipple">
+        <maxRadius>30</maxRadius>
+        <expandSpeedCellsPerTick>1</expandSpeedCellsPerTick>
+        <extinguishDamage>1000</extinguishDamage>
+        <placeFilth>true</placeFilth>
       </li>
     </effectComps>
   </DMS_Legion.GroundSupport.AerialSupportTypeDef>

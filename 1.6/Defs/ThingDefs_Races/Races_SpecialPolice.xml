@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_SpecialPolice" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_SpecialPolice</defName>
     <label>特种警察</label>
-    <description>装备了电击设备与喷气护肩的镇暴机兵。</description>
+    <description>一款用于镇压暴动的警用机兵。配备高压电击器，可在极短时间内击晕目标；内置的弹跳装置则保证其能够快速机动，以及时投入镇压行动。</description>
     <statBases>
       <MoveSpeed>4.5</MoveSpeed>
       <ArmorRating_Blunt>1.2</ArmorRating_Blunt>

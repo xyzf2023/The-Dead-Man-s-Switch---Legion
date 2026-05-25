@@ -19,6 +19,16 @@ namespace DMS_Legion.AXF12
         private bool useManualReturnLanding;
         private IntVec3 customReturnLandingCell = IntVec3.Invalid;
 
+        // 轰炸模式：false=集束轰炸，true=多点轰炸
+        private bool useMultiPointBombing;
+
+        // 多点轰炸选点进行中状态（选满或取消前不扣弹、不发射）
+        private List<IntVec3>? pendingMultiBombCells;
+        private int pendingMultiBombIndex;
+        private PlanetTile pendingMultiBombTargetTile;
+        private int pendingMultiBombCount;
+        private Map? pendingMultiBombMap;
+
         /// <summary>轰炸两步选点：世界格选完后跳转目标地图并直接调用同一方法 StartBombingCellTargeter 启动单格选点。以下静态字段仅供 AXF12BombingCellSelectPromptComponent 备用。</summary>
         public static Comp_AXF12ReconLaunch? PendingBombingComp;
         public static PlanetTile PendingBombingTargetTile;
@@ -192,6 +202,23 @@ namespace DMS_Legion.AXF12
 
             yield return bombCommand;
 
+            // 轰炸模式切换：普通按钮显示当前模式，点击后切换（非勾选开关样式）
+            var bombingModeCommand = new Command_Action
+            {
+                defaultLabel = useMultiPointBombing
+                    ? "DMSL_AXF12_BombingMode_MultiPoint_Label".Translate()
+                    : "DMSL_AXF12_BombingMode_Concentrated_Label".Translate(),
+                defaultDesc = useMultiPointBombing
+                    ? "DMSL_AXF12_BombingMode_MultiPoint_Desc".Translate()
+                    : "DMSL_AXF12_BombingMode_Concentrated_Desc".Translate(),
+                icon = ContentFinder<Texture2D>.Get(
+                    useMultiPointBombing ? "UI/Gizmo/MultiPointBombing" : "UI/Gizmo/ConcentratedBombing",
+                    false),
+                action = () => useMultiPointBombing = !useMultiPointBombing
+            };
+
+            yield return bombingModeCommand;
+
             // 自定义返航降落点开关（电力开关式 Gizmo）。开启后，在点击侦察/拦截/轰炸时会先在本图选返航落点再进入世界选点。
             var customLandingToggle = new Command_Toggle
             {
@@ -243,6 +270,8 @@ namespace DMS_Legion.AXF12
             AddOption(1, "DMSL_AXF12_BombOption_One", "DMSL_AerialSupport_AXF12Bombing_Once");
             AddOption(2, "DMSL_AXF12_BombOption_Two", "DMSL_AerialSupport_AXF12Bombing_Twice");
             AddOption(3, "DMSL_AXF12_BombOption_Three", "DMSL_AerialSupport_AXF12Bombing_Thrice");
+            AddOption(4, "DMSL_AXF12_BombOption_Four", "DMSL_AerialSupport_AXF12Bombing_FourTimes");
+            AddOption(5, "DMSL_AXF12_BombOption_Five", "DMSL_AerialSupport_AXF12Bombing_FiveTimes");
 
             Find.WindowStack.Add(new FloatMenu(options));
         }
@@ -405,6 +434,12 @@ namespace DMS_Legion.AXF12
         /// </summary>
         internal void StartBombingCellTargeter(PlanetTile targetTile, int bombCount, string supportTypeDefName)
         {
+            if (bombCount > 1 && useMultiPointBombing)
+            {
+                StartMultiPointBombingCellTargeter(targetTile, bombCount);
+                return;
+            }
+
             Map? map = Current.Game.CurrentMap;
             if (map == null)
             {
@@ -440,6 +475,148 @@ namespace DMS_Legion.AXF12
                     null,
                     false);
             }
+        }
+
+        /// <summary>
+        /// 多点轰炸：在目标地图上依次选择 bombCount 个落点，全部选完后再扣弹并发射。
+        /// </summary>
+        private void StartMultiPointBombingCellTargeter(PlanetTile targetTile, int bombCount)
+        {
+            Map? map = Current.Game.CurrentMap;
+            if (map == null)
+            {
+                Messages.Message("DMSL_AXF12_Message_NoMapSelect".Translate(), MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            pendingMultiBombCells = new List<IntVec3>();
+            pendingMultiBombIndex = 0;
+            pendingMultiBombTargetTile = targetTile;
+            pendingMultiBombCount = bombCount;
+            pendingMultiBombMap = map;
+            BeginNextMultiPointBombTargeter();
+        }
+
+        private void BeginNextMultiPointBombTargeter()
+        {
+            Map? map = pendingMultiBombMap ?? Current.Game.CurrentMap;
+            if (map == null || pendingMultiBombCells == null)
+            {
+                ClearMultiPointBombingPending();
+                return;
+            }
+
+            int currentIndex = pendingMultiBombIndex;
+            Messages.Message(
+                "DMSL_AXF12_MultiBomb_SelectPoint".Translate(currentIndex + 1, pendingMultiBombCount),
+                MessageTypeDefOf.NeutralEvent);
+
+            var targetingParams = new TargetingParameters
+            {
+                canTargetLocations = true,
+                canTargetSelf = false,
+                canTargetPawns = false,
+                canTargetBuildings = true,
+                canTargetAnimals = false,
+                canTargetHumans = false,
+                canTargetMechs = false,
+                canTargetItems = false,
+                validator = (TargetInfo target) => target.Cell.InBounds(map)
+            };
+
+            if (Find.Targeter == null)
+            {
+                ClearMultiPointBombingPending();
+                return;
+            }
+
+            bool selectedThisRound = false;
+            LocalTargetInfo selectedTarget = LocalTargetInfo.Invalid;
+
+            Find.Targeter.BeginTargeting(
+                targetingParams,
+                (LocalTargetInfo target) =>
+                {
+                    selectedThisRound = true;
+                    selectedTarget = target;
+                },
+                null,
+                () =>
+                {
+                    if (!selectedThisRound)
+                    {
+                        OnMultiPointBombingCancelled();
+                    }
+                    else
+                    {
+                        HandleMultiPointBombCellSelected(selectedTarget);
+                    }
+                },
+                null,
+                false);
+        }
+
+        private void HandleMultiPointBombCellSelected(LocalTargetInfo target)
+        {
+            if (pendingMultiBombCells == null)
+            {
+                return;
+            }
+
+            pendingMultiBombCells.Add(target.Cell);
+            pendingMultiBombIndex++;
+
+            if (pendingMultiBombIndex < pendingMultiBombCount)
+            {
+                ScheduleNextMultiPointBombTargeter();
+                return;
+            }
+
+            var cells = new List<IntVec3>(pendingMultiBombCells);
+            PlanetTile tile = pendingMultiBombTargetTile;
+            Map? map = pendingMultiBombMap;
+            int count = pendingMultiBombCount;
+            ClearMultiPointBombingPending();
+
+            OnBombingCellsSelected(
+                cells,
+                tile,
+                map,
+                count,
+                "DMSL_AerialSupport_AXF12Bombing_Once",
+                multiPointBombing: true);
+        }
+
+        /// <summary>
+        /// 在当前 Targeter 完全结束后再启动下一轮选点（经 GameComponent 延迟队列，暂停时亦可通过 OnGUI 排空）。
+        /// </summary>
+        private void ScheduleNextMultiPointBombTargeter()
+        {
+            AXF12DeferredActionComponent.Enqueue(BeginNextMultiPointBombTargeter);
+        }
+
+        private void OnMultiPointBombingCancelled()
+        {
+            if (pendingMultiBombCells == null)
+            {
+                return;
+            }
+
+            if (pendingMultiBombIndex < pendingMultiBombCount)
+            {
+                Messages.Message("DMSL_AXF12_MultiBomb_Cancelled".Translate(), MessageTypeDefOf.RejectInput);
+            }
+
+            ClearMultiPointBombingPending();
+        }
+
+        private void ClearMultiPointBombingPending()
+        {
+            pendingMultiBombCells = null;
+            pendingMultiBombIndex = 0;
+            pendingMultiBombTargetTile = default;
+            pendingMultiBombCount = 0;
+            pendingMultiBombMap = null;
         }
 
         /// <summary>
@@ -517,79 +694,116 @@ namespace DMS_Legion.AXF12
 
         private void OnBombingCellSelected(LocalTargetInfo target, PlanetTile targetTile, Map? targetMap, int bombCount, string supportTypeDefName)
         {
-            Log.Message($"[DMS_Legion][AXF12] OnBombingCellSelected 被调用 cell={target.Cell} targetTile={targetTile} bombCount={bombCount}");
             if (targetMap == null)
             {
                 return;
             }
-            IntVec3 targetCell = target.Cell;
-                var ammoReserve = parent.GetComp<CompAXF12AmmoReserve>();
-                int consumed = ammoReserve?.ConsumeAmmo(bombCount) ?? 0;
-                if (consumed < bombCount)
-                {
-                    Messages.Message("DMSL_AXF12_BombNoAmmo".Translate(), MessageTypeDefOf.RejectInput);
-                    return;
-                }
 
-                var launchable = LaunchableComp;
-                if (launchable == null || parent.Map?.Parent == null)
-                {
-                    Messages.Message("发射组件缺失，无法执行轰炸。", MessageTypeDefOf.RejectInput);
-                    return;
-                }
+            OnBombingCellsSelected(
+                new List<IntVec3> { target.Cell },
+                targetTile,
+                targetMap,
+                bombCount,
+                supportTypeDefName,
+                multiPointBombing: false);
+        }
 
-                var transporter = TransporterComp;
-                if (transporter == null)
-                {
-                    Messages.Message("运输组件缺失，无法执行轰炸。", MessageTypeDefOf.RejectInput);
-                    return;
-                }
+        private void OnBombingCellsSelected(
+            List<IntVec3> targetCells,
+            PlanetTile targetTile,
+            Map? targetMap,
+            int bombCount,
+            string supportTypeDefName,
+            bool multiPointBombing)
+        {
+            if (targetMap == null || targetCells == null || targetCells.Count == 0)
+            {
+                return;
+            }
 
-                EnsureTransporterGroup(transporter, parent.Map);
+            var launchable = LaunchableComp;
+            if (launchable == null || parent.Map?.Parent == null)
+            {
+                Messages.Message("发射组件缺失，无法执行轰炸。", MessageTypeDefOf.RejectInput);
+                return;
+            }
 
-                PlanetTile originTile = parent.Map.Parent.Tile;
-                IntVec3 originCell = GetReturnOriginCell();
+            var transporter = TransporterComp;
+            if (transporter == null)
+            {
+                Messages.Message("运输组件缺失，无法执行轰炸。", MessageTypeDefOf.RejectInput);
+                return;
+            }
 
-                if (!TryGetReconFuelCost(launchable, originTile, targetTile, out float fuelCost))
-                {
-                    Messages.Message("DMSL_AXF12_Message_NoFuelCost".Translate(), MessageTypeDefOf.RejectInput);
-                    return;
-                }
+            EnsureTransporterGroup(transporter, parent.Map);
 
-                var refuelable = parent.GetComp<CompRefuelable>();
-                if (refuelable != null && refuelable.Fuel < fuelCost)
-                {
-                    Messages.Message("DMSL_AXF12_Message_NoFuelNeed".Translate(fuelCost.ToString("F0")), MessageTypeDefOf.RejectInput);
-                    return;
-                }
+            PlanetTile originTile = parent.Map.Parent.Tile;
+            IntVec3 originCell = GetReturnOriginCell();
 
-                var bombingAction = new TransportersArrivalAction_AXF12Bombing(
+            if (!TryGetReconFuelCost(launchable, originTile, targetTile, out float fuelCost))
+            {
+                Messages.Message("DMSL_AXF12_Message_NoFuelCost".Translate(), MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            var refuelable = parent.GetComp<CompRefuelable>();
+            if (refuelable != null && refuelable.Fuel < fuelCost)
+            {
+                Messages.Message("DMSL_AXF12_Message_NoFuelNeed".Translate(fuelCost.ToString("F0")), MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            var ammoReserve = parent.GetComp<CompAXF12AmmoReserve>();
+            int consumed = ammoReserve?.ConsumeAmmo(bombCount) ?? 0;
+            if (consumed < bombCount)
+            {
+                Messages.Message("DMSL_AXF12_BombNoAmmo".Translate(), MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            TransportersArrivalAction_AXF12Bombing bombingAction;
+            if (multiPointBombing)
+            {
+                bombingAction = new TransportersArrivalAction_AXF12Bombing(
                     originTile,
                     targetTile,
                     originCell,
-                    targetCell,
+                    targetCells,
+                    "DMSL_AerialSupport_AXF12Bombing_Once",
+                    Props.transportShipDefName,
+                    Props.worldObjectDefName,
+                    multiPointBombing: true);
+            }
+            else
+            {
+                bombingAction = new TransportersArrivalAction_AXF12Bombing(
+                    originTile,
+                    targetTile,
+                    originCell,
+                    targetCells[0],
                     supportTypeDefName,
                     Props.transportShipDefName,
                     Props.worldObjectDefName);
+            }
 
-                AXF12LaunchContext.CustomFuelCostActive = true;
-                AXF12LaunchContext.CustomFuelCost = fuelCost;
-                AXF12LaunchContext.AllowedDefName = parent.def.defName;
+            AXF12LaunchContext.CustomFuelCostActive = true;
+            AXF12LaunchContext.CustomFuelCost = fuelCost;
+            AXF12LaunchContext.AllowedDefName = parent.def.defName;
 
-                bool launched;
-                try
-                {
-                    launched = TryLaunchWithArrivalAction(launchable, targetTile, bombingAction);
-                }
-                finally
-                {
-                    AXF12LaunchContext.Reset();
-                }
+            bool launched;
+            try
+            {
+                launched = TryLaunchWithArrivalAction(launchable, targetTile, bombingAction);
+            }
+            finally
+            {
+                AXF12LaunchContext.Reset();
+            }
 
-                if (!launched)
-                {
-                    Messages.Message("DMSL_AXF12_Message_LaunchFailed".Translate(), MessageTypeDefOf.RejectInput);
-                }
+            if (!launched)
+            {
+                Messages.Message("DMSL_AXF12_Message_LaunchFailed".Translate(), MessageTypeDefOf.RejectInput);
+            }
         }
 
         /// <summary> 是否存在任意地图的空袭倒计时（GetRemainingTicks() &gt; 0）。 </summary>
@@ -1155,6 +1369,7 @@ namespace DMS_Legion.AXF12
             base.PostExposeData();
             Scribe_Values.Look(ref useManualReturnLanding, "axf12UseManualReturnLanding", false);
             Scribe_Values.Look(ref customReturnLandingCell, "axf12CustomReturnLandingCell", IntVec3.Invalid);
+            Scribe_Values.Look(ref useMultiPointBombing, "axf12UseMultiPointBombing", false);
         }
     }
 }

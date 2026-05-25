@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 空中支援类型定义 - 自定义直线测试 -->
+  <!-- 攻击机轰炸 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_AttackAircraftBombing</defName>
     <label>攻击机轰炸</label>
-    <description>命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计五枚小型炸弹。</description>
+    <description>命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计六枚小型炸弹。</description>
     <aircraftTexturePath>GroundSupport/sparrow</aircraftTexturePath>
     <flightSpeed>0.01</flightSpeed>
     <cooldownTicks>0</cooldownTicks>
@@ -19,7 +19,7 @@
     <effectComps>
       <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
         <!-- 沿航线生成的爆炸点数量 -->
-        <explosionCount>5</explosionCount>
+        <explosionCount>6</explosionCount>
         <!-- 单次爆炸伤害量 -->
         <damageAmount>100</damageAmount>
         <!-- 单次爆炸半径（格） -->
@@ -34,7 +34,7 @@
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_FighterBomberBombing</defName>
     <label>战斗轰炸机轰炸</label>
-    <description>命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十枚大型炸弹。</description>
+    <description>命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十二枚大型炸弹。</description>
     <aircraftTexturePath>GroundSupport/IDS</aircraftTexturePath>
     <flightSpeed>0.01</flightSpeed>
     <cooldownTicks>0</cooldownTicks>
@@ -49,7 +49,7 @@
     <effectComps>
       <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
         <!-- 沿航线生成的爆炸点数量 -->
-        <explosionCount>10</explosionCount>
+        <explosionCount>12</explosionCount>
         <!-- 单次爆炸伤害量 -->
         <damageAmount>125</damageAmount>
         <!-- 单次爆炸半径（格） -->
@@ -60,11 +60,73 @@
     </effectComps>
   </DMS_Legion.GroundSupport.AerialSupportTypeDef>
 
+  <!-- 战术轰炸 -->
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_TacticalBombing</defName>
+    <label>战术轰炸</label>
+    <description>命令狂风执行一次战术轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十八枚重型炸弹。</description>
+    <aircraftTexturePath>GroundSupport/IDS</aircraftTexturePath>
+    <flightSpeed>0.01</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>CustomLine</flightPathType>
+    <!-- 延迟配置：自定义直线支援示例（同时开始） -->
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
+        <!-- 沿航线生成的爆炸点数量 -->
+        <explosionCount>18</explosionCount>
+        <!-- 单次爆炸伤害量 -->
+        <damageAmount>150</damageAmount>
+        <!-- 单次爆炸半径（格） -->
+        <explosionRadius>16</explosionRadius>
+        <!-- 伤害类型 defName（原版 Bomb 等） -->
+        <damageDefDefName>Bomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+
+  <!-- 区域压制轰炸 -->
+<DMS_Legion.GroundSupport.AerialSupportTypeDef>
+  <defName>DMSL_AerialSupport_AreaSuppressionBombing</defName>
+  <label>区域压制轰炸</label>
+  <description>命令长弓手执行一次区域压制轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计二十四枚高爆弹。</description>
+  <aircraftTexturePath>GroundSupport/LASB-25</aircraftTexturePath>
+  <flightSpeed>0.015</flightSpeed>
+  <cooldownTicks>0</cooldownTicks>
+  <drawSize>10.0</drawSize>
+  <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+  <enableExhaust>false</enableExhaust> <!-- 是否启用尾气效果总开关 -->
+  <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+  <flightPathType>CustomLine</flightPathType>
+  <!-- 延迟配置：自定义直线支援示例（同时开始） -->
+  <renderDelayTicks>0</renderDelayTicks>
+  <soundDelayTicks>0</soundDelayTicks>
+  <effectComps>
+    <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
+      <!-- 沿航线生成的爆炸点数量 -->
+      <explosionCount>24</explosionCount>
+      <!-- 单次爆炸伤害量 -->
+      <damageAmount>175</damageAmount>
+      <!-- 单次爆炸半径（格） -->
+      <explosionRadius>18</explosionRadius>
+      <!-- 伤害类型 defName（原版 Bomb 等） -->
+      <damageDefDefName>Bomb</damageDefDefName>
+    </li>
+  </effectComps>
+</DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  
 <!-- 地毯式轰炸 -->
   <DMS_Legion.GroundSupport.AerialSupportTypeDef>
     <defName>DMSL_AerialSupport_CarpetBombing</defName>
     <label>地毯式轰炸</label>
-    <description>命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十枚高爆弹。</description>
+    <description>命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十六枚重型高爆弹。</description>
     <aircraftTexturePath>GroundSupport/LASB-25</aircraftTexturePath>
     <flightSpeed>0.015</flightSpeed>
     <cooldownTicks>0</cooldownTicks>
@@ -79,11 +141,11 @@
     <effectComps>
       <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_CustomLineBombing">
         <!-- 沿航线生成的爆炸点数量 -->
-        <explosionCount>30</explosionCount>
+        <explosionCount>36</explosionCount>
         <!-- 单次爆炸伤害量 -->
-        <damageAmount>150</damageAmount>
+        <damageAmount>200</damageAmount>
         <!-- 单次爆炸半径（格） -->
-        <explosionRadius>18</explosionRadius>
+        <explosionRadius>20</explosionRadius>
         <!-- 伤害类型 defName（原版 Bomb 等） -->
         <damageDefDefName>Bomb</damageDefDefName>
       </li>

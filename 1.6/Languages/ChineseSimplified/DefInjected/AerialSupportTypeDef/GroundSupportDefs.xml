@@ -4,13 +4,19 @@
   <DMSL_AerialSupport_NuclearStrike.label>核打击</DMSL_AerialSupport_NuclearStrike.label>
   <DMSL_AerialSupport_NuclearStrike.description>进行一次战略核打击</DMSL_AerialSupport_NuclearStrike.description>
   <DMSL_AerialSupport_AttackAircraftBombing.label>攻击机轰炸</DMSL_AerialSupport_AttackAircraftBombing.label>
-  <DMSL_AerialSupport_AttackAircraftBombing.description>命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计五枚小型炸弹。</DMSL_AerialSupport_AttackAircraftBombing.description>
+  <DMSL_AerialSupport_AttackAircraftBombing.description>命令麻雀执行一次轰炸任务。你需要传入两个坐标，随后麻雀将在这两个坐标间投放共计六枚小型炸弹。</DMSL_AerialSupport_AttackAircraftBombing.description>
   <DMSL_AerialSupport_FighterBomberBombing.label>战斗轰炸机轰炸</DMSL_AerialSupport_FighterBomberBombing.label>
-  <DMSL_AerialSupport_FighterBomberBombing.description>命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十枚大型炸弹。</DMSL_AerialSupport_FighterBomberBombing.description>
+  <DMSL_AerialSupport_FighterBomberBombing.description>命令狂风执行一次轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十二枚大型炸弹。</DMSL_AerialSupport_FighterBomberBombing.description>
+  <DMSL_AerialSupport_TacticalBombing.label>战术轰炸</DMSL_AerialSupport_TacticalBombing.label>
+  <DMSL_AerialSupport_TacticalBombing.description>命令狂风执行一次战术轰炸任务。你需要传入两个坐标，随后狂风将在这两个坐标间投放共计十八枚重型炸弹。</DMSL_AerialSupport_TacticalBombing.description>
+  <DMSL_AerialSupport_AreaSuppressionBombing.label>区域压制轰炸</DMSL_AerialSupport_AreaSuppressionBombing.label>
+  <DMSL_AerialSupport_AreaSuppressionBombing.description>命令长弓手执行一次区域压制轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计二十四枚高爆弹。</DMSL_AerialSupport_AreaSuppressionBombing.description>
   <DMSL_AerialSupport_CarpetBombing.label>地毯式轰炸</DMSL_AerialSupport_CarpetBombing.label>
-  <DMSL_AerialSupport_CarpetBombing.description>命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十枚高爆弹。</DMSL_AerialSupport_CarpetBombing.description>
+  <DMSL_AerialSupport_CarpetBombing.description>命令长弓手执行一次地毯式轰炸任务。你需要传入两个坐标，随后长弓手将在这两个坐标间投放共计三十六枚重型高爆弹。</DMSL_AerialSupport_CarpetBombing.description>
   <DMSL_AerialSupport_StrafingRun.label>机炮扫射</DMSL_AerialSupport_StrafingRun.label>
   <DMSL_AerialSupport_StrafingRun.description>命令麻雀执行一次机炮扫射任务。你需要传入两个坐标，随后麻雀将沿此路径在区间内使用机炮扫射。\n\n（如果你加载了CE，此支援会被替换为攻击机轰炸）</DMSL_AerialSupport_StrafingRun.description>
   <DMSL_AerialSupport_ToxGas.label>投放毒气弹</DMSL_AerialSupport_ToxGas.label>
   <DMSL_AerialSupport_ToxGas.description>向目标地点投放一颗大型毒气弹，在30格内生成毒气云。</DMSL_AerialSupport_ToxGas.description>
+  <DMSL_AerialSupport_FirefoamRipple.label>投放消防泡沫</DMSL_AerialSupport_FirefoamRipple.label>
+  <DMSL_AerialSupport_FirefoamRipple.description>向目标地点喷洒消防泡沫，扑灭30格范围内的火焰。</DMSL_AerialSupport_FirefoamRipple.description>
 </LanguageData>

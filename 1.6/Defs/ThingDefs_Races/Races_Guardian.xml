@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_Guardian" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Guardian</defName>
     <label>近卫</label>
-    <description>为高烈度战区准备的装备厚重装甲与高集成度观瞄设备的机兵。</description>
+    <description>一款以高烈度作战标准设计的重装机兵。其机体采用多层复合装甲与强化骨架结构，能够在正面火力压制下维持稳定推进，并长期承担突破、防御与阵地压制等高强度作战任务。搭载的综合作战系统能兼容不同规格武器，甚至包括部分重型武装，以适应复杂且多变的战场环境。</description>
     <statBases>
       <MoveSpeed>4.2</MoveSpeed>
       <ArmorRating_Blunt>1.4</ArmorRating_Blunt>

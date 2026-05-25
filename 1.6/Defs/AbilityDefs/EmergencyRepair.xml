@@ -4,7 +4,7 @@
   <AbilityDef>
     <defName>DMSL_Ability_EmergencyRepair</defName><!-- 能力定义名称 -->
     <label>应急维修</label><!-- 显示名称 -->
-    <description>机械体获得500%的全局工作速度加成，持续三小时，冷却两天。</description><!-- 能力描述 -->
+    <description>机械体获得500%的修理速度加成，持续三小时，冷却两天。</description><!-- 能力描述 -->
     <iconPath>UI/Abilities/EmergencyRepair</iconPath><!-- 图标路径（需要创建对应图标） -->
     <cooldownTicksRange>120000~120000</cooldownTicksRange><!-- 冷却时间：2天（120000 ticks = 2 * 60000 ticks） -->
     <jobDef>CastAbilityOnThing</jobDef><!-- 工作定义：对物体施放能力 -->

@@ -2,31 +2,31 @@
 <LanguageData>
   <!-- Defs/ThingDefs_Races - 机兵与无人机 -->
   <DMSL_Mech_Commander.label>指挥官</DMSL_Mech_Commander.label>
-  <DMSL_Mech_Commander.description>用于承担军团内信息指挥链的指挥机机兵，用于带宽分流能力，可以协助机械师控制机械体。拥有带领远征队的能力。</DMSL_Mech_Commander.description>
+  <DMSL_Mech_Commander.description>一款专为无人化战场设计的重型指挥机兵，搭载大功率通讯阵列与精密战术协同系统，能够对大规模机械体单位进行实时带宽分流与指令调度，并精确传达御械师的控制信号。\n\n其特殊之处在于，指挥官并非单纯的中继节点。内建的独立战术演算系统使其拥有独立带宽并能自行控制机械体，且其控制单位不会受到常规指挥距离限制。因此许多舰队会将其部署于边境据点与远距离开拓任务中，作为能够独立率领机兵部队行动的前线指挥核心。</DMSL_Mech_Commander.description>
   <DMSL_Mech_Shaman.label>萨满</DMSL_Mech_Shaman.label>
-  <DMSL_Mech_Shaman.description>一种搭载了起灵装置的、拥有提供群体隐身能力的机械体。</DMSL_Mech_Shaman.description>
+  <DMSL_Mech_Shaman.description>一款搭载了灵能装置的实验性机兵。其机体内部安装的灵能系统能够以特定方式激发灵能场，使自身与周边盟友在感知层面上“消失”，从而达到心灵隐身与干扰侦测的目的。\n\n由于其高昂的制造成本，只有极少数萨满会出现在正面战场。大多数情况下，它们只会被投入于高风险渗透、斩首与清除行动，而这些任务往往意味着局势已经失去常规控制……亦或者说，只是这次行动本身值得被如此重视？</DMSL_Mech_Shaman.description>
   <DMSL_Mech_Scout.label>斥候</DMSL_Mech_Scout.label>
-  <DMSL_Mech_Scout.description>一种配备了机械马的先锋，由人工肌肉提供无与伦比的速度使得它在侦查方面有不可替代的优势。</DMSL_Mech_Scout.description>
+  <DMSL_Mech_Scout.description>一款搭载了先进仿生技术与移动演算系统的高机动机兵。其搭载的动态机动模组会在移动时持续收集当前地形与动作数据，并即时修正行进方案，以将人工肌肉束的输出潜能压榨到极致。保持移动时斥候将逐步提高移动速度，甚至能够在持续移动一段距离后无视复杂地形对行动的影响。\n\n&lt;i&gt;"通常人们提到骑兵冲锋，往往会想起中世纪那些披挂重甲的骑士；而如今这个场景却再度在战场上演——荒诞，但依旧威力十足。"——某位御械师的战斗记录。&lt;/i&gt;</DMSL_Mech_Scout.description>
   <DMSL_Mech_Guardian.label>近卫</DMSL_Mech_Guardian.label>
-  <DMSL_Mech_Guardian.description>为高烈度战区准备的装备厚重装甲与高集成度观瞄设备的机兵。</DMSL_Mech_Guardian.description>
+  <DMSL_Mech_Guardian.description>一款以高烈度作战标准设计的重装机兵。其机体采用多层复合装甲与强化骨架结构，能够在正面火力压制下维持稳定推进，并长期承担突破、防御与阵地压制等高强度作战任务。搭载的综合作战系统能兼容不同规格武器，甚至包括部分重型武装，以适应复杂且多变的战场环境。</DMSL_Mech_Guardian.description>
   <DMSL_Mech_Arsonist.label>纵火者</DMSL_Mech_Arsonist.label>
-  <DMSL_Mech_Arsonist.description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</DMSL_Mech_Arsonist.description>
+  <DMSL_Mech_Arsonist.description>一款专为高温环境设计的特种机兵。机体配备有特制的耐高温结构与火焰喷射装置，能够在狭窄空间、地下设施等环境中持续进行火力清剿。其手部额外搭载近距离喷火模块，使其在格斗过程中有概率直接点燃目标。\n\n为了避免误伤与结构性火灾，纵火者的部署通常需要经过额外审批。不过在大多数需要它的场合，审批流程往往会比火势蔓延得更慢。</DMSL_Mech_Arsonist.description>
   <DMSL_Mech_SupportFrame.label>支援框架</DMSL_Mech_SupportFrame.label>
-  <DMSL_Mech_SupportFrame.description>战斗框架的改进型号之一，用于测试重武器在步行机上的效果</DMSL_Mech_SupportFrame.description>
+  <DMSL_Mech_SupportFrame.description>战斗框架的泛生改进型号之一，用于测试重武器在步行机平台上的实战适应性。其机体针对承载能力与武器后坐控制进行了专门强化，能够稳定操作一般步行机难以负担的重型武装，因此常被用作步兵推进时的伴随火力支援单位。</DMSL_Mech_SupportFrame.description>
   <DMSL_Drone_CommandingBird.label>指挥鸟</DMSL_Drone_CommandingBird.label>
   <DMSL_Drone_CommandingBird.description>一种由腰带释放出的微型指挥无人机，以帮助机械师在远离前线的地方指挥战斗。</DMSL_Drone_CommandingBird.description>
   <DMSL_Mech_Terra.label>尘世</DMSL_Mech_Terra.label>
-  <DMSL_Mech_Terra.description>一款曾用于执行突袭任务的机械体，特殊的仿生适配可以使其自由穿戴人类装备。</DMSL_Mech_Terra.description>
+  <DMSL_Mech_Terra.description>一款曾被用于执行突袭与空降任务的特种机兵。其机体采用了特殊的仿生结构，能够自由穿戴大部分人类装备，在任务执行与装备利用方面都具备较高灵活性。即使在合成机兵技术已经成熟的当下，尘世也依旧凭借相对低廉的造价与尚可的作战能力在军团序列中保有一席之地。</DMSL_Mech_Terra.description>
   <DMSL_Mech_Engineer.label>工程师</DMSL_Mech_Engineer.label>
-  <DMSL_Mech_Engineer.description>配备了机械体重启设备的工程机机兵。可以维修受损机械体，或者修复已经关机的机械体并将其重启。</DMSL_Mech_Engineer.description>
+  <DMSL_Mech_Engineer.description>一款量产型工程机兵。其配备的多功能作业臂不仅能够完成机兵维修工作，也使其在执行手工制造、设施建设等任务时同样具备出色效率。搭载的先进维修系统使其能够修复大部分常规损伤，甚至在条件允许时重新启动已经停机的机械体。</DMSL_Mech_Engineer.description>
   <DMSL_Mech_Commandos.label>机动射手</DMSL_Mech_Commandos.label>
-  <DMSL_Mech_Commandos.description>用于应对高烈度的战场环境所开发出来的具有厚重装甲的机兵，头部安装了高集成度的观瞄模块,使得在远距离射击上与火枪手拥有同样的精准度。</DMSL_Mech_Commandos.description>
+  <DMSL_Mech_Commandos.description>一款为机动部队设计的泛用型机兵。该型号搭载的综合作战系统使其能够使用几乎所有人类武器，同时具备较高机动性，以满足野战环境下的作战需求。</DMSL_Mech_Commandos.description>
   <DMSL_Mech_SpecialPolice.label>特种警察</DMSL_Mech_SpecialPolice.label>
-  <DMSL_Mech_SpecialPolice.description>装备了电击设备与喷气护肩的镇暴机兵。</DMSL_Mech_SpecialPolice.description>
+  <DMSL_Mech_SpecialPolice.description>一款用于镇压暴动的警用机兵。配备高压电击器，可在极短时间内击晕目标；内置的弹跳装置则保证其能够快速机动，以及时投入镇压行动。</DMSL_Mech_SpecialPolice.description>
   <DMSL_Mech_DesignatedMarksman.label>精确射手</DMSL_Mech_DesignatedMarksman.label>
-  <DMSL_Mech_DesignatedMarksman.description>狙击手昂贵的价格使他难以承担班组狙击手的任务，而精确射手应运而生。</DMSL_Mech_DesignatedMarksman.description>
+  <DMSL_Mech_DesignatedMarksman.description>狙击手的泛生改进型号之一。该型号在尽可能保留远程射击精度的同时，进一步压缩了组装与带宽成本，并对机体的整体性能进行了改良。作为代价，精确射手的技能等级较原型有所下降。</DMSL_Mech_DesignatedMarksman.description>
   <DMSL_Mech_ArmoredGrenadiers.label>装甲掷弹兵</DMSL_Mech_ArmoredGrenadiers.label>
-  <DMSL_Mech_ArmoredGrenadiers.description>用于承担高烈度战区的反坦克任务与投掷各种手雷的机兵。</DMSL_Mech_ArmoredGrenadiers.description>
+  <DMSL_Mech_ArmoredGrenadiers.description>掷弹兵的泛生改进型号之一。该型号在原有基础上对组装工艺进行了进一步升级，以更高的造价换取了防护、火力持续性与战场生存能力的全面提升。同时，其武器适配范围较掷弹兵也有所扩大，除各类榴弹发射器与投掷物外，还能够根据战场需求使用更多常规武器，以应对更加复杂的高烈度作战环境。</DMSL_Mech_ArmoredGrenadiers.description>
   <DMSL_Mech_DoctorFrame.label>医护框架</DMSL_Mech_DoctorFrame.label>
   <DMSL_Mech_DoctorFrame.description>战斗框架的改进型号之一，可以承担救护和烹饪工作。您不会拿他做救死扶伤以外的事情，对吧？</DMSL_Mech_DoctorFrame.description>
   <DMSL_Mech_AgriculturalFrame.label>农业框架</DMSL_Mech_AgriculturalFrame.label>

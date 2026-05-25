@@ -4,7 +4,7 @@
   <ThingDef Name="DMSL_Mech_Engineer" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_Engineer</defName>
     <label>工程师</label>
-    <description>配备了机械体重启设备的工程机机兵。可以维修受损机械体，或者修复已经关机的机械体并将其重启。</description>
+    <description>一款量产型工程机兵。其配备的多功能作业臂不仅能够完成机兵维修工作，也使其在执行手工制造、设施建设等任务时同样具备出色效率。搭载的先进维修系统使其能够修复大部分常规损伤，甚至在条件允许时重新启动已经停机的机械体。</description>
     <statBases>
       <MoveSpeed>4.2</MoveSpeed>
       <ArmorRating_Blunt>0.9</ArmorRating_Blunt>

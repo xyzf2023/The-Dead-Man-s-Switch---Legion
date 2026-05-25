@@ -1,8 +1,7 @@
 // ============================================================================
 // 文件：LordJob_DigitalAngelAssistColony.cs
-// 说明：继承原版 LordJob_AssistColony，在未交战时低频扫描并将
-//       「对殖民地活跃威胁」与「非玩家猎杀人类动物」视为同级，
-//       按距支援队伍中心的水平距离优先分配攻击任务（可达性由 CanReach 校验）。
+// 说明：继承原版 LordJob_AssistColony；存在普通活跃敌人时完全交给原版援军 AI。
+//       仅在没有普通敌人时，每 300 tick 为可接管机兵补充攻击非玩家猎杀人类动物。
 // ============================================================================
 
 using System.Collections.Generic;
@@ -46,36 +45,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
 
             lastThreatScanTick = now;
 
-            if (SupportPawnsAreInCombat())
-                return;
-
             TryAssignNearestThreatTarget();
-        }
-
-        private bool SupportPawnsAreInCombat()
-        {
-            if (lord == null || lord.ownedPawns == null)
-                return false;
-
-            for (int i = 0; i < lord.ownedPawns.Count; i++)
-            {
-                Pawn pawn = lord.ownedPawns[i];
-                if (pawn == null || pawn.Dead || !pawn.Spawned)
-                    continue;
-
-                Job job = pawn.CurJob;
-                if (job == null)
-                    continue;
-
-                if (job.def == JobDefOf.AttackStatic ||
-                    job.def == JobDefOf.AttackMelee ||
-                    job.ability != null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void TryAssignNearestThreatTarget()
@@ -84,6 +54,9 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
                 return;
 
             Map map = lord.Map;
+
+            if (HasNormalActiveThreat(map))
+                return;
 
             if (!TryGetSupportPawnsCenter(out IntVec3 center))
                 return;
@@ -129,36 +102,43 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return center.IsValid && center.InBounds(map);
         }
 
+        private static bool HasNormalActiveThreat(Map map)
+        {
+            HashSet<IAttackTarget>? hostileTargets = map.attackTargetsCache?.TargetsHostileToColony;
+            if (hostileTargets == null)
+                return false;
+
+            foreach (IAttackTarget t in hostileTargets)
+            {
+                if (t?.Thing == null)
+                    continue;
+
+                Thing thing = t.Thing;
+                if (!thing.Spawned || thing.Destroyed)
+                    continue;
+
+                if (!GenHostility.IsActiveThreatToPlayer(t))
+                    continue;
+
+                if (thing is Pawn pawn)
+                {
+                    if (pawn.Dead || pawn.Downed)
+                        continue;
+
+                    if (IsValidManhunterAnimal(pawn))
+                        continue;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         private List<Thing> BuildThreatCandidates(Map map)
         {
             var candidates = new List<Thing>();
             var added = new HashSet<Thing>();
-
-            HashSet<IAttackTarget>? hostileTargets = map.attackTargetsCache?.TargetsHostileToColony;
-            if (hostileTargets != null)
-            {
-                foreach (IAttackTarget t in hostileTargets)
-                {
-                    if (t?.Thing == null)
-                        continue;
-
-                    Thing thing = t.Thing;
-                    if (!thing.Spawned || thing.Destroyed)
-                        continue;
-
-                    if (!GenHostility.IsActiveThreatToPlayer(t))
-                        continue;
-
-                    if (thing is Pawn pawn)
-                    {
-                        if (pawn.Dead || pawn.Downed)
-                            continue;
-                    }
-
-                    if (added.Add(thing))
-                        candidates.Add(thing);
-                }
-            }
 
             IReadOnlyList<Pawn>? spawned = map.mapPawns?.AllPawnsSpawned;
             if (spawned != null)
@@ -300,6 +280,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return curJob.def == JobDefOf.Wait ||
                    curJob.def == JobDefOf.Wait_Wander ||
                    curJob.def == JobDefOf.Wait_MaintainPosture ||
+                   curJob.def == JobDefOf.Wait_Combat ||
                    curJob.def == JobDefOf.Goto ||
                    curJob.def == JobDefOf.GotoWander;
         }

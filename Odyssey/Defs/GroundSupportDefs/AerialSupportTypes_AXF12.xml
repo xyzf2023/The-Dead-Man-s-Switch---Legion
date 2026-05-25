@@ -153,4 +153,76 @@
     </effectComps>
   </DMS_Legion.GroundSupport.AerialSupportTypeDef>
 
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_AXF12Bombing_FourTimes</defName>
+    <label>AXF12轰炸四次</label>
+    <description>AXF12投放四颗航弹。</description>
+    <aircraftTexturePath>Buildings/AXF12/AXF12_north</aircraftTexturePath>
+    <flightSpeed>0.025</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>0.05</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <startDirection>Random</startDirection>
+    <preferNorthEntry>false</preferNorthEntry>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Bombing">
+        <explosionRadius>10</explosionRadius>
+        <damageAmount>800</damageAmount>
+        <explosionCount>4</explosionCount>
+        <targetAreaRadius>4</targetAreaRadius>
+        <explosionsPerTick>1</explosionsPerTick>
+        <explosionIntervalSeconds>0.2</explosionIntervalSeconds>
+        <damageDefDefName>DMSL_Damage_AerialBomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
+  <DMS_Legion.GroundSupport.AerialSupportTypeDef>
+    <defName>DMSL_AerialSupport_AXF12Bombing_FiveTimes</defName>
+    <label>AXF12轰炸五次</label>
+    <description>AXF12投放五颗航弹。</description>
+    <aircraftTexturePath>Buildings/AXF12/AXF12_north</aircraftTexturePath>
+    <flightSpeed>0.025</flightSpeed>
+    <cooldownTicks>0</cooldownTicks>
+    <drawSize>10.0</drawSize>
+    <appearSoundDef>AerialSupport_Normal</appearSoundDef>
+    <enableExhaust>false</enableExhaust>
+    <exhaustSpawnRate>0.05</exhaustSpawnRate>
+    <exhaustParticlesPerTick>0.0</exhaustParticlesPerTick>
+    <exhaustBaseScale>1.0</exhaustBaseScale>
+    <exhaustMinSpeed>0.4</exhaustMinSpeed>
+    <exhaustMaxSpeed>0.6</exhaustMaxSpeed>
+    <exhaustAngleVariance>15</exhaustAngleVariance>
+    <exhaustRotationRange>30</exhaustRotationRange>
+    <continueDrawingAfterArrival>true</continueDrawingAfterArrival>
+    <flightPathType>Normal</flightPathType>
+    <startDirection>Random</startDirection>
+    <preferNorthEntry>false</preferNorthEntry>
+    <renderDelayTicks>0</renderDelayTicks>
+    <soundDelayTicks>0</soundDelayTicks>
+    <effectComps>
+      <li Class="DMS_Legion.GroundSupport.SupportEffects.CompProperties_AerialSupportEffect_Bombing">
+        <explosionRadius>10</explosionRadius>
+        <damageAmount>800</damageAmount>
+        <explosionCount>5</explosionCount>
+        <targetAreaRadius>5</targetAreaRadius>
+        <explosionsPerTick>1</explosionsPerTick>
+        <explosionIntervalSeconds>0.2</explosionIntervalSeconds>
+        <damageDefDefName>DMSL_Damage_AerialBomb</damageDefDefName>
+      </li>
+    </effectComps>
+  </DMS_Legion.GroundSupport.AerialSupportTypeDef>
+
 </Defs>

@@ -241,7 +241,7 @@ namespace DMS_Legion.AXF12
     public class CompProperties_AXF12AmmoReserve : CompProperties
     {
         public string reserveThingDefName = "DMSL_AerialBomb";
-        public int maxCount = 3;
+        public int maxCount = 5;
 
         public CompProperties_AXF12AmmoReserve()
         {
@@ -250,7 +250,7 @@ namespace DMS_Legion.AXF12
     }
 
     /// <summary>
-    /// 航弹储备 Gizmo：两条分割线将条均分为三份（每份对应一颗航弹），滑条仅在 0、1、2、3 四档。
+    /// 航弹储备 Gizmo：按最大储备数均分分割线，滑条档位为 0～maxCount。
     /// </summary>
     [StaticConstructorOnStartup]
     public class Gizmo_AXF12AmmoReserve : Gizmo
@@ -264,10 +264,17 @@ namespace DMS_Legion.AXF12
         private static readonly Texture2D EmptyBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.03f, 0.035f, 0.05f));
         private static readonly Texture2D DragBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.74f, 0.97f, 0.8f));
         private static bool draggingBar;
-        /// <summary>两条分割线位置：1/3、2/3，将条均分为三份（每份对应一颗航弹）。</summary>
-        private static readonly List<float> BandPercentages = new List<float> { 1f / 3f, 2f / 3f };
-        /// <summary>滑条仅 4 档：0、1、2、3（对应 0、1/3、2/3、1）。</summary>
-        private const int Increments = 3;
+
+        private List<float> GetBandPercentages()
+        {
+            int max = Mathf.Max(1, comp.Props.maxCount);
+            var bands = new List<float>();
+            for (int i = 1; i < max; i++)
+            {
+                bands.Add((float)i / max);
+            }
+            return bands;
+        }
 
         public Gizmo_AXF12AmmoReserve(CompAXF12AmmoReserve comp)
         {
@@ -300,7 +307,19 @@ namespace DMS_Legion.AXF12
             float num4 = (num2 - num3) / 2f;
             Rect rect4 = new Rect(rect2.x, rect3.yMax + num4, rect2.width, num3);
 
-            Widgets.DraggableBar(rect4, BarTex, BarHighlightTex, EmptyBarTex, DragBarTex, ref draggingBar, comp.PercentageFull, ref targetValue, BandPercentages, Increments, 0f, 1f);
+            Widgets.DraggableBar(
+                rect4,
+                BarTex,
+                BarHighlightTex,
+                EmptyBarTex,
+                DragBarTex,
+                ref draggingBar,
+                comp.PercentageFull,
+                ref targetValue,
+                GetBandPercentages(),
+                Mathf.Max(1, comp.Props.maxCount),
+                0f,
+                1f);
 
             Text.Anchor = TextAnchor.MiddleCenter;
             rect4.y -= 2f;

@@ -5,7 +5,7 @@
   <ThingDef Name="DMSL_Mech_ArmoredGrenadiers" ParentName="BaseAutomatroidHumanRace">
     <defName>DMSL_Mech_ArmoredGrenadiers</defName>
     <label>装甲掷弹兵</label>
-    <description>用于承担高烈度战区的反坦克任务与投掷各种手雷的机兵。</description>
+    <description>掷弹兵的泛生改进型号之一。该型号在原有基础上对组装工艺进行了进一步升级，以更高的造价换取了防护、火力持续性与战场生存能力的全面提升。同时，其武器适配范围较掷弹兵也有所扩大，除各类榴弹发射器与投掷物外，还能够根据战场需求使用更多常规武器，以应对更加复杂的高烈度作战环境。</description>
     <statBases>
       <MoveSpeed>4</MoveSpeed>
       <ArmorRating_Blunt>1.3</ArmorRating_Blunt>

@@ -9,4 +9,8 @@
   <DMSL_AerialSupport_AXF12Bombing_Twice.description>AXF12投放两颗航弹。</DMSL_AerialSupport_AXF12Bombing_Twice.description>
   <DMSL_AerialSupport_AXF12Bombing_Thrice.label>AXF12轰炸三次</DMSL_AerialSupport_AXF12Bombing_Thrice.label>
   <DMSL_AerialSupport_AXF12Bombing_Thrice.description>AXF12投放三颗航弹。</DMSL_AerialSupport_AXF12Bombing_Thrice.description>
+  <DMSL_AerialSupport_AXF12Bombing_FourTimes.label>AXF12轰炸四次</DMSL_AerialSupport_AXF12Bombing_FourTimes.label>
+  <DMSL_AerialSupport_AXF12Bombing_FourTimes.description>AXF12投放四颗航弹。</DMSL_AerialSupport_AXF12Bombing_FourTimes.description>
+  <DMSL_AerialSupport_AXF12Bombing_FiveTimes.label>AXF12轰炸五次</DMSL_AerialSupport_AXF12Bombing_FiveTimes.label>
+  <DMSL_AerialSupport_AXF12Bombing_FiveTimes.description>AXF12投放五颗航弹。</DMSL_AerialSupport_AXF12Bombing_FiveTimes.description>
 </LanguageData>

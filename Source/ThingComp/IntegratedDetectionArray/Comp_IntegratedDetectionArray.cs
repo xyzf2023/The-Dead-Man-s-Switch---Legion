@@ -17,13 +17,19 @@ namespace DMS_Legion.IntegratedDetectionArray
         private const string GizmoIconPath = "UI/Gizmo/GenerateDecoyCoords";
         private const string GizmoIconLocalScan = "UI/Gizmo/LocalVeinScan";
         private const string GizmoIconLongRangeScan = "UI/Gizmo/Long-RangeVeinScan";
+        private const string GizmoIconLocalTargetedScan = "UI/Commands/LaunchReport";
         /// <summary>12 小时 = 30000 tick</summary>
         private const float ProgressTicksPerCycle = 30000f;
+        /// <summary>耗电校正兜底间隔（tick），用于禁止/允许、电网重连等无法直接监听的场景。</summary>
+        private const int PowerConsumptionRefreshIntervalTicks = 600;
 
         private float scanProgress;
         private bool isLocalMode = true;
+        private bool useSelectedMineralForLocalScan;
         private ThingDef? targetMineable;
         private CompPowerTrader? powerComp;
+        private CompForbiddable? forbiddableComp;
+        private float lastAppliedPowerConsumption = -1f;
 
         public CompProperties_IntegratedDetectionArray Props => (CompProperties_IntegratedDetectionArray)props;
 
@@ -31,7 +37,9 @@ namespace DMS_Legion.IntegratedDetectionArray
         {
             base.PostSpawnSetup(respawningAfterLoad);
             powerComp = parent.GetComp<CompPowerTrader>();
+            forbiddableComp = parent.GetComp<CompForbiddable>();
             SetDefaultTargetMineralIfNeeded();
+            RefreshPowerConsumptionIfNeeded();
         }
 
         public override void PostExposeData()
@@ -39,6 +47,7 @@ namespace DMS_Legion.IntegratedDetectionArray
             base.PostExposeData();
             Scribe_Values.Look(ref scanProgress, "scanProgress", 0f);
             Scribe_Values.Look(ref isLocalMode, "isLocalMode", true);
+            Scribe_Values.Look(ref useSelectedMineralForLocalScan, "useSelectedMineralForLocalScan", false);
             Scribe_Defs.Look(ref targetMineable, "targetMineable");
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 SetDefaultTargetMineralIfNeeded();
@@ -73,11 +82,13 @@ namespace DMS_Legion.IntegratedDetectionArray
         public override void CompTick()
         {
             base.CompTick();
+
+            if (parent.IsHashIntervalTick(PowerConsumptionRefreshIntervalTicks))
+                RefreshPowerConsumptionIfNeeded();
+
             if (powerComp == null || !powerComp.PowerOn)
                 return;
-            // 被禁止时（玩家点了「禁止」）不增加扫描进度
-            var forbiddable = parent.GetComp<CompForbiddable>();
-            if (forbiddable != null && forbiddable.Forbidden)
+            if (IsForbidden())
                 return;
             scanProgress += 1f / ProgressTicksPerCycle;
             if (scanProgress >= 1f)
@@ -85,6 +96,38 @@ namespace DMS_Legion.IntegratedDetectionArray
                 ExecuteScanComplete();
                 scanProgress = 0f;
             }
+        }
+
+        private bool IsForbidden()
+        {
+            return forbiddableComp != null && forbiddableComp.Forbidden;
+        }
+
+        private float GetDesiredPowerConsumption()
+        {
+            if (IsForbidden())
+                return Props?.disabledPowerConsumption ?? 50f;
+
+            if (isLocalMode && useSelectedMineralForLocalScan)
+                return Props?.localTargetedScanPowerConsumption ?? 8000f;
+
+            return powerComp?.Props.PowerConsumption ?? 2500f;
+        }
+
+        private void RefreshPowerConsumptionIfNeeded()
+        {
+            if (powerComp == null)
+                return;
+
+            float desiredPowerConsumption = GetDesiredPowerConsumption();
+            float desiredPowerOutput = -desiredPowerConsumption;
+
+            if (Mathf.Approximately(lastAppliedPowerConsumption, desiredPowerConsumption)
+                && Mathf.Approximately(powerComp.PowerOutput, desiredPowerOutput))
+                return;
+
+            powerComp.PowerOutput = desiredPowerOutput;
+            lastAppliedPowerConsumption = desiredPowerConsumption;
         }
 
         private void SetDefaultTargetMineralIfNeeded()
@@ -116,10 +159,10 @@ namespace DMS_Legion.IntegratedDetectionArray
             }
             if (!CellFinderLoose.TryFindRandomNotEdgeCellWith(10, (IntVec3 x) => CanScatterDeepAt(x, map), map, out IntVec3 result))
             {
-                Log.Error("[DMS_Legion] IntegratedDetectionArray: Could not find a center cell for deep scanning lump generation!");
+                Log.Error("[DMS_Legion] 综合探测阵列：无法找到用于生成深层矿脉的中心格。");
                 return;
             }
-            ThingDef thingDef = ChooseDeepLumpThingDef();
+            ThingDef thingDef = ChooseLocalDeepLumpThingDef();
             int numCells = Mathf.CeilToInt(thingDef.deepLumpSizeRange.RandomInRange);
             foreach (IntVec3 item in GridShapeMaker.IrregularLump(result, map, numCells))
             {
@@ -141,6 +184,28 @@ namespace DMS_Legion.IntegratedDetectionArray
                 || !pos.GetAffordances(map).Contains(ThingDefOf.DeepDrill.terrainAffordanceNeeded))
                 return false;
             return !map.deepResourceGrid.GetCellBool(CellIndicesUtility.CellToIndex(pos, map.Size.x));
+        }
+
+        private ThingDef ChooseLocalDeepLumpThingDef()
+        {
+            if (useSelectedMineralForLocalScan)
+            {
+                ThingDef? selectedResource = targetMineable?.building?.mineableThing;
+                if (CanUseAsLocalDeepResource(selectedResource))
+                    return selectedResource!;
+            }
+            return ChooseDeepLumpThingDef();
+        }
+
+        private static bool CanUseAsLocalDeepResource(ThingDef? def)
+        {
+            if (def == null)
+                return false;
+            if (def.deepLumpSizeRange == IntRange.Zero)
+                return false;
+            if (def.deepCountPerCell <= 0)
+                return false;
+            return true;
         }
 
         private static ThingDef ChooseDeepLumpThingDef()
@@ -190,38 +255,40 @@ namespace DMS_Legion.IntegratedDetectionArray
                     ? "DMSL_IntegratedDetectionArray_ModeLocalDesc".Translate()
                     : "DMSL_IntegratedDetectionArray_ModeLongRangeDesc".Translate(),
                 icon = ContentFinder<Texture2D>.Get(isLocalMode ? GizmoIconLocalScan : GizmoIconLongRangeScan, true),
-                action = () => { isLocalMode = !isLocalMode; }
+                action = () =>
+                {
+                    isLocalMode = !isLocalMode;
+                    RefreshPowerConsumptionIfNeeded();
+                }
             };
             if (!powered)
                 modeCmd.Disable("DMSL_IntegratedDetectionArray_Disable_NoPower".Translate());
             yield return modeCmd;
 
-            // 选择目标矿物（仅远程模式显示；本地模式按原版随机权重生成，不显示此按钮）
-            if (!isLocalMode && parent?.Faction == Faction.OfPlayer && targetMineable?.building?.mineableThing is ThingDef mineableThing)
+            // 本地定向扫描开关（仅本地模式显示）
+            if (isLocalMode)
             {
-                var mineralCmd = new Command_Action
+                var localTargetCmd = new Command_Toggle
                 {
-                    defaultLabel = "CommandSelectMineralToScanFor".Translate() + ": " + mineableThing.LabelCap,
-                    defaultDesc = "CommandSelectMineralToScanForDesc".Translate(),
-                    icon = mineableThing.uiIcon,
-                    iconAngle = mineableThing.uiIconAngle,
-                    iconOffset = mineableThing.uiIconOffset,
-                    action = () =>
+                    defaultLabel = "DMSL_IntegratedDetectionArray_LocalTargetedScan".Translate(),
+                    defaultDesc = "DMSL_IntegratedDetectionArray_LocalTargetedScanDesc".Translate(),
+                    icon = ContentFinder<Texture2D>.Get(GizmoIconLocalTargetedScan, true),
+                    isActive = () => useSelectedMineralForLocalScan,
+                    toggleAction = () =>
                     {
-                        List<ThingDef> mineables = ((GenStep_PreciousLump)GenStepDefOf.PreciousLump.genStep).mineables;
-                        var list = new List<FloatMenuOption>();
-                        foreach (ThingDef d in mineables)
-                        {
-                            ThingDef localD = d;
-                            list.Add(new FloatMenuOption(localD.building.mineableThing.LabelCap, () =>
-                            {
-                                targetMineable = localD;
-                            }, MenuOptionPriority.Default, null, null, 29f, (Rect rect) => Widgets.InfoCardButton(rect.x + 5f, rect.y + (rect.height - 24f) / 2f, localD.building.mineableThing)));
-                        }
-                        Find.WindowStack.Add(new FloatMenu(list));
+                        useSelectedMineralForLocalScan = !useSelectedMineralForLocalScan;
+                        RefreshPowerConsumptionIfNeeded();
                     }
                 };
-                yield return mineralCmd;
+                yield return localTargetCmd;
+            }
+
+            // 选择目标矿物（远程模式始终显示；本地模式仅在定向扫描开启时显示）
+            if (!isLocalMode || useSelectedMineralForLocalScan)
+            {
+                Command_Action? mineralCmd = CreateSelectMineralGizmo();
+                if (mineralCmd != null)
+                    yield return mineralCmd;
             }
 
             // 生成诱饵信号
@@ -250,6 +317,39 @@ namespace DMS_Legion.IntegratedDetectionArray
                     }
                 };
             }
+        }
+
+        private Command_Action? CreateSelectMineralGizmo()
+        {
+            if (parent?.Faction != Faction.OfPlayer)
+                return null;
+            if (targetMineable?.building?.mineableThing is not ThingDef mineableThing)
+                return null;
+
+            return new Command_Action
+            {
+                defaultLabel = "CommandSelectMineralToScanFor".Translate() + ": " + mineableThing.LabelCap,
+                defaultDesc = "CommandSelectMineralToScanForDesc".Translate(),
+                icon = mineableThing.uiIcon,
+                iconAngle = mineableThing.uiIconAngle,
+                iconOffset = mineableThing.uiIconOffset,
+                action = () =>
+                {
+                    List<ThingDef> mineables = ((GenStep_PreciousLump)GenStepDefOf.PreciousLump.genStep).mineables;
+                    var list = new List<FloatMenuOption>();
+                    foreach (ThingDef d in mineables)
+                    {
+                        if (d.building?.mineableThing == null)
+                            continue;
+                        ThingDef localD = d;
+                        list.Add(new FloatMenuOption(localD.building.mineableThing.LabelCap, () =>
+                        {
+                            targetMineable = localD;
+                        }, MenuOptionPriority.Default, null, null, 29f, (Rect rect) => Widgets.InfoCardButton(rect.x + 5f, rect.y + (rect.height - 24f) / 2f, localD.building.mineableThing)));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(list));
+                }
+            };
         }
 
         private void StartDecoyTargeter(Map targetMap)

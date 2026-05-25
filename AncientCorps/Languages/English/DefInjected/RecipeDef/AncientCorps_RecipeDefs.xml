@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <!-- AncientCorps Defs/RecipeDefs -->
-  <DMSL_Make_STGeorge.label>Gestate Saint George</DMSL_Make_STGeorge.label>
+  <DMSL_Make_STGeorge.label>Assemble Saint George</DMSL_Make_STGeorge.label>
   <DMSL_Make_panzer.label>Gestate Panzer</DMSL_Make_panzer.label>
-  <DMSL_Make_leopard.label>Gestate Leopard</DMSL_Make_leopard.label>
-  <DMSL_Make_IronFace.label>Gestate Iron Face</DMSL_Make_IronFace.label>
-  <DMSL_Make_ZBZ59D.label>Gestate ZBZ59D</DMSL_Make_ZBZ59D.label>
+  <DMSL_Make_leopard.label>Assemble Leopard</DMSL_Make_leopard.label>
+  <DMSL_Make_IronFace.label>Assemble Iron Face</DMSL_Make_IronFace.label>
+  <DMSL_Make_ZBZ59D.label>Assemble Trench</DMSL_Make_ZBZ59D.label>
 </LanguageData>

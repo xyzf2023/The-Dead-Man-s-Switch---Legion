@@ -3,6 +3,8 @@
   <!-- Royalty Defs/DMSL_RoyalPermits.xml -->
   <DMSL_RoyalAid_Smoke.label>Call Smoke Strike</DMSL_RoyalAid_Smoke.label>
   <DMSL_RoyalAid_Smoke.description>Request a smoke strike deployment from the Colonial Fleet.</DMSL_RoyalAid_Smoke.description>
+  <DMSL_RoyalAid_FirefoamRipple.label>Call Firefoam Bomb</DMSL_RoyalAid_FirefoamRipple.label>
+  <DMSL_RoyalAid_FirefoamRipple.description>Request a firefoam bomb deployment from the Colonial Fleet. A firefoam bomb will be dropped at the target location, extinguishing fires within a 30-tile radius.</DMSL_RoyalAid_FirefoamRipple.description>
   <DMSL_RoyalAid_StrafingRun.label>Call Strafing Run</DMSL_RoyalAid_StrafingRun.label>
   <DMSL_RoyalAid_StrafingRun.description>Request a strafing run from the Colonial Fleet.</DMSL_RoyalAid_StrafingRun.description>
   <DMSL_RoyalAid_Emp.label>Call EMP Pulse Bomb</DMSL_RoyalAid_Emp.label>
@@ -13,6 +15,10 @@
   <DMSL_RoyalAid_AttackAircraftBombing.description>Request an attack aircraft bombing run from the Colonial Fleet. Sparrow will execute the run. Provide two coordinates; Sparrow will drop five small bombs along the line between them.\n\n(If you have CE loaded, this support will be replaced with attack aircraft bombing.)</DMSL_RoyalAid_AttackAircraftBombing.description>
   <DMSL_RoyalAid_FighterBomberBombing.label>Call Fighter Bomber Bombing</DMSL_RoyalAid_FighterBomberBombing.label>
   <DMSL_RoyalAid_FighterBomberBombing.description>Request a fighter-bomber run from the Colonial Fleet. Tempest will execute the run. Provide two coordinates; Tempest will drop ten large bombs along the line between them.</DMSL_RoyalAid_FighterBomberBombing.description>
+  <DMSL_RoyalAid_TacticalBombing.label>Call Tactical Bombing</DMSL_RoyalAid_TacticalBombing.label>
+  <DMSL_RoyalAid_TacticalBombing.description>Request a tactical bombing run from the Colonial Fleet. Tempest will execute the tactical bombing task. Provide two coordinates; Tempest will drop eighteen heavy bombs along the line between them.</DMSL_RoyalAid_TacticalBombing.description>
+  <DMSL_RoyalAid_AreaSuppressionBombing.label>Call Area Suppression Bombing</DMSL_RoyalAid_AreaSuppressionBombing.label>
+  <DMSL_RoyalAid_AreaSuppressionBombing.description>Request an area suppression bombing run from the Colonial Fleet. Longbow will execute the area suppression bombing task. Provide two coordinates; Longbow will drop twenty-four high-explosive bombs along the line between them.</DMSL_RoyalAid_AreaSuppressionBombing.description>
   <DMSL_RoyalAid_CarpetBombing.label>Call Carpet Bombing</DMSL_RoyalAid_CarpetBombing.label>
   <DMSL_RoyalAid_CarpetBombing.description>Request a carpet bombing run from the Colonial Fleet. Longbow will execute the run. Provide two coordinates; Longbow will drop thirty high-explosive bombs along the line between them.</DMSL_RoyalAid_CarpetBombing.description>
   <DMSL_RoyalAid_AMS2.label>Call ASM-2 "White Shark" Missile Salvo</DMSL_RoyalAid_AMS2.label>

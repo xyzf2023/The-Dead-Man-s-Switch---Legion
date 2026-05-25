@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <!-- AncientCorps Defs/RecipeDefs -->
-  <DMSL_Make_STGeorge.label>培育圣乔治</DMSL_Make_STGeorge.label>
-  <DMSL_Make_panzer.label>培育陆龟</DMSL_Make_panzer.label>
-  <DMSL_Make_leopard.label>培育豹</DMSL_Make_leopard.label>
-  <DMSL_Make_IronFace.label>培育铁面</DMSL_Make_IronFace.label>
-  <DMSL_Make_ZBZ59D.label>培育 ZBZ59D</DMSL_Make_ZBZ59D.label>
+  <DMSL_Make_STGeorge.label>组装圣乔治</DMSL_Make_STGeorge.label>
+  <DMSL_Make_panzer.label>组装陆龟</DMSL_Make_panzer.label>
+  <DMSL_Make_leopard.label>组装豹</DMSL_Make_leopard.label>
+  <DMSL_Make_IronFace.label>组装铁面</DMSL_Make_IronFace.label>
+  <DMSL_Make_ZBZ59D.label>组装堑壕</DMSL_Make_ZBZ59D.label>
 </LanguageData>

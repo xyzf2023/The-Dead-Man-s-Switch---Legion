@@ -13,6 +13,12 @@ namespace DMS_Legion.IntegratedDetectionArray
         /// </summary>
         public int decoyDurationTicks = 12500;
 
+        /// <summary>建筑被禁止（CompForbiddable.Forbidden）时的实际耗电（W）。</summary>
+        public float disabledPowerConsumption = 50f;
+
+        /// <summary>本地模式且开启本地定向扫描时的实际耗电（W）。</summary>
+        public float localTargetedScanPowerConsumption = 8000f;
+
         public CompProperties_IntegratedDetectionArray()
         {
             compClass = typeof(Comp_IntegratedDetectionArray);
