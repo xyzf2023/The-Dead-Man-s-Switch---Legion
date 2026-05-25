@@ -60,6 +60,13 @@
       <li Class="DMS_Legion.CompProperties_CommandRangeExpansion">
         <radius>30</radius> <!-- 扩展半径（格），可自定义 -->
       </li>
+      
+      <!-- 未征召时原地等待，避免 FFF 默认闲逛 -->
+      <li Class="DMS_Legion.CompProperties_CommandingBirdIdleWait">
+        <checkIntervalTicks>60</checkIntervalTicks>
+        <waitDurationTicks>180</waitDurationTicks>
+        <returnToPlatformJobDefName>FFF_ReturnToDronePlatform</returnToPlatformJobDefName>
+      </li>
     </comps>
     
     <!-- 模组扩展，用于武器兼容性 -->
