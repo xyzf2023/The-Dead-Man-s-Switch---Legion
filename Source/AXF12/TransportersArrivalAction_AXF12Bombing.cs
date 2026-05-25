@@ -8,7 +8,7 @@ namespace DMS_Legion.AXF12
 {
     /// <summary>
     /// 轰炸任务抵达目标格后：仅支持已加载地图，预约空中支援（不跳视角）。
-    /// 集束模式：单点 + Once/Twice/Thrice/FourTimes/FiveTimes；多点模式：各点依次 Once，间隔在构造时确定以便存档稳定。
+    /// 集束模式：单点 + Once/Twice/Thrice/FourTimes/FiveTimes；多点模式：各点依次 Once，首点 300 tick，后续点间隔 120～240 tick（构造时确定以便存档稳定）。
     /// </summary>
     public class TransportersArrivalAction_AXF12Bombing : TransportersArrivalAction
     {
@@ -78,7 +78,7 @@ namespace DMS_Legion.AXF12
             for (int i = 0; i < targetCells.Count; i++)
             {
                 supportDelayTicks.Add(delay);
-                delay += Rand.RangeInclusive(600, 900);
+                delay += Rand.RangeInclusive(120, 240);
             }
 
             requiredLoiterTicks = Math.Max(600, supportDelayTicks[supportDelayTicks.Count - 1] + 300);
