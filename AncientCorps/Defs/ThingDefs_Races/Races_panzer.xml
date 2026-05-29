@@ -10,6 +10,10 @@
     <!-- 机甲描述 -->
     <description>一台超重型战斗机械体，配备了多种武器系统。</description>
 
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Gun_57MM</ThingDef>
+    </descriptionHyperlinks>
+    
     <!-- 基础属性 -->
     <statBases>
       <MoveSpeed>3</MoveSpeed> <!-- 移动速度 -->
@@ -136,7 +140,7 @@
 
     <weaponMoney>2000~9999</weaponMoney>
     <weaponTags>
-      <li>DMSL_panzer</li>                                               <!-- STGeorge专用武器标签 -->
+      <li>DMSL_panzer</li>
     </weaponTags>
   </PawnKindDef>
   

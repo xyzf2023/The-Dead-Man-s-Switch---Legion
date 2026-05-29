@@ -9,6 +9,10 @@
         <label>骑士长枪</label>
         <!-- 物品描述，悬停时显示 -->
         <description>一款专为斥候设计的骑兵长枪，伤害会随着移动速度增加。\n\n&lt;i&gt;“当移速达到一定阈值后，骑枪会变得势不可挡。”&lt;/i&gt;</description>
+        
+        <descriptionHyperlinks>
+            <ThingDef>DMSL_Mech_Scout</ThingDef>
+        </descriptionHyperlinks>
 
         <!-- 图形设置 -->
         <graphicData>

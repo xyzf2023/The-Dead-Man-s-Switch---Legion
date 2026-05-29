@@ -5,18 +5,16 @@
 
     <!-- 主武器定义：Type59 100mm gun "North Red Flag" -->
     <ThingDef ParentName="DMS_AutomatroidHeavyGun">
-        <!-- 内部标识符，用于在游戏中引用此武器 -->
         <defName>DMSL_Gun_NorthRedFlag</defName>
-        
-        <!-- 显示名称，在游戏界面中显示为"Type59 100mm gun "North Red Flag"" -->
         <label>“新十月”</label>
-        
-        <!-- 武器描述：半自动反坦克炮，由超重型自动机携带，结构简单可靠 -->
         <description>一款100毫米坦克线膛炮。</description>
         
+        <descriptionHyperlinks>
+            <ThingDef>DMSL_Mech_ZBZ59D</ThingDef>
+        </descriptionHyperlinks>
+
         <!-- 武器标签列表，定义武器分类和特性 -->
         <weaponTags>
-            <!-- 武器属于Tarbosaurus系列 -->
             <li>DMSL_ZBZ_59D_Gun</li>
         </weaponTags>
         

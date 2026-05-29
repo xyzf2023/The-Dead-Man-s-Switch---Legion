@@ -14,6 +14,10 @@
         <!-- 武器描述：半自动反坦克炮，由超重型自动机携带，结构简单可靠 -->
         <description>一种被研发用于被直升机吊运部署的超轻型155mm火炮。</description>
         
+        <descriptionHyperlinks>
+            <ThingDef>DMSL_Mech_STGeorge</ThingDef>
+        </descriptionHyperlinks>
+
         <!-- 武器标签列表，定义武器分类和特性 -->
         <weaponTags>
             <!-- 武器属于Tarbosaurus系列 -->

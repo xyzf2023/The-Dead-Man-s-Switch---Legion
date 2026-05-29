@@ -9,6 +9,11 @@
     <label>堑壕</label>
     <!-- 机甲描述 -->
     <description>北约代号 “铁锤”，于第二次世界大战结束后的第十年完成设计，并在一次胜利日阅兵式上首次对外展示。\n\n该车在研发过程中采用了高度紧凑的总体布局，旨在压缩正面投影、降低被命中概率；其标配武器为一门 105 毫米火炮，以适应当时对未来装甲战争环境的判断。\n\n当前所展示的型号为后期改进版本，在原有基础上加装了爆炸式反应装甲，并针对若干局部结构进行了细化改良。</description>
+
+    <descriptionHyperlinks>
+      <ThingDef>DMSL_Gun_NorthRedFlag</ThingDef>
+    </descriptionHyperlinks>
+
     <!-- 基础属性 -->
     <statBases>
       <MoveSpeed>3.7</MoveSpeed> <!-- 移动速度 -->

@@ -14,6 +14,10 @@
         <!-- 武器描述：半自动反坦克炮，由超重型自动机携带，结构简单可靠 -->
         <description>由超重型机械体携带的半自动反坦克炮，结构简单可靠，广泛用于各类装甲平台，用于打击坦克与重型机甲等重装甲目标。</description>
         
+        <descriptionHyperlinks>
+            <ThingDef>DMSL_Mech_panzer</ThingDef>
+        </descriptionHyperlinks>
+
         <!-- 武器标签列表，定义武器分类和特性 -->
         <weaponTags>
             <!-- 武器属于Panzer系列 -->
