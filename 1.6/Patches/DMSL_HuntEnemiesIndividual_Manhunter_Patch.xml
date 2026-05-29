@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  在 HuntEnemiesIndividual 职责中，于原版 JobGiver_AIFightEnemies 之后插入猎杀动物专用 JobGiver。
+  援军机兵由 LordToil_HuntEnemies 分配该 duty；JobGiver 内部校验 LordJob_DigitalAngelAssistColony。
+-->
+<Patch>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/DutyDef[defName="HuntEnemiesIndividual"]/thinkNode/subNodes/li[@Class="JobGiver_AIFightEnemies"]</xpath>
+    <value>
+      <li Class="DMS_Legion.Incidents.DigitalAngelSupport.JobGiver_DigitalAngelFightManhunterAnimals">
+        <targetAcquireRadius>65</targetAcquireRadius>
+        <targetKeepRadius>72</targetKeepRadius>
+      </li>
+    </value>
+  </Operation>
+</Patch>

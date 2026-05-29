@@ -1,7 +1,7 @@
 // ============================================================================
 // 文件：LordJob_DigitalAngelAssistColony.cs
 // 说明：继承原版 LordJob_AssistColony；存在普通活跃敌人时完全交给原版援军 AI。
-//       仅在没有普通敌人时，每 300 tick 为可接管机兵补充攻击非玩家猎杀人类动物。
+//       猎杀人类动物由 JobGiver_DigitalAngelFightManhunterAnimals（挂于 HuntEnemiesIndividual）处理。
 // ============================================================================
 
 using System.Collections.Generic;
@@ -14,9 +14,6 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
 {
     public class LordJob_DigitalAngelAssistColony : LordJob_AssistColony
     {
-        private const int ThreatScanIntervalTicks = 300;
-        private int lastThreatScanTick = -999999;
-
         public LordJob_DigitalAngelAssistColony()
         {
         }
@@ -26,83 +23,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
         {
         }
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref lastThreatScanTick, "lastThreatScanTick", -999999);
-        }
-
-        public override void LordJobTick()
-        {
-            base.LordJobTick();
-
-            if (lord == null || lord.Map == null)
-                return;
-
-            int now = Find.TickManager.TicksGame;
-            if (now - lastThreatScanTick < ThreatScanIntervalTicks)
-                return;
-
-            lastThreatScanTick = now;
-
-            TryAssignNearestThreatTarget();
-        }
-
-        private void TryAssignNearestThreatTarget()
-        {
-            if (lord == null || lord.Map == null)
-                return;
-
-            Map map = lord.Map;
-
-            if (HasNormalActiveThreat(map))
-                return;
-
-            if (!TryGetSupportPawnsCenter(out IntVec3 center))
-                return;
-
-            List<Thing> candidates = BuildThreatCandidates(map);
-            if (candidates == null || candidates.Count == 0)
-                return;
-
-            Thing? target = TryFindNearestCandidate(candidates, center, map);
-            if (target == null || !IsValidCandidateThing(target, map))
-                return;
-
-            TryAssignAttackJobToAvailablePawns(target);
-        }
-
-        private bool TryGetSupportPawnsCenter(out IntVec3 center)
-        {
-            center = IntVec3.Invalid;
-
-            if (lord == null || lord.Map == null || lord.ownedPawns == null)
-                return false;
-
-            int sumX = 0;
-            int sumZ = 0;
-            int count = 0;
-            Map map = lord.Map;
-
-            for (int i = 0; i < lord.ownedPawns.Count; i++)
-            {
-                Pawn pawn = lord.ownedPawns[i];
-                if (pawn == null || pawn.Dead || pawn.Downed || !pawn.Spawned || pawn.Map != map)
-                    continue;
-
-                sumX += pawn.Position.x;
-                sumZ += pawn.Position.z;
-                count++;
-            }
-
-            if (count <= 0)
-                return false;
-
-            center = new IntVec3(sumX / count, 0, sumZ / count);
-            return center.IsValid && center.InBounds(map);
-        }
-
-        private static bool HasNormalActiveThreat(Map map)
+        internal static bool HasNormalActiveThreat(Map map)
         {
             HashSet<IAttackTarget>? hostileTargets = map.attackTargetsCache?.TargetsHostileToColony;
             if (hostileTargets == null)
@@ -135,29 +56,24 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return false;
         }
 
-        private List<Thing> BuildThreatCandidates(Map map)
+        /// <summary>
+        /// 扫描地图上的合法猎杀人类动物；后续可在此加入 300 tick 缓存供 JobGiver 复用。
+        /// </summary>
+        internal static void ForEachValidManhunterAnimal(Map map, System.Action<Pawn> action)
         {
-            var candidates = new List<Thing>();
-            var added = new HashSet<Thing>();
-
             IReadOnlyList<Pawn>? spawned = map.mapPawns?.AllPawnsSpawned;
-            if (spawned != null)
+            if (spawned == null)
+                return;
+
+            for (int i = 0; i < spawned.Count; i++)
             {
-                for (int i = 0; i < spawned.Count; i++)
-                {
-                    Pawn pawn = spawned[i];
-                    if (!IsValidManhunterAnimal(pawn))
-                        continue;
-
-                    if (added.Add(pawn))
-                        candidates.Add(pawn);
-                }
+                Pawn pawn = spawned[i];
+                if (IsValidManhunterAnimal(pawn))
+                    action(pawn);
             }
-
-            return candidates;
         }
 
-        private static bool IsValidManhunterAnimal(Pawn pawn)
+        internal static bool IsValidManhunterAnimal(Pawn pawn)
         {
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed)
                 return false;
@@ -178,111 +94,6 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return defName == "Manhunter" ||
                    defName == "ManhunterPermanent" ||
                    defName.Contains("Manhunter");
-        }
-
-        private static Thing? TryFindNearestCandidate(List<Thing> candidates, IntVec3 center, Map map)
-        {
-            Thing? best = null;
-            float bestDistSq = float.MaxValue;
-
-            for (int i = 0; i < candidates.Count; i++)
-            {
-                Thing thing = candidates[i];
-                if (!IsValidCandidateThing(thing, map))
-                    continue;
-
-                float distSq = (thing.Position - center).LengthHorizontalSquared;
-                if (distSq < bestDistSq)
-                {
-                    bestDistSq = distSq;
-                    best = thing;
-                }
-            }
-
-            return best;
-        }
-
-        private static bool IsValidCandidateThing(Thing? thing, Map map)
-        {
-            if (thing == null || thing.Destroyed || !thing.Spawned || thing.Map != map)
-                return false;
-
-            if (thing is Pawn pawn)
-            {
-                if (pawn.Dead || pawn.Downed)
-                    return false;
-            }
-
-            return thing.Position.IsValid && thing.Position.InBounds(map);
-        }
-
-        private void TryAssignAttackJobToAvailablePawns(Thing target)
-        {
-            if (lord == null || lord.Map == null || target == null || lord.ownedPawns == null)
-                return;
-
-            Map map = lord.Map;
-
-            for (int i = 0; i < lord.ownedPawns.Count; i++)
-            {
-                Pawn pawn = lord.ownedPawns[i];
-                if (!IsAvailableForThreatJob(pawn))
-                    continue;
-
-                if (pawn.Map != map)
-                    continue;
-
-                if (!pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly))
-                    continue;
-
-                Job? job = MakeAttackJob(pawn, target);
-                if (job == null)
-                    continue;
-
-                pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-            }
-        }
-
-        private static Job? MakeAttackJob(Pawn pawn, Thing target)
-        {
-            Verb verb = pawn.TryGetAttackVerb(target, !pawn.IsColonist);
-            if (verb == null || verb.verbProps == null)
-                return null;
-
-            JobDef jobDef = verb.verbProps.IsMeleeAttack
-                ? JobDefOf.AttackMelee
-                : JobDefOf.AttackStatic;
-
-            Job job = JobMaker.MakeJob(jobDef, target);
-            job.expiryInterval = 600;
-            job.checkOverrideOnExpire = true;
-            return job;
-        }
-
-        private static bool IsAvailableForThreatJob(Pawn pawn)
-        {
-            if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed || pawn.jobs == null)
-                return false;
-
-            Job curJob = pawn.CurJob;
-            if (curJob == null)
-                return true;
-
-            if (curJob.def == JobDefOf.AttackStatic ||
-                curJob.def == JobDefOf.AttackMelee ||
-                curJob.ability != null ||
-                curJob.def == JobDefOf.TendPatient ||
-                curJob.def == JobDefOf.Rescue)
-            {
-                return false;
-            }
-
-            return curJob.def == JobDefOf.Wait ||
-                   curJob.def == JobDefOf.Wait_Wander ||
-                   curJob.def == JobDefOf.Wait_MaintainPosture ||
-                   curJob.def == JobDefOf.Wait_Combat ||
-                   curJob.def == JobDefOf.Goto ||
-                   curJob.def == JobDefOf.GotoWander;
         }
     }
 }
