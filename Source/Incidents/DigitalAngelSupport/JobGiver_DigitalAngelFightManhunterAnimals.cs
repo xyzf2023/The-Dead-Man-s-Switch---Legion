@@ -47,31 +47,35 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             }
             else
             {
+                bool foundDest;
+                IntVec3 dest = IntVec3.Invalid;
                 Thing? previousTarget = pawn.mindState.enemyTarget;
+
                 pawn.mindState.enemyTarget = target;
                 try
                 {
-                    if (!TryFindShootingPosition(pawn, out IntVec3 dest, verb))
-                        return null!;
-
-                    if (dest == pawn.Position)
-                    {
-                        if (!verb.CanHitTarget(target))
-                            return null!;
-
-                        job = MakeRangedAttackStaticJob(target);
-                    }
-                    else
-                    {
-                        job = JobMaker.MakeJob(JobDefOf.Goto, dest);
-                        job.expiryInterval = ExpiryInterval_ShooterSucceeded.RandomInRange;
-                        job.checkOverrideOnExpire = true;
-                    }
+                    foundDest = TryFindShootingPosition(pawn, out dest, verb);
                 }
                 finally
                 {
-                    if (job == null)
-                        pawn.mindState.enemyTarget = previousTarget;
+                    pawn.mindState.enemyTarget = previousTarget;
+                }
+
+                if (!foundDest)
+                    return null!;
+
+                if (dest == pawn.Position)
+                {
+                    if (!verb.CanHitTarget(target))
+                        return null!;
+
+                    job = MakeRangedAttackStaticJob(target);
+                }
+                else
+                {
+                    job = JobMaker.MakeJob(JobDefOf.Goto, dest);
+                    job.expiryInterval = ExpiryInterval_ShooterSucceeded.RandomInRange;
+                    job.checkOverrideOnExpire = true;
                 }
             }
 
