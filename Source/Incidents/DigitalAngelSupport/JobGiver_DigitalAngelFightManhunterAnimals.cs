@@ -29,7 +29,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             return FindNearestManhunterAnimal(pawn, map)!;
         }
 
-        private static Thing? FindNearestManhunterAnimal(Pawn pawn, Map map)
+        private Thing? FindNearestManhunterAnimal(Pawn pawn, Map map)
         {
             Thing? best = null;
             float bestDistSq = float.MaxValue;
@@ -37,7 +37,7 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
 
             LordJob_DigitalAngelAssistColony.ForEachValidManhunterAnimal(map, candidate =>
             {
-                if (!candidate.Position.IsValid || !candidate.Position.InBounds(map))
+                if (!IsUsableManhunterTargetFor(pawn, candidate, map))
                     return;
 
                 float distSq = (candidate.Position - pos).LengthHorizontalSquared;
@@ -49,6 +49,30 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             });
 
             return best;
+        }
+
+        private bool IsUsableManhunterTargetFor(Pawn pawn, Pawn candidate, Map map)
+        {
+            if (pawn == null || candidate == null || map == null)
+                return false;
+
+            if (!LordJob_DigitalAngelAssistColony.IsValidManhunterAnimal(candidate))
+                return false;
+
+            if (!candidate.Position.IsValid || !candidate.Position.InBounds(map))
+                return false;
+
+            Verb verb = pawn.TryGetAttackVerb(candidate, !pawn.IsColonist, allowTurrets);
+            if (verb == null || verb.verbProps == null)
+                return false;
+
+            if (verb.verbProps.IsMeleeAttack)
+                return pawn.CanReach(candidate, PathEndMode.Touch, Danger.Deadly);
+
+            if (verb.CanHitTarget(candidate))
+                return true;
+
+            return pawn.CanReach(candidate, PathEndMode.Touch, Danger.Deadly);
         }
     }
 }

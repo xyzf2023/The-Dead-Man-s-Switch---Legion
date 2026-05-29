@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  在 HuntEnemiesIndividual 职责中，于原版 JobGiver_AIFightEnemies 之后插入猎杀动物专用 JobGiver。
-  援军机兵由 LordToil_HuntEnemies 分配该 duty；JobGiver 内部校验 LordJob_DigitalAngelAssistColony。
+  在 HuntEnemiesIndividual 职责中，于原版 JobGiver_AIFightEnemies 之前插入猎杀动物专用 JobGiver。
+  PatchOperationInsert 默认 order 为 Prepend，故实际插入在 JobGiver_AIFightEnemies 之前。
+  该 JobGiver 内部会校验 LordJob_DigitalAngelAssistColony，并在存在普通活跃敌人时 return null，
+  因此不会抢占普通敌人战斗逻辑；无普通敌人时可在 AITrash / GotoNearestHostile 等 fallback 之前提供猎杀动物目标。
 -->
 <Patch>
   <Operation Class="PatchOperationInsert">
