@@ -16,27 +16,27 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
         protected override Job TryGiveJob(Pawn pawn)
         {
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed || pawn.Map == null)
-                return null;
+                return null!;
 
             Lord? lord = pawn.GetLord();
             if (lord?.LordJob is not LordJob_DigitalAngelAssistColony)
-                return null;
+                return null!;
 
             Map map = pawn.Map;
             if (LordJob_DigitalAngelAssistColony.HasNormalActiveThreat(map))
-                return null;
+                return null!;
 
             Thing? target = FindNearestManhunterAnimal(pawn, map);
             if (target == null)
-                return null;
+                return null!;
 
             bool allowManualCastWeapons = !pawn.IsColonist && !pawn.IsColonySubhuman;
             Verb verb = pawn.TryGetAttackVerb(target, allowManualCastWeapons, allowTurrets);
             if (verb == null || verb.verbProps == null)
-                return null;
+                return null!;
 
             pawn.mindState.enemyTarget = target;
-            pawn.mindState.Notify_EngagedTarget();
+            pawn.mindState.lastEngageTargetTick = Find.TickManager.TicksGame;
             lord.Notify_PawnAcquiredTarget(pawn, target);
 
             if (verb.verbProps.IsMeleeAttack)
@@ -46,13 +46,13 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
                 return MakeRangedAttackStaticJob(target);
 
             if (!TryFindShootingPosition(pawn, out IntVec3 dest, verb))
-                return null;
+                return null!;
 
             if (dest == pawn.Position)
             {
                 if (verb.CanHitTarget(target))
                     return MakeRangedAttackStaticJob(target);
-                return null;
+                return null!;
             }
 
             Job gotoJob = JobMaker.MakeJob(JobDefOf.Goto, dest);
