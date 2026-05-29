@@ -1,7 +1,7 @@
 // ============================================================================
 // 文件：JobGiver_DigitalAngelFightManhunterAnimals.cs
-// 说明：电子天使/未知机兵援军专用；在无普通活跃敌人时，将非玩家猎杀人类动物
-//       作为攻击目标，并复用 JobGiver_AIFightEnemies 的原版战斗 Job 流程。
+// 说明：电子天使/未知机兵援军专用；在无普通活跃敌人时攻击非玩家猎杀人类动物。
+//       远程单位使用 AttackStatic / Goto，避免 Wait_Combat 的原版自动选敌逻辑。
 // ============================================================================
 
 using RimWorld;
@@ -13,6 +13,54 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
 {
     public class JobGiver_DigitalAngelFightManhunterAnimals : JobGiver_AIFightEnemies
     {
+        protected override Job TryGiveJob(Pawn pawn)
+        {
+            if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed || pawn.Map == null)
+                return null;
+
+            Lord? lord = pawn.GetLord();
+            if (lord?.LordJob is not LordJob_DigitalAngelAssistColony)
+                return null;
+
+            Map map = pawn.Map;
+            if (LordJob_DigitalAngelAssistColony.HasNormalActiveThreat(map))
+                return null;
+
+            Thing? target = FindNearestManhunterAnimal(pawn, map);
+            if (target == null)
+                return null;
+
+            bool allowManualCastWeapons = !pawn.IsColonist && !pawn.IsColonySubhuman;
+            Verb verb = pawn.TryGetAttackVerb(target, allowManualCastWeapons, allowTurrets);
+            if (verb == null || verb.verbProps == null)
+                return null;
+
+            pawn.mindState.enemyTarget = target;
+            pawn.mindState.Notify_EngagedTarget();
+            lord.Notify_PawnAcquiredTarget(pawn, target);
+
+            if (verb.verbProps.IsMeleeAttack)
+                return MeleeAttackJob(pawn, target);
+
+            if (verb.CanHitTarget(target))
+                return MakeRangedAttackStaticJob(target);
+
+            if (!TryFindShootingPosition(pawn, out IntVec3 dest, verb))
+                return null;
+
+            if (dest == pawn.Position)
+            {
+                if (verb.CanHitTarget(target))
+                    return MakeRangedAttackStaticJob(target);
+                return null;
+            }
+
+            Job gotoJob = JobMaker.MakeJob(JobDefOf.Goto, dest);
+            gotoJob.expiryInterval = ExpiryInterval_ShooterSucceeded.RandomInRange;
+            gotoJob.checkOverrideOnExpire = true;
+            return gotoJob;
+        }
+
         protected override Thing FindAttackTarget(Pawn pawn)
         {
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed || pawn.Map == null)
@@ -62,7 +110,8 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             if (!candidate.Position.IsValid || !candidate.Position.InBounds(map))
                 return false;
 
-            Verb verb = pawn.TryGetAttackVerb(candidate, !pawn.IsColonist, allowTurrets);
+            bool allowManualCastWeapons = !pawn.IsColonist && !pawn.IsColonySubhuman;
+            Verb verb = pawn.TryGetAttackVerb(candidate, allowManualCastWeapons, allowTurrets);
             if (verb == null || verb.verbProps == null)
                 return false;
 
@@ -72,7 +121,25 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             if (verb.CanHitTarget(candidate))
                 return true;
 
-            return pawn.CanReach(candidate, PathEndMode.Touch, Danger.Deadly);
+            Thing? previousTarget = pawn.mindState.enemyTarget;
+            pawn.mindState.enemyTarget = candidate;
+            try
+            {
+                return TryFindShootingPosition(pawn, out _, verb);
+            }
+            finally
+            {
+                pawn.mindState.enemyTarget = previousTarget;
+            }
+        }
+
+        private static Job MakeRangedAttackStaticJob(Thing target)
+        {
+            Job job = JobMaker.MakeJob(JobDefOf.AttackStatic, target);
+            job.expiryInterval = Rand.RangeInclusive(450, 550);
+            job.checkOverrideOnExpire = true;
+            job.endIfCantShootTargetFromCurPos = true;
+            return job;
         }
     }
 }
