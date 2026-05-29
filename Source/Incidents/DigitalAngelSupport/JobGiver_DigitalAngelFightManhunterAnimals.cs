@@ -35,30 +35,54 @@ namespace DMS_Legion.Incidents.DigitalAngelSupport
             if (verb == null || verb.verbProps == null)
                 return null!;
 
+            Job? job = null;
+
+            if (verb.verbProps.IsMeleeAttack)
+            {
+                job = MeleeAttackJob(pawn, target);
+            }
+            else if (verb.CanHitTarget(target))
+            {
+                job = MakeRangedAttackStaticJob(target);
+            }
+            else
+            {
+                Thing? previousTarget = pawn.mindState.enemyTarget;
+                pawn.mindState.enemyTarget = target;
+                try
+                {
+                    if (!TryFindShootingPosition(pawn, out IntVec3 dest, verb))
+                        return null!;
+
+                    if (dest == pawn.Position)
+                    {
+                        if (!verb.CanHitTarget(target))
+                            return null!;
+
+                        job = MakeRangedAttackStaticJob(target);
+                    }
+                    else
+                    {
+                        job = JobMaker.MakeJob(JobDefOf.Goto, dest);
+                        job.expiryInterval = ExpiryInterval_ShooterSucceeded.RandomInRange;
+                        job.checkOverrideOnExpire = true;
+                    }
+                }
+                finally
+                {
+                    if (job == null)
+                        pawn.mindState.enemyTarget = previousTarget;
+                }
+            }
+
+            if (job == null)
+                return null!;
+
             pawn.mindState.enemyTarget = target;
             pawn.mindState.lastEngageTargetTick = Find.TickManager.TicksGame;
             lord.Notify_PawnAcquiredTarget(pawn, target);
 
-            if (verb.verbProps.IsMeleeAttack)
-                return MeleeAttackJob(pawn, target);
-
-            if (verb.CanHitTarget(target))
-                return MakeRangedAttackStaticJob(target);
-
-            if (!TryFindShootingPosition(pawn, out IntVec3 dest, verb))
-                return null!;
-
-            if (dest == pawn.Position)
-            {
-                if (verb.CanHitTarget(target))
-                    return MakeRangedAttackStaticJob(target);
-                return null!;
-            }
-
-            Job gotoJob = JobMaker.MakeJob(JobDefOf.Goto, dest);
-            gotoJob.expiryInterval = ExpiryInterval_ShooterSucceeded.RandomInRange;
-            gotoJob.checkOverrideOnExpire = true;
-            return gotoJob;
+            return job;
         }
 
         protected override Thing FindAttackTarget(Pawn pawn)
